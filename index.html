@@ -124,6 +124,14 @@
   .rp-li::before{content:"";position:absolute;left:2px;top:7px;width:4px;height:4px;border-radius:50%;background:#b9c6d4}
   .rp-li.blk::before{background:var(--accent)}
   .rp-li.ask::before{background:var(--gold)}
+  .rp-counts{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}
+  .rp-counts span{font-size:10.5px;color:var(--sub);background:#f0f5fa;border:1px solid var(--line);border-radius:8px;padding:3px 9px;line-height:1.5}
+  .rp-counts b{color:var(--navy);font-size:12px;margin-right:2px}
+  .rp-counts .blk b{color:var(--accent)}
+  .rp-counts .ask b{color:var(--gold)}
+  .rp-more{display:block;margin-top:11px;text-decoration:none;text-align:center;font-size:11.5px;font-weight:750;color:var(--navy2);border:1px solid #cbdcec;background:#f4f8fc;border-radius:8px;padding:7px 10px;transition:.15s}
+  .rp-more:hover{background:#e8f0f9;border-color:var(--navy2)}
+  .rp-agg{font-size:11px;color:var(--sub);line-height:1.7;background:#f4f8fc;border:1px solid #cbdcec;border-radius:9px;padding:10px 13px;margin-bottom:12px}
   .rp-dir{display:flex;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line)}
   .rp-dir:last-child{border-bottom:0}
   .rp-dir .did{font-size:9.5px;font-weight:800;color:#fff;background:var(--navy2);padding:2px 6px;border-radius:5px;height:fit-content;white-space:nowrap}
@@ -189,9 +197,10 @@
 
 <div class="wrap">
   <section id="dailyReport">
-    <div class="sh"><span class="bar"></span><h2>每日战报 · Team 监督指令</h2><span class="hint" id="rpMeta"></span></div>
+    <div class="sh"><span class="bar"></span><h2>每日战报 · Team 汇整</h2><span class="hint" id="rpMeta"></span></div>
     <div class="rp-days" id="rpDays"></div>
     <div class="card pad rp-verdict" id="rpVerdict"></div>
+    <div class="rp-agg">本页只做<b>汇总</b>：Team 判定 + 两条线对比摘要 + 全部监督指令 + 跨线裁决 + 升级事项 + 全量发信台账。<br>每条线的完整日报（事实、卡点、请求、本线指令、本线发信明细）在各自的 PWA 里，点卡片底部按钮进入。</div>
     <div class="rp-wrap">
       <div class="rp-card s" id="rpSales"></div>
       <div class="rp-card m" id="rpMkt"></div>
@@ -332,22 +341,29 @@
         '<h3>AI GB-Team \u6c47\u6574\u5224\u5b9a '+lvlTag('\u5173\u6ce8')+'<span style="font-size:10.5px;font-weight:600;color:#8a6f3a">'+esc(d.cycle)+'</span></h3>'+
         '<p>'+esc(d.team.verdict)+'</p>';
 
-      /* \u4e24\u4efd\u65e5\u62a5 */
-      function card(el, rep, cls, scoreTxt){
+      /* \u4e24\u6761\u7ebf\u6c47\u603b\u6458\u8981 \u00b7 \u5b8c\u6574\u65e5\u62a5\u5728\u5404\u81ea PWA */
+      function card(el, rep, cls, href, fallbackName){
+        if(!rep){
+          el.className='rp-card '+cls;
+          el.innerHTML='<div class="hd2"><h3>'+esc(fallbackName)+'</h3><div class="sc">\u2014</div></div>'+
+            '<div class="rp-body"><div class="rp-hl">\u5f53\u65e5\u672a\u63d0\u4ea4\u65e5\u62a5\uff0cAI GB-Team \u5df2\u6807\u8bb0\u4e3a\u300c\u672a\u63d0\u4ea4\u300d</div></div>';
+          return;
+        }
         var h='<div class="hd2"><h3>'+esc(rep.agent)+'</h3><div class="sc">'+rep.score+'<span>/100</span></div></div><div class="rp-body">';
         h+='<div class="rp-hl">'+esc(rep.headline)+'</div>';
         h+='<div class="rp-kpis">'+rep.kpi.map(function(k){
           return '<div class="rp-kpi '+tone(k.tone)+'"><b>'+esc(k.v)+'</b><span class="kk">'+esc(k.k)+'</span><span class="dd">'+esc(k.d)+'</span></div>';
         }).join('')+'</div>';
-        h+='<div class="rp-sub">\u4e8b\u5b9e</div>'+rep.facts.map(function(f){return '<div class="rp-li">'+esc(f)+'</div>';}).join('');
-        h+='<div class="rp-sub">\u5361\u70b9</div>'+rep.blockers.map(function(f){return '<div class="rp-li blk">'+esc(f)+'</div>';}).join('');
-        h+='<div class="rp-sub">\u5411 Team \u63d0\u51fa\u7684\u8bf7\u6c42</div>'+rep.asks.map(function(f){return '<div class="rp-li ask">'+esc(f)+'</div>';}).join('');
+        h+='<div class="rp-counts"><span><b>'+(rep.facts||[]).length+'</b> \u9879\u4e8b\u5b9e</span>'+
+          '<span class="blk"><b>'+(rep.blockers||[]).length+'</b> \u9879\u5361\u70b9</span>'+
+          '<span class="ask"><b>'+(rep.asks||[]).length+'</b> \u9879\u8bf7\u6c42</span></div>';
+        h+='<a class="rp-more" href="'+href+'">\u8fdb\u5165 '+esc(rep.agent)+' \u770b\u5b8c\u6574\u65e5\u62a5 \u2192</a>';
         h+='</div>';
         el.className='rp-card '+cls;
         el.innerHTML=h;
       }
-      card(document.getElementById('rpSales'), d.sales, 's');
-      card(document.getElementById('rpMkt'), d.marketing, 'm');
+      card(document.getElementById('rpSales'), d.sales, 's', './sales/index.html', 'AI GB-Sales');
+      card(document.getElementById('rpMkt'), d.marketing, 'm', './marketing/index.html', 'AI GB-Marketing');
 
       /* \u76d1\u7763\u6307\u4ee4 */
       document.getElementById('rpDirs').innerHTML=
