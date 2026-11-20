@@ -5,18 +5,19 @@
  * 升级架构时：同步递增 version.json.cache 与本文件 CACHE 常量即可。
  * 注意：所有资源需 sharecode cookie 会话；start_url 已内嵌 sharecode。
  */
-const CACHE = 'ai-sales-hub-v25';
+const CACHE = 'ai-sales-hub-v26';
 const SHARE = '?sharecode=BOOB2ODIT5';
 const BASE = './';
 const CORE = [
   BASE + SHARE,
   BASE + 'index.html' + SHARE,
-  BASE + 'data.js?v=3.0.13' + SHARE,
+  BASE + 'data.js?v=3.0.17' + SHARE,
   BASE + 'version.json' + SHARE,
+  BASE + '../shared/tabbar.js' + SHARE,
   BASE + 'manifest.webmanifest' + SHARE,
-  BASE + 'assets/icon-192.png?v=3.0.13' + SHARE,
-  BASE + 'assets/icon-512.png?v=3.0.13' + SHARE,
-  BASE + 'assets/apple-touch-icon.png?v=3.0.13' + SHARE
+  BASE + 'assets/icon-192.png?v=3.0.17' + SHARE,
+  BASE + 'assets/icon-512.png?v=3.0.17' + SHARE,
+  BASE + 'assets/apple-touch-icon.png?v=3.0.17' + SHARE
 ];
 
 self.addEventListener('install', e => {

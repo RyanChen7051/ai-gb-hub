@@ -280,8 +280,8 @@
     .gb-bar{display:none}
     .gb-tabbar{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;position:fixed;left:0;right:0;bottom:0;z-index:1100;
       padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));
-      background:rgba(13,44,73,.98);border-top:1px solid rgba(255,255,255,.18);
-      box-shadow:0 -4px 18px rgba(13,44,73,.30);backdrop-filter:blur(8px)}
+      background:#0d2c49;border-top:1px solid rgba(255,255,255,.18);
+      box-shadow:0 -4px 18px rgba(13,44,73,.30)}
     .gb-tabbar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:48px;
       border-radius:10px;text-decoration:none;color:#c9dcec;font-size:10.5px;font-weight:700;line-height:1.1;
       white-space:nowrap;overflow:hidden;text-overflow:ellipsis;-webkit-tap-highlight-color:transparent}
@@ -649,5 +649,6 @@
   <a href="../sales/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="7" width="19" height="13" rx="2.5"/><path d="M8.5 7V5.2A1.2 1.2 0 0 1 9.7 4h4.6a1.2 1.2 0 0 1 1.2 1.2V7"/><path d="M2.5 12.5h19"/></svg><span>AI GB-Sales</span></a>
   <a class="here" href="../marketing/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4a1.5 1.5 0 0 0 1.5 1.5H7l6.5 4V4.5L7 8.5H4.5A1.5 1.5 0 0 0 3 10Z"/><path d="M17 8.5a4 4 0 0 1 0 7"/><path d="M7 15.5V20"/></svg><span>AI GB-Marketing</span></a>
 </nav>
+<script src="../shared/tabbar.js"></script>
 </body>
 </html>
