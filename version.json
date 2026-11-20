@@ -1,19 +1,20 @@
 {
-  "version": "1.1.0",
-  "build": "20261120b",
+  "version": "1.1.1",
+  "build": "20261120c",
   "released": "2026-11-20",
   "title": "每日战报 · Team 监督指令 · 发信台账",
   "changelog": [
+    "修复：Sales 页顶部协作导航无法点击——隐藏态 reply-banner / health-banner 透明度为 0 但仍占据点击命中区（缺 pointer-events:none），已补齐并在 .show 时恢复 auto",
+    "改进：两页协作导航改为顶部常驻（position:sticky, z-index 1100），长页面滚动时不需回顶部即可切换",
     "新增「每日战报 · Team 监督指令」板块，置于首页顶部：Team 汇整判定、两条线日报、5 项监督指令、2 项冲突裁决、3 项升级所有者",
     "新增发信台账：逐封记录时间/发信角色/收件人/主题/message_id，可与 Agent Mail 已发送箱逐封比对",
-    "打通真实自动发信通道：Agent Mail，日配额 50 封，无需人工点击确认；今日实测发出 3 封，配额由 50 递减至 47",
-    "AI GB-Marketing 今日首次发出 2 封合作邀约预演（ISSF 协会青年项目 / Precision & Pour 咖啡联名），收件人为所有者审阅",
+    "打通真实自动发信通道：Agent Mail，日配额 50 封，无需人工点击确认",
     "两个子 PWA 注入「Team 下发指令」挂件，各自只显示发给自己的指令并回链完整战报",
-    "日报数据按日累积：shared/reports/gb-reports.js，新的一天插入数组首位，历史永久保留",
-    "Service Worker 缓存升至 v2，并预缓存战报与台账数据文件",
-    "统一仓库：AI GB-Sales 与 AI GB-Marketing 同域部署，手机各一个固定网址",
-    "命名体系：两个 PWA 的 manifest/标题/协作条统一为 AI GB-Sales / AI GB-Marketing",
-    "共享契约 shared/gb-team.js：角色、汇报关系、4 条情报流、共享实体口径"
+    "Service Worker 缓存升至 v2，并预缓存战报与台账数据文件"
   ],
-  "team": ["AI GB-PM", "AI GB-Sales", "AI GB-Marketing"]
+  "team": [
+    "AI GB-PM",
+    "AI GB-Sales",
+    "AI GB-Marketing"
+  ]
 }
