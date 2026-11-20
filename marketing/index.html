@@ -428,7 +428,8 @@
   }
 
   // 头部
-  document.getElementById('botName').textContent = D.meta.botName;
+  /* 命名统一：页面标题带上所有者指定的 AI GB-Marketing 代号，中文名「市场战术专家」保留 */
+  document.getElementById('botName').textContent = 'AI GB-Marketing · 市场战术专家';
   document.getElementById('orgName').textContent = D.meta.org;
   document.title = D.meta.botName+' · GunBase 全球品牌宣传中心';
   var tags=[
@@ -604,7 +605,8 @@
 })();
 </script>
 <script src="../shared/reports/gb-reports.js"></script>
-<script>window.GB_DIRECTIVE_FOR="GB-Marketing";</script>
-<script src="../shared/directives-widget.js"></script>
+<script src="../shared/reports/gb-email-log.js"></script>
+<script>window.GB_LINE_FOR="GB-Marketing";</script>
+<script src="../shared/line-report.js"></script>
 </body>
 </html>
