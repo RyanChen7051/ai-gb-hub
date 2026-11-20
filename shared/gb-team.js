@@ -31,14 +31,14 @@ window.GB_TEAM = {
     {
       id: "GB-Sales", name: "AI GB-Sales", en: "AI GB Sales",
       role: "客户线 · 找买家、发开发信、跟进台账", reportsTo: "GB-PM",
-      status: "live", statusLabel: "已上线 · 本地 v3.0.15",
+      status: "live", statusLabel: "已上线 · 本地 v3.0.16",
       scope: "海外业务汇报中心：授权状态、渠道结构、决策卡点、客户回信",
       entry: "./sales/", factBasis: "owner-specified"
     },
     {
       id: "GB-Marketing", name: "AI GB-Marketing", en: "AI GB Marketing",
       role: "市场线 · 动态调研、合作发现、品牌宣传", reportsTo: "GB-PM",
-      status: "live", statusLabel: "已上线 · 本地 v1.3.1",
+      status: "live", statusLabel: "已上线 · 本地 v1.3.2",
       scope: "关键字+组织双引擎、全球布局、合作机会池、合规闸门、品牌授权矩阵",
       entry: "./marketing/", factBasis: "owner-specified"
     }

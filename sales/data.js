@@ -9,7 +9,7 @@ window.REPORT_DATA = {
     reportDate: "2026-11-17",
     generatedAt: "2026-11-18 13:56 (GMT+8)",
     cycle: "第 3 日",
-    version: "3.0.15",
+    version: "3.0.16",
     tagline: "云端实时 · 关机也更新 · 每日业务进度",
     note: "数据从 Supabase 云端实时读取，电脑关机也更新；本机开机后自动回补报告到桌面。不代表任何对外发送已完成，所有对外发送均需所有者逐次授权。"
   },
