@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#123a5e">
+<meta name="description" content="GunBase AI市场战术专家 · 全球品牌宣传情报与合作伙伴发现中心">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="AI市场战术">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<title>AI市场战术专家 · GunBase 全球品牌宣传中心</title>
+<style>
+  :root{
+    --bg:#eef2f7; --card:#ffffff; --ink:#16212e; --sub:#5b6b7c; --line:#dde5ee;
+    --navy:#123a5e; --navy2:#1d5486; --accent:#b8461f; --gold:#c08a2e;
+    --green:#1f7a4d; --greenbg:#e7f4ec; --blue:#1d5486; --bluebg:#e8f0f9;
+    --amber:#9a6b12; --amberbg:#fbf1d9; --red:#a83628; --redbg:#fbe9e6;
+    --purple:#6b4a9c; --purplebg:#f0ebf8; --teal:#126b6b; --tealbg:#e4f2f1;
+    --gray:#5b6b7c; --graybg:#eef2f7;
+    --shadow:0 2px 12px rgba(18,58,94,.07); --r:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;line-height:1.6;font-size:15px;padding-bottom:40px;-webkit-font-smoothing:antialiased}
+  .gb-bar{background:linear-gradient(135deg,#0d2c49,#1d5486);color:#fff;border-bottom:1px solid rgba(255,255,255,.12)}
+  .gb-bar .wrap{display:flex;align-items:center;gap:10px;padding-top:9px;padding-bottom:9px;flex-wrap:wrap}
+  .gb-bar .gb-lab{font-size:11px;font-weight:800;letter-spacing:.4px;opacity:.85}
+  .gb-bar a{color:#eaf2f9;text-decoration:none;font-size:11px;font-weight:700;padding:4px 11px;border-radius:14px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.09);transition:.15s}
+  .gb-bar a:hover{background:rgba(255,255,255,.2)}
+  .gb-bar a.here{background:rgba(120,235,170,.18);border-color:rgba(120,235,170,.5);color:#c9f7dd}
+  .gb-bar .gb-note{margin-left:auto;font-size:10px;color:#bcd3e6}
+  @media(max-width:680px){.gb-bar .gb-note{margin-left:0;width:100%}}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 18px}
+  svg.ic{width:18px;height:18px;flex:0 0 auto;vertical-align:-3px}
+
+  header{background:linear-gradient(135deg,#0f3252 0%,#1d5486 60%,#23669c 100%);color:#fff;padding:26px 0 22px;position:relative;overflow:hidden}
+  header::before{content:"";position:absolute;right:-60px;top:-70px;width:280px;height:280px;border:1px solid rgba(255,255,255,.1);border-radius:50%;box-shadow:0 0 0 45px rgba(255,255,255,.035),0 0 0 90px rgba(255,255,255,.025)}
+  header::after{content:"";position:absolute;left:-90px;bottom:-140px;width:300px;height:300px;border:1px solid rgba(255,255,255,.07);border-radius:50%}
+  .hd-top{display:flex;align-items:center;gap:15px;position:relative;z-index:1}
+  .logo{width:70px;height:70px;flex:0 0 auto;filter:drop-shadow(0 4px 12px rgba(0,0,0,.30))}
+  .logo img{width:100%;height:100%;object-fit:contain;display:block}
+  .hd-title h1{font-size:23px;letter-spacing:.3px;font-weight:750}
+  .hd-title .org{font-size:13px;color:#cfe0ef;margin-top:2px}
+  .hd-tag{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:1}
+  .pill{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);padding:5px 12px;border-radius:20px;font-size:12px;color:#eaf2f9;display:inline-flex;align-items:center;gap:6px}
+  .pill.live{background:rgba(90,220,150,.16);border-color:rgba(120,235,170,.45);color:#c9f7dd}
+  .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#7fe0a6;box-shadow:0 0 0 3px rgba(127,224,166,.2)}
+  .hd-meta{margin-top:14px;font-size:12px;color:#bcd3e6;position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.13);padding-top:11px;line-height:1.6}
+
+  section{margin-top:22px}
+  .sec-h{display:flex;align-items:center;gap:10px;margin-bottom:13px;padding-left:2px;flex-wrap:wrap}
+  .sec-h .bar{width:4px;height:20px;background:var(--accent);border-radius:2px}
+  .sec-h h2{font-size:17px;font-weight:750;color:var(--navy);display:flex;align-items:center;gap:8px}
+  .sec-h h2 svg{color:var(--navy2)}
+  .sec-h .hint{font-size:11.5px;color:var(--sub);margin-left:auto;text-align:right}
+
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 12px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px}
+  .kpi.green::before{background:var(--green)} .kpi.blue::before{background:var(--blue)}
+  .kpi.amber::before{background:var(--amber)} .kpi.purple::before{background:var(--purple)} .kpi.teal::before{background:var(--teal)}
+  .kpi .lab{font-size:11.5px;color:var(--sub);display:flex;align-items:center;gap:5px}
+  .kpi .val{font-size:26px;font-weight:800;line-height:1.1;margin:5px 0 2px;color:var(--navy)}
+  .kpi .val small{font-size:12px;font-weight:600;color:var(--sub)}
+  .kpi .sub{font-size:10.5px;color:#8a97a6;line-height:1.4;min-height:28px}
+  .vtag{display:inline-block;font-size:9px;font-weight:700;padding:1px 6px;border-radius:8px;margin-top:4px}
+  .vtag.v-verified{background:var(--greenbg);color:var(--green)}
+  .vtag.v-model{background:var(--amberbg);color:var(--amber)}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+  .card-pad{padding:15px 17px}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .eng-head{padding:13px 16px;display:flex;align-items:center;gap:10px;color:#fff}
+  .eng-head.kw{color:#fff;background:linear-gradient(135deg,#1d5486,#2f7cb8)}
+  .eng-head.org{background:linear-gradient(135deg,#126b6b,#1f9c9c)}
+  .eng-head .en-ic{width:34px;height:34px;border-radius:9px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .eng-head h3{font-size:14.5px;font-weight:750}
+  .eng-head p{font-size:11.5px;opacity:.9;line-height:1.5;margin-top:2px}
+  .eng-desc{padding:11px 16px;font-size:12px;color:var(--sub);line-height:1.6;background:#f8fafc;border-bottom:1px solid var(--line)}
+  .kw-group{padding:11px 16px;border-bottom:1px solid #eef2f6}
+  .kw-group:last-child{border-bottom:none}
+  .kw-top{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+  .lang-code{background:var(--navy);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:5px}
+  .kw-region{font-size:12px;font-weight:700;color:var(--navy)}
+  .kw-intent{font-size:10.5px;color:var(--sub);margin-left:auto}
+  .kw-list{display:flex;flex-wrap:wrap;gap:6px}
+  .kw{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10.5px;color:#3a5570;background:#f0f5fa;border:1px solid #dde7f0;border-radius:6px;padding:3px 8px}
+  .org-cat{padding:12px 16px;border-bottom:1px solid #eef2f6}
+  .org-cat:last-child{border-bottom:none}
+  .org-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .org-type{font-size:13px;font-weight:700;color:var(--navy)}
+  .org-tag{font-size:9.5px;padding:1px 7px;border-radius:9px;background:var(--bluebg);color:var(--navy2);font-weight:700}
+  .org-count{margin-left:auto;font-size:11px;font-weight:800;color:var(--teal)}
+  .org-ex{font-size:11.5px;color:#41546a;line-height:1.7;margin-top:6px}
+  .org-note{font-size:11px;color:var(--sub);line-height:1.6;margin-top:5px}
+  .org-note b{color:var(--teal)}
+
+  .region-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:10px}
+  .region{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:12px 13px;box-shadow:var(--shadow);border-top:3px solid var(--blue)}
+  .region.yellow{border-top-color:var(--amber)}
+  .region-top{display:flex;align-items:center;gap:7px}
+  .region-code{font-size:10px;font-weight:800;color:#fff;background:var(--navy2);padding:2px 6px;border-radius:4px}
+  .region-name{font-size:13.5px;font-weight:750;color:var(--navy)}
+  .region-en{font-size:10px;color:#9aa8b6;margin-left:auto}
+  .region-anchor{font-size:11px;color:var(--sub);margin-top:7px;line-height:1.5}
+  .region-anchor b{color:var(--navy2)}
+  .region-focus{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:8px;background:var(--bluebg);color:var(--navy2);margin-top:7px}
+  .region.yellow .region-focus{background:var(--amberbg);color:var(--amber)}
+  .region-note{font-size:10.5px;color:#8a97a6;line-height:1.5;margin-top:6px}
+
+  .mech-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:10px}
+  .mech{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:12px 13px;box-shadow:var(--shadow)}
+  .mech h4{font-size:13px;color:var(--navy);font-weight:750;display:flex;align-items:center;gap:6px}
+  .mech .en{font-size:10px;color:#9aa8b6;font-weight:500}
+  .mech p{font-size:11px;color:var(--sub);line-height:1.55;margin-top:6px}
+  .mech .ex{font-size:10px;color:var(--teal);margin-top:7px;padding-top:6px;border-top:1px dashed var(--line)}
+
+  .brand-show{display:grid;grid-template-columns:200px 1fr;gap:20px;padding:18px;align-items:center}
+  .brand-mark{width:180px;height:180px;filter:drop-shadow(0 6px 18px rgba(18,58,94,.18))}
+  .brand-mark img{width:100%;height:100%;display:block}
+  .brand-info h3{font-size:16px;color:var(--navy);font-weight:750}
+  .brand-lede{font-size:12px;color:var(--sub);margin-top:6px;line-height:1.7}
+  .brand-items{margin-top:12px;display:grid;gap:7px}
+  .bi{display:flex;gap:10px;align-items:baseline;font-size:11.5px;line-height:1.6}
+  .bi-k{flex:0 0 132px;font-weight:700;color:var(--navy2)}
+  .bi-v{color:var(--sub)}
+  .brand-assets{margin-top:13px;padding-top:10px;border-top:1px dashed var(--line);font-size:10.5px;color:#8a97a6;line-height:1.6}
+  @media(max-width:680px){.brand-show{grid-template-columns:1fr;justify-items:center}.brand-info{width:100%}.bi-k{flex-basis:112px}}
+  /* v1.2 品牌授权矩阵 */
+  .lic-hero{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:center;padding:18px;background:linear-gradient(135deg,#f4f8fc,#eaf2fa);border-bottom:1px solid var(--line)}
+  .lic-hero .lic-mark{width:140px;height:140px;filter:drop-shadow(0 5px 14px rgba(18,58,94,.18))}
+  .lic-hero .lic-mark img{width:100%;height:100%;display:block}
+  .lic-hero h3{font-size:18px;color:var(--navy);font-weight:800;letter-spacing:.2px}
+  .lic-hero .lic-sub{font-size:12px;color:var(--sub);margin-top:5px;line-height:1.7}
+  .lic-hero .lic-badges{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+  .lic-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px;background:#fff;border:1px solid #cfdcea;color:var(--navy2)}
+  .lic-badge.owner{background:var(--navy);border-color:var(--navy);color:#fff}
+  .lic-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;padding:16px}
+  .lic-card{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;box-shadow:var(--shadow)}
+  .lic-head{padding:12px 14px;color:#fff;display:flex;align-items:center;gap:10px}
+  .lic-head.blue{background:linear-gradient(135deg,#1d5486,#2f7cb8)}
+  .lic-head.teal{background:linear-gradient(135deg,#126b6b,#1f9c9c)}
+  .lic-head.purple{background:linear-gradient(135deg,#6b4a9c,#8b6cc0)}
+  .lic-head .lic-ic{width:36px;height:36px;border-radius:9px;background:rgba(255,255,255,.17);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .lic-head .lic-ic svg{width:19px;height:19px}
+  .lic-head h4{font-size:14px;font-weight:750}
+  .lic-head h4 span{display:block;font-size:10px;opacity:.85;font-weight:500;letter-spacing:.5px;margin-top:1px}
+  .lic-head .lic-num{margin-left:auto;font-size:10px;font-weight:800;background:rgba(255,255,255,.18);padding:2px 7px;border-radius:8px}
+  .lic-body{padding:12px 14px}
+  .lic-status{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:9px}
+  .lic-st{font-size:9.5px;font-weight:750;padding:3px 8px;border-radius:9px;display:inline-flex;align-items:center;gap:4px}
+  .lic-st.ok{background:var(--greenbg);color:var(--green)}
+  .lic-st.wait{background:var(--amberbg);color:var(--amber)}
+  .lic-st .pd{width:5px;height:5px;border-radius:50%;background:currentColor}
+  .lic-row{font-size:11px;line-height:1.6;margin-top:6px;color:#41546a}
+  .lic-row b{color:var(--navy2);font-weight:700}
+  .lic-caveat{margin-top:9px;padding:8px 10px;background:#fff8ed;border:1px solid #f0dcb8;border-radius:7px;font-size:10.5px;color:#7a5a12;line-height:1.55}
+  .lic-fact{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);font-size:10.5px;color:var(--sub);line-height:1.55}
+  .lic-src{display:block;font-size:9.5px;color:#9aa8b6;margin-top:4px;font-style:normal}
+  .lic-guard{margin:0 16px 16px;background:#f8fafc;border:1px solid var(--line);border-radius:9px;padding:11px 14px}
+  .lic-guard b{font-size:11.5px;color:var(--navy);display:block;margin-bottom:6px}
+  .lic-guard ol{margin:0;padding-left:17px}
+  .lic-guard li{font-size:10.8px;color:#41546a;line-height:1.65;margin:3px 0}
+  @media(max-width:680px){.lic-hero{grid-template-columns:1fr;justify-items:center;text-align:center}.lic-hero .lic-mark{width:110px;height:110px}}
+
+  /* v1.2 搜索来源矩阵 */
+  .srcmat-note{margin-bottom:12px}
+  .srcmat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:10px;padding:16px}
+  .srcmat-card{border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:10px;padding:12px 13px;background:#fff;box-shadow:var(--shadow)}
+  .srcmat-card.teal{border-left-color:var(--teal)} .srcmat-card.green{border-left-color:var(--green)}
+  .srcmat-card.purple{border-left-color:var(--purple)} .srcmat-card.amber{border-left-color:var(--amber)}
+  .srcmat-card.gray{border-left-color:var(--gray)}
+  .srcmat-top{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .srcmat-top h4{font-size:12.5px;color:var(--navy);font-weight:750}
+  .srcmat-top .en{font-size:9.5px;color:#9aa8b6}
+  .srcmat-v{margin-left:auto;font-size:9px;font-weight:750;padding:1px 6px;border-radius:8px}
+  .srcmat-v.verified{background:var(--greenbg);color:var(--green)}
+  .srcmat-v.model{background:var(--amberbg);color:var(--amber)}
+  .srcmat-src{font-size:10.8px;color:#41546a;line-height:1.6;margin-top:8px}
+  .srcmat-use{font-size:10.5px;color:var(--sub);line-height:1.55;margin-top:6px;padding-top:6px;border-top:1px dashed var(--line)}
+  .srcmat-ref{font-size:9.5px;color:#9aa8b6;margin-top:5px;display:block}
+  .filters{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px}
+  .fbtn{font-size:11.5px;padding:5px 12px;border-radius:18px;border:1px solid var(--line);background:#fff;color:var(--sub);cursor:pointer;transition:.15s;font-weight:600}
+  .fbtn:hover{border-color:var(--navy2);color:var(--navy2)}
+  .fbtn.on{background:var(--navy);border-color:var(--navy);color:#fff}
+  .fbtn.on.green{background:var(--green);border-color:var(--green)}
+  .fbtn.on.yellow{background:var(--amber);border-color:var(--amber)}
+  .fbtn.on.red{background:var(--red);border-color:var(--red)}
+  .opp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:11px}
+  .opp{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:13px 14px;box-shadow:var(--shadow);border-left:4px solid var(--blue)}
+  .opp.green{border-left-color:var(--green)} .opp.yellow{border-left-color:var(--amber)} .opp.red{border-left-color:var(--red);background:#fffafa}
+  .opp-top{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .opp-id{font-size:10px;font-weight:800;color:#fff;background:#9aa8b6;border-radius:4px;padding:1px 6px}
+  .opp.green .opp-id{background:var(--green)} .opp.yellow .opp-id{background:var(--amber)} .opp.red .opp-id{background:var(--red)}
+  .opp-title{font-size:13.5px;font-weight:750;color:var(--navy)}
+  .cl-tag{font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:8px;margin-left:auto}
+  .cl-green{background:var(--greenbg);color:var(--green)} .cl-yellow{background:var(--amberbg);color:var(--amber)} .cl-red{background:var(--redbg);color:var(--red)}
+  .opp-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+  .mini{font-size:9.5px;padding:2px 7px;border-radius:7px;background:#f1f5f9;color:var(--sub);font-weight:600}
+  .opp-val{font-size:11.5px;color:#334454;line-height:1.55;margin-top:9px}
+  .opp-why{font-size:10.5px;color:var(--sub);line-height:1.55;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+  .opp-why b{color:var(--navy2)}
+
+  .comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .comp{border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+  .comp-head{padding:11px 14px;color:#fff;display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:750}
+  .comp.green .comp-head{background:linear-gradient(135deg,#1f7a4d,#2d9c66)}
+  .comp.yellow .comp-head{background:linear-gradient(135deg,#9a6b12,#c08a2e)}
+  .comp.red .comp-head{background:linear-gradient(135deg,#a83628,#c9543f)}
+  .comp-head .num{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:12px}
+  .comp-body{padding:8px 12px;background:var(--card)}
+  .comp-item{padding:8px 4px;border-bottom:1px solid #f0f3f7}
+  .comp-item:last-child{border-bottom:none}
+  .comp-item b{font-size:12px;color:var(--navy);display:block}
+  .comp-item span{font-size:10.8px;color:var(--sub);line-height:1.5;display:block;margin-top:2px}
+  .comp-item i{font-size:9.5px;color:#9aa8b6;font-style:normal;display:block;margin-top:3px}
+  .comp-note{margin-top:12px}
+
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  th{background:#f6f9fc;color:var(--navy);text-align:left;font-weight:650;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;font-size:11.5px}
+  td{padding:9px 12px;border-bottom:1px solid #eef2f6;vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  .src-tag{font-size:10px;color:var(--sub)}
+
+  .tl{position:relative;padding-left:22px}
+  .tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:var(--line)}
+  .tl-item{position:relative;margin-bottom:15px}
+  .tl-item:last-child{margin-bottom:0}
+  .tl-item::before{content:"";position:absolute;left:-20px;top:5px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--navy2);box-shadow:0 0 0 3px var(--card)}
+  .tl-item.green::before{border-color:var(--green)} .tl-item.purple::before{border-color:var(--purple)}
+  .tl-phase{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.4px}
+  .tl-title{font-size:14px;font-weight:750;color:var(--navy);margin:1px 0 6px}
+  .tl-body{background:#f8fafc;border:1px solid var(--line);border-radius:9px;padding:10px 13px}
+  .tl-body ul{margin:0;padding-left:16px}
+  .tl-body li{margin:4px 0;color:#334454;font-size:12px}
+
+  .src-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:6px}
+  .src-item{font-size:10.5px;color:var(--sub);line-height:1.5;padding:6px 8px;background:#f8fafc;border-radius:6px}
+  .src-item b{color:var(--navy2)}
+
+  .ft-brand{display:flex;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap}
+  .ft-brand img{width:30px;height:30px;opacity:.92}
+  .note{background:var(--bluebg);border:1px solid #cbdcec;border-radius:9px;padding:11px 14px;font-size:11.8px;color:#2c4b66;line-height:1.6;margin-top:12px}
+  .notice{background:#fff8ed;border:1px solid #f0dcb8;border-radius:9px;padding:11px 14px;font-size:11.8px;color:#7a5a12;line-height:1.6;margin-top:12px}
+  .update-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .ubtn{font-size:11.5px;padding:6px 13px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--navy);cursor:pointer;font-weight:600}
+  .ubtn:hover{border-color:var(--navy2)}
+  .ustat{font-size:11px;color:var(--sub)}
+  footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);font-size:11.5px;color:var(--sub);line-height:1.7}
+  @media(max-width:760px){
+    .two-col,.comp-grid{grid-template-columns:1fr}
+    .hd-title h1{font-size:19px}
+  }
+</style>
+</head>
+<body>
+<div class="gb-bar"><div class="wrap">
+  <span class="gb-lab">AI GB TEAM · 同事协作</span>
+  <a href="../index.html">团队中心</a>
+  <a class="here" href="./index.html">AI GB-Marketing（本页）</a>
+  <a href="../sales/index.html">AI GB-Sales</a>
+  <span class="gb-note">资料互通 · 汇报给 AI GB-PM（规划中）</span>
+</div></div>
+<header>
+  <div class="wrap">
+    <div class="hd-top">
+      <div class="logo"><img src="assets/brand-logo.svg" alt="AI 市场战术专家徽章"></div>
+      <div class="hd-title">
+        <h1 id="botName">AI 市场战术专家</h1>
+        <div class="org" id="orgName">GunBase 火械基地 · 全球品牌宣传战术中心</div>
+      </div>
+    </div>
+    <div class="hd-tag" id="hdTags"></div>
+    <div class="hd-meta" id="hdMeta"></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <section>
+    <div class="sec-h"><span class="bar"></span><h2>全球战术概览</h2><span class="hint" id="kpiHint"></span></div>
+    <div class="kpis" id="kpis"></div>
+  </section>
+
+  <section>
+    <div class="sec-h"><span class="bar"></span><h2>双引擎 · 资料来源</h2><span class="hint">关键字发现 + 全球组织网络 · 品牌宣传优先</span></div>
+    <div class="two-col">
+      <div class="card">
+        <div class="eng-head kw" id="kwHead"></div>
+        <div class="eng-desc" id="kwDesc"></div>
+        <div id="kwGroups"></div>
+      </div>
+      <div class="card">
+        <div class="eng-head org" id="orgHead"></div>
+        <div class="eng-desc" id="orgDesc"></div>
+        <div id="orgCats"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-h"><span class="bar"></span><h2>搜索来源矩阵</h2><span class="hint">双引擎的上游取数渠道 · 非实时抓取结果</span></div>
+    <div class="card">
+      <div class="card-pad srcmat-note" id="srcmatDesc"></div>
+      <div class="srcmat-grid" id="srcmatGrid"></div>
+      <div class="card-pad" style="border-top:1px solid var(--line)"><div class="note" id="srcmatNote" style="margin-top:0"></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-h"><span class="bar"></span><h2>全球布局</h2><span class="hint">ISSF 洲际结构 + SCI 区域网络</span></div>
+    <div class="region-grid" id="regions"></div>
+  </section>
+
+  <section>
+    <div class="sec-h"><span class="bar"></span><h2>合作机制库</h2><span class="hint">非买卖型 · 主打品牌曝光</span></div>
+    <div class="mech-grid" id="mechanisms"></div>
+  </section>
+
+  <section>
+    <div class="sec-h"><span class="bar"></span><h2>合作机会池</h2><span class="hint">点击筛选 · 模型推演示例</span></div>
+    <div class="filters" id="oppFilters"></div>
+    <div class="opp-grid" id="opps"></div>
+    <div class="notice">机会池中的条目是基于已核实公开事实的<b>策略推演示例</b>，不代表已建立合作或已发出 contact。绿灯=可启动方向，黄灯=法务前置，红灯=禁止。任何对外接触需所有者逐次授权。</div>
+  </section>
+
+  <section>
+    <div class="sec-h"><span class="bar"></span><h2>合规闸门</h2><span class="hint">法律红线 · 附来源</span></div>
+    <div class="comp-grid" id="compliance"></div>
+    <div class="note" id="compNote"></div>
+  </section>
+
+  <section>
+    <div class="sec-h"><span class="bar"></span><h2>已核实案例库</h2><span class="hint">全球品牌宣传合作实证</span></div>
+    <div class="card">
+      <table>
+        <thead><tr><th>品牌 A</th><th>品牌 B</th><th>区域</th><th>机制</th><th>成效</th><th>来源</th></tr></thead>
+        <tbody id="casesBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-h"><span class="bar"></span><h2>90 天品牌宣传路线图</h2><span class="hint">建地基 → 验证场景 → 模板化</span></div>
+    <div class="card card-pad"><div class="tl" id="roadmap"></div></div>
+  </section>
+
+  <section>
+    <div class="sec-h"><span class="bar"></span><h2>数据来源（MLA）</h2></div>
+    <div class="card card-pad"><div class="src-grid" id="sources"></div></div>
+  </section>
+
+  <section>
+    <div class="sec-h"><span class="bar"></span><h2>品牌标识</h2><span class="hint">GUNBASE × AI 市场战术专家 · 联合徽章</span></div>
+    <div class="card">
+      <div class="brand-show">
+        <div class="brand-mark"><img src="assets/brand-logo.svg" alt="AI 市场战术专家徽章"></div>
+        <div class="brand-info">
+          <h3>战术情报徽章</h3>
+          <p class="brand-lede">把 GUNBASE 原始字标完整嵌入战术雷达徽章：品牌背书在核心，情报能力在外圈。字标取自现有 GUNBASE 官方图档，仅做白化与裁切，未改动字体、速度线与 ® 标记。</p>
+          <div class="brand-items">
+            <div class="bi"><span class="bi-k">雷达网格 + 十字准星</span><span class="bi-v">全球动态调研与精准机会识别</span></div>
+            <div class="bi"><span class="bi-k">金色信号弧 + 三节点</span><span class="bi-v">关键字雷达与全球组织雷达双引擎扫描</span></div>
+            <div class="bi"><span class="bi-k">GUNBASE 字标</span><span class="bi-v">原版字标白化嵌入，保留上下速度线及 ®</span></div>
+            <div class="bi"><span class="bi-k">深蓝 / 金 / 青配色</span><span class="bi-v">沿用本 PWA 主色，桌面端与移动端视觉统一</span></div>
+          </div>
+          <div class="brand-assets">交付资产：brand-logo.svg（矢量源文件）· brand-logo-maskable.svg · gunbase-wordmark-white.png · 192 / 512 / 180 iOS / maskable Android 图标 · legacy/ 内保留原始图标备份</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-h"><span class="bar"></span><h2>品牌授权矩阵</h2><span class="hint">授权已给出 · 部署状态待核验</span></div>
+    <div class="card">
+      <div class="lic-hero">
+        <div class="lic-mark"><img src="assets/brand-logo.svg" alt="GUNBASE × AI 市场战术专家 联合徽章"></div>
+        <div>
+          <h3 id="licMarkName"></h3>
+          <div class="lic-sub" id="licNote"></div>
+          <div class="lic-badges"><span class="lic-badge owner" id="licOwner"></span><span class="lic-badge" id="licVer"></span><span class="lic-badge">授权 3 项</span></div>
+        </div>
+      </div>
+      <div class="lic-grid" id="licGrid"></div>
+      <div class="lic-guard" id="licGuard"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-h"><span class="bar"></span><h2>版本与更新</h2></div>
+    <div class="card card-pad">
+      <div class="update-bar">
+        <button class="ubtn" id="chkBtn">检查更新</button>
+        <span class="ustat" id="ustat">当前版本 v—</span>
+      </div>
+      <div class="note" id="dataNote" style="margin-top:12px"></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="ft-brand"><img src="assets/brand-logo.svg" alt="GUNBASE 联合徽章"><div id="footNote"></div></div>
+    <div style="margin-top:6px">本页为策略演示版 · 数据来自公开可核实来源与策略推演（已分别标注）· 不构成法律意见 · 不采集个人信息</div>
+  </footer>
+</div>
+
+<script src="data.js"></script>
+<script>
+(function(){
+  var D = window.MARKET_DATA;
+  if(!D){ document.body.innerHTML='<p style="padding:40px">数据文件 data.js 加载失败。</p>'; return; }
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function icon(n){
+    var p={
+      globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/>',
+      search:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
+      target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
+      chart:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+      mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+      key:'<circle cx="8" cy="15" r="4"/><path d="M11 12l8-8M17 6l2 2M14 9l2 2"/>'
+    };
+    return '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+(p[n]||p.target)+'</svg>';
+  }
+
+  // 头部
+  document.getElementById('botName').textContent = D.meta.botName;
+  document.getElementById('orgName').textContent = D.meta.org;
+  document.title = D.meta.botName+' · GunBase 全球品牌宣传中心';
+  var tags=[
+    '<span class="pill live"><span class="dot"></span>'+esc(D.meta.scope)+'</span>',
+    '<span class="pill">'+icon('search')+'关键字 + 组织 双引擎</span>',
+    '<span class="pill">'+icon('target')+'主打品牌宣传</span>',
+    '<span class="pill">'+esc(D.meta.version?'v'+D.meta.version:'')+'</span>'
+  ];
+  document.getElementById('hdTags').innerHTML=tags.join('');
+  document.getElementById('hdMeta').innerHTML='<b>'+esc(D.meta.tagline)+'</b><br>'+esc(D.meta.generatedAt)+' · 数据分级标注：绿=已核实来源 / 琥珀=策略推演示例';
+
+  // KPI
+  document.getElementById('kpis').innerHTML=D.kpis.map(function(k){
+    var v=k.vs==='verified'?'<span class="vtag v-verified">已核实</span>':'<span class="vtag v-model">策略库</span>';
+    return '<div class="kpi '+esc(k.tone)+'"><div class="lab">'+esc(k.label)+'</div>'+
+      '<div class="val">'+esc(k.value)+' <small>'+esc(k.unit)+'</small></div>'+
+      '<div class="sub">'+esc(k.sub)+'</div>'+v+'</div>';
+  }).join('');
+  document.getElementById('kpiHint').textContent='共 '+D.kpis.length+' 项 · 生成于 '+D.meta.reportDate;
+
+  // 双引擎
+  var kw=D.engines.keyword, og=D.engines.org;
+  document.getElementById('kwHead').innerHTML='<div class="en-ic">'+icon('search')+'</div><div><h3>'+esc(kw.title)+'</h3><p>Keyword Radar</p></div>';
+  document.getElementById('kwDesc').textContent=kw.desc;
+  document.getElementById('kwGroups').innerHTML=kw.groups.map(function(g){
+    return '<div class="kw-group"><div class="kw-top"><span class="lang-code">'+esc(g.lang)+'</span>'+
+      '<span class="kw-region">'+esc(g.region)+'</span><span class="kw-intent">'+esc(g.intent)+'</span></div>'+
+      '<div class="kw-list">'+g.kws.map(function(k){return '<span class="kw">'+esc(k)+'</span>';}).join('')+'</div></div>';
+  }).join('');
+  document.getElementById('orgHead').innerHTML='<div class="en-ic">'+icon('globe')+'</div><div><h3>'+esc(og.title)+'</h3><p>Organization Radar</p></div>';
+  document.getElementById('orgDesc').textContent=og.desc;
+  document.getElementById('orgCats').innerHTML=og.categories.map(function(c){
+    return '<div class="org-cat"><div class="org-top"><span class="org-type">'+esc(c.type)+'</span>'+
+      '<span class="org-tag">'+esc(c.tag)+'</span><span class="org-count">'+esc(c.count)+'</span></div>'+
+      '<div class="org-ex">'+c.examples.map(esc).join(' · ')+'</div>'+
+      '<div class="org-note"><b>战术价值：</b>'+esc(c.note)+' <span style="color:#9aa8b6">['+esc(c.source)+']</span></div></div>';
+  }).join('');
+
+  // 全球布局
+  document.getElementById('regions').innerHTML=D.regions.map(function(r){
+    return '<div class="region '+esc(r.status)+'"><div class="region-top"><span class="region-code">'+esc(r.code)+'</span>'+
+      '<span class="region-name">'+esc(r.name)+'</span><span class="region-en">'+esc(r.en)+'</span></div>'+
+      '<div class="region-anchor"><b>锚点：</b>'+esc(r.anchor)+'</div>'+
+      '<div class="region-focus">'+esc(r.focus)+'</div>'+
+      '<div class="region-note">'+esc(r.note)+'</div></div>';
+  }).join('');
+
+  // 合作机制
+  document.getElementById('mechanisms').innerHTML=D.mechanisms.map(function(m){
+    return '<div class="mech"><h4>'+esc(m.name)+' <span class="en">'+esc(m.en)+'</span></h4>'+
+      '<p>'+esc(m.desc)+'</p><div class="ex">例：'+esc(m.example)+'</div></div>';
+  }).join('');
+
+  // 机会池（可筛选）
+  var mechMap={}; D.mechanisms.forEach(function(m){mechMap[m.key]=m.name;});
+  var curFilter='all';
+  var filters=[{k:'all',t:'全部'},{k:'green',t:'可启动'},{k:'yellow',t:'法务前置'},{k:'red',t:'禁止'}];
+  document.getElementById('oppFilters').innerHTML=filters.map(function(f){
+    return '<button class="fbtn '+(f.k==='all'?'on':'')+'" data-f="'+f.k+'">'+f.t+'</button>';
+  }).join('');
+  function renderOpps(){
+    var list=D.opportunities.filter(function(o){return curFilter==='all'||o.compliance===curFilter;});
+    document.getElementById('opps').innerHTML=list.map(function(o){
+      var cl=o.compliance, clName={green:'可启动',yellow:'法务前置',red:'禁止'}[cl];
+      return '<div class="opp '+cl+'"><div class="opp-top"><span class="opp-id">'+esc(o.id)+'</span>'+
+        '<span class="opp-title">'+esc(o.title)+'</span><span class="cl-tag cl-'+cl+'">'+clName+'</span></div>'+
+        '<div class="opp-meta"><span class="mini">'+esc(mechMap[o.mech]||o.mech)+'</span>'+
+        '<span class="mini">'+esc(o.region)+'</span><span class="mini">'+esc(o.partner)+'</span>'+
+        '<span class="mini">模型示例</span></div>'+
+        '<div class="opp-val">'+esc(o.value)+'</div>'+
+        '<div class="opp-why"><b>依据：</b>'+esc(o.why)+'</div></div>';
+    }).join('');
+  }
+  renderOpps();
+  document.getElementById('oppFilters').addEventListener('click',function(e){
+    var b=e.target.closest('.fbtn'); if(!b)return;
+    curFilter=b.getAttribute('data-f');
+    Array.prototype.forEach.call(this.querySelectorAll('.fbtn'),function(x){
+      x.classList.remove('on');
+      if(x===b) x.classList.add('on');
+    });
+    renderOpps();
+  });
+
+  // 合规闸门
+  var cm=D.compliance;
+  function compCol(cls,title,arr,num){
+    return '<div class="comp '+cls+'"><div class="comp-head"><span class="num">'+num+'</span>'+esc(title)+' <span style="margin-left:auto;font-size:11px;font-weight:500;opacity:.9">'+arr.length+' 项</span></div>'+
+      '<div class="comp-body">'+arr.map(function(i){
+        return '<div class="comp-item"><b>'+esc(i.t)+'</b><span>'+esc(i.s)+'</span><i>来源：'+esc(i.src)+'</i></div>';
+      }).join('')+'</div></div>';
+  }
+  document.getElementById('compliance').innerHTML=
+    compCol('green','绿灯 · 可启动',cm.green,'✓')+
+    compCol('yellow','黄灯 · 法务前置',cm.yellow,'!')+
+    compCol('red','红灯 · 禁止',cm.red,'×');
+  document.getElementById('compNote').textContent=cm.note;
+  document.getElementById('dataNote').textContent=D.meta.note;
+  document.getElementById('footNote').textContent=D.meta.org+' · '+D.meta.botName+' · 版本 '+D.meta.version;
+
+  // 案例库
+  document.getElementById('casesBody').innerHTML=D.cases.map(function(c){
+    return '<tr><td><b style="color:#123a5e">'+esc(c.a)+'</b></td><td>'+esc(c.b)+'</td>'+
+      '<td><span class="mini">'+esc(c.region)+'</span></td><td>'+esc(c.mech)+'</td>'+
+      '<td style="font-size:11.5px;color:#41546a">'+esc(c.result)+'</td>'+
+      '<td class="src-tag">'+esc(c.src)+'</td></tr>';
+  }).join('');
+
+  // 路线图
+  document.getElementById('roadmap').innerHTML=D.roadmap.map(function(r){
+    return '<div class="tl-item '+esc(r.color)+'"><div class="tl-phase">'+esc(r.phase)+'</div>'+
+      '<div class="tl-title">'+esc(r.title)+'</div><div class="tl-body"><ul>'+
+      r.tasks.map(function(t){return '<li>'+esc(t)+'</li>';}).join('')+'</ul></div></div>';
+  }).join('');
+
+  // 来源
+  document.getElementById('sources').innerHTML=D.sources.map(function(s){
+    return '<div class="src-item"><b>'+esc(s.t)+'.</b> '+esc(s.ttl)+'. <i>'+esc(s.u)+'.</i></div>';
+  }).join('');
+
+
+  // 品牌授权矩阵（v1.2）
+  var BU=D.brandUsage;
+  if(BU){
+    document.getElementById('licMarkName').textContent=BU.markName;
+    document.getElementById('licNote').textContent=BU.note;
+    document.getElementById('licOwner').textContent='所有者：'+BU.owner;
+    document.getElementById('licVer').textContent=BU.markVersion;
+    document.getElementById('licGrid').innerHTML=BU.licenses.map(function(l){
+      var st='<span class="lic-st ok"><span class="pd"></span>已授权 '+esc(l.authDate)+'</span>'+
+             '<span class="lic-st wait"><span class="pd"></span>部署：'+esc(l.deploy)+'</span>';
+      return '<div class="lic-card"><div class="lic-head '+esc(l.tone)+'">'+
+        '<div class="lic-ic">'+icon(l.icon)+'</div><h4>'+esc(l.scene)+'<span>'+esc(l.en)+'</span></h4>'+
+        '<span class="lic-num">'+esc(l.id)+'</span></div>'+
+        '<div class="lic-body"><div class="lic-status">'+st+'</div>'+
+        '<div class="lic-row"><b>对象：</b>'+esc(l.target)+'</div>'+
+        '<div class="lic-row"><b>范围：</b>'+esc(l.scope)+'</div>'+
+        '<div class="lic-caveat">'+esc(l.statusNote)+'</div>'+
+        '<div class="lic-fact">'+esc(l.fact)+'<i class="lic-src">来源：'+esc(l.src)+'</i></div>'+
+        '</div></div>';
+    }).join('');
+    document.getElementById('licGuard').innerHTML='<b>使用护栏</b><ol>'+
+      BU.guardrails.map(function(g){return '<li>'+esc(g)+'</li>';}).join('')+'</ol>';
+  }
+
+  // 搜索来源矩阵（v1.2）
+  var SS=D.searchSources;
+  if(SS){
+    document.getElementById('srcmatDesc').textContent=SS.desc;
+    document.getElementById('srcmatGrid').innerHTML=SS.channels.map(function(c){
+      var v=c.vs==='verified'?'<span class="srcmat-v verified">已核实</span>':'<span class="srcmat-v model">策略层</span>';
+      return '<div class="srcmat-card '+esc(c.tone)+'"><div class="srcmat-top"><h4>'+esc(c.type)+'</h4>'+
+        '<span class="en">'+esc(c.en)+'</span>'+v+'</div>'+
+        '<div class="srcmat-src"><b style="color:#123a5e">渠道：</b>'+esc(c.src)+'</div>'+
+        '<div class="srcmat-use"><b>用途：</b>'+esc(c.use)+'</div>'+
+        '<span class="srcmat-ref">'+esc(c.srcNote)+'</span></div>';
+    }).join('');
+    document.getElementById('srcmatNote').textContent=SS.note;
+  }
+
+  // 版本/更新（受控，不自动改数据）
+  document.getElementById('ustat').textContent='当前版本 v'+D.meta.version+' · 静态策略演示版';
+  document.getElementById('chkBtn').addEventListener('click',function(){
+    fetch('version.json?t='+Date.now(),{cache:'no-store'})
+      .then(function(r){return r.json();})
+      .then(function(v){
+        document.getElementById('ustat').textContent='当前 v'+D.meta.version+' · 发布版 '+(v.version||'—')+'（静态版需重新发布以更新）';
+      })
+      .catch(function(){
+        document.getElementById('ustat').textContent='当前版本 v'+D.meta.version+' · 离线可用';
+      });
+  });
+})();
+</script>
+</body>
+</html>

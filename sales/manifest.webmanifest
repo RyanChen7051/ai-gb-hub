@@ -1,0 +1,36 @@
+{
+  "name": "AI GB-Sales · GunBase 业务汇报中心",
+  "short_name": "AI GB-Sales",
+  "description": "GunBase 海外业务汇报 — 授权状态、进度、待决策（云端只读）",
+  "start_url": "./?sharecode=BOOB2ODIT5",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#eef2f7",
+  "theme_color": "#123a5e",
+  "lang": "zh-CN",
+  "categories": [
+    "business",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "./assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "build": "20261120a",
+  "released": "2026-11-20",
+  "title": "AI GB Team Hub 首次部署",
+  "changelog": [
+    "统一仓库：AI GB-Sales 与 AI GB-Marketing 同域部署，手机各一个固定网址",
+    "命名体系：两个 PWA 的 manifest/标题/协作条统一为 AI GB-Sales / AI GB-Marketing",
+    "汇报关系：AI GB-PM 定为两者直接汇报对象（规划中，系统实体未建立）",
+    "共享契约 shared/gb-team.js：角色、汇报关系、4 条情报流、共享实体口径",
+    "情报流 F1/F2/F3/F4 标注落地状态：部分落地 1 条、规划 3 条，不冒充系统级打通",
+    "路径修复：两个 PWA 的 manifest 与 SW 全部改为子目录相对路径，避免 github.io 子目录 404",
+    "门禁保留：Sales 决策操作仍限本机 file:// 打开，云端/手机只读"
+  ],
+  "team": ["AI GB-PM", "AI GB-Sales", "AI GB-Marketing"]
+}

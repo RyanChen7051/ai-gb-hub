@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#123a5e">
+<meta name="description" content="AI GB Team — AI GB-Sales 与 AI GB-Marketing 的统一入口与协作契约">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="AI GB Team">
+<link rel="apple-touch-icon" href="./assets/icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./assets/icon-192.png">
+<link rel="manifest" href="./manifest.webmanifest">
+<title>AI GB Team · GunBase 三角色协作中心</title>
+<style>
+  :root{
+    --bg:#eef2f7;--card:#fff;--ink:#16212e;--sub:#5b6b7c;--line:#dde5ee;
+    --navy:#123a5e;--navy2:#1d5486;--accent:#b8461f;--gold:#c08a2e;
+    --green:#1f7a4d;--greenbg:#e7f4ec;--amber:#9a6b12;--amberbg:#fbf1d9;
+    --purple:#6b4a9c;--purplebg:#f0ebf8;--teal:#126b6b;--tealbg:#e4f2f1;
+    --shadow:0 2px 12px rgba(18,58,94,.07);--r:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.65;font-size:15px;padding-bottom:48px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 18px}
+  header{background:linear-gradient(135deg,#0f3252 0%,#1d5486 60%,#23669c 100%);color:#fff;padding:30px 0 26px;position:relative;overflow:hidden}
+  header::before{content:"";position:absolute;right:-70px;top:-80px;width:300px;height:300px;border:1px solid rgba(255,255,255,.10);border-radius:50%;box-shadow:0 0 0 50px rgba(255,255,255,.035),0 0 0 100px rgba(255,255,255,.022)}
+  .hd{display:flex;align-items:center;gap:16px;position:relative;z-index:1}
+  .hd img{width:72px;height:72px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.3))}
+  .hd h1{font-size:25px;font-weight:800;letter-spacing:.3px}
+  .hd .sub{font-size:13px;color:#cfe0ef;margin-top:3px}
+  .hd-pills{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap;position:relative;z-index:1}
+  .pill{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);padding:5px 12px;border-radius:20px;font-size:12px;color:#eaf2f9}
+  .pill.live{background:rgba(90,220,150,.16);border-color:rgba(120,235,170,.45);color:#c9f7dd}
+  .pill.plan{background:rgba(200,170,240,.16);border-color:rgba(200,170,240,.4);color:#e4d6f7}
+  section{margin-top:22px}
+  .sh{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+  .sh .bar{width:4px;height:20px;background:var(--accent);border-radius:2px}
+  .sh h2{font-size:17px;color:var(--navy);font-weight:750}
+  .sh .hint{font-size:11.5px;color:var(--sub);margin-left:auto}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+  .pad{padding:16px 18px}
+
+  .entry-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:13px}
+  .entry{display:block;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);transition:.18s}
+  .entry:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(18,58,94,.14)}
+  .entry .top{padding:14px 16px;color:#fff;display:flex;align-items:center;gap:11px}
+  .entry.sales .top{background:linear-gradient(135deg,#1d5486,#2f7cb8)}
+  .entry.mkt .top{background:linear-gradient(135deg,#126b6b,#1f9c9c)}
+  .entry.pm .top{background:linear-gradient(135deg,#6b4a9c,#8b6cc0)}
+  .entry .top img{width:40px;height:40px;background:rgba(255,255,255,.14);border-radius:9px;padding:3px}
+  .entry .top h3{font-size:15.5px;font-weight:750}
+  .entry .top h3 span{display:block;font-size:10.5px;opacity:.85;font-weight:500;margin-top:1px}
+  .entry .body{padding:13px 16px}
+  .entry .body p{font-size:12px;color:var(--sub);line-height:1.65}
+  .entry .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+  .tag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:9px;background:#f0f5fa;color:var(--navy2)}
+  .tag.g{background:var(--greenbg);color:var(--green)}
+  .tag.p{background:var(--purplebg);color:var(--purple)}
+  .tag.a{background:var(--amberbg);color:var(--amber)}
+  .entry .go{margin-top:11px;font-size:11.5px;color:var(--navy2);font-weight:700}
+
+  .org-line{display:grid;grid-template-columns:1fr 2fr;gap:14px;align-items:start}
+  .pm-box{background:var(--purplebg);border:1px solid #d9ccef;border-radius:12px;padding:16px;text-align:center}
+  .pm-box img{width:56px;height:56px;opacity:.85}
+  .pm-box h3{font-size:15px;color:var(--purple);margin-top:7px}
+  .pm-box p{font-size:11px;color:#6b5a86;line-height:1.6;margin-top:5px}
+  .reports{display:grid;gap:10px}
+  .report{background:#f8fafc;border:1px solid var(--line);border-radius:11px;padding:12px 14px;border-left:3px solid var(--navy2)}
+  .report.mkt{border-left-color:var(--teal)}
+  .report h4{font-size:13px;color:var(--navy)}
+  .report .meta{font-size:10.5px;color:var(--sub);margin-top:4px;line-height:1.6}
+  .arrow-note{text-align:center;color:#9aa8b6;font-size:11px;margin:2px 0}
+
+  .flow-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:11px}
+  .flow{border:1px solid var(--line);border-radius:11px;padding:13px 14px;background:#fff;border-top:3px solid var(--green)}
+  .flow.plan{border-top-color:var(--amber)}
+  .flow.partial{border-top-color:var(--teal)}
+  .flow .fid{font-size:10px;font-weight:800;color:#fff;background:var(--navy2);padding:2px 7px;border-radius:5px}
+  .flow h4{font-size:13px;color:var(--navy);margin-top:8px}
+  .flow .route{font-size:10.5px;color:var(--navy2);font-weight:700;margin-top:5px}
+  .flow p{font-size:11px;color:var(--sub);line-height:1.6;margin-top:6px}
+  .flow .gate{font-size:10px;color:#7a5a12;background:#fff8ed;border:1px solid #f0dcb8;border-radius:6px;padding:6px 8px;margin-top:8px;line-height:1.55}
+  .st{font-size:9.5px;font-weight:750;padding:2px 7px;border-radius:8px;margin-left:6px}
+  .st.ok{background:var(--greenbg);color:var(--green)}
+  .st.wait{background:var(--amberbg);color:var(--amber)}
+  .st.part{background:var(--tealbg);color:var(--teal)}
+
+  .note{background:var(--bluebg,#e8f0f9);border:1px solid #cbdcec;border-radius:9px;padding:11px 14px;font-size:11.8px;color:#2c4b66;line-height:1.7}
+  .guard{background:#fff8ed;border:1px solid #f0dcb8}
+  .guard b{color:#7a5a12}
+  ul.clean{margin:0;padding-left:18px}
+  ul.clean li{font-size:11.5px;color:#41546a;line-height:1.75;margin:3px 0}
+  footer{text-align:center;color:#8a97a6;font-size:11px;margin-top:30px;line-height:1.8}
+  @media(max-width:680px){.org-line{grid-template-columns:1fr}.hd h1{font-size:20px}.hd img{width:58px;height:58px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="hd">
+      <img src="./assets/icon-192.png" alt="AI GB 徽章">
+      <div>
+        <h1 id="teamName">AI GB Team</h1>
+        <div class="sub" id="teamOwner"></div>
+      </div>
+    </div>
+    <div class="hd-pills">
+      <span class="pill live">2 个已上线</span>
+      <span class="pill plan">1 个规划中 · AI GB-PM</span>
+      <span class="pill">汇报关系由所有者指定</span>
+      <span class="pill" id="verPill"></span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <section>
+    <div class="sh"><span class="bar"></span><h2>三个角色 · 统一入口</h2><span class="hint">手机点开即用 · 添加到主屏幕更方便</span></div>
+    <div class="entry-grid" id="entries"></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="bar"></span><h2>汇报关系</h2><span class="hint">所有者指定的组织架构</span></div>
+    <div class="card pad">
+      <div class="org-line">
+        <div class="pm-box" id="pmBox"></div>
+        <div>
+          <div class="arrow-note">直接汇报 ↓</div>
+          <div class="reports" id="reports"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="bar"></span><h2>情报协作流</h2><span class="hint"><span id="flowStat"></span></span></div>
+    <div class="flow-grid" id="flows"></div>
+    <div class="note" style="margin-top:12px" id="exchangeNote"></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="bar"></span><h2>共享实体口径</h2><span class="hint">谁写谁读，避免互相覆盖</span></div>
+    <div class="card pad"><ul class="clean" id="entities"></ul></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="bar"></span><h2>已落地的互通动作</h2></div>
+    <div class="card pad"><ul class="clean" id="implemented"></ul></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="bar"></span><h2>边界与护栏</h2></div>
+    <div class="note guard" id="guards"></div>
+  </section>
+
+  <footer>
+    <div id="footMeta"></div>
+    <div>本页展示的是组织设计与展示层互通；不是数据库实时双向同步，AI GB-PM 尚未建立系统实体。</div>
+  </footer>
+</div>
+
+<script src="./shared/gb-team.js"></script>
+<script>
+(function(){
+  var T=window.GB_TEAM;
+  if(!T){document.body.innerHTML='<p style="padding:40px">团队契约 gb-team.js 加载失败。</p>';return;}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  document.getElementById('teamName').textContent=T.meta.team;
+  document.getElementById('teamOwner').textContent=T.meta.owner+' · 定义于 '+T.meta.definedAt;
+  document.getElementById('verPill').textContent='契约 '+T.meta.definedAt;
+  document.getElementById('footMeta').textContent=T.meta.note;
+
+  document.getElementById('entries').innerHTML=T.org.map(function(o){
+    var cls=o.id==='GB-Sales'?'sales':(o.id==='GB-Marketing'?'mkt':'pm');
+    var ic=o.id==='GB-Sales'?'./sales/assets/icon-192.png':(o.id==='GB-Marketing'?'./marketing/assets/icon-192.png':'./assets/icon-192.png');
+    var tag=o.status==='live'?'<span class="tag g">已上线</span>':'<span class="tag p">规划中</span>';
+    var link=o.entry?'href="'+esc(o.entry)+'"':'';
+    var go=o.entry?'<div class="go">打开 PWA →</div>':'<div class="go" style="color:#9aa8b6">系统未建立，暂不可打开</div>';
+    return '<a class="entry '+cls+'" '+link+'><div class="top"><img src="'+ic+'" alt=""><h3>'+esc(o.name)+'<span>'+esc(o.en)+'</span></h3></div>'+
+      '<div class="body"><p>'+esc(o.scope)+'</p><div class="tags">'+tag+'<span class="tag">'+esc(o.role)+'</span></div>'+go+'</div></a>';
+  }).join('');
+
+  var pm=T.org.filter(function(o){return o.id==='GB-PM';})[0];
+  document.getElementById('pmBox').innerHTML='<img src="./assets/icon-192.png" alt="AI GB-PM"><h3>'+esc(pm.name)+'</h3><p>'+esc(pm.statusLabel)+'<br>'+esc(pm.scope)+'</p>';
+  document.getElementById('reports').innerHTML=T.org.filter(function(o){return o.reportsTo==='GB-PM';}).map(function(o){
+    return '<div class="report '+(o.id==='GB-Marketing'?'mkt':'')+'"><h4>'+esc(o.name)+'</h4><div class="meta">'+esc(o.role)+'<br>'+esc(o.statusLabel)+'</div></div>';
+  }).join('');
+
+  var st={planned:0,partial:0,implemented:0};
+  T.exchange.flows.forEach(function(f){st[f.impl]=(st[f.impl]||0)+1;});
+  document.getElementById('flowStat').textContent='共 '+T.exchange.flows.length+' 条 · 已落地 '+st.implemented+' / 部分 '+st.partial+' / 规划 '+st.planned;
+  document.getElementById('flows').innerHTML=T.exchange.flows.map(function(f){
+    var tag=f.impl==='planned'?'<span class="st wait">规划</span>':(f.impl==='partial'?'<span class="st part">部分落地</span>':'<span class="st ok">已落地</span>');
+    return '<div class="flow '+f.impl+'"><span class="fid">'+esc(f.id)+'</span>'+tag+
+      '<h4>'+esc(f.name)+'</h4><div class="route">'+esc(f.from)+' → '+esc(f.to)+'</div>'+
+      '<p>'+esc(f.desc)+'</p><div class="gate">'+esc(f.gate)+'</div></div>';
+  }).join('');
+  document.getElementById('exchangeNote').innerHTML='<b>交换原则：</b>'+esc(T.exchange.principle)+'<br><b>当前状态：</b>'+esc(T.exchange.statusLabel);
+
+  document.getElementById('entities').innerHTML=T.exchange.sharedEntities.map(function(e){
+    return '<li><b>'+esc(e.name)+'</b>（'+esc(e.key)+'）· 写入方：'+esc(e.owner)+' — '+esc(e.note)+'</li>';
+  }).join('');
+  document.getElementById('implemented').innerHTML=T.implemented.map(function(x){return '<li>'+esc(x)+'</li>';}).join('');
+  document.getElementById('guards').innerHTML='<b>边界声明</b><br>'+T.guardrails.map(function(g){return '· '+esc(g);}).join('<br>');
+})();
+</script>
+</body>
+</html>
