@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+<defs>
+  <linearGradient id="pbg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#4a3273"/><stop offset="0.55" stop-color="#6b4a9c"/><stop offset="1" stop-color="#8d6cc4"/>
+  </linearGradient>
+</defs>
+<rect x="10" y="10" width="492" height="492" rx="116" fill="url(#pbg)"/>
+<rect x="22" y="22" width="468" height="468" rx="105" fill="none" stroke="#ffffff" stroke-opacity="0.26" stroke-width="2.5"/>
+<g stroke="#ffffff" stroke-opacity="0.80" stroke-width="8" fill="none" stroke-linecap="round">
+  <path d="M256 176 V216"/>
+  <path d="M168 216 H344"/>
+  <path d="M168 216 V254"/>
+  <path d="M344 216 V254"/>
+</g>
+<g fill="#ffffff">
+  <rect x="196" y="118" width="120" height="58" rx="16"/>
+  <rect x="96" y="254" width="144" height="62" rx="16" opacity="0.90"/>
+  <rect x="272" y="254" width="144" height="62" rx="16" opacity="0.90"/>
+</g>
+<text x="256" y="159" text-anchor="middle" font-family="Helvetica Neue,Arial,sans-serif" font-weight="800" font-size="30" fill="#4a3273">PM</text>
+<text x="168" y="293" text-anchor="middle" font-family="Helvetica Neue,Arial,sans-serif" font-weight="800" font-size="22" fill="#4a3273">SALES</text>
+<text x="344" y="293" text-anchor="middle" font-family="Helvetica Neue,Arial,sans-serif" font-weight="800" font-size="22" fill="#4a3273">MKT</text>
+<text x="256" y="382" text-anchor="middle" font-family="Helvetica Neue,Arial,sans-serif" font-weight="700" letter-spacing="4" font-size="26" fill="#ffffff">AI GB-PM</text>
+<text x="256" y="414" text-anchor="middle" font-family="Helvetica Neue,Arial,sans-serif" font-weight="600" letter-spacing="3" font-size="15" fill="#ffffff" opacity="0.72">PLANNED ROLE</text>
+</svg>

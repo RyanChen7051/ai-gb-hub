@@ -174,13 +174,46 @@
 
   footer{text-align:center;color:#8a97a6;font-size:11px;margin-top:30px;line-height:1.8}
   @media(max-width:680px){.org-line{grid-template-columns:1fr}.hd h1{font-size:20px}.hd img{width:58px;height:58px}}
+  /* GB-NAV2 顶部协作导航：iOS 安全区避让（不再被状态栏云雾遮住）+ 三段式切换 */
+  .gb-bar{background:linear-gradient(135deg,#0d2c49,#1d5486);color:#fff;border-bottom:1px solid rgba(255,255,255,.14);
+    padding-top:env(safe-area-inset-top,0px);position:sticky;top:0;z-index:1100;box-shadow:0 2px 10px rgba(13,44,73,.22)}
+  .gb-bar .wrap{display:block;padding-top:8px;padding-bottom:9px}
+  .gb-lab-row{display:flex;align-items:center;gap:8px;font-size:10.5px;color:#bcd3e6;margin-bottom:7px;line-height:1.3}
+  .gb-lab{font-weight:800;letter-spacing:.5px;color:#eaf2f9;white-space:nowrap}
+  .gb-lab-row .sp{margin-left:auto;text-align:right}
+  .gb-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+  .gb-tabs a{display:flex;align-items:center;justify-content:center;min-height:38px;padding:0 5px;border-radius:10px;
+    font-size:11.5px;font-weight:700;line-height:1.15;text-align:center;text-decoration:none;color:#eaf2f9;
+    background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);transition:.15s}
+  .gb-tabs a:hover{background:rgba(255,255,255,.20)}
+  .gb-tabs a.here{background:#fff;border-color:#fff;color:#0f3252;box-shadow:0 1px 4px rgba(0,0,0,.28)}
+  .gb-tabs a.here::before{content:"";width:6px;height:6px;border-radius:50%;background:#1f7a4d;margin-right:5px;flex:0 0 auto}
+  @media(min-width:720px){
+    .gb-bar .wrap{display:flex;align-items:center;gap:16px;padding-top:10px;padding-bottom:10px}
+    .gb-lab-row{margin-bottom:0;flex:1 1 auto}
+    .gb-lab-row .sp{margin-left:0;padding-left:4px}
+    .gb-tabs{display:flex;gap:7px;flex:0 0 auto}
+    .gb-tabs a{min-height:32px;padding:0 14px;border-radius:16px;white-space:nowrap}
+  }
+  @media(max-width:430px){
+    .gb-tabs a{font-size:10.5px;padding:0 3px;white-space:nowrap;letter-spacing:-.1px}
+    .gb-lab-row{font-size:10px}
+  }
 </style>
 </head>
 <body>
+<div class="gb-bar"><div class="wrap">
+  <div class="gb-lab-row"><span class="gb-lab">AI GB TEAM · 同事协作</span><span class="sp">汇总视图 · 两条线日报在这里合流</span></div>
+  <nav class="gb-tabs">
+    <a class="here" href="./index.html">团队中心</a>
+    <a href="./sales/index.html">AI GB-Sales</a>
+    <a href="./marketing/index.html">AI GB-Marketing</a>
+  </nav>
+</div></div>
 <header>
   <div class="wrap">
     <div class="hd">
-      <img src="./assets/icon-192.png" alt="AI GB 徽章">
+      <img src="./assets/team-logo.svg?v=1" alt="AI GB Team 总部徽章" width="72" height="72">
       <div>
         <h1 id="teamName">AI GB Team</h1>
         <div class="sub" id="teamOwner"></div>
@@ -273,7 +306,7 @@
 
   document.getElementById('entries').innerHTML=T.org.map(function(o){
     var cls=o.id==='GB-Sales'?'sales':(o.id==='GB-Marketing'?'mkt':'pm');
-    var ic=o.id==='GB-Sales'?'./sales/assets/icon-192.png':(o.id==='GB-Marketing'?'./marketing/assets/icon-192.png':'./assets/icon-192.png');
+    var ic=o.id==='GB-Sales'?'./sales/assets/icon-192.png':(o.id==='GB-Marketing'?'./marketing/assets/icon-192.png':'./assets/pm-logo.svg');
     var tag=o.status==='live'?'<span class="tag g">已上线</span>':'<span class="tag p">规划中</span>';
     var link=o.entry?'href="'+esc(o.entry)+'"':'';
     var go=o.entry?'<div class="go">打开 PWA →</div>':'<div class="go" style="color:#9aa8b6">系统未建立，暂不可打开</div>';
@@ -282,7 +315,7 @@
   }).join('');
 
   var pm=T.org.filter(function(o){return o.id==='GB-PM';})[0];
-  document.getElementById('pmBox').innerHTML='<img src="./assets/icon-192.png" alt="AI GB-PM"><h3>'+esc(pm.name)+'</h3><p>'+esc(pm.statusLabel)+'<br>'+esc(pm.scope)+'</p>';
+  document.getElementById('pmBox').innerHTML='<img src="./assets/pm-logo.svg" alt="AI GB-PM"><h3>'+esc(pm.name)+'</h3><p>'+esc(pm.statusLabel)+'<br>'+esc(pm.scope)+'</p>';
   document.getElementById('reports').innerHTML=T.org.filter(function(o){return o.reportsTo==='GB-PM';}).map(function(o){
     return '<div class="report '+(o.id==='GB-Marketing'?'mkt':'')+'"><h4>'+esc(o.name)+'</h4><div class="meta">'+esc(o.role)+'<br>'+esc(o.statusLabel)+'</div></div>';
   }).join('');

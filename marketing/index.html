@@ -26,14 +26,31 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;line-height:1.6;font-size:15px;padding-bottom:40px;-webkit-font-smoothing:antialiased}
-  .gb-bar{background:linear-gradient(135deg,#0d2c49,#1d5486);color:#fff;border-bottom:1px solid rgba(255,255,255,.12)}
-  .gb-bar .wrap{display:flex;align-items:center;gap:10px;padding-top:9px;padding-bottom:9px;flex-wrap:wrap}
-  .gb-bar .gb-lab{font-size:11px;font-weight:800;letter-spacing:.4px;opacity:.85}
-  .gb-bar a{color:#eaf2f9;text-decoration:none;font-size:11px;font-weight:700;padding:4px 11px;border-radius:14px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.09);transition:.15s}
-  .gb-bar a:hover{background:rgba(255,255,255,.2)}
-  .gb-bar a.here{background:rgba(120,235,170,.18);border-color:rgba(120,235,170,.5);color:#c9f7dd}
-  .gb-bar .gb-note{margin-left:auto;font-size:10px;color:#bcd3e6}
-  @media(max-width:680px){.gb-bar .gb-note{margin-left:0;width:100%}}
+  /* GB-NAV2 顶部协作导航：iOS 安全区避让（不再被状态栏云雾遮住）+ 三段式切换 */
+  .gb-bar{background:linear-gradient(135deg,#0d2c49,#1d5486);color:#fff;border-bottom:1px solid rgba(255,255,255,.14);
+    padding-top:env(safe-area-inset-top,0px);position:sticky;top:0;z-index:1100;box-shadow:0 2px 10px rgba(13,44,73,.22)}
+  .gb-bar .wrap{display:block;padding-top:8px;padding-bottom:9px}
+  .gb-lab-row{display:flex;align-items:center;gap:8px;font-size:10.5px;color:#bcd3e6;margin-bottom:7px;line-height:1.3}
+  .gb-lab{font-weight:800;letter-spacing:.5px;color:#eaf2f9;white-space:nowrap}
+  .gb-lab-row .sp{margin-left:auto;text-align:right}
+  .gb-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+  .gb-tabs a{display:flex;align-items:center;justify-content:center;min-height:38px;padding:0 5px;border-radius:10px;
+    font-size:11.5px;font-weight:700;line-height:1.15;text-align:center;text-decoration:none;color:#eaf2f9;
+    background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);transition:.15s}
+  .gb-tabs a:hover{background:rgba(255,255,255,.20)}
+  .gb-tabs a.here{background:#fff;border-color:#fff;color:#0f3252;box-shadow:0 1px 4px rgba(0,0,0,.28)}
+  .gb-tabs a.here::before{content:"";width:6px;height:6px;border-radius:50%;background:#1f7a4d;margin-right:5px;flex:0 0 auto}
+  @media(min-width:720px){
+    .gb-bar .wrap{display:flex;align-items:center;gap:16px;padding-top:10px;padding-bottom:10px}
+    .gb-lab-row{margin-bottom:0;flex:1 1 auto}
+    .gb-lab-row .sp{margin-left:0;padding-left:4px}
+    .gb-tabs{display:flex;gap:7px;flex:0 0 auto}
+    .gb-tabs a{min-height:32px;padding:0 14px;border-radius:16px;white-space:nowrap}
+  }
+  @media(max-width:430px){
+    .gb-tabs a{font-size:10.5px;padding:0 3px;white-space:nowrap;letter-spacing:-.1px}
+    .gb-lab-row{font-size:10px}
+  }
   .wrap{max-width:1120px;margin:0 auto;padding:0 18px}
   svg.ic{width:18px;height:18px;flex:0 0 auto;vertical-align:-3px}
 
@@ -256,17 +273,16 @@
     .hd-title h1{font-size:19px}
   }
 
-  /* GB-FIX-BAR-STICKY 协作导航常驻顶部，z-index 低于回信横幅(1199/1200)，不遮挡告警 */
-  .gb-bar{position:sticky;top:0;z-index:1100;box-shadow:0 2px 10px rgba(13,44,73,.18)}
 </style>
 </head>
 <body>
 <div class="gb-bar"><div class="wrap">
-  <span class="gb-lab">AI GB TEAM · 同事协作</span>
-  <a href="../index.html">团队中心</a>
-  <a class="here" href="./index.html">AI GB-Marketing（本页）</a>
-  <a href="../sales/index.html">AI GB-Sales</a>
-  <span class="gb-note">资料互通 · 汇报给 AI GB-PM（规划中）</span>
+  <div class="gb-lab-row"><span class="gb-lab">AI GB TEAM · 同事协作</span><span class="sp">资料互通 · 汇报给 AI GB-PM（规划中）</span></div>
+  <nav class="gb-tabs">
+    <a href="../index.html">团队中心</a>
+    <a href="../sales/index.html">AI GB-Sales</a>
+    <a class="here" href="../marketing/index.html">AI GB-Marketing</a>
+  </nav>
 </div></div>
 <header>
   <div class="wrap">

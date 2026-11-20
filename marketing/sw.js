@@ -2,7 +2,7 @@
  * 策略：网络优先 + 缓存兜底（静态策略演示版，离线可看上次内容）
  * 升级：改 data.js 后同步递增下面的 CACHE 版本号即可。
  */
-const CACHE = 'ai-gb-marketing-v2';
+const CACHE = 'ai-gb-marketing-v3';
 const BASE = './';
 const CORE = [
   BASE,
