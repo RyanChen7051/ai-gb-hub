@@ -1,0 +1,27 @@
+{
+  "mode": "pilot",
+  "modeExplain": "pilot = 预演期，所有对外邀约邮件只发给所有者本人审阅，不触达任何第三方；external = 正式对外，仅发给 whitelist 内的机构，并 CC 所有者。",
+  "updatedAt": "2026-11-20 15:00 (GMT+8)",
+  "updatedBy": "AI GB-Team（初始设置，待所有者确认）",
+  "ownerAddress": "sales@gunbase-optics.com",
+  "quota": {
+    "dailyTotal": 50,
+    "marketingDaily": 2,
+    "salesDailyMax": 6,
+    "reservedForReplies": 42
+  },
+  "whitelist": [],
+  "whitelistNote": "填入后 mode 才会生效为 external。格式：{\"org\":\"机构名\",\"email\":\"合作邮箱\",\"region\":\"DE\",\"lastSent\":null}",
+  "dedupe": {
+    "sameOrgDays": 30,
+    "sameLeadDays": 7
+  },
+  "hardRules": [
+    "邮件不得包含单价、总价、折扣或任何承诺性表述",
+    "不得出现战斗式射击、对抗性场景、纳粹符号与制服",
+    "不得在咖啡/零售场景陈列瞄具实物或枪支图像",
+    "黄灯合规项目（欧洲二战主题、德国境内射击场）未获法务结论前不得进外发队列",
+    "发送失败必须如实记为 failed，不得伪装成功",
+    "每日发送前必须读台账去重，不得重复触达同一机构"
+  ]
+}
