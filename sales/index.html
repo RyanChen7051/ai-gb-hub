@@ -508,6 +508,13 @@
   .hd-ft button{border:none;border-radius:9px;padding:10px 15px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;background:var(--navy);color:#fff}
   @media(max-width:420px){ .health-banner{padding:10px 11px;gap:9px} .health-banner .hb-ic{width:36px;height:36px} .health-banner .hb-go{padding:7px 9px;font-size:11px} }
   @media(display-mode:standalone){ body{padding-top:env(safe-area-inset-top)} }
+
+  /* GB-FIX-BANNER-HIT 隐藏态横幅透明度 0 但仍可点击，会挡住顶部协作导航 */
+  .reply-banner,.health-banner{pointer-events:none}
+  .reply-banner.show,.health-banner.show{pointer-events:auto}
+
+  /* GB-FIX-BAR-STICKY 协作导航常驻顶部，z-index 低于回信横幅(1199/1200)，不遮挡告警 */
+  .gb-bar{position:sticky;top:0;z-index:1100;box-shadow:0 2px 10px rgba(13,44,73,.18)}
 </style>
 </head>
 <body>
