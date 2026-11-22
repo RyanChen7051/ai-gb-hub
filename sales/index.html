@@ -27,31 +27,6 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;line-height:1.6;font-size:15px;padding-bottom:96px;-webkit-font-smoothing:antialiased}
-  /* GB-NAV2 顶部协作导航：iOS 安全区避让（不再被状态栏云雾遮住）+ 三段式切换 */
-  .gb-bar{background:linear-gradient(135deg,#0d2c49,#1d5486);color:#fff;border-bottom:1px solid rgba(255,255,255,.14);
-    padding-top:env(safe-area-inset-top,0px);position:sticky;top:0;z-index:1100;box-shadow:0 2px 10px rgba(13,44,73,.22)}
-  .gb-bar .wrap{display:block;padding-top:8px;padding-bottom:9px}
-  .gb-lab-row{display:flex;align-items:center;gap:8px;font-size:10.5px;color:#bcd3e6;margin-bottom:7px;line-height:1.3}
-  .gb-lab{font-weight:800;letter-spacing:.5px;color:#eaf2f9;white-space:nowrap}
-  .gb-lab-row .sp{margin-left:auto;text-align:right}
-  .gb-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-  .gb-tabs a{display:flex;align-items:center;justify-content:center;min-height:38px;padding:0 5px;border-radius:10px;
-    font-size:11.5px;font-weight:700;line-height:1.15;text-align:center;text-decoration:none;color:#eaf2f9;
-    background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);transition:.15s}
-  .gb-tabs a:hover{background:rgba(255,255,255,.20)}
-  .gb-tabs a.here{background:#fff;border-color:#fff;color:#0f3252;box-shadow:0 1px 4px rgba(0,0,0,.28)}
-  .gb-tabs a.here::before{content:"";width:6px;height:6px;border-radius:50%;background:#1f7a4d;margin-right:5px;flex:0 0 auto}
-  @media(min-width:720px){
-    .gb-bar .wrap{display:flex;align-items:center;gap:16px;padding-top:10px;padding-bottom:10px}
-    .gb-lab-row{margin-bottom:0;flex:1 1 auto}
-    .gb-lab-row .sp{margin-left:0;padding-left:4px}
-    .gb-tabs{display:flex;gap:7px;flex:0 0 auto}
-    .gb-tabs a{min-height:32px;padding:0 14px;border-radius:16px;white-space:nowrap}
-  }
-  @media(max-width:430px){
-    .gb-tabs a{font-size:10.5px;padding:0 3px;white-space:nowrap;letter-spacing:-.1px}
-    .gb-lab-row{font-size:10px}
-  }
   .wrap{max-width:1120px;margin:0 auto;padding:0 18px}
   svg.ic{width:18px;height:18px;flex:0 0 auto;vertical-align:-3px}
 
@@ -524,12 +499,48 @@
   .hd-ft .hd-info{flex:1;font-size:11px;color:var(--sub);line-height:1.5}
   .hd-ft button{border:none;border-radius:9px;padding:10px 15px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;background:var(--navy);color:#fff}
   @media(max-width:420px){ .health-banner{padding:10px 11px;gap:9px} .health-banner .hb-ic{width:36px;height:36px} .health-banner .hb-go{padding:7px 9px;font-size:11px} }
-  
-  /* GB-FIX-BANNER-HIT 隐藏态横幅透明度 0 但仍可点击，会挡住顶部协作导航 */
-  .reply-banner,.health-banner{pointer-events:none}
-  .reply-banner.show,.health-banner.show{pointer-events:auto}
+  @media(display-mode:standalone){ body{padding-top:env(safe-area-inset-top)} }
 
+  /* ===== 区块「更新」按钮（每个区块右上角，手动重拉云端数据） ===== */
+  .sec-upd{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);background:#fff;
+           color:var(--navy);font-family:inherit;font-size:11px;font-weight:650;padding:4px 9px;
+           border-radius:999px;cursor:pointer;white-space:nowrap;transition:background .15s,transform .1s;
+           font-variant-numeric:tabular-nums;flex:0 0 auto}
+  .sec-upd:hover{background:#eaf1f8}
+  .sec-upd:active{transform:scale(.95)}
+  .sec-upd.busy{opacity:.65;cursor:progress}
+  .sec-upd .su-ic{display:inline-block;font-size:12px;line-height:1}
+  .sec-upd.busy .su-ic{animation:su-spin .9s linear infinite}
+  .sec-upd.ok{border-color:#bcd9c4;background:#eef8f1;color:#1f6b3d}
+  .sec-upd.err{border-color:#e8c4bd;background:#fdf1ef;color:#a83628}
+  @keyframes su-spin{to{transform:rotate(360deg)}}
+  @media(max-width:420px){ .sec-h{gap:8px} .sec-upd{padding:3px 8px;font-size:10.5px} }
 
+  /* GB-NAV2 顶部协作导航：iOS 安全区避让（不再被状态栏云雾遮住）+ 三段式切换 */
+  .gb-bar{background:linear-gradient(135deg,#0d2c49,#1d5486);color:#fff;border-bottom:1px solid rgba(255,255,255,.14);
+    padding-top:env(safe-area-inset-top,0px);position:sticky;top:0;z-index:1100;box-shadow:0 2px 10px rgba(13,44,73,.22)}
+  .gb-bar .wrap{display:block;padding-top:8px;padding-bottom:9px}
+  .gb-lab-row{display:flex;align-items:center;gap:8px;font-size:10.5px;color:#bcd3e6;margin-bottom:7px;line-height:1.3}
+  .gb-lab{font-weight:800;letter-spacing:.5px;color:#eaf2f9;white-space:nowrap}
+  .gb-lab-row .sp{margin-left:auto;text-align:right}
+  .gb-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+  .gb-tabs a{display:flex;align-items:center;justify-content:center;min-height:38px;padding:0 5px;border-radius:10px;
+    font-size:11.5px;font-weight:700;line-height:1.15;text-align:center;text-decoration:none;color:#eaf2f9;
+    background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);transition:.15s}
+  .gb-tabs a:hover{background:rgba(255,255,255,.20)}
+  .gb-tabs a.here{background:#fff;border-color:#fff;color:#0f3252;box-shadow:0 1px 4px rgba(0,0,0,.28)}
+  .gb-tabs a.here::before{content:"";width:6px;height:6px;border-radius:50%;background:#1f7a4d;margin-right:5px;flex:0 0 auto}
+  @media(min-width:720px){
+    .gb-bar .wrap{display:flex;align-items:center;gap:16px;padding-top:10px;padding-bottom:10px}
+    .gb-lab-row{margin-bottom:0;flex:1 1 auto}
+    .gb-lab-row .sp{margin-left:0;padding-left:4px}
+    .gb-tabs{display:flex;gap:7px;flex:0 0 auto}
+    .gb-tabs a{min-height:32px;padding:0 14px;border-radius:16px;white-space:nowrap}
+  }
+  @media(max-width:430px){
+    .gb-tabs a{font-size:10.5px;padding:0 3px;white-space:nowrap;letter-spacing:-.1px}
+    .gb-lab-row{font-size:10px}
+  }
   /* GB-TABBAR v3 手机端切换改到底部：顶部会被 iOS 玻璃工具条/状态栏压住，底部不赌环境 */
   .gb-tabbar{display:none}
   @media(max-width:720px){
@@ -568,9 +579,10 @@
   </nav>
 </div></div>
 <header>
+<header>
   <div class="wrap">
     <div class="hd-top">
-      <div class="logo"><img src="assets/icon-512.png?v=3.0.13" alt="GunBase" onerror="this.style.display='none'"></div>
+      <div class="logo"><img src="assets/icon-512.png?v=3.2.0" alt="GunBase" onerror="this.style.display='none'"></div>
       <div class="hd-title">
         <h1 id="botName">AI GB-Sales · 业务情报中心</h1>
         <div class="org" id="org">GunBase 火械基地 · 海外业务执行机器人</div>
@@ -614,6 +626,30 @@
       <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M9 15l2 2 4-4"/></svg>
       每日循环 · 今日计划 / 执行复盘</h2><span class="hint" id="loopHint">早 08:00 出计划 · 晚 21:00 出复盘</span></div>
     <div class="loop-wrap" id="dailyLoop"></div>
+  </section>
+
+  <section>
+    <div class="sec-h"><span class="bar"></span><h2>
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l2-6 3 12 2.5-8 1.5 4h5"/></svg>
+      枪械市场情报 · 每日 21:00</h2><span class="hint" id="mktMeta">—</span></div>
+    <div class="card" style="padding:14px 16px">
+      <div id="mktStats" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+      <div id="mktAR" style="margin-top:14px"></div>
+      <div id="mktAK" style="margin-top:14px"></div>
+      <div id="mktList" style="margin-top:14px"></div>
+      <div id="mktNote" style="margin-top:10px;font-size:11px;color:var(--sub)">—</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-h"><span class="bar"></span><h2>
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z"/><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/></svg>
+      瞄准镜知识 · 周末学习报告</h2><span class="hint" id="learnMeta">—</span></div>
+    <div class="card" style="padding:14px 16px">
+      <div id="learnStats" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+      <div id="learnHooks" style="margin-top:14px"></div>
+      <div id="learnCards" style="margin-top:14px"></div>
+    </div>
   </section>
 
   <section>
@@ -737,7 +773,7 @@
 </button>
 <div class="chat-panel" id="chatPanel">
   <div class="chat-hd">
-    <div class="av"><img src="assets/icon-512.png?v=3.0.13" alt=""></div>
+    <div class="av"><img src="assets/icon-512.png?v=3.2.0" alt=""></div>
     <div class="ti"><b>和 AI GB-Sales 对话</b><span><span class="dot"></span><span id="chatBind">WorkBuddy 智能体 · 异步</span></span></div>
     <button class="x" id="chatClose">×</button>
   </div>
@@ -799,7 +835,7 @@
   </div>
 </div>
 
-<script src="data.js?v=3.0.17"></script>
+<script src="data.js?v=3.2.0"></script>
 <script>/* 策展数据内联兜底：当 data.js 被旧缓存覆盖时仍保证渠道/决策区块渲染 */
 window.__CURATED_INLINE={"channels":{"asOf":"2026-11-20","total":65,"sentTotal":14,"note":"细分保留 11-18 原始标签快照（台账 11-20 已将 Google·DE 统一为 WebSearch·DE/Google）；合并口径按「获取手段」归因。已发信为台账状态口径（另 1 封 Lobo 域名过期退信淘汰，未计入）。","merged":[{"id":"search","label":"联网搜索（经 Google 检索）","value":36,"sent":14,"color":"#1d5486","parts":"品牌经销商目录 19 + 多语种搜索 15 + Google 直搜 2","attr":"搜索引擎"},{"id":"directory","label":"批发商/展会名录","value":27,"sent":0,"color":"#2f7cb8","parts":"Innogun 13 + Shield 10 + Valiant 4","attr":"公开名录"},{"id":"platform","label":"Falcora 静态平台","value":2,"sent":0,"color":"#9aa7b5","parts":"FAL_REAL 只读数据文件","attr":"平台直读"}],"mergedInsight":"合并口径洞察：搜索引擎（经 Google 检索）实际贡献 36 条线索、且包揽全部 14 封已发信——是唯一被验证可触达的渠道。字面「Google 直接 2 条」只是标签碎片，另外 34 条被记在品牌经销商目录与多语种搜索名下。","items":[{"label":"展会/批发商名录","value":27,"sent":0,"color":"#1d5486","attr":"公开名录","attrType":"name","note":"Innogun 13 + Shield 10 + Valiant 4 · 最大存量、零触达"},{"label":"品牌经销商目录","value":19,"sent":9,"color":"#2f7cb8","attr":"经 Google 检索","attrType":"google","note":"Burris 9 + Element 10 官网经销商页 · 当前转化主力"},{"label":"联网多语种搜索","value":15,"sent":3,"color":"#126b6b","attr":"经 Google 检索","attrType":"google","note":"德/西/法/葡 8 组关键词实测 · 已发 3"},{"label":"Google 直接","value":2,"sent":2,"color":"#c08a2e","attr":"经 Google 检索","attrType":"google","note":"德语关键词直搜（路径2）· 已发 2"},{"label":"Falcora 平台","value":2,"sent":0,"color":"#9aa7b5","attr":"平台直读","attrType":"platform","note":"只读静态数据文件 · 已甄别、未发信"}],"insight":"渠道洞察：按获取手段合并后，经 Google 检索的线索共 36 条（55.4%）且贡献全部 14 封已发信；批发商名录 27 条（41.5%）零触达，是最大未开发存量。下一步优先激活名录池，并把检索类的高转化话术复用过去。"},"decisions":[{"cp":"客户回复 0","q":"15 封已发、0 封回复，转化从哪里破？","ctx":"截至 11-20：已对外发送 15 封、有效送达 14、退信 1，客户回复仍为 0。瓶颈已从「发得出」转为「有回音」。","opts":["启动 D3/D7 跟进序列，对已送达 14 封做二次触达","暂停群发，收窄到高匹配 A 档逐封定制重发","先补官网案例/资质页，提升可信度后再跟进"]},{"cp":"名录 27 条零触达","q":"占全部线索 41.5% 的批发商名录，是否立即开发？","ctx":"渠道结构显示：展会/批发商名录 27 条（Innogun 13 + Shield 10 + Valiant 4）全部「待开发」，0 封触达——当前最大的未开发存量。","opts":["立即起草并发送这 27 条的本地化首封","先甄别高匹配 10 条试投，验证话术后放量","维持现状，继续做品牌经销商目录"]},{"cp":"报价缺单价","q":"主力 SKU 价格清单本周能否给出？","ctx":"官网 showPrice:false，价格私下洽谈；price_list.md 仍是空模板。买家一旦回信问价，无即时报价能力，这是转化硬卡点。报价仍按 11 要素逐封授权。","opts":["本周给 5–10 个主力 SKU（单价/币种/MOQ/交期）","先给 3 个爆款 SKU 试水","暂不给，统一用「价格另议」先探需求"]},{"cp":"渠道投入配比","q":"下一步获客资源优先投向哪个渠道？","ctx":"经销商目录已发 9/19、搜索类已发 5/17、批发商名录 0/27。需决定集中投放方向，避免资源分散。","opts":["批发商名录（存量最大、零触达）","品牌经销商目录（转化最高，已发 9 封）","多语种搜索（可持续增量）"]},{"cp":"跟进 KPI = 0","q":"D3/D7 自动跟进序列是否即刻启用？","ctx":"看板「订单跟进」仍为 0 封，已发 14 封无人二次触达；行业惯例 3 天内跟进可显著提升回复率。序列草稿不含价格。","opts":["立即启用 D3/D7 自动跟进（云端执行、逐封记账）","先只对 A 档 14 封启用","暂不自动，逐封人工决定"]},{"cp":"决策链路未验证","q":"决策发出邮件链路本周是否实测闭环？","ctx":"决策发出依赖本机邮件客户端，至今未收到首封「决策发出」邮件。需一次真实闭环确认所有者决策能到达 AI 并被记账。","opts":["本周发一封测试决策验证链路","改为云端 API 直写决策（不依赖邮件客户端）","维持现状，暂不验证"]}],"decisionSummary":{"title":"7 项历史决策 · AI 已一次处理","note":"以下为早期 7 项决策的处置结果（5 已落地、2 待配合），保留作历史留痕。当前真正卡点已变化，请以下方 6 项「当前卡点决策」为准——它们逐条对应今天的数据缺口。","results":[{"q":"线索源调整","decision":"改用买家导向来源","state":"done","detail":"联网多语种搜客为主源，Falcora 降级为只读辅助源","by":"AI 已执行"},{"q":"品牌商是否目标","decision":"否，只要分销商/买家","state":"done","detail":"甄别引擎已把 ZEISS/Swarovski 等 12 家品牌商列入剔除词表","by":"AI 已执行"},{"q":"历史询盘名单","decision":"无，按新线索推进","state":"done","detail":"17 条已核验线索入台账，分层 A7/B10","by":"AI 已执行"},{"q":"W2 台账方案","decision":"先本地 CSV 台账","state":"done","detail":"leads_ledger.csv 已建，含 7 天去重哈希；Supabase 留作 Phase 2","by":"AI 已执行"},{"q":"W3 甄别引擎","decision":"规则引擎 + 分层","state":"done","detail":"screen_leads.py 已建并跑通，17 条零误伤；分层报告已出","by":"AI 已执行"},{"q":"W1 本机验信","decision":"一键脚本已备，待你双击","state":"wait","detail":"W1_本机验信一键.command 已生成并赋执行权限，验号+测试信一步跑完","by":"需你本机"},{"q":"W4 价格清单","decision":"模板已备，待你填 5–10 个 SKU","state":"wait","detail":"price_list.md 已生成（本地、不进看板）；价格仍逐封授权","by":"需你给价"}]}};
 </script>
@@ -834,8 +870,7 @@ function __bootMain(){
       }
     }
   })();
-  /* 命名统一：云端 payload 的 meta.botName 仍为旧名「AI 业务员」，此处固定按所有者指定的 AI GB-Sales 显示 */
-  document.getElementById('botName').textContent = 'AI GB-Sales · 业务情报中心';
+  document.getElementById('botName').textContent = m.botName+' · 业务情报中心';
   document.getElementById('org').textContent = m.org;
   document.getElementById('pillDate').textContent = '报告日期 '+m.reportDate;
   document.getElementById('pillCycle').textContent = m.cycle;
@@ -1120,13 +1155,13 @@ function __bootMain(){
     else { st.textContent='已选 '+n+' / '+total+' 项：'+Object.keys(decState).map(function(k){return '决策'+(+k+1);}).join('、'); btn.disabled=false; }
   }
   renderDecisions();
-  document.getElementById('decisions').addEventListener('click',function(e){
+  document.getElementById('decisions').onclick=function(e){
     if(!ownerLocal) return;
     var b=e.target.closest('.opt-btn'); if(!b) return;
     var i=+b.getAttribute('data-dec'), o=b.getAttribute('data-opt');
     if(decState[i]===o){ delete decState[i]; } else { decState[i]=o; }
     renderDecisions();
-  });
+  };
   document.getElementById('decSendBtn').onclick=function(){
     if(!ownerLocal) return;
     var keys=Object.keys(decState); if(!keys.length) return;
@@ -1189,7 +1224,9 @@ function __bootMain(){
     try{ var s=new Date().toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
       document.getElementById('pillClock').textContent='北京时间 '+s; }catch(e){}
   }
-  clock(); setInterval(clock,1000);
+  clock();
+  if(window.__clockTimer) clearInterval(window.__clockTimer);
+  window.__clockTimer=setInterval(clock,1000);
 
   // ===== 对话面板（绑定 WorkBuddy 智能体邮箱，异步）=====
   (function(){
@@ -1244,7 +1281,7 @@ function __bootMain(){
       window.location.href=mailto;
     }
     send.onclick=submit;
-    text.addEventListener('keydown',function(e){ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); submit(); } });
+    text.onkeydown=function(e){ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); submit(); } };
     fab.onclick=function(){ panel.classList.toggle('show'); if(panel.classList.contains('show')) text.focus(); };
     document.getElementById('chatClose').onclick=function(){ panel.classList.remove('show'); };
   })();
@@ -1534,6 +1571,7 @@ function __bootMain(){
         render();
       }).catch(function(){});
   }
+  window.__healthReload=function(){ try{ load(); }catch(e){} };
   function render(){
     var bad=state.alerts.length>0;
     // 徽标
@@ -1588,6 +1626,223 @@ function __bootMain(){
   document.addEventListener('visibilitychange',function(){ if(!document.hidden) load(); });
 })();
 </script>
+<script>
+/* ===== 情报区块：每日枪械市场日报(ai_sales_marketnews) + 周末学习报告(ai_sales_research) =====
+ * 数据由云端 worker 每晚 21:00 写入 Supabase；本区块只读渲染，不含任何写操作。
+ * 2026-11-21 新增。*/
+(function(){
+  var SUPA='https://nsnmtkukxquhinlmbejg.supabase.co';
+  var KEY='sb_publishable_YB5z3cQK-vCg67--oKpSrg_63STgMJW';
+  var CN={smg:'冲锋枪',pistol:'手枪',rifle:'步枪',sniper:'狙击枪',explosive:'爆炸物',other:'其他'};
+  var LC={tech:'技术参数',competitor:'竞品动态',compliance:'法规合规',channel:'渠道市场',event:'展会活动',pain:'客户痛点'};
+
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function chip(label,val,tone){
+    var bg=tone==='hot'?'#fdeceb':(tone==='mid'?'#fff6e0':'#eef3f8');
+    var cl=tone==='hot'?'#b8461f':(tone==='mid'?'#8a5a00':'#123a5e');
+    return '<span style="display:inline-flex;align-items:center;gap:6px;background:'+bg+';color:'+cl+
+      ';border:1px solid '+cl+'22;border-radius:999px;padding:4px 11px;font-size:12.5px;font-weight:600">'+
+      esc(label)+'<b style="font-size:14px">'+esc(val)+'</b></span>';
+  }
+  function linkList(arr,empty){
+    if(!arr||!arr.length) return '<div style="color:var(--sub);font-size:12.5px">'+esc(empty||'本窗口无命中')+'</div>';
+    return arr.map(function(x){
+      return '<div style="padding:5px 0;border-bottom:1px dashed var(--line)">'+
+        '<a href="'+esc(x.url)+'" target="_blank" rel="noopener" style="color:#123a5e;text-decoration:none;font-size:13px">'+esc(x.title)+'</a>'+
+        '<span style="color:var(--sub);font-size:11.5px"> · '+esc(x.source||'')+(x.published?' · '+esc(x.published):'')+'</span></div>';
+    }).join('');
+  }
+  function block(title,sub,html,accent){
+    return '<div style="border-left:3px solid '+accent+';padding-left:11px">'+
+      '<div style="font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:2px">'+esc(title)+
+      ' <span style="font-weight:400;color:var(--sub);font-size:11.5px">'+esc(sub)+'</span></div>'+
+      html+'</div>';
+  }
+
+  function renderMarket(p){
+    if(!p||!p.date){ document.getElementById('mktMeta').textContent='暂无数据（云端 21:00 后生成）'; return; }
+    var _gt=p.generated_at||'';
+    var _stamp=(_gt.indexOf(p.date)===0)?_gt:(p.date+' '+_gt);
+    document.getElementById('mktMeta').textContent=_stamp+' · '+(p.main_window||'');
+    var st='';
+    st+=chip('入报',p.total,p.total?'mid':'');
+    st+=chip('7日池',p.pool||p.total,'');
+    Object.keys(CN).forEach(function(k){
+      var v=(p.counts||{})[k]||0;
+      st+=chip(CN[k],v,k==='explosive'&&v?'hot':'');
+    });
+    st+=chip('AR15',(p.special&&p.special.ar15)?p.special.ar15.count:0,'hot');
+    st+=chip('AK',(p.special&&p.special.ak)?p.special.ak.count:0,'hot');
+    document.getElementById('mktStats').innerHTML=st;
+
+    ['ar15','ak'].forEach(function(key){
+      var b=(p.special||{})[key]||{count:0,groups:{},brands:[]};
+      var box=document.getElementById(key==='ar15'?'mktAR':'mktAK');
+      var inner='';
+      if(b.brands&&b.brands.length){
+        inner+='<div style="font-size:12px;color:var(--sub);margin:3px 0 6px">品牌出现频次：'+
+          b.brands.map(function(x){return esc(x[0])+'×'+x[1];}).join('、')+'</div>';
+      }
+      Object.keys(b.groups||{}).forEach(function(g){
+        inner+='<div style="margin:7px 0 2px;font-size:12px;font-weight:700;color:#123a5e">'+esc(g)+'（'+b.groups[g].length+'）</div>';
+        inner+=linkList(b.groups[g].slice(0,6));
+      });
+      if(!inner) inner='<div style="color:var(--sub);font-size:12.5px">该窗口内无报道，未做任何补写。</div>';
+      box.innerHTML=block(b.label||key.toUpperCase(),b.window_label||'',inner,key==='ar15'?'#b8461f':'#8a5a00');
+    });
+
+    var hl='<div style="font-size:13px;font-weight:700;margin-bottom:4px">头条速览</div>'+linkList((p.headlines||[]).slice(0,8));
+    if(p.feeds_failed&&p.feeds_failed.length){
+      hl+='<div style="margin-top:8px;font-size:11.5px;color:#b8461f">信源异常：'+
+        p.feeds_failed.map(function(f){return esc(f.source);}).join('、')+'</div>';
+    }
+    document.getElementById('mktList').innerHTML=hl;
+    document.getElementById('mktNote').textContent=p.note||'';
+  }
+
+  function renderLearn(p){
+    if(!p||!p.date){ document.getElementById('learnMeta').textContent='暂无数据（周末 21:00 后生成）'; return; }
+    var _lg=p.generated_at||'';
+    var _lstamp=(_lg.indexOf(p.date)===0)?_lg:(p.date+' '+_lg);
+    document.getElementById('learnMeta').textContent=_lstamp+' · 知识卡 '+p.total+' 张';
+    var st=chip('累计卡',p.total,'mid');
+    Object.keys(p.stats||{}).forEach(function(k){ st+=chip(LC[k]||k,p.stats[k],''); });
+    (p.top_tags||[]).slice(0,6).forEach(function(t){ st+=chip(t[0],'×'+t[1],''); });
+    document.getElementById('learnStats').innerHTML=st;
+
+    var hk='<div style="font-size:13px;font-weight:700;margin-bottom:4px">周一可直接用的行业钩子</div>';
+    if(!(p.hooks||[]).length) hk+='<div style="color:var(--sub);font-size:12.5px">本轮无高分素材</div>';
+    (p.hooks||[]).forEach(function(h,i){
+      hk+='<div style="padding:5px 0;border-bottom:1px dashed var(--line);font-size:13px">'+
+        '<b>'+(i+1)+'. '+esc(h.topic)+'</b> <span style="color:var(--sub);font-size:11.5px">· '+
+        esc(LC[h.why]||h.why)+' · '+esc(h.source)+(h.published?' · '+esc(h.published):'')+'</span><br>'+
+        '<a href="'+esc(h.url)+'" target="_blank" rel="noopener" style="color:#123a5e;font-size:11.5px">'+esc(h.url)+'</a></div>';
+    });
+    document.getElementById('learnHooks').innerHTML=hk;
+
+    var cs='<div style="font-size:13px;font-weight:700;margin-bottom:4px">高分知识卡</div>';
+    cs+=(p.top_cards||[]).map(function(c){
+      return '<div style="padding:5px 0;border-bottom:1px dashed var(--line)">'+
+        '<a href="'+esc(c.url)+'" target="_blank" rel="noopener" style="color:#123a5e;text-decoration:none;font-size:13px">'+esc(c.title)+'</a>'+
+        '<span style="color:var(--sub);font-size:11.5px"> · '+esc(LC[c.category]||c.category)+' · '+esc(c.source)+' · '+esc(c.score)+'分</span></div>';
+    }).join('');
+    document.getElementById('learnCards').innerHTML=cs;
+  }
+
+  function fetchOne(tbl){
+    var url=SUPA+'/rest/v1/sync_data?select=payload&table_name=eq.'+tbl+'&is_deleted=eq.false&limit=1';
+    return fetch(url,{headers:{apikey:KEY,Authorization:'Bearer '+KEY},cache:'no-store'})
+      .then(function(r){return r.ok?r.json():[];}).catch(function(){return [];});
+  }
+  function loadIntel(){
+    fetchOne('ai_sales_marketnews').then(function(rows){
+      renderMarket(rows&&rows[0]&&rows[0].payload?rows[0].payload.latest:null);
+    });
+    fetchOne('ai_sales_research').then(function(rows){
+      renderLearn(rows&&rows[0]&&rows[0].payload?rows[0].payload:null);
+    });
+  }
+  window.__loadIntel=loadIntel;
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',loadIntel); }
+  else { loadIntel(); }
+  setInterval(loadIntel,300000);
+})();
+
+/* ===== 每个区块的「更新」按钮：手动重拉云端数据并就地重绘 ===== */
+(function(){
+  var SUPA='https://nsnmtkukxquhinlmbejg.supabase.co';
+  var KEY='sb_publishable_YB5z3cQK-vCg67--oKpSrg_63STgMJW';
+  var H={'apikey':KEY,'Authorization':'Bearer '+KEY};
+  var busy=false;
+
+  function one(tbl){
+    return fetch(SUPA+'/rest/v1/sync_data?select=payload,updated_at&table_name=eq.'+tbl
+                 +'&is_deleted=eq.false&limit=1',{headers:H,cache:'no-store'})
+      .then(function(r){ return r.ok?r.json():[]; })
+      .catch(function(){ return []; });
+  }
+
+  window.__refreshAll=function(){
+    return Promise.all([one('ai_sales_hub'),one('ai_sales_health')]).then(function(res){
+      var hub=(res[0]&&res[0][0])||null;
+      if(hub&&hub.payload&&hub.payload.meta&&hub.payload.meta.version){
+        window.REPORT_DATA=hub.payload;
+        window.__DATA_SOURCE='cloud';
+        window.__CLOUD_UPDATED_AT=hub.updated_at;
+        var cur=window.__LOCAL_CURATED||{};
+        ['channels','decisions','decisionSummary'].forEach(function(k){
+          if(cur[k]) window.REPORT_DATA[k]=cur[k];
+        });
+      }
+      // 主数据重绘（通道/决策已做幂等，重复调用安全）
+      try{ if(typeof __bootMain==='function') __bootMain(); }catch(e){ console.warn('reboot fail',e); }
+      // 情报区块 + 健康状态
+      try{ if(window.__loadIntel) window.__loadIntel(); }catch(e){}
+      try{ if(window.__healthReload) window.__healthReload(); }catch(e){}
+      return hub?hub.updated_at:'';
+    });
+  };
+
+  function paintAll(cls,txt,hold){
+    var list=document.querySelectorAll('.sec-upd');
+    for(var i=0;i<list.length;i++){
+      var b=list[i], t=b.querySelector('.su-t');
+      b.classList.remove('busy','ok','err');
+      if(cls) b.classList.add(cls);
+      t.textContent=txt;
+      clearTimeout(b._rt);
+      if(hold) b._rt=setTimeout(function(){ b.classList.remove('ok','err'); b.querySelector('.su-t').textContent='更新'; },hold);
+    }
+  }
+
+  function run(btn){
+    if(busy) return;
+    busy=true;
+    var t0=Date.now();
+    var list=document.querySelectorAll('.sec-upd');
+    for(var i=0;i<list.length;i++){ list[i].classList.add('busy'); list[i].querySelector('.su-t').textContent='更新中'; }
+    // 顺带让 SW 检查新版本（有则提示重载）
+    try{
+      if('serviceWorker' in navigator){
+        navigator.serviceWorker.getRegistration().then(function(reg){
+          if(reg){ reg.update().catch(function(){}); if(reg.waiting) reg.waiting.postMessage({type:'SKIP_WAITING'}); }
+        }).catch(function(){});
+      }
+    }catch(e){}
+
+    window.__refreshAll().then(function(utc){
+      var wait=Math.max(0,450-(Date.now()-t0));
+      setTimeout(function(){
+        var d=new Date();
+        var hh=('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2)+':'+('0'+d.getSeconds()).slice(-2);
+        paintAll('ok','已更新 '+hh,7000);
+        busy=false;
+      },wait);
+    }).catch(function(){
+      paintAll('err','更新失败',5000);
+      busy=false;
+    });
+  }
+
+  function mount(){
+    var secs=document.querySelectorAll('.wrap > section');
+    for(var i=0;i<secs.length;i++){
+      var head=secs[i].querySelector('.sec-h');
+      if(!head||head.querySelector('.sec-upd')) continue;
+      var b=document.createElement('button');
+      b.type='button'; b.className='sec-upd';
+      b.title='重新从云端拉取最新数据（不用重开页面）';
+      b.innerHTML='<span class="su-ic">\u27F3</span><span class="su-t">更新</span>';
+      b.onclick=function(){ run(this); };
+      head.appendChild(b);
+    }
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',mount);
+  else mount();
+})();
+</script>
+
 <script src="../shared/reports/gb-reports.js"></script>
 <script src="../shared/reports/gb-email-log.js"></script>
 <script>window.GB_LINE_FOR="GB-Sales";</script>
