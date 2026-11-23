@@ -1,8 +1,8 @@
 {
   "mode": "pilot",
   "modeExplain": "pilot = 预演期，所有对外邀约邮件只发给所有者本人审阅，不触达任何第三方；external = 正式对外，仅发给 whitelist 内的机构，并 CC 所有者。",
-  "updatedAt": "2026-11-23 09:20 (GMT+8)",
-  "updatedBy": "AI GB-Team（按所有者 11-23 指示：美加/澳洲改北京时间上午发送）",
+  "updatedAt": "2026-11-23 10:15 (GMT+8)",
+  "updatedBy": "AI GB-Team（按所有者 11-23 纠正：自动发信深夜无影响，撤销北京上午特例，全部恢复客户当地净空窗）",
   "ownerAddress": "sales@gunbase-optics.com",
   "quota": {
     "dailyTotal": 50,
@@ -11,12 +11,12 @@
     "reservedForReplies": 42
   },
   "sendWindow": {
-    "rule": "一般地区：净空窗 = 收件人当地工作时段 - 上班头30分 - 下班前45分 - 午休前后各10分。例外（所有者 11-23 指示）：美国/加拿大/澳洲统一按【北京时间上午 09:00-11:59】发送，不再按当地净空窗，也不受周末当地日历影响（按北京日历）。判定工具 send_window.py 输出 clockMode=BJ-morning 时即为例外。Sales 与 Marketing 共用同一张表。",
+    "rule": "统一净空窗 = 收件人当地工作时段 - 上班头30分 - 下班前45分 - 午休前后各10分。所有地区含美/加/澳洲一律按客户当地判定，无北京上午特例（2026-11-23 10:15 撤销：Sales 与 Marketing 均云端 7x24 自动发信，北京深夜不影响执行）。判定工具 send_window.py 输出 clockMode 恒为 local-net。",
     "appliesTo": [
       "GB-Sales",
       "GB-Marketing"
     ],
-    "basis": "一般地区按收件人当地时间；美加/澳洲按北京时间上午（clockMode=BJ-morning）",
+    "basis": "收件人当地时间（全部地区统一，含美加/澳洲）",
     "guards": {
       "openGuardMin": 30,
       "closeGuardMin": 45,
@@ -91,24 +91,18 @@
         "friNet": "08:30-11:50/13:10-13:30"
       },
       "us": {
-        "label": "美国/加拿大（北京上午发·例外）",
-        "clockMode": "BJ-morning",
-        "bjWindow": "09:00-11:59",
-        "bjPreferred": [
-          "09:20",
-          "10:50"
-        ],
-        "note": "不再按当地工作时段；收件人当地可能是前一天晚上，属所有者明确决策"
+        "label": "美国/加拿大",
+        "work": "09:00-12:00/13:00-16:00",
+        "net": "09:30-11:50/13:10-15:15",
+        "friNet": "09:30-11:50/13:10-14:15",
+        "note": "按客户当地净空窗发；换算到北京多为深夜/凌晨，由云端 worker 执行，本机无需在线"
       },
       "au": {
-        "label": "澳大利亚（北京上午发·例外）",
-        "clockMode": "BJ-morning",
-        "bjWindow": "09:00-11:59",
-        "bjPreferred": [
-          "09:20",
-          "10:50"
-        ],
-        "note": "不再按当地净空窗"
+        "label": "澳大利亚",
+        "work": "09:00-12:30/13:30-17:00",
+        "net": "09:30-12:20/13:40-16:15",
+        "friNet": "09:30-12:20/13:40-15:15",
+        "note": "按客户当地净空窗发；云端 7x24 执行"
       },
       "jp": {
         "label": "日本",
@@ -123,11 +117,7 @@
         "friNet": "09:30-11:50/13:40-16:15"
       }
     },
-    "localMachineLimit": "美加/澳洲已改北京时间上午 09:00-11:59，本机 09:30/11:00 定点任务 + 每小时兜底可覆盖；一般地区仍按当地净空窗，美洲以外的深夜落点不再存在。",
-    "preferredBjTimes": [
-      "09:20",
-      "10:50"
-    ]
+    "localMachineLimit": "无：Sales 与 Marketing 均由云端 worker（GitHub Actions + Supabase pg_cron）7x24 按客户当地净空窗自动发信，本机开关机不影响。Marketing 走独立队列 ai_marketing_cloud_queue + 独立 job。"
   },
   "whitelist": [],
   "whitelistNote": "填入后 mode 才会生效为 external。格式：{\"org\":\"机构名\",\"email\":\"合作邮箱\",\"region\":\"DE\",\"lastSent\":null}",
@@ -142,6 +132,6 @@
     "黄灯合规项目（欧洲二战主题、德国境内射击场）未获法务结论前不得进外发队列",
     "发送失败必须如实记为 failed，不得伪装成功",
     "每日发送前必须读台账去重，不得重复触达同一机构",
-    "发送前必须跑 send_window.py 判定：一般地区不在当地净空窗不发；美加/澳洲不在北京时间上午 09:00-11:59 不发（含上班头30分与下班前45分规则对一般地区仍有效）"
+    "发送前必须跑 send_window.py 判定：所有地区（含美加/澳洲）不在收件人当地净空窗不发（含上班头30分与下班前45分规则）；无北京上午特例。"
   ]
 }
