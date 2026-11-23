@@ -102,11 +102,12 @@
   .rp-verdict{background:linear-gradient(135deg,#fdf6ee,#fffaf3);border:1px solid #f0dcb8;border-left:4px solid var(--gold);margin-bottom:13px}
   .rp-verdict h3{font-size:13.5px;color:#7a5a12;display:flex;align-items:center;gap:8px}
   .rp-verdict p{font-size:12.5px;color:#3d3020;line-height:1.75;margin-top:8px}
-  .rp-wrap{display:grid;grid-template-columns:1fr 1fr;gap:13px;align-items:start}
+  .rp-wrap{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px;align-items:start}
   .rp-card{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
   .rp-card .hd2{padding:12px 15px;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:10px}
   .rp-card.s .hd2{background:linear-gradient(135deg,#1d5486,#2f7cb8)}
   .rp-card.m .hd2{background:linear-gradient(135deg,#126b6b,#1f9c9c)}
+  .rp-card.r .hd2{background:linear-gradient(135deg,#4a3f6b,#7364a8)}
   .rp-card .hd2 h3{font-size:14px;font-weight:750}
   .rp-card .hd2 .sc{font-size:19px;font-weight:800;line-height:1}
   .rp-card .hd2 .sc span{font-size:10px;font-weight:600;opacity:.8}
@@ -274,10 +275,11 @@
     <div class="sh"><span class="bar"></span><h2>每日战报 · Team 汇整</h2><span class="hint" id="rpMeta"></span></div>
     <div class="rp-days" id="rpDays"></div>
     <div class="card pad rp-verdict" id="rpVerdict"></div>
-    <div class="rp-agg">本页只做<b>汇总</b>：Team 判定 + 两条线对比摘要 + 全部监督指令 + 跨线裁决 + 升级事项 + 全量发信台账。<br>每条线的完整日报（事实、卡点、请求、本线指令、本线发信明细）在各自的 PWA 里，点卡片底部按钮进入。</div>
+    <div class="rp-agg">本页只做<b>汇总</b>：Team 判定 + 三条线对比摘要 + 全部监督指令 + 跨线裁决 + 升级事项 + 全量发信台账。<br>每条线的完整日报（事实、卡点、请求、本线指令、本线发信明细）在各自的 PWA 里，点卡片底部按钮进入。</div>
     <div class="rp-wrap">
       <div class="rp-card s" id="rpSales"></div>
       <div class="rp-card m" id="rpMkt"></div>
+      <div class="rp-card r" id="rpRD"></div>
     </div>
     <div class="rp-wrap" style="margin-top:13px">
       <div class="rp-card" id="rpDirs"></div>
@@ -445,6 +447,7 @@
       }
       card(document.getElementById('rpSales'), d.sales, 's', './sales/index.html', 'AI GB-Sales');
       card(document.getElementById('rpMkt'), d.marketing, 'm', './marketing/index.html', 'AI GB-Marketing');
+      card(document.getElementById('rpRD'), d.rd, 'r', './rd/index.html', 'AI GB-RD');
 
       /* \u76d1\u7763\u6307\u4ee4 */
       document.getElementById('rpDirs').innerHTML=
