@@ -14,15 +14,116 @@ window.GB_REPORTS = {
   meta: {
     version: "1.0.1",
     cadence: "每日 21:00 (GMT+8) 由 AI-GB-Team 汇整并发布",
-    submitDeadline: "每日 20:50 前两条线提交日报",
+    submitDeadline: "每日 20:50 前三条线提交日报",
     owner: "GunBase 火械基地 · 陈邦杰",
     mailbox: "eyku5737@agent.qq.com",
     quotaDaily: 50,
-    rule: "AI-GB-Team 本身不发邮件；两条线各自发信，Team 只汇整与下指令。",
+    rule: "AI-GB-Team 本身不发邮件；Sales/Marketing 各自发信，RD 不做对外触达，Team 只汇整与下指令。",
     accumulateNote: "本文件按日累积，新的一天插入数组首位，历史记录永久保留。"
   },
 
   days: [
+    {
+      date: "2026-11-23",
+      weekday: "周一",
+      publishedAt: "2026-11-23 12:00 (GMT+8)",
+      cycle: "第 2 日 · 总管席临时汇整（结构重组日）",
+
+      sales: {
+        agent: "AI GB-Sales",
+        score: 0,
+        scoreLabel: "未提交 · 日报待补",
+        headline: "11-23 日报尚未提交（截至 12:00）；立即执行令已下发，要求 12:30 前补齐",
+        kpi: [
+          { k: "今日对外发送", v: "0", d: "发信台账当日无 Sales 条目", tone: "red" },
+          { k: "日报提交", v: "未提交", d: "gb-reports.js 无当日 sales 段", tone: "red" },
+          { k: "生产商名录", v: "已产出", d: "12 条信号源已同步新路径", tone: "green" },
+          { k: "渠道库", v: "已产出", d: "xlsx 288KB，新路径", tone: "green" }
+        ],
+        facts: [
+          "【总管代写占位】本段由总管席在 12:00 汇整时预置，待 AI GB-Sales 正式补交后覆盖；已读指令板 · 2026-11-23 11:52",
+          "S1/S2 两份名录已在新路径产出，经实跑验证；S3 日报与发信台账尚未提交",
+          "桌面资料夹已重组为 AI-GB-Team/AI-GB-Sales 等角色目录，路径全部同步"
+        ],
+        blockers: ["S3 日报缺交，立即执行令要求 12:30 前补齐"],
+        asks: ["请 Sales 如实填写当日 0 发信原因，不得编造"]
+      },
+
+      marketing: {
+        agent: "AI GB-Marketing",
+        score: 0,
+        scoreLabel: "未提交 · 日报待补",
+        headline: "情报延迟 90 分钟已交付；双封邀约已批准并推云端，待当地落点投递（北京 17:15 / 20:45）",
+        kpi: [
+          { k: "今日对外发送", v: "0/2", d: "两封 pending，落点未到", tone: "amber" },
+          { k: "云端批准", v: "True", d: "已推 Supabase 私有表", tone: "green" },
+          { k: "情报条目", v: "已交付", d: "generatedAt 09:40，延迟 90 分钟", tone: "amber" },
+          { k: "草稿就绪", v: "2", d: "Sabatti / Prins Hendrik", tone: "green" }
+        ],
+        facts: [
+          "【总管代写占位】本段由总管席在 12:00 汇整时预置，待 AI GB-Marketing 正式补交后覆盖；已读指令板 · 2026-11-23 11:52",
+          "M1 合作情报已发布，延迟 90 分钟；M2 两封邀约已获所有者批准",
+          "Marketing 目录重建为 AI-GB-Marketing/，草稿队列 bodyFile 已指向新路径"
+        ],
+        blockers: ["两封邀约待当地净空窗落点投递，非漏发"],
+        asks: []
+      },
+
+      rd: {
+        agent: "AI GB-RD",
+        score: 0,
+        scoreLabel: "首期 · 技术情报已交付",
+        headline: "首期技术扫描：12 条可核实信号 / 3 件公开专利 / 6 项图纸储备方向；ED 玻璃下放 + 快拆座公差链是最具落地价值的抓手",
+        kpi: [
+          { k: "技术信号", v: "12", d: "新品/专利/标准/工程，均附公开来源", tone: "blue" },
+          { k: "图纸储备方向", v: "6", d: "基于已核实事实的工程推演", tone: "green" },
+          { k: "公开专利", v: "3", d: "2026 公开，需 FTO 复核", tone: "purple" },
+          { k: "接口标准", v: "2", d: "MIL-STD-1913 / STANAG 4694", tone: "amber" },
+          { k: "可核实来源", v: "11", d: "展会官方/厂商/专利库", tone: "teal" },
+          { k: "累计报告", v: "1", d: "首期，11-23 建立", tone: "blue" }
+        ],
+        facts: [
+          "已读指令板 · 2026-11-23 11:52（结构重组与命名规范通报）",
+          "首期报告 11:25 生成于 AI-GB-RD/每日技术报告/2026-11-23.md",
+          "T-05/T-06/T-07 为 2026 公开专利；图纸储备均为概念方向，未量产、未做 FTO",
+          "IX 类军用项目只做趋势情报，不做仿制图纸"
+        ],
+        blockers: [
+          "图纸落地前须做专利自由实施（FTO）检索与出口合规复核",
+          "厂商测试口径（如 Burris 600 码 90%）需独立验证"
+        ],
+        asks: ["请所有者确认是否对 DR-01 快拆镜座 / DR-02 热成像夹片转接座启动 FTO 检索"]
+      },
+
+      team: {
+        verdict: "首期三线汇整：RD 首期技术情报已交付（12 信号/3 专利/6 方向）；Sales S3 与 Marketing 日报尚未提交；两封邀约已批准待落点投递。今日核心是结构重组——三线目录与命名统一为 AI-GB-*。",
+        checkins: [
+          { id: "S1", agent: "AI GB-Sales", task: "生产商名录", scheduled: "08:30", actual: "00:21", evidence: "~/Desktop/AI-GB-Team/00_共享资源/07_枪械生产商调研/", verdict: "已交付·来源待核" },
+          { id: "S2", agent: "AI GB-Sales", task: "渠道库", scheduled: "08:35", actual: "02:43", evidence: "~/Desktop/AI-GB-Team/00_共享资源/08_全球枪店与俱乐部调研/", verdict: "已交付·来源待核" },
+          { id: "S3", agent: "AI GB-Sales", task: "日报+发信", scheduled: "09:00", actual: "—", evidence: "无", verdict: "缺交" },
+          { id: "M1", agent: "AI GB-Marketing", task: "合作情报", scheduled: "08:10", actual: "09:40", evidence: "gb-market-intel.js", verdict: "延迟90分钟" },
+          { id: "M2", agent: "AI GB-Marketing", task: "双封邀约", scheduled: "08:30", actual: "09:09", evidence: "queue/2026-11-23.json", verdict: "延迟39分钟" },
+          { id: "R1", agent: "AI GB-RD", task: "全球技术报告", scheduled: "08:00", actual: "11:25", evidence: "AI-GB-RD/每日技术报告/2026-11-23.md", verdict: "延迟·首期" }
+        ],
+        directives: [
+          { id: "D-01", to: "AI GB-Sales", level: "警示", title: "补齐 11-23 日报与台账", detail: "12:30 前写入 sales 段与 email-log，0 发信如实写原因", due: "2026-11-23 12:30", status: "已下发", basis: "gb-reports.js 无当日 sales 段" },
+          { id: "D-02", to: "AI GB-Marketing", level: "关注", title: "核对两封邀约投递", detail: "禁止重复起草/重复 add，按当地净空窗落点投递", due: "2026-11-23 21:00", status: "已下发", basis: "云端 approved=True、pending、0/2" },
+          { id: "D-03", to: "AI GB-RD", level: "关注", title: "首期技术报告已纳入团队中心", detail: "后续每日 08:00 报告需写入 gb-reports.js 的 rd 段", due: "持续", status: "已下发", basis: "团队中心新增 RD 卡，R1 打卡延迟" }
+        ],
+        conflicts: "今日无跨线冲突；结构重组为三线共用路径，已按共享层隔离。",
+        escalations: [
+          { item: "DR-01 / DR-02 图纸方向是否启动 FTO 检索", why: "图纸落地须先做专利自由实施与出口合规复核", blocks: "RD 图纸从概念进入设计评审" }
+        ]
+      },
+
+      emailLog: {
+        sales: { sent: 0, note: "截至 12:00 当日无 Sales 发信记录，日报待补" },
+        marketing: { sent: 0, note: "两封已批准并推云端，待当地落点（北京 17:15 / 20:45）投递" },
+        rd: { sent: 0, note: "RD 不发对外邮件，只做技术情报" },
+        quotaUsed: 0,
+        quotaTotal: 50
+      }
+    },
     {
       date: "2026-11-20",
       weekday: "周五",
