@@ -820,7 +820,7 @@
   function run(btn){
     if(busy)return;busy=true;
     if(btn){btn.classList.add('busy');var t0=btn.querySelector('.su-t');if(t0)t0.textContent='更新中';}
-    try{if('serviceWorker' in navigator&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){return Promise.all(rs.map(function(r){return r.unregister().catch(function(){});}));}).catch(function(){});}}catch(e){}
+    try{if('serviceWorker' in navigator&&navigator.serviceWorker.getRegistrations){var _s=location.pathname.replace(/[^\/]*$/,'');navigator.serviceWorker.getRegistrations().then(function(rs){return Promise.all(rs.filter(function(r){return String(r.scope||'').indexOf(_s)===0;}).map(function(r){return r.unregister().catch(function(){});}));}).catch(function(){});}}catch(e){}
     var urls={'version.json':1};var nodes=document.querySelectorAll('script[src],link[rel="stylesheet"][href]');
     for(var i=0;i<nodes.length;i++){var raw=nodes[i].getAttribute('src')||nodes[i].getAttribute('href')||'';if(!raw)continue;
       if(/^https?:/i.test(raw)&&raw.indexOf(location.origin)!==-1)raw=raw.slice(location.origin.length);
@@ -899,15 +899,21 @@
     }catch(e){}
     try{
       if('caches' in window){
+        /* 只清 RD 自己的缓存（ai-gb-rd-*），别把根 SW 的站点缓存一起端了 */
         jobs.push(caches.keys().then(function(ks){
-          return Promise.all(ks.map(function(k){return caches.delete(k);}));
+          return Promise.all(ks.filter(function(k){return k.indexOf('ai-gb-rd')===0;}).map(function(k){return caches.delete(k);}));
         }).catch(function(){}));
       }
     }catch(e){}
     try{
       if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){
+        /* 只注销 RD 自己作用域内的 SW；根 SW（/ai-gb-hub/，覆盖团队中心/marketing/sales）
+           不能被连坐注销，否则用户从 rd 点一次硬更新，整个站点的离线缓存就废了。 */
+        var rdScope=location.pathname.replace(/[^\/]*$/,'');
         jobs.push(navigator.serviceWorker.getRegistrations().then(function(rs){
-          return Promise.all(rs.map(function(r){return r.unregister();}));
+          return Promise.all(rs.filter(function(r){
+            return String(r.scope||'').indexOf(rdScope)===0;
+          }).map(function(r){return r.unregister();}));
         }).catch(function(){}));
       }
     }catch(e){}

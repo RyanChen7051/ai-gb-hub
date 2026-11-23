@@ -5,7 +5,7 @@
  * 升级架构时：同步递增 version.json.cache 与本文件 CACHE 常量即可。
  * 注意：所有资源需 sharecode cookie 会话；start_url 已内嵌 sharecode。
  */
-const CACHE = 'ai-sales-hub-v35';
+const CACHE = 'ai-sales-hub-v36';
 const SHARE = '?sharecode=BOOB2ODIT5';
 const BASE = './';
 const CORE = [
@@ -30,7 +30,8 @@ self.addEventListener('install', e => {
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys => Promise.all(
-      keys.filter(k => k !== CACHE).map(k => caches.delete(k))
+      // 只清自己的旧版本；根 SW（ai-gb-team-hub-*）与兄弟目录缓存不许连坐删除
+      keys.filter(k => k.indexOf('ai-sales-hub') === 0 && k !== CACHE).map(k => caches.delete(k))
     )).then(() => self.clients.claim())
   );
 });
@@ -48,14 +49,20 @@ self.addEventListener('fetch', e => {
 
   // version.json 与导航请求：必须走网络（保证版本检测/每日数据新鲜），失败才回退缓存
   e.respondWith(
-    fetch(req).then(res => {
-      if (res && res.status === 200) {
+    // cache:'no-store'：Pages 所有资源 max-age=600，不用它就会拿到 10 分钟前的旧文件
+    fetch(req, { cache: 'no-store' }).then(res => {
+      if (res && res.status === 200 && res.type === 'basic') {
         const copy = res.clone();
         caches.open(CACHE).then(c => c.put(req, copy)).catch(() => {});
       }
       return res;
-    }).catch(() =>
-      caches.match(req).then(hit => hit || caches.match('/index.html' + SHARE))
-    )
+    }).catch(() => caches.match(req).then(hit => {
+      if (hit) return hit;
+      // 只有页面导航才回退到首页；原来是 '/index.html'（站点在 /ai-gb-hub/ 子路径下，此路径根本不存在）
+      if (req.mode === 'navigate') {
+        return caches.match(BASE + SHARE).then(h => h || caches.match(BASE + 'index.html' + SHARE)).then(h => h || Response.error());
+      }
+      return Response.error();
+    }))
   );
 });

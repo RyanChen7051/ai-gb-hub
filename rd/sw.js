@@ -29,7 +29,8 @@ self.addEventListener('install', e => {
 });
 self.addEventListener('activate', e => {
   e.waitUntil(caches.keys().then(keys => Promise.all(
-    keys.filter(k => k !== CACHE).map(k => caches.delete(k))
+    // 只清自己的旧版本；根 SW（ai-gb-team-hub-*）与兄弟目录缓存不许连坐删除
+    keys.filter(k => k.indexOf('ai-gb-rd') === 0 && k !== CACHE).map(k => caches.delete(k))
   )).then(() => self.clients.claim()));
 });
 self.addEventListener('message', e => {

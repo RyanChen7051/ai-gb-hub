@@ -799,5 +799,18 @@
 })();
 </script>
 
+<script>
+/* 注册 Marketing 自己的 SW（./sw.js，作用域 /ai-gb-hub/marketing/）。
+ * 本页此前只查 getRegistration 不 register，marketing/sw.js 一直是死文件。
+ */
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('sw.js').then(function(w){
+      try{w.update().catch(function(){});}catch(e){}
+    }).catch(function(){});
+  });
+}
+</script>
+
 </body>
 </html>
