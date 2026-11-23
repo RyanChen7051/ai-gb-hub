@@ -150,7 +150,7 @@
     var team = d.team || {};
     if (!rep) {
       sec.innerHTML = '<div class="gblr-card"><div class="gblr-body"><div class="gblr-empty">'
-        + esc(NAME) + ' 尚未提交 ' + esc(d.date) + ' 的日报。AI GB-Team 已将其标记为「未提交」。'
+        + esc(NAME) + ' 尚未提交 ' + esc(d.date) + ' 的日报。AI-GB-Team 已将其标记为「未提交」。'
         + '</div></div></div>';
       return;
     }
@@ -237,7 +237,7 @@
       '<div class="gblr-card">'
       + '<div class="gblr-hd">'
       +   '<div>'
-      +     '<div class="gblr-kicker">本线日报 · ' + esc(NAME) + ' 向 AI GB-Team 提交</div>'
+      +     '<div class="gblr-kicker">本线日报 · ' + esc(NAME) + ' 向 AI-GB-Team 提交</div>'
       +     '<div class="gblr-title">' + esc(d.date) + ' · ' + esc(d.weekday) + ' · ' + esc(d.cycle) + '</div>'
       +     '<div class="gblr-state">' + esc(rep.scoreLabel || '') + '</div>'
       +   '</div>'
@@ -249,7 +249,7 @@
       +   '<div class="gblr-kpis">' + kpis + '</div>'
       +   '<div class="gblr-sec">本线事实</div>' + list(rep.facts, '')
       +   '<div class="gblr-sec">卡点</div>' + list(rep.blockers, 'blk')
-      +   '<div class="gblr-sec">我向 AI GB-Team 提出的请求</div>' + list(rep.asks, 'ask')
+      +   '<div class="gblr-sec">我向 AI-GB-Team 提出的请求</div>' + list(rep.asks, 'ask')
       +   '<div class="gblr-cols">'
       +     '<div class="gblr-panel">'
       +       '<div class="gblr-ph"><h4>Team 下发本线的监督指令</h4><span class="n">' + mineDirs.length + ' 项'
