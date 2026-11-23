@@ -427,7 +427,7 @@ window.REPORT_DATA = {
 
   sources: [
     "GunBase. \"GunBase 火械基地 — Tactical Optics · First Aid · Gear.\" www.gunbase-optics.com, accessed 16 Nov. 2026.",
-    "AI GB-Sales. \"01–12 业务资产与 2026-11-15、2026-11-16 业务进度报告.\" 本地文件, Desktop/AI-综合AI业务员/, 15–16 Nov. 2026.",
+    "AI GB-Sales. \"01–12 业务资产与 2026-11-15、2026-11-16 业务进度报告.\" 本地文件, Desktop/AI-GB-Team/, 15–16 Nov. 2026.",
     "FALCORA. \"app.html / data-real-companies.js / data-l2-contacts.js.\" ryanchen7051.github.io/falcora/, accessed 16 Nov. 2026.",
     "Namecheap PrivateEmail. 邮箱激活状态（所有者确认，有效期 2 年）, 15 Nov. 2026."
   ]
