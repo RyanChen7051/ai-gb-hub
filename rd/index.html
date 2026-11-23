@@ -567,11 +567,32 @@
     .rd-sw button span{font-size:8px}
   }
 
+
+  /* ===== 新版本提示条（自动发现远端版本更高时出现）===== */
+  .gb-verb{position:fixed;left:0;right:0;top:0;z-index:1200;display:flex;align-items:center;gap:10px;
+    padding:10px 14px;background:linear-gradient(135deg,#123a5e,#1d5486);color:#fff;
+    box-shadow:0 3px 16px rgba(10,28,48,.34);font-size:12.5px;line-height:1.4;
+    transform:translateY(-120%);transition:transform .28s ease}
+  .gb-verb.on{transform:translateY(0)}
+  .gb-verb-t{flex:1;min-width:0}
+  .gb-verb-t b{font-weight:800;color:#ffd98a}
+  .gb-verb-go{border:0;background:#ffd98a;color:#3a2a00;font-family:inherit;font-size:12px;
+    font-weight:800;padding:7px 13px;border-radius:8px;cursor:pointer;white-space:nowrap}
+  .gb-verb-go:hover{background:#ffe6ab}
+  .gb-verb-x{border:0;background:transparent;color:#cfe0ef;font-size:18px;line-height:1;
+    padding:2px 6px;cursor:pointer;font-family:inherit}
+  .gb-verb-x:hover{color:#fff}
+
   footer{text-align:center;color:#8a97a6;font-size:11px;margin-top:30px;line-height:1.8}
   @media(max-width:680px){.hd h1{font-size:20px}.hd img{width:58px;height:58px}}
 </style>
 </head>
 <body>
+<div class="gb-verb" id="gbVerBar">
+  <span class="gb-verb-t">发现新版本 <b id="gbVerNum"></b>，当前显示的是旧副本</span>
+  <button type="button" class="gb-verb-go" id="gbVerGo">立即更新</button>
+  <button type="button" class="gb-verb-x" id="gbVerX" aria-label="稍后">&#215;</button>
+</div>
 <div class="gb-bar"><div class="wrap">
   <div class="gb-lab-row"><span class="gb-lab">AI GB TEAM · 同事协作</span><span class="sp">全球技术情报 · 图纸设计储备</span></div>
   <nav class="gb-tabs">
@@ -799,7 +820,7 @@
   function run(btn){
     if(busy)return;busy=true;
     if(btn){btn.classList.add('busy');var t0=btn.querySelector('.su-t');if(t0)t0.textContent='更新中';}
-    try{if('serviceWorker' in navigator){navigator.serviceWorker.getRegistration().then(function(reg){if(reg){reg.update().catch(function(){});if(reg.waiting)reg.waiting.postMessage({type:'SKIP_WAITING'});}}).catch(function(){});}}catch(e){}
+    try{if('serviceWorker' in navigator&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){return Promise.all(rs.map(function(r){return r.unregister().catch(function(){});}));}).catch(function(){});}}catch(e){}
     var urls={'version.json':1};var nodes=document.querySelectorAll('script[src],link[rel="stylesheet"][href]');
     for(var i=0;i<nodes.length;i++){var raw=nodes[i].getAttribute('src')||nodes[i].getAttribute('href')||'';if(!raw)continue;
       if(/^https?:/i.test(raw)&&raw.indexOf(location.origin)!==-1)raw=raw.slice(location.origin.length);
@@ -849,6 +870,82 @@
   }
   var H=(location.hash||'').replace('#','');
   apply(['pain','qw','flow'].indexOf(H)>=0?H:'intel');
+})();
+</script>
+<script>
+/* 版本哨兵：主动发现远端发布版本高于本页数据版本时，提示一键更新。
+ * 解决 Pages 的 max-age=600 + 旧 SW 命中 HTTP 缓存导致「文件已更新但页面不动」。
+ */
+(function(){
+  var bar=document.getElementById('gbVerBar'),num=document.getElementById('gbVerNum');
+  if(!bar)return;
+  function parts(v){return String(v||'0').split('.').map(function(x){return parseInt(x,10)||0;});}
+  function gt(a,b){
+    var A=parts(a),B=parts(b),n=Math.max(A.length,B.length);
+    for(var i=0;i<n;i++){var x=A[i]||0,y=B[i]||0;if(x>y)return true;if(x<y)return false;}
+    return false;
+  }
+  function hardUpdate(){
+    var jobs=[];
+    try{
+      var nodes=document.querySelectorAll('script[src],link[rel="stylesheet"][href]');
+      for(var i=0;i<nodes.length;i++){
+        var raw=nodes[i].getAttribute('src')||nodes[i].getAttribute('href')||'';
+        if(!raw)continue;
+        if(/^(data:|mailto:|#)/i.test(raw))continue;
+        if(/^https?:/i.test(raw)&&raw.indexOf(location.origin)===-1)continue;
+        jobs.push(fetch(raw,{cache:'reload'}).catch(function(){}));
+      }
+    }catch(e){}
+    try{
+      if('caches' in window){
+        jobs.push(caches.keys().then(function(ks){
+          return Promise.all(ks.map(function(k){return caches.delete(k);}));
+        }).catch(function(){}));
+      }
+    }catch(e){}
+    try{
+      if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){
+        jobs.push(navigator.serviceWorker.getRegistrations().then(function(rs){
+          return Promise.all(rs.map(function(r){return r.unregister();}));
+        }).catch(function(){}));
+      }
+    }catch(e){}
+    Promise.all(jobs).then(function(){
+      var u;
+      try{
+        u=new URL(location.href);
+        u.searchParams.set('v',String(Date.now()));
+        u=u.pathname+u.search+u.hash;
+      }catch(e){
+        u=location.pathname+'?v='+Date.now()+(location.hash||'');
+      }
+      location.replace(u);
+    });
+  }
+  document.getElementById('gbVerGo').addEventListener('click',hardUpdate);
+  document.getElementById('gbVerX').addEventListener('click',function(){bar.classList.remove('on');});
+  function check(){
+    var local=(window.GB_RD_DATA&&window.GB_RD_DATA.meta&&window.GB_RD_DATA.meta.version)||'';
+    if(!local)return;
+    fetch('./version.json?t='+Date.now(),{cache:'no-store'}).then(function(r){
+      return r.ok?r.json():null;
+    }).then(function(v){
+      if(!v||!v.version)return;
+      if(gt(v.version,local)){
+        num.textContent=v.version;
+        bar.dataset.remote=v.version;
+        bar.classList.add('on');
+        try{document.documentElement.setAttribute('data-newver',v.version);}catch(e){}
+      }
+    }).catch(function(){});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',check);
+  else check();
+  setTimeout(check,2500);
+  document.addEventListener('visibilitychange',function(){
+    if(document.visibilityState==='visible')check();
+  });
 })();
 </script>
 </body>

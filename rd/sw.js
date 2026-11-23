@@ -1,7 +1,8 @@
 /* AI GB-RD — Service Worker
- * 网络优先 + 缓存兜底。改 data.js 后同步递增 CACHE 版本号。
+ * 网络优先（强制绕过 HTTP 缓存）+ Cache API 离线兜底。
+ * 改任何前端文件后，同步递增 CACHE 版本号，否则旧 SW 会继续提供旧副本。
  */
-const CACHE = 'ai-gb-rd-v4';
+const CACHE = 'ai-gb-rd-v5';
 const BASE = './';
 const CORE = [
   BASE,
@@ -39,9 +40,12 @@ self.addEventListener('fetch', e => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
+  // 关键：cache:'no-store' 绕过 HTTP 缓存（GitHub Pages 给所有资源 max-age=600，
+  // 否则 fetch(req) 会命中浏览器 HTTP 缓存，表现就是「文件已更新但页面还是旧的」）。
+  // 离线能力由下面的 Cache API 兜底，不依赖 HTTP 缓存。
   e.respondWith(
-    fetch(req).then(res => {
-      if (res && res.status === 200) {
+    fetch(req, { cache: 'no-store' }).then(res => {
+      if (res && res.status === 200 && res.type === 'basic') {
         const copy = res.clone();
         caches.open(CACHE).then(c => c.put(req, copy)).catch(() => {});
       }
