@@ -931,7 +931,7 @@
   }
   document.getElementById('gbVerGo').addEventListener('click',hardUpdate);
   document.getElementById('gbVerX').addEventListener('click',function(){bar.classList.remove('on');});
-  function check(){
+  function check(fromRestore){
     var local=(window.GB_RD_DATA&&window.GB_RD_DATA.meta&&window.GB_RD_DATA.meta.version)||'';
     if(!local)return;
     fetch('./version.json?t='+Date.now(),{cache:'no-store'}).then(function(r){
@@ -943,14 +943,37 @@
         bar.dataset.remote=v.version;
         bar.classList.add('on');
         try{document.documentElement.setAttribute('data-newver',v.version);}catch(e){}
+        if(fromRestore)autoHeal(v.version);
       }
     }).catch(function(){});
   }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',check);
-  else check();
-  setTimeout(check,2500);
+  /* bfcache / 后台标签页自愈：
+   * 标签页被浏览器冻结保存后再还原时，不发任何网络请求、直接复活旧 DOM，
+   * 表现就是「明明发布了新版本，页面还是几小时前那版，切换栏/提示条都没有」。
+   * 还原时主动校验一次版本，确有新版则自动重载一次（同一版本每个会话只自动一次，防死循环）。
+   */
+  var healer=null;
+  function autoHeal(remote){
+    var key='gbrd_autov_'+remote;
+    try{
+      if(sessionStorage.getItem(key))return;
+      sessionStorage.setItem(key,'1');
+    }catch(e){ return; }
+    clearTimeout(healer);
+    healer=setTimeout(function(){ location.reload(); },300);
+  }
+  window.addEventListener('pageshow',function(e){
+    if(e.persisted)check(true);          // 从 bfcache 还原 → 必须重新校验
+  });
+  window.addEventListener('focus',function(){
+    if(document.visibilityState==='visible')check(true);
+  });
+  window.addEventListener('online',function(){ check(true); });
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){check(false);});
+  else check(false);
+  setTimeout(function(){check(false);},2500);
   document.addEventListener('visibilitychange',function(){
-    if(document.visibilityState==='visible')check();
+    if(document.visibilityState==='visible')check(true);
   });
 })();
 </script>
