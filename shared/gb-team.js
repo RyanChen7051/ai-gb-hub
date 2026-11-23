@@ -1,4 +1,4 @@
-/* AI GB 团队契约 — 三角色命名、汇报关系与情报交换协议
+/* AI GB 团队契约 — 四角色命名、汇报关系与情报交换协议
  *
  * 事实来源：2026-11-20 资产所有者（陈邦杰）口述授权：
  *   - AI Sales 改名 AI GB-Sales
@@ -38,9 +38,16 @@ window.GB_TEAM = {
     {
       id: "GB-Marketing", name: "AI GB-Marketing", en: "AI GB Marketing",
       role: "市场线 · 动态调研、合作发现、品牌宣传", reportsTo: "GB-PM",
-      status: "live", statusLabel: "已上线 · 本地 v1.3.3",
+      status: "live", statusLabel: "已上线 · 本地 v2.1.1",
       scope: "关键字+组织双引擎、全球布局、合作机会池、合规闸门、品牌授权矩阵",
       entry: "./marketing/", factBasis: "owner-specified"
+    },
+    {
+      id: "GB-RD", name: "AI GB-RD", en: "AI GB Research & Development",
+      role: "技术线 · 全球技术扫描、图纸设计储备", reportsTo: "GB-PM",
+      status: "live", statusLabel: "已上线 · 本地 v1.0.0",
+      scope: "瞄准镜/枪械配件/战术装备每日技术情报、三大检索矩阵、图纸端设计储备与合规闸门",
+      entry: "./rd/", factBasis: "owner-specified-2026-11-23"
     }
   ],
 

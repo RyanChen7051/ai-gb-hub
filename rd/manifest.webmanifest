@@ -1,0 +1,37 @@
+{
+  "name": "AI GB-RD · GunBase 全球技术与图纸储备中心",
+  "short_name": "AI GB-RD",
+  "description": "GunBase 全球技术情报 — 瞄准镜 / 枪械配件 / 战术装备 → 图纸设计储备",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#eef2f7",
+  "theme_color": "#123a5e",
+  "lang": "zh-CN",
+  "categories": [
+    "business",
+    "productivity",
+    "technology"
+  ],
+  "icons": [
+    {
+      "src": "./assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

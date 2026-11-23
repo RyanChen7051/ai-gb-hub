@@ -19,17 +19,19 @@
   var ICON = {
     team: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5"/><path d="M10 21v-6h4v6"/></svg>',
     sales: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="7" width="19" height="13" rx="2.5"/><path d="M8.5 7V5.2A1.2 1.2 0 0 1 9.7 4h4.6a1.2 1.2 0 0 1 1.2 1.2V7"/><path d="M2.5 12.5h19"/></svg>',
-    mkt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4a1.5 1.5 0 0 0 1.5 1.5H7l6.5 4V4.5L7 8.5H4.5A1.5 1.5 0 0 0 3 10Z"/><path d="M17 8.5a4 4 0 0 1 0 7"/><path d="M7 15.5V20"/></svg>'
+    mkt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4a1.5 1.5 0 0 0 1.5 1.5H7l6.5 4V4.5L7 8.5H4.5A1.5 1.5 0 0 0 3 10Z"/><path d="M17 8.5a4 4 0 0 1 0 7"/><path d="M7 15.5V20"/></svg>',
+    rd: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v4M12 18.5v4M1.5 12h4M18.5 12h4"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>'
   };
 
   var path = location.pathname;
-  var inSub = /\/(sales|marketing)\//.test(path);
+  var inSub = /\/(sales|marketing|rd)\//.test(path);
   var P = inSub ? '../' : './';
-  var here = /\/sales\//.test(path) ? 'sales' : (/\/marketing\//.test(path) ? 'mkt' : 'team');
+  var here = /\/sales\//.test(path) ? 'sales' : (/\/marketing\//.test(path) ? 'mkt' : (/\/rd\//.test(path) ? 'rd' : 'team'));
   var TABS = [
     ['team', '团队中心', P + 'index.html'],
     ['sales', 'AI GB-Sales', P + 'sales/index.html'],
-    ['mkt', 'AI GB-Marketing', P + 'marketing/index.html']
+    ['mkt', 'AI GB-Mkt', P + 'marketing/index.html'],
+    ['rd', 'AI GB-RD', P + 'rd/index.html']
   ];
 
   function mobile() {
@@ -82,7 +84,7 @@
     var s = nav.style;
     s.cssText = '';
     s.display = 'grid';
-    s.gridTemplateColumns = 'repeat(3,1fr)';
+    s.gridTemplateColumns = 'repeat(4,1fr)';
     s.gap = '4px';
     s.position = 'fixed';
     s.left = '0px';

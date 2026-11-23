@@ -564,7 +564,7 @@
   .gb-lab-row{display:flex;align-items:center;gap:8px;font-size:10.5px;color:#bcd3e6;margin-bottom:7px;line-height:1.3}
   .gb-lab{font-weight:800;letter-spacing:.5px;color:#eaf2f9;white-space:nowrap}
   .gb-lab-row .sp{margin-left:auto;text-align:right}
-  .gb-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+  .gb-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
   .gb-tabs a{display:flex;align-items:center;justify-content:center;min-height:38px;padding:0 5px;border-radius:10px;
     font-size:11.5px;font-weight:700;line-height:1.15;text-align:center;text-decoration:none;color:#eaf2f9;
     background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);transition:.15s}
@@ -586,7 +586,7 @@
   .gb-tabbar{display:none}
   @media(max-width:720px){
     .gb-bar{display:none}
-    .gb-tabbar{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;position:fixed;left:0;right:0;bottom:0;z-index:1100;
+    .gb-tabbar{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;position:fixed;left:0;right:0;bottom:0;z-index:1100;
       padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));
       background:#0d2c49;border-top:1px solid rgba(255,255,255,.18);
       box-shadow:0 -4px 18px rgba(13,44,73,.30)}
@@ -617,6 +617,7 @@
     <a href="../index.html">团队中心</a>
     <a class="here" href="../sales/index.html">AI GB-Sales</a>
     <a href="../marketing/index.html">AI GB-Marketing</a>
+    <a href="../rd/index.html">AI GB-RD</a>
   </nav>
 </div></div>
 <header>
@@ -2205,7 +2206,8 @@ function __bootMain(){
 <nav class="gb-tabbar" aria-label="同事切换">
   <a href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5"/><path d="M10 21v-6h4v6"/></svg><span>团队中心</span></a>
   <a class="here" href="../sales/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="7" width="19" height="13" rx="2.5"/><path d="M8.5 7V5.2A1.2 1.2 0 0 1 9.7 4h4.6a1.2 1.2 0 0 1 1.2 1.2V7"/><path d="M2.5 12.5h19"/></svg><span>AI GB-Sales</span></a>
-  <a href="../marketing/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4a1.5 1.5 0 0 0 1.5 1.5H7l6.5 4V4.5L7 8.5H4.5A1.5 1.5 0 0 0 3 10Z"/><path d="M17 8.5a4 4 0 0 1 0 7"/><path d="M7 15.5V20"/></svg><span>AI GB-Marketing</span></a>
+  <a href="../marketing/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4a1.5 1.5 0 0 0 1.5 1.5H7l6.5 4V4.5L7 8.5H4.5A1.5 1.5 0 0 0 3 10Z"/><path d="M17 8.5a4 4 0 0 1 0 7"/><path d="M7 15.5V20"/></svg><span>AI GB-Mkt</span></a>
+  <a href="../rd/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v4M12 18.5v4M1.5 12h4M18.5 12h4"/></svg><span>AI GB-RD</span></a>
 </nav>
 <script src="../shared/tabbar.js"></script>
 <script src="../shared/back-to-top.js"></script>

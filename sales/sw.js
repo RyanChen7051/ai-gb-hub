@@ -5,7 +5,7 @@
  * 升级架构时：同步递增 version.json.cache 与本文件 CACHE 常量即可。
  * 注意：所有资源需 sharecode cookie 会话；start_url 已内嵌 sharecode。
  */
-const CACHE = 'ai-sales-hub-v34';
+const CACHE = 'ai-sales-hub-v35';
 const SHARE = '?sharecode=BOOB2ODIT5';
 const BASE = './';
 const CORE = [
