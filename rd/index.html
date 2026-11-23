@@ -948,5 +948,17 @@
   });
 })();
 </script>
+<script>
+/* 注册 RD 自己的 Service Worker（此前只有 sales 注册过，rd/sw.js 一直是死文件）。
+ * SW 内部 fetch 用 cache:'no-store'，保证拿到最新发布而不是 HTTP 缓存副本。
+ */
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').then(function(w){
+      try{w.update().catch(function(){});}catch(e){}
+    }).catch(function(){});
+  });
+}
+</script>
 </body>
 </html>
