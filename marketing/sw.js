@@ -2,7 +2,7 @@
  * 策略：网络优先 + 缓存兜底（静态策略演示版，离线可看上次内容）
  * 升级：改 data.js 后同步递增下面的 CACHE 版本号即可。
  */
-const CACHE = 'ai-gb-marketing-v5';
+const CACHE = 'ai-gb-marketing-v7';
 const BASE = './';
 const CORE = [
   BASE,
@@ -10,6 +10,8 @@ const CORE = [
   BASE + 'data.js',
   BASE + 'version.json',
   BASE + '../shared/tabbar.js',
+  BASE + '../shared/reports/gb-market-intel.js',
+  BASE + '../shared/market-intel-widget.js',
   BASE + 'manifest.webmanifest',
   BASE + 'assets/icon-192.png',
   BASE + 'assets/icon-512.png',

@@ -514,6 +514,41 @@
   .sec-upd.ok{border-color:#bcd9c4;background:#eef8f1;color:#1f6b3d}
   .sec-upd.err{border-color:#e8c4bd;background:#fdf1ef;color:#a83628}
   @keyframes su-spin{to{transform:rotate(360deg)}}
+
+  /* ===== 枪械生产商名录（每日 08:00 调研） ===== */
+  .prod-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+  .prod-kpi{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:9px 6px;text-align:center}
+  .prod-kpi b{display:block;font-size:19px;font-weight:800;line-height:1.15;color:var(--navy)}
+  .prod-kpi span{display:block;font-size:10px;color:var(--sub);margin-top:3px;line-height:1.3}
+  .prod-kpi.g b{color:#1f7a4d}.prod-kpi.o b{color:#b8461f}.prod-kpi.t b{color:#126b6b}
+  .prod-tools{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:11px}
+  .prod-tools select,.prod-tools input{font-family:inherit;font-size:12px;color:var(--ink);
+    border:1px solid var(--line);border-radius:8px;padding:6px 9px;background:#fff;min-height:32px}
+  .prod-tools input{flex:1 1 150px;min-width:120px}
+  .prod-tools select{flex:0 0 auto;max-width:46%}
+  .prod-tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+  table.prod{width:100%;border-collapse:collapse;font-size:12px;min-width:760px}
+  table.prod th{background:#eef3f8;color:var(--navy);font-size:10.5px;font-weight:800;
+    text-align:left;padding:8px 9px;white-space:nowrap;border-bottom:1px solid var(--line);letter-spacing:.3px}
+  table.prod td{padding:7px 9px;border-bottom:1px solid #f0f4f8;vertical-align:top;color:#243447;line-height:1.5}
+  table.prod tr:last-child td{border-bottom:0}
+  table.prod tbody tr:nth-child(even){background:#fbfcfe}
+  table.prod .nm{font-weight:700;color:var(--navy);min-width:170px}
+  table.prod .mail{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:#1f6b3d;word-break:break-all}
+  table.prod .nul{color:#9aa7b5}
+  table.prod .tag{display:inline-block;font-size:9.5px;font-weight:750;padding:1px 6px;border-radius:7px;
+    background:#e8f0f9;color:#1d5486;white-space:nowrap}
+  table.prod .tag.op{background:#e7f4ec;color:#1f7a4d}
+  table.prod .tag.no{background:#fdeceb;color:#b8461f}
+  table.prod a{color:#1d5486;text-decoration:none;font-size:11px;word-break:break-all}
+  table.prod a:hover{text-decoration:underline}
+  .prod-foot{margin-top:9px;font-size:10.5px;color:#8a97a6;line-height:1.7}
+  .prod-more{margin-top:9px;text-align:center}
+  .prod-more button{font-family:inherit;font-size:11.5px;font-weight:700;color:var(--navy);
+    border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;cursor:pointer}
+  .prod-more button:hover{background:#eaf1f8}
+  @media(max-width:720px){ .prod-kpis{grid-template-columns:repeat(2,1fr)} }
+
   @media(max-width:420px){ .sec-h{gap:8px} .sec-upd{padding:3px 8px;font-size:10.5px} }
 
   /* GB-NAV2 顶部协作导航：iOS 安全区避让（不再被状态栏云雾遮住）+ 三段式切换 */
@@ -579,7 +614,6 @@
   </nav>
 </div></div>
 <header>
-<header>
   <div class="wrap">
     <div class="hd-top">
       <div class="logo"><img src="assets/icon-512.png?v=3.2.0" alt="GunBase" onerror="this.style.display='none'"></div>
@@ -620,6 +654,79 @@
       今日概览</h2><span class="hint" id="genAt">—</span></div>
     <div class="kpis" id="kpis"></div>
   </section>
+
+  <section id="producers">
+    <div class="sec-h"><span class="bar"></span><h2>
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg>
+      枪械生产商名录 · 生产地与公开联系方式</h2><span class="hint" id="prodHint">每日 08:00 调研</span></div>
+    <div class="card pad">
+      <div class="prod-kpis" id="prodKpis">
+        <div class="prod-kpi"><b>—</b><span>企业总数</span></div>
+        <div class="prod-kpi g"><b>—</b><span>有公开邮箱</span></div>
+        <div class="prod-kpi t"><b>—</b><span>今日新抓邮箱</span></div>
+        <div class="prod-kpi o"><b>—</b><span>今日新增建档</span></div>
+      </div>
+      <div class="prod-tools">
+        <select id="prodCat"><option value="">全部类别</option></select>
+        <select id="prodCountry"><option value="">全部国家/地区</option></select>
+        <input id="prodQ" type="search" placeholder="搜企业名 / 城市 / 邮箱">
+      </div>
+      <div class="prod-tw">
+        <table class="prod">
+          <thead><tr>
+            <th>类别</th><th>企业名</th><th>国家</th><th>生产地/总部</th>
+            <th>公开邮箱</th><th>联系部门</th><th>官网</th>
+          </tr></thead>
+          <tbody id="prodBody"><tr><td colspan="7" class="nul">加载中…</td></tr></tbody>
+        </table>
+      </div>
+      <div class="prod-more" id="prodMore" style="display:none">
+        <button type="button" id="prodMoreBtn">显示更多</button>
+      </div>
+      <div class="prod-foot" id="prodFoot">
+        邮箱只取企业官网公开页面上实际出现的地址；官网没公开的留空标「未获取」，不猜不拼。
+        联系人只到部门级（官网不公开个人姓名）。Excel 每天 08:30 生成到桌面「AI-综合AI业务员/07_枪械生产商调研」。
+      </div>
+    </div>
+  </section>
+
+  <section id="channels">
+    <div class="sec-h"><span class="bar"></span><h2>
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      全球枪店 · 射击/狩猎俱乐部 · 分销买家</h2><span class="hint" id="chnHint">每日 08:00 增量</span></div>
+    <div class="card pad">
+      <div class="prod-kpis" id="chnKpis">
+        <div class="prod-kpi"><b>—</b><span>条目总数</span></div>
+        <div class="prod-kpi g"><b>—</b><span>有公开邮箱</span></div>
+        <div class="prod-kpi t"><b>—</b><span>今日新增</span></div>
+        <div class="prod-kpi o"><b>—</b><span>区块进度</span></div>
+      </div>
+      <div class="prod-tools">
+        <select id="chnCat"><option value="">全部类别</option></select>
+        <select id="chnCountry"><option value="">全部国家/地区</option></select>
+        <input id="chnQ" type="search" placeholder="搜名称 / 城市 / 邮箱">
+      </div>
+      <div class="prod-tw">
+        <table class="prod">
+          <thead><tr>
+            <th>类别</th><th>名称</th><th>国家</th><th>城市</th>
+            <th>公开邮箱</th><th>联系部门</th><th>官网</th>
+          </tr></thead>
+          <tbody id="chnBody"><tr><td colspan="7" class="nul">加载中…</td></tr></tbody>
+        </table>
+      </div>
+      <div class="prod-more" id="chnMore" style="display:none">
+        <button type="button" id="chnMoreBtn">显示更多</button>
+      </div>
+      <div class="prod-foot" id="chnFoot">
+        来源：OpenStreetMap 公开地图数据（标「OSM 标注」的邮箱是商户自己登记的，其余为脚本访问其官网抓到的公开邮箱）。
+        抓不到就留空标「未获取」，不猜不拼；联系信息只到部门级，不写个人姓名。
+        全球按国家切区块轮转，每天推进新区域，条目逐日累积——不是一次性「全球所有」。
+        Excel 每天 08:35 生成到桌面「AI-综合AI业务员/08_全球枪店与俱乐部调研」。
+      </div>
+    </div>
+  </section>
+
 
   <section>
     <div class="sec-h"><span class="bar"></span><h2>
@@ -1763,6 +1870,235 @@ function __bootMain(){
       .catch(function(){ return []; });
   }
 
+
+  /* ===== 枪械生产商名录（数据源 ai_sales_producers，每日 08:00 由云端 producers.py 写入） ===== */
+  var PROD_ALL=[], PROD_SHOWN=40;
+  var PROD_CAT={'rifle':'步枪/卡宾枪','pistol':'手枪','smg':'冲锋枪','sniper':'狙击枪',
+                'shotgun':'霰弹枪','mg':'机枪','optics':'光学/瞄准镜'};
+
+  function prodEsc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  function prodRender(){
+    var cat=document.getElementById('prodCat').value;
+    var ctry=document.getElementById('prodCountry').value;
+    var q=(document.getElementById('prodQ').value||'').trim().toLowerCase();
+    var arr=PROD_ALL.filter(function(r){
+      if(cat && r.cat!==cat) return false;
+      if(ctry && r.country!==ctry) return false;
+      if(q){
+        var hay=((r.name||'')+' '+(r.city||'')+' '+(r.country||'')+' '+((r.emails||[]).join(' '))).toLowerCase();
+        if(hay.indexOf(q)===-1) return false;
+      }
+      return true;
+    });
+    var body=document.getElementById('prodBody');
+    if(!arr.length){ body.innerHTML='<tr><td colspan="7" class="nul">没有匹配的企业</td></tr>'; }
+    else{
+      var slice=arr.slice(0,PROD_SHOWN);
+      body.innerHTML=slice.map(function(r){
+        var mail=(r.emails||[])[0]||'';
+        var mailCell = mail
+          ? '<span class="mail">'+prodEsc(mail)+'</span>'
+          : '<span class="tag no">未获取</span>';
+        var dept = mail ? prodEsc(r.dept||'—') : '<span class="nul">—</span>';
+        return '<tr>'
+          + '<td><span class="tag">'+prodEsc(PROD_CAT[r.cat]||r.cat)+'</span></td>'
+          + '<td class="nm">'+prodEsc(r.name)+'</td>'
+          + '<td>'+prodEsc(r.country||'')+'</td>'
+          + '<td>'+(r.city?prodEsc(r.city):'<span class="nul">待核实</span>')+'</td>'
+          + '<td>'+mailCell+'</td>'
+          + '<td>'+dept+'</td>'
+          + '<td><a href="'+prodEsc(r.site)+'" target="_blank" rel="noopener">'+prodEsc(r.site.replace(/^https?:\/\//,''))+'</a></td>'
+          + '</tr>';
+      }).join('');
+    }
+    var more=document.getElementById('prodMore');
+    if(arr.length>PROD_SHOWN){
+      more.style.display='block';
+      document.getElementById('prodMoreBtn').textContent='显示更多（还剩 '+(arr.length-PROD_SHOWN)+' 家）';
+    }else{ more.style.display='none'; }
+    document.getElementById('prodFoot').setAttribute('data-n',arr.length);
+  }
+
+  function prodFillSelects(){
+    var cats={}, ctries={};
+    PROD_ALL.forEach(function(r){ if(r.cat)cats[r.cat]=1; if(r.country)ctries[r.country]=1; });
+    var sc=document.getElementById('prodCat'), scv=sc.value;
+    sc.innerHTML='<option value="">全部类别</option>'+Object.keys(cats).map(function(k){
+      return '<option value="'+prodEsc(k)+'">'+prodEsc(PROD_CAT[k]||k)+'</option>'; }).join('');
+    sc.value=scv;
+    var sn=document.getElementById('prodCountry'), snv=sn.value;
+    sn.innerHTML='<option value="">全部国家/地区</option>'+Object.keys(ctries).sort().map(function(k){
+      return '<option value="'+prodEsc(k)+'">'+prodEsc(k)+'</option>'; }).join('');
+    sn.value=snv;
+  }
+
+  function prodPaintKpis(pl){
+    var st=(pl&&pl.stats)||{};
+    var k=document.getElementById('prodKpis');
+    var pct=st.total?(100*st.with_email/st.total):0;
+    k.innerHTML=
+        '<div class="prod-kpi"><b>'+(st.total||0)+'</b><span>企业总数</span></div>'
+      + '<div class="prod-kpi g"><b>'+(st.with_email||0)+'</b><span>有公开邮箱 '+pct.toFixed(0)+'%</span></div>'
+      + '<div class="prod-kpi t"><b>'+(st.found_today||0)+'</b><span>今日新抓邮箱</span></div>'
+      + '<div class="prod-kpi o"><b>'+(st.new_today||0)+'</b><span>今日新增建档</span></div>';
+    document.getElementById('prodHint').textContent='报告 '+(pl.date||'—')+' · 每日 08:00 调研';
+  }
+
+  function loadProducers(){
+    return one('ai_sales_producers').then(function(rows){
+      var pl=(rows&&rows[0]&&rows[0].payload&&rows[0].payload.latest)||null;
+      if(!pl||!pl.records){
+        document.getElementById('prodBody').innerHTML='<tr><td colspan="7" class="nul">云端暂无名录数据（每天 08:00 自动生成）</td></tr>';
+        return;
+      }
+      PROD_ALL=pl.records.slice().sort(function(a,b){
+        var ae=(a.emails&&a.emails.length)?0:1, be=(b.emails&&b.emails.length)?0:1;
+        if(ae!==be) return ae-be;
+        if(a.cat!==b.cat) return String(a.cat).localeCompare(String(b.cat));
+        return String(a.name).localeCompare(String(b.name));
+      });
+      prodPaintKpis(pl);
+      prodFillSelects();
+      prodRender();
+    }).catch(function(){
+      document.getElementById('prodBody').innerHTML='<tr><td colspan="7" class="nul">名录拉取失败，点右上角「更新」重试</td></tr>';
+    });
+  }
+  window.__loadProducers=loadProducers;
+
+  (function(){
+    function bind(){
+      var c=document.getElementById('prodCat'), n=document.getElementById('prodCountry'),
+          q=document.getElementById('prodQ'), m=document.getElementById('prodMoreBtn');
+      if(!c) return;
+      c.onchange=function(){ PROD_SHOWN=40; prodRender(); };
+      n.onchange=function(){ PROD_SHOWN=40; prodRender(); };
+      q.oninput=function(){ PROD_SHOWN=40; prodRender(); };
+      if(m) m.onclick=function(){ PROD_SHOWN+=60; prodRender(); };
+      if(!PROD_ALL.length) loadProducers();
+    }
+    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bind);
+    else bind();
+  })();
+
+  /* ===== 全球渠道库（数据源 ai_sales_channels，每日 08:00 由云端 channels.py 写入） ===== */
+  var CHN_ALL=[], CHN_SHOWN=40;
+  var CHN_CAT={'distributor':'分销/批发','retailer':'枪店/零售','hunting_shop':'狩猎用品店',
+               'range':'靶场/射击中心','shooting_club':'射击俱乐部','hunting_club':'狩猎俱乐部'};
+
+  function chnEsc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  function chnRender(){
+    var cat=document.getElementById('chnCat').value;
+    var ctry=document.getElementById('chnCountry').value;
+    var q=(document.getElementById('chnQ').value||'').trim().toLowerCase();
+    var arr=CHN_ALL.filter(function(r){
+      if(cat && r.cat!==cat) return false;
+      if(ctry && r.country!==ctry) return false;
+      if(q){
+        var hay=((r.name||'')+' '+(r.city||'')+' '+(r.country||'')+' '+((r.emails||[]).join(' '))).toLowerCase();
+        if(hay.indexOf(q)===-1) return false;
+      }
+      return true;
+    });
+    var body=document.getElementById('chnBody');
+    if(!arr.length){ body.innerHTML='<tr><td colspan="7" class="nul">没有匹配的条目</td></tr>'; }
+    else{
+      var slice=arr.slice(0,CHN_SHOWN);
+      body.innerHTML=slice.map(function(r){
+        var mail=(r.emails||[])[0]||'';
+        var mailCell = mail ? '<span class="mail">'+chnEsc(mail)+'</span>' : '<span class="tag no">未获取</span>';
+        var dept = mail ? chnEsc(r.dept||'—') : '<span class="nul">—</span>';
+        var nameCell = chnEsc(r.name);
+        if(r.osm_url){ nameCell += ' <a class="nul" href="'+chnEsc(r.osm_url)+'" target="_blank" rel="noopener" title="在 OpenStreetMap 核对">↗</a>'; }
+        var siteCell = r.site
+          ? '<a href="'+chnEsc(r.site)+'" target="_blank" rel="noopener">'+chnEsc(String(r.site).replace(/^https?:\/\//,''))+'</a>'
+          : '<span class="nul">—</span>';
+        return '<tr>'
+          + '<td><span class="tag">'+chnEsc(CHN_CAT[r.cat]||r.cat)+'</span></td>'
+          + '<td class="nm">'+nameCell+'</td>'
+          + '<td>'+chnEsc(r.country||'')+'</td>'
+          + '<td>'+(r.city?chnEsc(r.city):'<span class="nul">未确认</span>')+'</td>'
+          + '<td>'+mailCell+'</td>'
+          + '<td>'+dept+'</td>'
+          + '<td>'+siteCell+'</td>'
+          + '</tr>';
+      }).join('');
+    }
+    var more=document.getElementById('chnMore');
+    if(arr.length>CHN_SHOWN){
+      more.style.display='block';
+      document.getElementById('chnMoreBtn').textContent='显示更多（还剩 '+(arr.length-CHN_SHOWN)+' 条）';
+    }else{ more.style.display='none'; }
+    document.getElementById('chnFoot').setAttribute('data-n',arr.length);
+  }
+
+  function chnFillSelects(){
+    var cats={}, ctries={};
+    CHN_ALL.forEach(function(r){ if(r.cat)cats[r.cat]=1; if(r.country)ctries[r.country]=1; });
+    var sc=document.getElementById('chnCat'), scv=sc.value;
+    sc.innerHTML='<option value="">全部类别</option>'+Object.keys(cats).map(function(k){
+      return '<option value="'+chnEsc(k)+'">'+chnEsc(CHN_CAT[k]||k)+'</option>'; }).join('');
+    sc.value=scv;
+    var sn=document.getElementById('chnCountry'), snv=sn.value;
+    sn.innerHTML='<option value="">全部国家/地区</option>'+Object.keys(ctries).sort().map(function(k){
+      return '<option value="'+chnEsc(k)+'">'+chnEsc(k)+'</option>'; }).join('');
+    sn.value=snv;
+  }
+
+  function chnPaintKpis(pl){
+    var st=(pl&&pl.stats)||{};
+    var k=document.getElementById('chnKpis');
+    k.innerHTML=
+        '<div class="prod-kpi"><b>'+(st.total||0)+'</b><span>条目总数</span></div>'
+      + '<div class="prod-kpi g"><b>'+(st.with_email||0)+'</b><span>有公开邮箱</span></div>'
+      + '<div class="prod-kpi t"><b>+'+(st.new_today||0)+'</b><span>今日新增</span></div>'
+      + '<div class="prod-kpi o"><b>'+(st.tiles_done||0)+'/'+(st.tiles_total||0)+'</b><span>区块进度</span></div>';
+    var hint=document.getElementById('chnHint');
+    if(hint && pl && pl.generated_at){ hint.textContent='更新 '+pl.generated_at; }
+  }
+
+  function loadChannels(){
+    return one('ai_sales_channels').then(function(rows){
+      var pl=(rows&&rows[0]&&rows[0].payload&&rows[0].payload.latest)||null;
+      if(!pl||!pl.records){
+        document.getElementById('chnBody').innerHTML='<tr><td colspan="7" class="nul">云端暂无渠道库数据（每天 08:00 自动增量）</td></tr>';
+        return;
+      }
+      var CHN_ORD={'distributor':0,'retailer':1,'hunting_shop':2,'range':3,'shooting_club':4,'hunting_club':5};
+      CHN_ALL=pl.records.slice().sort(function(a,b){
+        var ao=(CHN_ORD[a.cat]===undefined?9:CHN_ORD[a.cat]), bo=(CHN_ORD[b.cat]===undefined?9:CHN_ORD[b.cat]);
+        if(ao!==bo) return ao-bo;
+        var ae=(a.emails&&a.emails.length)?0:1, be=(b.emails&&b.emails.length)?0:1;
+        if(ae!==be) return ae-be;
+        return String(a.name).localeCompare(String(b.name));
+      });
+      chnPaintKpis(pl);
+      chnFillSelects();
+      chnRender();
+    }).catch(function(){
+      document.getElementById('chnBody').innerHTML='<tr><td colspan="7" class="nul">渠道库拉取失败，点右上角「更新」重试</td></tr>';
+    });
+  }
+  window.__loadChannels=loadChannels;
+
+  (function(){
+    function bind(){
+      var c=document.getElementById('chnCat'), n=document.getElementById('chnCountry'),
+          q=document.getElementById('chnQ'), m=document.getElementById('chnMoreBtn');
+      if(!c) return;
+      c.onchange=function(){ CHN_SHOWN=40; chnRender(); };
+      n.onchange=function(){ CHN_SHOWN=40; chnRender(); };
+      q.oninput=function(){ CHN_SHOWN=40; chnRender(); };
+      m.onclick=function(){ CHN_SHOWN+=40; chnRender(); };
+    }
+    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bind);
+    else bind();
+  })();
+
   window.__refreshAll=function(){
     return Promise.all([one('ai_sales_hub'),one('ai_sales_health')]).then(function(res){
       var hub=(res[0]&&res[0][0])||null;
@@ -1779,6 +2115,8 @@ function __bootMain(){
       try{ if(typeof __bootMain==='function') __bootMain(); }catch(e){ console.warn('reboot fail',e); }
       // 情报区块 + 健康状态
       try{ if(window.__loadIntel) window.__loadIntel(); }catch(e){}
+      try{ if(window.__loadProducers) window.__loadProducers(); }catch(e){}
+      try{ if(window.__loadChannels) window.__loadChannels(); }catch(e){}
       try{ if(window.__healthReload) window.__healthReload(); }catch(e){}
       return hub?hub.updated_at:'';
     });

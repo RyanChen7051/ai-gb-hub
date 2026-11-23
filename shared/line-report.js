@@ -106,15 +106,27 @@
   styleEl.textContent = CSS;
   document.head.appendChild(styleEl);
 
-  /* ===== 挂载位置：页头之后第一个 .wrap 的开头 ===== */
+  /* ===== 挂载位置：页头之后第一个 .wrap 的开头 =====
+   * 加固（2026-11-22）：曾因页面里多写了一个空 <header>，导致 nextElementSibling 不是 .wrap，
+   * 挂件被塞进顶部导航条 .gb-bar 的 .wrap（flex 子项 → 页面变成一条窄栏）。
+   * 现在逐级兜底，并明确排除导航条/底部切换栏内的 .wrap。 */
   var hd = document.querySelector('header');
   var host = null;
   if (hd && hd.nextElementSibling && hd.nextElementSibling.classList.contains('wrap')) host = hd.nextElementSibling;
-  if (!host) host = document.querySelector('main');
-  if (!host) {
-    var wraps = [].slice.call(document.querySelectorAll('.wrap'));
-    host = wraps[0] || document.body;
+  if (!host && hd && hd.parentNode) {
+    var sibs = hd.parentNode.children;
+    for (var si = 0; si < sibs.length; si++) {
+      if (sibs[si].classList && sibs[si].classList.contains('wrap')) { host = sibs[si]; break; }
+    }
   }
+  if (!host) {
+    var wraps = [].slice.call(document.querySelectorAll('.wrap')).filter(function (w) {
+      return !w.closest('.gb-bar') && !w.closest('.gb-tabbar') && !w.closest('nav');
+    });
+    host = wraps[0] || null;
+  }
+  if (!host) host = document.querySelector('main');
+  if (!host) host = document.body;
 
   var sec = document.createElement('section');
   sec.className = 'gblr';

@@ -219,7 +219,27 @@
     body{padding-bottom:calc(74px + env(safe-area-inset-bottom,0px))}
   }
   @media(max-width:380px){ .gb-tabbar a{font-size:9.5px} }
-</style>
+
+  /* ===== 区块「更新」按钮（静态页：清缓存 + 强制拉取最新发布文件 + 重载） ===== */
+  .sec-upd{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);background:#fff;
+           color:var(--navy);font-family:inherit;font-size:11px;font-weight:650;padding:4px 9px;
+           border-radius:999px;cursor:pointer;white-space:nowrap;transition:background .15s,transform .1s;
+           font-variant-numeric:tabular-nums;flex:0 0 auto}
+  .sec-upd:hover{background:#eaf1f8}
+  .sec-upd:active{transform:scale(.95)}
+  .sec-upd.busy{opacity:.65;cursor:progress}
+  .sec-upd .su-ic{display:inline-block;font-size:12px;line-height:1}
+  .sec-upd.busy .su-ic{animation:su-spin .9s linear infinite}
+  .sec-upd.ok{border-color:#bcd9c4;background:#eef8f1;color:#1f6b3d}
+  .sec-upd.err{border-color:#e8c4bd;background:#fdf1ef;color:#a83628}
+  @keyframes su-spin{to{transform:rotate(360deg)}}
+  .gb-upd-toast{position:fixed;left:50%;top:14px;transform:translateX(-50%) translateY(-16px);
+      background:#0d2c49;color:#fff;font-size:12.5px;font-weight:650;padding:8px 15px;border-radius:999px;
+      box-shadow:0 6px 20px rgba(13,44,73,.28);opacity:0;transition:opacity .22s,transform .22s;z-index:9999;
+      pointer-events:none;white-space:nowrap;max-width:92vw;overflow:hidden;text-overflow:ellipsis}
+  .gb-upd-toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+  @media(max-width:420px){ .sec-upd{padding:3px 8px;font-size:10.5px} }
+  </style>
 </head>
 <body>
 <div class="gb-bar"><div class="wrap">
@@ -264,6 +284,11 @@
     </div>
     <div class="card pad" id="rpEsc" style="margin-top:13px"></div>
     <div class="card pad" id="rpMail" style="margin-top:13px"></div>
+  </section>
+
+  <section id="mktIntel">
+    <div class="sh"><span class="bar"></span><h2>Marketing 每日合作情报 · Team 摘要</h2><span class="hint" id="miMeta"></span></div>
+    <div id="miWrap"></div>
   </section>
 
   <section>
@@ -313,6 +338,8 @@
 
 <script src="./shared/reports/gb-email-log.js"></script>
 <script src="./shared/reports/gb-reports.js"></script>
+<script src="./shared/reports/gb-market-intel.js"></script>
+<script src="./shared/team-intel-digest.js"></script>
 <script src="./shared/gb-team.js"></script>
 <script>
 (function(){
@@ -488,5 +515,112 @@
   <a href="./marketing/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4a1.5 1.5 0 0 0 1.5 1.5H7l6.5 4V4.5L7 8.5H4.5A1.5 1.5 0 0 0 3 10Z"/><path d="M17 8.5a4 4 0 0 1 0 7"/><path d="M7 15.5V20"/></svg><span>AI GB-Marketing</span></a>
 </nav>
 <script src="./shared/tabbar.js"></script>
+<script>
+/* 区块「更新」按钮（Team / Marketing 为静态文件页）
+ * 点一下 = 清 SW 缓存 + 强制重取页面依赖的所有本站 JS（cache:'reload'）+ 重载页面
+ * 重载后顶部弹出「已更新 HH:MM:SS」提示。 */
+(function(){
+  var HDR='.sh';
+  var busy=false, TOAST_KEY='__gbUpdToast_'+location.pathname;
+
+  function paintAll(cls,txt,hold){
+    var list=document.querySelectorAll('.sec-upd');
+    for(var i=0;i<list.length;i++){
+      var b=list[i], t=b.querySelector('.su-t');
+      b.classList.remove('busy','ok','err');
+      if(cls) b.classList.add(cls);
+      if(t) t.textContent=txt;
+      clearTimeout(b._rt);
+      if(hold) b._rt=setTimeout(function(){ b.classList.remove('ok','err'); var s=b.querySelector('.su-t'); if(s) s.textContent='更新'; },hold);
+    }
+  }
+
+  function toast(msg){
+    var el=document.getElementById('gbUpdToast');
+    if(!el){ el=document.createElement('div'); el.id='gbUpdToast'; el.className='gb-upd-toast'; document.body.appendChild(el); }
+    el.textContent=msg; el.classList.add('on');
+    setTimeout(function(){ el.classList.remove('on'); },2600);
+  }
+
+  function hhmmss(){
+    var d=new Date();
+    return ('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2)+':'+('0'+d.getSeconds()).slice(-2);
+  }
+
+  function run(btn){
+    if(busy) return;
+    busy=true;
+    if(btn){ btn.classList.add('busy'); var t0=btn.querySelector('.su-t'); if(t0) t0.textContent='更新中'; }
+    if(!btn) paintAll('busy','更新中');
+
+    // 1) SW 检查新版本
+    try{
+      if('serviceWorker' in navigator){
+        navigator.serviceWorker.getRegistration().then(function(reg){
+          if(reg){ reg.update().catch(function(){}); if(reg.waiting) reg.waiting.postMessage({type:'SKIP_WAITING'}); }
+        }).catch(function(){});
+      }
+    }catch(e){}
+
+    // 2) 收集本站依赖（脚本 / 样式 / version.json），强制走网络并刷新 HTTP 缓存
+    var urls={ 'version.json':1 };
+    var nodes=document.querySelectorAll('script[src],link[rel="stylesheet"][href]');
+    for(var i=0;i<nodes.length;i++){
+      var raw=nodes[i].getAttribute('src')||nodes[i].getAttribute('href')||'';
+      if(!raw) continue;
+      if(/^https?:/i.test(raw) && raw.indexOf(location.origin)!==-1) raw=raw.slice(location.origin.length);
+      if(/^(data:|mailto:|#)/i.test(raw)) continue;
+      if(/^https?:/i.test(raw)) continue;   // 外域资源不动
+      urls[raw]=1;
+    }
+    var list=Object.keys(urls);
+    var jobs=list.map(function(u){
+      return fetch(u,{cache:'reload'}).then(function(r){return r.ok;}).catch(function(){return false;});
+    });
+
+    var clearCaches=('caches' in window)
+      ? caches.keys().then(function(ks){return Promise.all(ks.map(function(k){return caches.delete(k);}));}).catch(function(){})
+      : Promise.resolve();
+
+    Promise.all([Promise.all(jobs),clearCaches]).then(function(res){
+      var okCount=0, arr=res[0]||[];
+      for(var j=0;j<arr.length;j++){ if(arr[j]) okCount++; }
+      if(navigator.onLine===false || okCount===0){
+        paintAll('err','离线，暂时无法更新',4000);
+        busy=false; return;
+      }
+      try{ sessionStorage.setItem(TOAST_KEY, hhmmss()); }catch(e){}
+      var u=location.pathname+(location.search?location.search+'&':'?')+'t='+Date.now();
+      location.replace(u);
+    }).catch(function(){
+      paintAll('err','更新失败',4000);
+      busy=false;
+    });
+  }
+
+  function mount(){
+    var secs=document.querySelectorAll('.wrap > section');
+    for(var i=0;i<secs.length;i++){
+      var head=secs[i].querySelector(HDR);
+      if(!head||head.querySelector('.sec-upd')) continue;
+      var b=document.createElement('button');
+      b.type='button'; b.className='sec-upd';
+      b.title='清缓存并重新拉取最新发布内容（不用手动关页面）';
+      b.innerHTML='<span class="su-ic">\u27F3</span><span class="su-t">更新</span>';
+      b.onclick=function(){ run(this); };
+      head.appendChild(b);
+    }
+    // 重载后的完成提示
+    try{
+      var t=sessionStorage.getItem(TOAST_KEY);
+      if(t){ sessionStorage.removeItem(TOAST_KEY); toast('已更新 · '+t); }
+    }catch(e){}
+  }
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',mount);
+  else mount();
+})();
+</script>
+
 </body>
 </html>

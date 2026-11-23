@@ -12,7 +12,7 @@ window.MARKET_DATA = {
     botName: "AI 市场战术专家",
     shortName: "AI市场战术",
     org: "GunBase 火械基地 · 全球品牌宣传战术中心",
-    version: "1.3.3",
+    version: "1.4.0",
     reportDate: "2026-11-20",
     generatedAt: "2026-11-20 14:11 (GMT+8)",
     scope: "全球 · 六大区",
