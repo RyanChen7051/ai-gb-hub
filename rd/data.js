@@ -13,7 +13,7 @@ window.GB_RD_DATA = {
     shortName: "AI GB-RD",
     en: "AI GB Research & Development",
     org: "GunBase 火械基地 · 全球技术与图纸储备中心",
-    version: "1.1.0",
+    version: "1.2.0",
     reportDate: "2026-11-23",
     generatedAt: "2026-11-23 11:25 (GMT+8)",
     scope: "全球 · 瞄准镜 / 枪械配件 / 战术装备",

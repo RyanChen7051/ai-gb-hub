@@ -365,6 +365,89 @@
     .rd-sw button span{font-size:9px}
   }
 
+
+  /* ===== 快赢图纸视图 ===== */
+  .sgg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
+  .tier{background:#fff;border:1px solid var(--line);border-radius:11px;padding:12px 14px;border-top:3px solid var(--green)}
+  .tier.teal{border-top-color:var(--teal)}.tier.amber{border-top-color:var(--gold)}
+  .tier-hd{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+  .tier-id{width:20px;height:20px;border-radius:6px;background:var(--green);color:#fff;font-size:11px;
+    font-weight:800;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .tier.teal .tier-id{background:var(--teal)}.tier.amber .tier-id{background:var(--gold)}
+  .tier-hd b{font-size:12px;color:var(--navy);font-weight:750}
+  .tier-r{font-size:9.5px;color:#fff;background:var(--navy2);padding:1px 7px;border-radius:8px;margin-left:auto;font-weight:700;white-space:nowrap}
+  .tier p{font-size:10.8px;color:#41546a;line-height:1.7}
+
+  .road{display:grid;gap:9px}
+  .road-i{display:flex;gap:11px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--green);
+    border-radius:11px;padding:11px 14px;box-shadow:var(--shadow)}
+  .road-i.teal{border-left-color:var(--teal)}.road-i.amber{border-left-color:var(--gold)}
+  .road-n{width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;font-size:11px;
+    font-weight:800;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .road-b{flex:1}
+  .road-p{font-size:12px;font-weight:800;color:var(--navy)}
+  .road-it{font-size:11px;color:var(--navy2);font-weight:700;margin-top:2px}
+  .road-g{font-size:10.5px;color:#41546a;margin-top:3px;line-height:1.6}
+
+  .qw{background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden;
+    box-shadow:var(--shadow);border-left:4px solid var(--green)}
+  .qw.tB{border-left-color:var(--teal)}.qw.tC{border-left-color:var(--gold)}
+  .qw[open]{border-color:#cfe0f0}
+  .qw summary{display:flex;align-items:center;gap:9px;padding:11px 14px;cursor:pointer;list-style:none;flex-wrap:wrap}
+  .qw summary::-webkit-details-marker{display:none}
+  .qw-name{font-size:13px;font-weight:750;color:var(--navy);flex:1;min-width:170px;line-height:1.4}
+  .qw-rank{font-size:11px;font-weight:800;color:#fff;background:var(--accent);padding:2px 7px;border-radius:6px;flex:0 0 auto}
+  .qw-id{font-size:9.5px;font-weight:800;color:#fff;background:var(--navy2);padding:2px 7px;border-radius:5px;flex:0 0 auto}
+  .qw-meta{display:flex;gap:5px;align-items:center;flex-wrap:wrap}
+  .qw-tier{font-size:9px;font-weight:800;padding:1px 7px;border-radius:6px;background:var(--greenbg);color:var(--green);white-space:nowrap}
+  .qw.tB .qw-tier{background:var(--tealbg);color:var(--teal)}
+  .qw.tC .qw-tier{background:var(--amberbg);color:var(--amber)}
+  .qw-wk{font-size:9.5px;font-weight:700;color:var(--navy2);background:#f0f5fa;padding:1px 7px;border-radius:6px;white-space:nowrap}
+  .qw-risk{font-size:9px;font-weight:700;padding:1px 7px;border-radius:6px;white-space:nowrap}
+  .qw-risk.r0{background:var(--greenbg);color:var(--green)}
+  .qw-risk.r1{background:#eef6f0;color:#1f6b3d}
+  .qw-risk.r2{background:var(--amberbg);color:var(--amber)}
+  .qw-risk.r3{background:#fdeceb;color:#a83628}
+  .qw-body{padding:0 14px 13px;border-top:1px solid var(--line)}
+  .qw-pains{display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-top:10px}
+  .qchip{font-size:9.5px;font-weight:800;color:var(--navy2);background:#e8f0f9;border:1px solid #cbdcec;
+    border-radius:6px;padding:1px 6px}
+  .qw-pn{font-size:10px;color:#8a97a6}
+  .qw-head{font-size:12.5px;font-weight:750;color:var(--accent);margin-top:8px;line-height:1.55}
+  .qw-why{font-size:11.2px;color:#41546a;line-height:1.72;margin-top:6px}
+  .qw-sec{font-size:10px;font-weight:800;color:var(--navy2);letter-spacing:.3px;margin:11px 0 4px}
+  .qw-dl li{font-size:10.8px;color:#1f2d3d}
+  .qw-spec{width:100%;border-collapse:collapse;font-size:10.8px}
+  .qw-spec th{text-align:left;font-size:9.8px;font-weight:800;color:var(--navy2);background:#f6f9fc;
+    padding:5px 8px;border:1px solid var(--line);white-space:nowrap;width:88px}
+  .qw-spec td{padding:5px 8px;border:1px solid var(--line);color:#41546a;line-height:1.6}
+  .qw-two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .qw-txt{font-size:10.8px;color:#41546a;line-height:1.7}
+  .qw-basis{font-size:9.8px;color:#8a97a6;margin-top:8px;line-height:1.6}
+
+  .df-t{width:100%;border-collapse:collapse;font-size:10.6px}
+  .df-t th{background:#eef4fa;color:var(--navy);font-size:9.5px;font-weight:800;text-align:left;
+    padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+  .df-t td{padding:8px 10px;border-bottom:1px dashed var(--line);color:#41546a;line-height:1.6;vertical-align:top}
+  .df-t tbody tr:last-child td{border-bottom:0}
+  .df-id{font-weight:800;color:#8a97a6;white-space:nowrap}
+  .df-n{font-weight:750;color:var(--navy)}
+  .df-w{white-space:nowrap;color:#8a6310;font-weight:700}
+  .df-r{white-space:nowrap;font-size:9.5px;color:#8a97a6}
+  .df-p{white-space:nowrap}
+
+  @media(max-width:720px){
+    .qw-two{grid-template-columns:1fr}
+    .qw-name{min-width:100%;order:5;font-size:12px}
+    .qw-spec th{width:74px;font-size:9.2px}
+    .qw-spec td{font-size:10px}
+    .df-t{font-size:9.6px}
+    .df-t th,.df-t td{padding:7px 7px}
+    .qw summary{gap:6px;padding:10px 12px}
+    .rd-sw button{font-size:11.5px}
+    .rd-sw button span{font-size:8.5px}
+  }
+
   footer{text-align:center;color:#8a97a6;font-size:11px;margin-top:30px;line-height:1.8}
   @media(max-width:680px){.hd h1{font-size:20px}.hd img{width:58px;height:58px}}
 </style>
@@ -401,6 +484,7 @@
   <div class="rd-sw" id="rdSwitch" role="tablist">
     <button type="button" class="on" data-v="intel" role="tab">技术情报<span>每日 08:00 自动更新</span></button>
     <button type="button" data-v="pain" role="tab">用户痛点<span>14 条 · 6 个簇 · 已分级</span></button>
+    <button type="button" data-v="qw" role="tab">快赢图纸<span>10 项 · 按落地速度</span></button>
   </div>
   <section data-v="intel">
     <div class="sh"><span class="bar"></span><h2>核心指标</h2><span class="hint" id="metaHint"></span></div>
@@ -442,6 +526,7 @@
   </section>
 
   <section data-v="pain" id="painRoot" style="display:none"></section>
+  <section data-v="qw" id="qwRoot" style="display:none"></section>
 
   <footer>
     <div id="footMeta"></div>
@@ -460,6 +545,8 @@
 <script src="./data.js"></script>
 <script src="./pain-data.js"></script>
 <script src="./pain.js"></script>
+<script src="./qw-data.js"></script>
+<script src="./qw.js"></script>
 <script>
 (function(){
   var D=window.GB_RD_DATA;
@@ -630,12 +717,15 @@
     btns[k].addEventListener('click',function(){
       var v=this.getAttribute('data-v');
       apply(v);
-      if(v==='pain'){try{history.replaceState(null,'','#pain');}catch(e){}}
-      else{try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}}
+      try{
+        if(v==='intel'){history.replaceState(null,'',location.pathname+location.search);}
+        else{history.replaceState(null,'','#'+v);}
+      }catch(e){}
       window.scrollTo({top:0,behavior:'smooth'});
     });
   }
-  apply(location.hash==='#pain'?'pain':'intel');
+  var H=(location.hash||'').replace('#','');
+  apply(H==='pain'?'pain':(H==='qw'?'qw':'intel'));
 })();
 </script>
 </body>
