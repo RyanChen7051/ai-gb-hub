@@ -1,9 +1,10 @@
 {
-  "version": "1.5.2",
-  "build": "20261123h",
+  "version": "1.5.3",
+  "build": "20261123i",
   "released": "2026-11-23",
   "title": "全站补上 Service Worker 注册 + 修根 SW 缓存陷阱",
   "changelog": [
+    "v1.5.3 修复：团队中心「跨线冲突裁决」区块整块渲染失败——11-23 那条数据把 conflicts 写成了字符串，渲染器按数组 .map 直接抛 TypeError。gb-reports.js 末尾新增数据归一（字符串→[{note}]、单对象→[obj]、null→[]），渲染器对 note 兜底展示，原文不改。",
     "v1.5.2 新增 shared/gb-bfcache-heal.js：标签页被浏览器冻结保存（bfcache）后还原时不发任何请求，旧 DOM 直接复活，SW 与 no-store 全部失效——团队中心 / Marketing / Sales 三页均挂上该守卫，还原/聚焦/联网/重新可见时校验 version.json 的 build，变了自动重载一次（按版本打标，每会话只一次）。",
     "v1.5.1 修复：团队中心与 Marketing 页此前只调 getRegistration、从未 register，导致根 sw.js 在全站是死文件、这两页从未被离线缓存接管——两页现已补注册（marketing 用 ../sw.js，作用域同为 /ai-gb-hub/）。",
     "v1.5.1 修复：根 sw.js 的 fetch(req) 未加 cache:'no-store'，会命中 Pages 的 max-age=600 HTTP 缓存拿到旧文件（与 rd/sw.js 早前同一个坑），已修正。",

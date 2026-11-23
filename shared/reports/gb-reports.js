@@ -283,3 +283,26 @@ window.GB_REPORTS = {
     }
   ]
 };
+
+/* ===== 数据归一（防渲染中断）=====
+ * 历史数据里 team.conflicts 有一天被写成一句话（字符串），而后所有渲染器都按数组处理，
+ * .map / .filter 会抛 TypeError 并中断整块渲染（实测：团队中心「跨线冲突裁决」区块空白，
+ * 控制台报 d.team.conflicts.map is not a function）。
+ * 这里在数据加载后统一归一：字符串包成 [{note:"..."}]、单对象包成 [obj]、null 变 []。
+ * 渲染器对 note 兜底展示，原文一字不改。
+ */
+(function () {
+  var R = window.GB_REPORTS;
+  if (!R || !R.days || !R.days.length) return;
+  ['conflicts', 'escalations', 'directives', 'checkins'].forEach(function (k) {
+    R.days.forEach(function (d) {
+      var t = d && d.team;
+      if (!t || t[k] == null) return;
+      var v = t[k];
+      if (Array.isArray(v)) return;
+      if (typeof v === 'string') t[k] = v.trim() ? [{ note: v }] : [];
+      else if (typeof v === 'object') t[k] = [v];
+      else t[k] = [];
+    });
+  });
+})();

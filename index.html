@@ -464,6 +464,8 @@
       document.getElementById('rpCf').innerHTML=
         '<div class="hd2" style="background:linear-gradient(135deg,#6b4a9c,#8b6cc0)"><h3>\u8de8\u7ebf\u51b2\u7a81\u88c1\u51b3</h3><div class="sc" style="font-size:13px">'+d.team.conflicts.length+' \u9879</div></div>'+
         '<div class="rp-body">'+d.team.conflicts.map(function(c){
+          /* 历史数据里有一天 conflicts 写成一句话（经 gb-reports.js 归一为 [{note}]），此处按 note 兜底展示 */
+          if(c.note&&!c.topic) return '<div class="cf"><div class="cs">'+esc(c.note)+'</div></div>';
           return '<div class="cf"><div class="ct">'+esc(c.topic)+'</div>'+
             '<div class="cs">'+esc(c.sides)+'</div>'+
             '<div class="cr"><b>Team \u88c1\u51b3\uff1a</b>'+esc(c.ruling)+'</div></div>';
