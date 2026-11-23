@@ -1,12 +1,14 @@
 /* AI GB-RD — Service Worker
  * 网络优先 + 缓存兜底。改 data.js 后同步递增 CACHE 版本号。
  */
-const CACHE = 'ai-gb-rd-v1';
+const CACHE = 'ai-gb-rd-v2';
 const BASE = './';
 const CORE = [
   BASE,
   BASE + 'index.html',
   BASE + 'data.js',
+  BASE + 'pain-data.js',
+  BASE + 'pain.js',
   BASE + 'version.json',
   BASE + '../shared/tabbar.js',
   BASE + '../shared/back-to-top.js',

@@ -45,8 +45,8 @@ window.GB_TEAM = {
     {
       id: "GB-RD", name: "AI GB-RD", en: "AI GB Research & Development",
       role: "技术线 · 全球技术扫描、图纸设计储备", reportsTo: "GB-PM",
-      status: "live", statusLabel: "已上线 · 本地 v1.0.0",
-      scope: "瞄准镜/枪械配件/战术装备每日技术情报、三大检索矩阵、图纸端设计储备与合规闸门",
+      status: "live", statusLabel: "已上线 · 本地 v1.1.0",
+      scope: "瞄准镜/枪械配件/战术装备每日技术情报、三大检索矩阵、图纸端设计储备与合规闸门；使用者痛点库（14 条 / 6 簇，A/B/C 分级）",
       entry: "./rd/", factBasis: "owner-specified-2026-11-23"
     }
   ],
