@@ -42,6 +42,15 @@
     + '.mi-ft{padding:10px 16px;background:#f8fafc;border-top:1px solid #dde5ee;font-size:11px;color:#5b6b7c;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;line-height:1.6}'
     + '.mi-ft a{color:#126b6b;font-weight:700;text-decoration:none}'
     + '.mi-ft a:hover{text-decoration:underline}'
+
+    + '.mi-pos{margin-top:13px;border:1px solid #cfe0e0;border-radius:11px;background:#f4fbfa;overflow:hidden}'
+    + '.mi-pos .ph{padding:9px 12px;background:#e6f4f2;border-bottom:1px solid #cfe0e0;font-size:11.5px;font-weight:800;color:#126b6b;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}'
+    + '.mi-pos .ph .tg{font-size:9.5px;font-weight:750;background:#fff;border:1px solid #cfe0e0;border-radius:9px;padding:1px 7px}'
+    + '.mi-pos .pb{padding:10px 12px}'
+    + '.mi-pos .vd{font-size:11px;color:#7a4a12;line-height:1.7;background:#fff8ed;border:1px solid #f0dcb8;border-radius:8px;padding:8px 10px}'
+    + '.mi-pos .row{font-size:10.5px;color:#41546a;line-height:1.65;margin-top:6px;padding-left:12px;position:relative}'
+    + '.mi-pos .row::before{content:"";position:absolute;left:2px;top:7px;width:4px;height:4px;border-radius:50%;background:#126b6b}'
+    + '.mi-pos .row b{color:#123a5e}'
     + '@media(max-width:820px){.mi-kpis{grid-template-columns:repeat(3,1fr)}.mi-cols{grid-template-columns:1fr}}'
     + '@media(max-width:430px){.mi-kpis{grid-template-columns:repeat(2,1fr)}}';
 
@@ -52,6 +61,21 @@
 
   var lvName = { green: '可启动', yellow: '前置门槛', red: '禁止/情报' };
   var lvCls = { green: 'g', yellow: 'a', red: 'r' };
+
+
+  var pos = d.positioning;
+  var posHtml = '';
+  if (pos) {
+    var ev = (pos.evidence || []).slice(0, 4).map(function (e) {
+      return '<div class="row"><b>' + esc(e.title) + '</b> - ' + esc(e.implication) + '</div>';
+    }).join('');
+    var pb = (pos.playbook || []).slice(0, 2).map(function (b) {
+      return '<div class="row"><b>' + esc(b.id + ' ' + b.title) + '</b> - ' + esc(b.detail) + '</div>';
+    }).join('');
+    posHtml = '<div class="mi-pos">'
+      + '<div class="ph"><span>品牌定位与国际信任基础 - 中国台湾地区品牌</span><span class="tg">产地标签非信任状</span></div>'
+      + '<div class="pb"><div class="vd">' + esc(pos.verdict) + '</div>' + ev + pb + '</div></div>';
+  }
 
   var kpis = (d.kpi || []).map(function (k) {
     return '<div class="mi-k"><b>' + esc(k.v) + '</b><span class="k">' + esc(k.k) + '</span></div>';
@@ -84,6 +108,7 @@
     + '<div class="mi-body">'
     + '<div class="mi-hl">' + esc(d.headline) + '</div>'
     + '<div class="mi-kpis">' + kpis + '</div>'
+    + posHtml
     + '<div class="mi-cols">'
     +   '<div class="mi-panel"><div class="mi-ph"><span>重点对象 · 最新动态与机会</span><span class="n">' + (d.partners || []).length + ' 个</span></div><div class="mi-pb">' + hot + '</div></div>'
     +   '<div>'

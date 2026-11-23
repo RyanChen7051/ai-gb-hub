@@ -130,6 +130,28 @@
     + '.gbi-ft{background:#f8fafc;border-top:1px solid #dde5ee;padding:11px 18px;font-size:11px;color:#5b6b7c;line-height:1.7;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}'
     + '.gbi-ft a{color:#126b6b;font-weight:700;text-decoration:none}'
     + '.gbi-ft a:hover{text-decoration:underline}'
+
+    + '.gbp{margin:14px 0 2px;border:1px solid #cfe0e0;border-radius:11px;background:#f4fbfa;overflow:hidden}'
+    + '.gbp-hd{padding:10px 13px;background:#e6f4f2;border-bottom:1px solid #cfe0e0;font-size:12px;font-weight:800;color:#126b6b;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center}'
+    + '.gbp-hd .tag{font-size:9.5px;font-weight:750;background:#fff;border:1px solid #cfe0e0;border-radius:9px;padding:2px 8px;color:#126b6b}'
+    + '.gbp-b{padding:11px 13px}'
+    + '.gbp-st{font-size:11.5px;color:#123a5e;line-height:1.7;background:#fff;border:1px solid #dde5ee;border-radius:8px;padding:9px 11px}'
+    + '.gbp-vd{font-size:11.5px;color:#7a4a12;line-height:1.7;background:#fff8ed;border:1px solid #f0dcb8;border-radius:8px;padding:9px 11px;margin-top:8px;font-weight:650}'
+    + '.gbp-ev{margin-top:12px;display:grid;gap:8px}'
+    + '.gbp-e{border:1px solid #dde5ee;border-left:3px solid #126b6b;border-radius:8px;background:#fff;padding:9px 11px}'
+    + '.gbp-e .d{font-size:9.5px;color:#9a6b12;font-weight:800}'
+    + '.gbp-e .t{font-size:11.6px;font-weight:750;color:#123a5e;line-height:1.5;margin-top:2px}'
+    + '.gbp-e .f{font-size:11px;color:#41546a;line-height:1.65;margin-top:4px}'
+    + '.gbp-e .i{font-size:11px;color:#1f6a52;line-height:1.65;margin-top:5px;background:#eef8f1;border-radius:6px;padding:6px 8px}'
+    + '.gbp-e .s{font-size:9.5px;color:#8a97a6;margin-top:5px}'
+    + '.gbp-e .s a{color:#1d5486;text-decoration:none;font-weight:700}'
+    + '.gbp-e .s a:hover{text-decoration:underline}'
+    + '.gbp-pb{margin-top:12px;display:grid;gap:8px}'
+    + '.gbp-p{border:1px solid #d9ccef;border-left:3px solid #6b4a9c;border-radius:8px;background:#faf7fe;padding:9px 11px}'
+    + '.gbp-p .t{font-size:11.6px;font-weight:750;color:#5a3d88;line-height:1.5}'
+    + '.gbp-p .d{font-size:11px;color:#4c3c62;line-height:1.65;margin-top:4px}'
+    + '.gbp-p .g{font-size:10px;color:#8a6b28;line-height:1.55;margin-top:4px}'
+    + '@media(max-width:560px){.gbp-e .i{font-size:10.5px}}'
     + '@media(max-width:900px){.gbi-kpis{grid-template-columns:repeat(3,1fr)}}'
     + '@media(max-width:560px){.gbi-kpis{grid-template-columns:repeat(2,1fr)}.gbi-title{font-size:15px}.gbi-w .dt{flex-basis:100%}}';
 
@@ -162,6 +184,37 @@
   host.insertBefore(sec, host.firstChild);
 
   var idx = 0, fContact = 'all', fLevel = 'all';
+
+
+  function positioningHtml(pos) {
+    if (!pos) return '';
+    var ev = (pos.evidence || []).map(function (e) {
+      return '<div class="gbp-e">'
+        + '<div class="d">' + esc(e.date) + (e.v === 'verified' ? ' · 已核实' : ' · 推演') + '</div>'
+        + '<div class="t">' + esc(e.title) + '</div>'
+        + '<div class="f">' + esc(e.fact) + '</div>'
+        + '<div class="i">我方含义：' + esc(e.implication) + '</div>'
+        + '<div class="s">来源：' + srcLink(e) + '</div>'
+        + '</div>';
+    }).join('');
+    var pb = (pos.playbook || []).map(function (b) {
+      return '<div class="gbp-p">'
+        + '<div class="t">' + esc(b.id) + ' · ' + esc(b.title) + '</div>'
+        + '<div class="d">' + esc(b.detail) + '</div>'
+        + '<div class="g">边界：' + esc(b.guard) + '</div>'
+        + '</div>';
+    }).join('');
+    return '<div class="gbp">'
+      + '<div class="gbp-hd"><span>GUNBASE 品牌定位与国际信任基础 · 中国台湾地区品牌</span><span class="tag">事实 / 推演分列</span></div>'
+      + '<div class="gbp-b">'
+      +   '<div class="gbp-st">' + esc(pos.stance) + '</div>'
+      +   '<div class="gbp-vd">' + esc(pos.verdict) + '</div>'
+      +   '<div class="gbi-sec">可验证事实与国际经验 <span class="cnt">' + (pos.evidence || []).length + ' 条</span></div>'
+      +   '<div class="gbp-ev">' + ev + '</div>'
+      +   '<div class="gbi-sec">据此形成的打法（推演） <span class="cnt">' + (pos.playbook || []).length + ' 条</span></div>'
+      +   '<div class="gbp-pb">' + pb + '</div>'
+      + '</div></div>';
+  }
 
   function srcLink(n) {
     if (!n.url) return esc(n.src || '来源');
@@ -287,6 +340,7 @@
       + '<div class="gbi-body">'
       +   '<div class="gbi-hl">' + esc(d.headline) + '</div>'
       +   '<div class="gbi-kpis">' + kpis + '</div>'
+      +   positioningHtml(d.positioning)
       +   '<div class="gbi-sec">重点跟踪对象 <span class="cnt">' + (d.partners || []).length + ' 个</span></div>'
       +   '<div class="gbi-filters">' + cf + '</div>'
       +   '<div class="gbi-filters">' + lf + '</div>'

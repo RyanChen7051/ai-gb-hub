@@ -18,6 +18,7 @@ window.GB_MARKET_INTEL = {
     generatedAt: "2026-11-23 09:40 (GMT+8)",
     owner: "AI GB-Marketing · 市场战术专家",
     scope: "全球 · 品牌合作方（已发 / 已入队 / 未触达）",
+    brandStance: "GUNBASE 按中国台湾地区品牌（Taiwan-based）定位，不是内地品牌。定位分析以国际对中国台湾地区制造与台湾地区品牌的既有信任、合作经验为基础；诚实结论是产地标签信任度中等，真正可用的是同品类、可核实的国际背书。",
     dedupRule: "一个机构只有一个归属方。GB-Sales 已发或已入队的机构，Marketing 跳过；Marketing 已发或已入队的机构，Sales 跳过。命中即视为他人领地，30 天内不重复触达。真实邮箱只存本机。",
     poolNote: "全量池来自每日 07_枪械生产商名录（93 家 / 33 家有公开邮箱）与 08_全球枪店与俱乐部名录（2327 条 / 365 条有公开邮箱）。每日简报不可能逐条展开，故先给全量口径，再挑出当日有可核实新动态或高势能的高价值对象作重点跟踪，其余按类别信号覆盖。",
     integrity: "本文件所有『最新动态』均附来源与日期；策略与机会为推演，需所有者逐次授权后才可对外接触。不构成法律意见。"
@@ -38,6 +39,27 @@ window.GB_MARKET_INTEL = {
         { k: "新增动态", v: "14", d: "2026 年公开来源，逐条附 URL", tone: "green" },
         { k: "可启动机会", v: "9", d: "绿灯 9 / 黄灯 4 / 红灯 3", tone: "teal" }
       ],
+
+
+      /* ===== GUNBASE 品牌定位与国际信任基础（中国台湾地区品牌）===== */
+      positioning: {
+        stance: "GUNBASE 按中国台湾地区品牌（Taiwan-based）定位，不是内地品牌。分析以国际对中国台湾地区制造与台湾地区品牌的既有信任、合作经验为出发点，但诚实结论是：产地标签不构成强信任状，对外叙事必须用『可验证的品类内证据』支撑。",
+        verdict: "NIM 2025 调查中 Made in Taiwan 信任度 33%，仅比 Made in China 31% 高 2 个百分点，远低于德国 66%、日本 63%。因此不能写『来自台湾所以品质更好』；可用的是同品类、可核实的国际奖项、材料来源、冠军共创与渠道合作。",
+        evidence: [
+          { date: "2025-03", title: "国际 Made in 信任排名：台湾地区 33%、德国 66%、日本 63%", fact: "纽伦堡市场决策研究所（NIM）2025 年 3 月对 10 国 20,000 人调查，把产地列入最信任前两位的比例：德国 66%、瑞士 64%、日本 63%、法国/意大利/英国 57%、美国/欧盟 55%、台湾地区 33%、中国内地 31%、墨西哥 28%、印度 27%。", implication: "诚实结论：产地标签不够硬。对外话术必须以具体技术、第三方奖项、合作方姓名支撑，否则台湾制造反而容易被联想到低价代工。", src: "Visual Capitalist（引 NIM 2025-03 调查）", url: "visualcapitalist.com/ranked-the-worlds-most-trusted-made-in-labels", v: "verified" },
+          { date: "2025-10", title: "英国实地体验后对中国台湾地区产品观感显著转正", fact: "TAITRA 与 TITA 在伦敦 Westfield White City 办 Taiwan Select 快闪展，25 个台湾精品品牌参展：95% 参观者对中国台湾地区产品观感变好、93% 未来可能购买、91% 愿意推荐、70% 看重创新与品质。", implication: "支持既有『体验日』主线：让对方上手摸产品比在邮件里讲产地更能改变认知。注意这是展会访客自选样本，存在选择偏差，不能当成全英民意。", src: "Business Mondays / Z News Service", url: "businessmondays.co.uk/?p=113875", v: "verified" },
+          { date: "2025", title: "中国台湾地区国际品牌价值连续 6 年破百亿美元", fact: "台经院推动、Interbrand（ISO 10668 认证）鉴价的 2025 台湾最佳国际品牌价值：前 25 名总值 151.49 亿美元，年增 2.7%；华硕 12 度居首，联发科成长 45%。", implication: "说明中国台湾地区已有成熟的国际品牌经营体系，GUNBASE 可把『台湾地区精密制造与品牌体系』作为背景，但具体信任仍要落到自家产品参数与第三方证据。", src: "经济部产业发展署 MIT 网站 / China Times", url: "keid.nat.gov.tw/branding-taiwan/news/pressRelease_more?id=44c0b41d34f64d4ebeeda7e0b07b2f66", v: "verified" },
+          { date: "2026", title: "同品类样板：Integrix 以台湾地区研发制造拿下美国年度光学奖", fact: "Leapers 旗下 INTEGRIX 高端光学线 2023 年推出，自有光学与机械设计、加工、组装、测试，采用日本 Ohara 与德国 Schott 镜片、标称 92% 透光率；iXF 4.5x28 被 American Rifleman 选为 2026 Golden Bullseye Optic of the Year，并与 Service Rifle 冠军 Nick Till 共同开发。Leapers 2018 年在台湾设 ISO 9001 工厂、2012 年在德国设 UTG Europe 配送中心。", implication: "与 GUNBASE 最贴近的可验证路径：台湾地区工程制造 + 德日光学材料 + 冠军共创 + 美国专业媒体奖项 + 欧洲本地配送。我方『精度 + 体验』叙事可直接对齐这个结构。", src: "Gun Trade World / Shooting Sports USA", url: "guntradeworld.com/leapers-35-years-of-manufacturing-investment", v: "verified" },
+          { date: "2024 ~ 2025", title: "欧洲战术内容创作者参观台湾产线后转为经销商", fact: "斯洛文尼亚 Polenar Tactical 两位创办人参观 UTG 台湾产线后融资进货，成为 UTG 与 INTEGRIX 欧洲经销商；报道称其对 Ohara / Schott 镜片、铝合金一体加工与无尘室组装印象深刻。", implication: "给出具体的伙伴获取路径：先让专业内容创作者或教练看产线与品控，再谈经销或联合活动，比直接发产品目录有效。", src: "方格子（Polenar Tactical 参访纪实）", url: "vocus.cc/article/69aed5f4fd89780001914c14", v: "verified" },
+          { date: "1980s 起", title: "中国台湾地区光学产业的国际技术合作历史", fact: "亚洲光学 1980 年成立于台中，1982 年与日本 SEKON 技术合作生产光学镜片、代工 Ricoh 镜头，并在美国 TASCO 技术移转下生产猎枪用瞄准镜。", implication: "可作为『台湾地区光学不是从零开始』的产业史背景；来源为百科类条目，正式对外提案前应找一手企业史料再引用。", src: "百度百科 / aVenture 公司资料", url: "baike.baidu.com/view/3282353.htm", v: "verified" }
+        ],
+        playbook: [
+          { id: "B1", title: "产地只做事实描述，不做信任主张", detail: "邮件与提案里 GUNBASE 写作 Taiwan-based / based in Taiwan，随后立刻接可验证细节（镜片来源、测试项目、第三方奖项、合作俱乐部名称）。不写『来自台湾，所以品质更好』这类无证据断言。", guard: "对外英文用 Taiwan-based / Taiwan region，不与国家并列；不做政治表述。" },
+          { id: "B2", title: "复刻 Integrix 结构：材料 + 冠军 + 媒体 + 本地库存", detail: "四项背书按优先级补齐：镜片或镀膜来源、至少一位射手或教练的共创与署名、一篇第三方评测、欧洲或中东本地样品与库存点。每补一项就更新本区证据。", guard: "未有第三方文件或书面同意前，不得宣称已有合作或获奖。" },
+          { id: "B3", title: "把工厂与品控变成内容，而不是保密", detail: "参考 Polenar 案例：邀请欧洲射击类内容创作者、俱乐部教练到产线或线上看品控流程，换取真实评测与经销或活动转化，与我方体验日打法合并。", guard: "涉及客户身份、报价、内部工艺参数的内容需所有者审批。" },
+          { id: "B4", title: "体验优先于产地说明", detail: "英国快闪展数据显示上手体验能把观感提升 95%，所以俱乐部与靶场合作先给样品实测，再谈品牌故事；不在首封邮件里堆产地论述。", guard: "该数据来自展会访客自选样本，仅作方向参考，不当作普遍民意。" }
+        ]
+      },
 
       /* ===== 重点跟踪对象：已发 / 已入队 / 未触达 ===== */
       partners: [
@@ -72,8 +94,8 @@ window.GB_MARKET_INTEL = {
             { date: "2026-07-20 ~ 29", title: "杭州世界杯规模：686 名运动员 / 66 个成员协会 / 61 国", detail: "共 1089 项出发名单，含步枪、手枪、飞碟三个分项；ISSF 设 Platinum / Gold / Silver / Bronze Sponsors 与 Official Suppliers 分层体系。", src: "ISSF 官网", url: "issf-sports.org/news/5151", v: "verified" },
             { date: "2026-07", title: "青年世锦赛在德国 Suhl 举行", detail: "2026 ISSF Junior World Championship（步枪/手枪/飞碟），美国队夺多枚奖牌并两项世界青年纪录。", src: "Shooting Wire", url: "shootingwire.com/releases/2026/07/team-usa-rifle-and-pistol-athletes-shine", v: "verified" }
           ],
-          strategy: "ISSF 的赞助分层已经对中国品牌敞开（Relegend 是最新例证），这是最有说服力的进入理由。GUNBASE 不必一上来争铂金，Official Supplier 或青年项目供应商是更现实的第一阶；青少年 J 系列被专门提及，说明『青年装备』是 ISSF 当前叙事里的热词，与我方光学体验日方向一致。",
-          opp: { level: "green", title: "Official Supplier / 青年项目装备支持", why: "已有中国品牌进入同一体系，路径被验证；青年议题是官方叙事重点", action: "整理一页英文权益 proposal（不报价格），等所有者授权后接触", gate: "赞助预算与代表权需所有者决定；不承诺赞助金额", v: "model" }
+          strategy: "ISSF 的赞助分层向产业伙伴开放，但 Relegend 是内地射击服品牌，不是 GUNBASE 的同类先例——GUNBASE 按中国台湾地区品牌定位，不借用这条叙事。本轮未检得台湾地区光学品牌进入 ISSF 赞助体系的独立公开先例，因此改用双支柱：一是 ISSF 分层本身对产业开放（Platinum 到 Official Supplier），二是台湾地区精密光学在国际市场已验证的品类内背书（见本日『品牌定位与国际信任基础』，如 Integrix 获 American Rifleman 2026 年度光学奖）。GUNBASE 不必一上来争铂金，Official Supplier 或青年项目供应商是更现实的第一阶；青少年 J 系列被专门提及，说明『青年装备』是 ISSF 当前叙事里的热词，与我方光学体验日方向一致。",
+          opp: { level: "green", title: "Official Supplier / 青年项目装备支持", why: "ISSF 分层对产业伙伴开放；青年议题是官方叙事重点；以台湾地区光学的国际品类背书支撑，不沿用内地品牌先例", action: "整理一页英文权益 proposal（不报价格），以 Taiwan-based 身份表述，等所有者授权后接触", gate: "赞助预算与代表权需所有者决定；不承诺赞助金额；不虚构材料来源或合作身份", v: "model" }
         },
         {
           name: "Safari Club International (SCI)", country: "美国 / 全球", region: "北美", type: "国际协会",
@@ -207,9 +229,9 @@ window.GB_MARKET_INTEL = {
           basis: "SD Shooting / SHOT Show 官网 / JAGD & HUND 官网（均 2026 公开来源）"
         },
         {
-          id: "P2", title: "用已被验证的赞助结构降低对方教育成本", level: "核心",
-          detail: "ISSF 刚接纳中国射击服品牌 Relegend 为铂金赞助商；SCI 持续吸纳企业赞助商；Trofeo Fiocchi-Sabatti 已有光学品牌在场。这些先例让 GUNBASE 的提案不必从零解释『为什么一家光学公司要来』。",
-          basis: "ISSF news/5149 / Hunting Life / ColdBore"
+          id: "P2", title: "产地标签不做信任主张，改用品类内可验证背书", level: "核心",
+          detail: "ISSF 分层向产业开放、SCI 持续吸纳企业赞助商、Trofeo Fiocchi-Sabatti 已有光学品牌在场——这三条让『光学公司为什么要来』不用从零解释。但 Relegend 是内地品牌，不作为 GUNBASE 的定位先例。GUNBASE 按中国台湾地区品牌叙事，靠的是可验证证据：Integrix（台湾地区研发制造 + 德国 Schott / 日本 Ohara 镜片）获 American Rifleman 2026 年度光学奖、与 Service Rifle 冠军共创、欧洲专业频道参观产线后转为经销商。国际调查里 Made in Taiwan 信任度 33%，仅高于内地 31%，远低于德国 66% 与日本 63%，所以不能靠产地口号。",
+          basis: "ISSF news/5149 / Hunting Life / ColdBore / Gun Trade World / Shooting Sports USA / Visual Capitalist（引 NIM 2025-03 调查）"
         },
         {
           id: "P3", title: "青年与入门是 2026 年的共同语法", level: "重点",
@@ -250,7 +272,7 @@ window.GB_MARKET_INTEL = {
         { item: "跨产业联名首选城市与预算上限", why: "Dunkin'/Mossy Oak/and wander 三个案例都依赖地域文化资产，落地城市决定联名对象", blocks: "O1 联名模板从推演转方案" }
       ],
 
-      dataNote: "今日动态来自 2026 年公开来源（ISSF、JAGD & HUND、SHOT Show、Walther、Swarovski、ColdBore、ContentGrip 等），每条在对象卡内附标题与来源域名。策略与机会为 AI GB-Marketing 推演，不代表已建立合作。全量池口径来自本机 07_/08_ 每日名录。"
+      dataNote: "今日动态来自 2026 年公开来源（ISSF、JAGD & HUND、SHOT Show、Walther、Swarovski、ColdBore、ContentGrip 等），每条在对象卡内附标题与来源域名。策略与机会为 AI GB-Marketing 推演，不代表已建立合作。全量池口径来自本机 07_/08_ 每日名录。品牌定位证据见本日『品牌定位与国际信任基础』，均为公开可核实来源；事实与策略推演已分别标注。"
     }
   ]
 };
