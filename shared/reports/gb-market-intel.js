@@ -14,7 +14,7 @@
 window.GB_MARKET_INTEL = {
   meta: {
     version: "1.0.0",
-    cadence: "每日 08:30 (GMT+8) 由 AI GB-Marketing 发布；21:00 由 AI GB-Team 在团队中心汇总",
+    cadence: "每日 08:30 (GMT+8) 由 AI GB-Marketing 发布；21:00 由 AI-GB-Team 在团队中心汇总",
     generatedAt: "2026-11-23 09:40 (GMT+8)",
     owner: "AI GB-Marketing · 市场战术专家",
     scope: "全球 · 品牌合作方（已发 / 已入队 / 未触达）",
