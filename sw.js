@@ -1,7 +1,7 @@
 /* AI GB Team Hub — Service Worker
  * 策略：网络优先 + 缓存兜底。子目录部署，全部相对路径。
  */
-const CACHE = 'ai-gb-team-hub-v14';
+const CACHE = 'ai-gb-team-hub-v15';
 const BASE = './';
 const CORE = [
   BASE,
@@ -10,6 +10,7 @@ const CORE = [
   BASE + 'shared/reports/gb-reports.js',
   BASE + 'shared/reports/gb-email-log.js',
   BASE + 'shared/reports/gb-market-intel.js',
+  BASE + 'rd/data.js',
   BASE + 'shared/team-intel-digest.js',
   BASE + 'shared/line-report.js',
   BASE + 'shared/tabbar.js',
