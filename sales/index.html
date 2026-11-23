@@ -514,6 +514,11 @@
   .sec-upd.ok{border-color:#bcd9c4;background:#eef8f1;color:#1f6b3d}
   .sec-upd.err{border-color:#e8c4bd;background:#fdf1ef;color:#a83628}
   @keyframes su-spin{to{transform:rotate(360deg)}}
+  .hd-upd{margin-left:auto;flex:0 0 auto;font-size:12.5px;font-weight:700;padding:7px 15px;border-radius:999px;
+          border:1px solid #bcd3e6;background:#eaf3fb;color:#123a5e;box-shadow:0 2px 8px rgba(18,58,94,.10)}
+  .hd-upd .su-ic{font-size:15px}
+  .hd-upd:hover{background:#d9e9f7}
+
 
   /* ===== 枪械生产商名录（每日 08:00 调研） ===== */
   .prod-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
@@ -2164,6 +2169,15 @@ function __bootMain(){
   }
 
   function mount(){
+    var top=document.querySelector('.hd-top');
+    if(top && !top.querySelector('.hd-upd')){
+      var mb=document.createElement('button');
+      mb.type='button'; mb.className='sec-upd hd-upd';
+      mb.title='\u6e05\u7f13\u5b58\u5e76\u91cd\u65b0\u62c9\u53d6\u6700\u65b0\u53d1\u5e03\u5185\u5bb9\uff0c\u4e0d\u7528\u624b\u52a8\u5173\u9875\u9762';
+      mb.innerHTML='<span class="su-ic">\u27f3</span><span class="su-t">\u66f4\u65b0</span>';
+      mb.onclick=function(){ run(this); };
+      top.appendChild(mb);
+    }
     var secs=document.querySelectorAll('.wrap > section');
     for(var i=0;i<secs.length;i++){
       var head=secs[i].querySelector('.sec-h');
