@@ -32,7 +32,7 @@ window.GB_TEAM = {
       id: "GB-Sales", name: "AI GB-Sales", en: "AI GB Sales",
       role: "客户线 · 找买家、发开发信、跟进台账", reportsTo: "GB-PM",
       status: "live", statusLabel: "已上线 · 本地 v3.0.17",
-      scope: "海外业务汇报中心：授权状态、渠道结构、决策卡点、客户回信",
+      scope: "海外业务汇报中心：授权状态、渠道结构、决策卡点、客户回信；接收 AI GB-RD 打样闭环 S8 移交的 Sales Kit 六件套（含证据对照与已知局限）",
       entry: "./sales/", factBasis: "owner-specified"
     },
     {
@@ -45,8 +45,8 @@ window.GB_TEAM = {
     {
       id: "GB-RD", name: "AI GB-RD", en: "AI GB Research & Development",
       role: "技术线 · 全球技术扫描、图纸设计储备", reportsTo: "GB-PM",
-      status: "live", statusLabel: "已上线 · 本地 v1.1.0",
-      scope: "瞄准镜/枪械配件/战术装备每日技术情报、三大检索矩阵、图纸端设计储备与合规闸门；使用者痛点库（14 条 / 6 簇，A/B/C 分级）",
+      status: "live", statusLabel: "已上线 · 本地 v1.3.0",
+      scope: "瞄准镜/枪械配件/战术装备每日技术情报、三大检索矩阵、图纸端设计储备与合规闸门；使用者痛点库（14 条 / 6 簇，A/B/C 分级）；打样闭环八段产线（痛点 → 图纸 → 打印 → 喷漆 → 模拟 → 实拍 → 移交 Sales）",
       entry: "./rd/", factBasis: "owner-specified-2026-11-23"
     }
   ],
