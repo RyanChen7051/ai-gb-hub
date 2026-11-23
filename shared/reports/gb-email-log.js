@@ -25,7 +25,7 @@ window.GB_EMAIL_LOG = {
       entries: [
         {
           time: "14:42",
-          agent: "AI GB-Team（通道验证）",
+          agent: "AI-GB-Team（通道验证）",
           to: "sales@gunbase-optics.com",
           subject: "[通道验证] AI GB Team 自动发信链路测试 · 2026-11-20",
           type: "系统验证",
