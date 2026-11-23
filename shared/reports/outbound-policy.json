@@ -2,7 +2,7 @@
   "mode": "pilot",
   "modeExplain": "pilot = 预演期，所有对外邀约邮件只发给所有者本人审阅，不触达任何第三方；external = 正式对外，仅发给 whitelist 内的机构，并 CC 所有者。",
   "updatedAt": "2026-11-23 10:15 (GMT+8)",
-  "updatedBy": "AI GB-Team（按所有者 11-23 纠正：自动发信深夜无影响，撤销北京上午特例，全部恢复客户当地净空窗）",
+  "updatedBy": "AI-GB-Team（按所有者 11-23 纠正：自动发信深夜无影响，撤销北京上午特例，全部恢复客户当地净空窗）",
   "ownerAddress": "sales@gunbase-optics.com",
   "quota": {
     "dailyTotal": 50,
