@@ -2,7 +2,7 @@
  *
  * 结构说明：
  *   days[] 按日期倒序积累，每天一条。AI GB-Sales 与 AI GB-Marketing 各提交一份日报，
- *   AI GB-Team 汇整后产出 verdict（判定）、conflicts（冲突裁决）、directives（监督指令）、
+ *   AI-GB-Team 汇整后产出 verdict（判定）、conflicts（冲突裁决）、directives（监督指令）、
  *   escalations（升级给所有者的事项）。
  *
  * 诚信约定：
@@ -13,12 +13,12 @@
 window.GB_REPORTS = {
   meta: {
     version: "1.0.1",
-    cadence: "每日 21:00 (GMT+8) 由 AI GB-Team 汇整并发布",
+    cadence: "每日 21:00 (GMT+8) 由 AI-GB-Team 汇整并发布",
     submitDeadline: "每日 20:50 前两条线提交日报",
     owner: "GunBase 火械基地 · 陈邦杰",
     mailbox: "eyku5737@agent.qq.com",
     quotaDaily: 50,
-    rule: "AI GB-Team 本身不发邮件；两条线各自发信，Team 只汇整与下指令。",
+    rule: "AI-GB-Team 本身不发邮件；两条线各自发信，Team 只汇整与下指令。",
     accumulateNote: "本文件按日累积，新的一天插入数组首位，历史记录永久保留。"
   },
 
@@ -139,7 +139,7 @@ window.GB_REPORTS = {
           {
             id: "D-05", to: "AI GB-Sales + AI GB-Marketing", level: "关注",
             title: "日报提交节奏：20:50 前提交，21:00 Team 发布",
-            detail: "两条线各自向 AI GB-Team 提交日报，Team 不发邮件，只做汇整与下指令。日报须含 KPI、事实、卡点、请求四项，缺项视为未提交。",
+            detail: "两条线各自向 AI-GB-Team 提交日报，Team 不发邮件，只做汇整与下指令。日报须含 KPI、事实、卡点、请求四项，缺项视为未提交。",
             due: "每日 20:50", status: "待执行", basis: "今日两条线均未在 20:50 前提交独立日报"
           },
           {
