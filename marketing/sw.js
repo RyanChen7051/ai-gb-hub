@@ -4,7 +4,7 @@
  *     fetch(req) 会命中 HTTP 缓存拿到旧文件 → 必须 fetch(req,{cache:'no-store'})。
  * 升级：改 data.js 后同步递增下面的 CACHE 版本号即可。
  */
-const CACHE = 'ai-gb-marketing-v14';
+const CACHE = 'ai-gb-marketing-v15';
 const BASE = './';
 const CORE = [
   BASE,
@@ -13,6 +13,7 @@ const CORE = [
   BASE + 'version.json',
   BASE + '../shared/tabbar.js',
   BASE + '../shared/back-to-top.js',
+  BASE + '../shared/gb-bfcache-heal.js',
   BASE + '../shared/reports/gb-market-intel.js',
   BASE + '../shared/market-intel-widget.js',
   BASE + 'manifest.webmanifest',
