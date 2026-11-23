@@ -19,7 +19,7 @@ window.GB_RD_DATA = {
     scope: "全球 · 瞄准镜 / 枪械配件 / 战术装备",
     tagline: "每日全球技术扫描 → 可落图纸的设计储备",
     cadence: "每日 08:00（北京时间）自动更新",
-    desktopDir: "~/Desktop/AI-GB-RD/",
+    desktopDir: "~/Desktop/AI-GB-Team/AI-GB-RD/",
     note: "本页技术信号来自公开可核实来源（每条附 URL 与日期）；图纸设计储备是基于这些事实的工程推演方向，尚未量产、未做专利自由实施（FTO）检索，落地前须经工程评审与法务复核。IX 类军用项目只做趋势情报，不做仿制图纸。"
   },
 
