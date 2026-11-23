@@ -54,7 +54,7 @@
   sec.innerHTML =
     '<div style="background:#fff;border:1px solid #dde5ee;border-radius:14px;overflow:hidden;box-shadow:0 2px 12px rgba(18,58,94,.07)">'
     + '<div style="background:linear-gradient(135deg,#0f3252,#1d5486);color:#fff;padding:13px 17px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">'
-    + '<div><div style="font-size:14.5px;font-weight:750">AI GB-Team 下发的监督指令</div>'
+    + '<div><div style="font-size:14.5px;font-weight:750">AI-GB-Team 下发的监督指令</div>'
     + '<div style="font-size:11px;color:#cfe0ef;margin-top:2px">' + esc(FOR === 'GB-Sales' ? day.sales.agent : day.marketing.agent) + ' · ' + esc(day.date) + ' · ' + esc(day.cycle) + '</div></div>'
     + '<div style="display:flex;gap:6px">'
     + '<span style="background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);padding:4px 10px;border-radius:16px;font-size:11px;color:#eaf2f9">共 ' + mine.length + ' 项</span>'
@@ -62,7 +62,7 @@
     + '</div></div>'
     + '<div style="padding:6px 17px 14px">' + rows + '</div>'
     + '<div style="background:#f8fafc;border-top:1px solid #dde5ee;padding:11px 17px;font-size:11px;color:#5b6b7c;line-height:1.65">'
-    + '指令由 AI GB-Team 每日 21:00 汇整后下发 · <a href="../index.html" style="color:#1d5486;font-weight:700;text-decoration:none">查看完整战报 →</a>'
+    + '指令由 AI-GB-Team 每日 21:00 汇整后下发 · <a href="../index.html" style="color:#1d5486;font-weight:700;text-decoration:none">查看完整战报 →</a>'
     + '</div></div>';
 
   var footer = document.querySelector('footer');
