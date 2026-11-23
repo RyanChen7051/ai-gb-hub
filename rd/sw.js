@@ -2,11 +2,12 @@
  * 网络优先（强制绕过 HTTP 缓存）+ Cache API 离线兜底。
  * 改任何前端文件后，同步递增 CACHE 版本号，否则旧 SW 会继续提供旧副本。
  */
-const CACHE = 'ai-gb-rd-v5';
+const CACHE = 'ai-gb-rd-v6';
 const BASE = './';
 const CORE = [
   BASE,
   BASE + 'index.html',
+  BASE + 'app.html',
   BASE + 'data.js',
   BASE + 'pain-data.js',
   BASE + 'pain.js',
@@ -25,7 +26,12 @@ const CORE = [
 ];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting()).catch(() => {}));
+  e.waitUntil((async () => {
+    const c = await caches.open(CACHE);
+    // 逐项 add：任一项 404 都不该让整次安装失败（addAll 是全有或全无）
+    await Promise.all(CORE.map(u => c.add(new Request(u, { cache: 'reload' })).catch(() => {})));
+    await self.skipWaiting();
+  })().catch(() => {}));
 });
 self.addEventListener('activate', e => {
   e.waitUntil(caches.keys().then(keys => Promise.all(
@@ -51,6 +57,13 @@ self.addEventListener('fetch', e => {
         caches.open(CACHE).then(c => c.put(req, copy)).catch(() => {});
       }
       return res;
-    }).catch(() => caches.match(req).then(hit => hit || caches.match(BASE + 'index.html')))
+    }).catch(() => caches.match(req).then(hit => {
+      if (hit) return hit;
+      // 只有页面导航才回退到首页，其余返回 error，避免把 HTML 当 JS/CSS 吐出
+      if (req.mode !== 'navigate') return Response.error();
+      return caches.match(BASE + 'app.html')
+        .then(h => h || caches.match(BASE + 'index.html'))
+        .then(h => h || Response.error());
+    }))
   );
 });

@@ -1,9 +1,10 @@
 {
-  "version": "1.3.2",
-  "build": "20261123f",
-  "updatedAt": "2026-11-23 16:20 (GMT+8)",
+  "version": "1.4.0",
+  "build": "20261123j",
+  "updatedAt": "2026-11-23 16:56 (GMT+8)",
   "name": "AI GB-RD",
   "changelog": [
+    "v1.4.0 入口结构改造为「版本门」：rd/index.html 不再承载任何内容，只做一件永不改变的事——用 cache:'no-store' 现取 version.json 的 build，再跳到该 build 的不可变页面 e-<build>.html（真实内容在 app.html）。这样无论浏览器 / CDN / 桌面端预览隧道把入口冻结多久，跳转目标始终是最后一次构建，不会再出现「页面停在几小时前」。version.json 取不到时退回 app.html（离线由 SW 缓存兜底）；SW 升 v6，预缓存改逐项 add（一项 404 不再整体失败），页面导航的离线兜底指向 app.html。",
     "v1.3.2 补注册 Service Worker：此前只有 sales 页面注册过，rd/sw.js 从未生效（离线能力与缓存控制均为空转）。现已注册并主动 update 检查；配合 SW 内 cache:'no-store'，发布后首次访问即取到新版本。",
     "v1.3.1 修复「文件已更新但页面仍是旧副本」：SW 的 fetch 改为 cache:'no-store' 绕过 Pages 的 max-age=600 HTTP 缓存；新增版本哨兵——页面比对 version.json，远端版本更高时顶部弹提示条，一键清缓存 + 注销 SW + 强制重载；「更新」按钮改为注销 SW。",
     "v1.3.0 新增「打样闭环」视图：八阶段产线（痛点搜索 / 痛点分析 / 图纸设计 / 3D打印 / 喷涂金属漆 / 3D模拟前后差异 / 实拍 / 移交 Sales），含输入输出、闸门、26 条翻车点、三条物理约束、Sales Kit 六件套与禁用表述清单。",
