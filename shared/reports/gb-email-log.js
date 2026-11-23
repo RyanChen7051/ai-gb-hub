@@ -10,10 +10,10 @@
  */
 window.GB_EMAIL_LOG = {
   meta: {
-    mailbox: "eyku5737@agent.qq.com",
-    channel: "Agent Mail",
+    mailbox: "sales@gunbase-optics.com",
+    channel: "GunBase 企业邮箱 SMTP（对外）/ Agent Mail（内部预览）",
     quotaDaily: 50,
-    note: "本台账为实际发送记录。预演期收件人为所有者本人，不计入对外触达。"
+    note: "本台账为实际发送记录。mode=对外 为真实触达，mode=预演/预览 收件人为所有者本人、不计入对外业绩。Marketing 的对外信由 ~/.workbuddy/gunbase-sales-bot/marketing_send.py 写入，含 localTime / netWindow 便于复核是否踩到当地邮件海。"
   },
 
   days: [
