@@ -15,7 +15,7 @@ window.GB_MARKET_INTEL = {
   meta: {
     version: "1.0.0",
     cadence: "每日 08:30 (GMT+8) 由 AI GB-Marketing 发布；21:00 由 AI-GB-Team 在团队中心汇总",
-    generatedAt: "2026-11-23 09:40 (GMT+8)",
+    generatedAt: "2026-11-25 11:17 (GMT+8) · M1 补跑，原调度 08:10，延迟 187 分钟",
     owner: "AI GB-Marketing · 市场战术专家",
     scope: "全球 · 品牌合作方（已发 / 已入队 / 未触达）",
     brandStance: "GUNBASE 按中国台湾地区品牌（Taiwan-based）定位，不是内地品牌。定位分析以国际对中国台湾地区制造与台湾地区品牌的既有信任、合作经验为基础；诚实结论是产地标签信任度中等，真正可用的是同品类、可核实的国际背书。",
@@ -25,6 +25,204 @@ window.GB_MARKET_INTEL = {
   },
 
   days: [
+    {
+      date: "2026-11-25",
+      weekday: "周三",
+      generatedAt: "2026-11-25 11:17 (GMT+8) · 补跑：原调度 08:10，延迟 187 分钟，本机未在调度时刻触发，按实际时间如实记录",
+      headline: "第 2 份合作情报（迟到补跑）：新检出欧洲射击联合会三年媒体协议、ISSF 赛场服务 MOU、SHOT Show 2027 截止节点，以及两条正在发生的时间窗（Purdey Game Cup 11/23-28、Walther Youth Cup 11/27-29）。品牌定位证据新增 1 条：玉晶光与 3M 的精密光学合作，但明确不是枪用光学背书。",
+
+      kpi: [
+        { k: "新增动态", v: "10", d: "近 30 天公开来源，逐条附 URL 与日期", tone: "green" },
+        { k: "重点对象", v: "10", d: "新进雷达 4：ESC / Purdey / 玉晶光 / Columbia x BEAMS", tone: "blue" },
+        { k: "新增定位证据", v: "1", d: "继承 11-23 全部 6 条，只增不删", tone: "teal" },
+        { k: "归属锁定", v: "26", d: "Sales 24 + Marketing 2，Marketing 不触达", tone: "amber" },
+        { k: "进行中窗口", v: "2", d: "Purdey Game Cup 11/23-28、Walther Youth Cup 11/27-29", tone: "amber" },
+        { k: "待所有者拍板", v: "4", d: "ESC 接触授权 / SHOT Show 决策 / Purdey 2027 奖品 / D-03 对象池", tone: "amber" }
+      ],
+
+      positioning: {
+        stance: "GUNBASE 按中国台湾地区品牌（Taiwan-based）定位，不是内地品牌。分析以国际对中国台湾地区制造与台湾地区品牌的既有信任、合作经验为出发点，但诚实结论是：产地标签不构成强信任状，对外叙事必须用『可验证的品类内证据』支撑。",
+        verdict: "NIM 2025 调查中 Made in Taiwan 信任度 33%，仅比 Made in China 31% 高 2 个百分点，远低于德国 66%、日本 63%。因此不能写『来自台湾所以品质更好』；可用的是同品类、可核实的国际奖项、材料来源、冠军共创与渠道合作。",
+        evidence: [
+          { date: "2025-03", title: "国际 Made in 信任排名：台湾地区 33%、德国 66%、日本 63%", fact: "纽伦堡市场决策研究所（NIM）2025 年 3 月对 10 国 20,000 人调查，把产地列入最信任前两位的比例：德国 66%、瑞士 64%、日本 63%、法国/意大利/英国 57%、美国/欧盟 55%、台湾地区 33%、中国内地 31%、墨西哥 28%、印度 27%。", implication: "诚实结论：产地标签不够硬。对外话术必须以具体技术、第三方奖项、合作方姓名支撑，否则台湾制造反而容易被联想到低价代工。", src: "Visual Capitalist（引 NIM 2025-03 调查）", url: "visualcapitalist.com/ranked-the-worlds-most-trusted-made-in-labels", v: "verified" },
+          { date: "2025-10", title: "英国实地体验后对中国台湾地区产品观感显著转正", fact: "TAITRA 与 TITA 在伦敦 Westfield White City 办 Taiwan Select 快闪展，25 个台湾精品品牌参展：95% 参观者对中国台湾地区产品观感变好、93% 未来可能购买、91% 愿意推荐、70% 看重创新与品质。", implication: "支持既有『体验日』主线：让对方上手摸产品比在邮件里讲产地更能改变认知。注意这是展会访客自选样本，存在选择偏差，不能当成全英民意。", src: "Business Mondays / Z News Service", url: "businessmondays.co.uk/?p=113875", v: "verified" },
+          { date: "2025", title: "中国台湾地区国际品牌价值连续 6 年破百亿美元", fact: "台经院推动、Interbrand（ISO 10668 认证）鉴价的 2025 台湾最佳国际品牌价值：前 25 名总值 151.49 亿美元，年增 2.7%；华硕 12 度居首，联发科成长 45%。", implication: "说明中国台湾地区已有成熟的国际品牌经营体系，GUNBASE 可把『台湾地区精密制造与品牌体系』作为背景，但具体信任仍要落到自家产品参数与第三方证据。", src: "经济部产业发展署 MIT 网站 / China Times", url: "keid.nat.gov.tw/branding-taiwan/news/pressRelease_more?id=44c0b41d34f64d4ebeeda7e0b07b2f66", v: "verified" },
+          { date: "2026", title: "同品类样板：Integrix 以台湾地区研发制造拿下美国年度光学奖", fact: "Leapers 旗下 INTEGRIX 高端光学线 2023 年推出，自有光学与机械设计、加工、组装、测试，采用日本 Ohara 与德国 Schott 镜片、标称 92% 透光率；iXF 4.5x28 被 American Rifleman 选为 2026 Golden Bullseye Optic of the Year，并与 Service Rifle 冠军 Nick Till 共同开发。Leapers 2018 年在台湾设 ISO 9001 工厂、2012 年在德国设 UTG Europe 配送中心。", implication: "与 GUNBASE 最贴近的可验证路径：台湾地区工程制造 + 德日光学材料 + 冠军共创 + 美国专业媒体奖项 + 欧洲本地配送。我方『精度 + 体验』叙事可直接对齐这个结构。", src: "Gun Trade World / Shooting Sports USA", url: "guntradeworld.com/leapers-35-years-of-manufacturing-investment", v: "verified" },
+          { date: "2024 ~ 2025", title: "欧洲战术内容创作者参观台湾产线后转为经销商", fact: "斯洛文尼亚 Polenar Tactical 两位创办人参观 UTG 台湾产线后融资进货，成为 UTG 与 INTEGRIX 欧洲经销商；报道称其对 Ohara / Schott 镜片、铝合金一体加工与无尘室组装印象深刻。", implication: "给出具体的伙伴获取路径：先让专业内容创作者或教练看产线与品控，再谈经销或联合活动，比直接发产品目录有效。", src: "方格子（Polenar Tactical 参访纪实）", url: "vocus.cc/article/69aed5f4fd89780001914c14", v: "verified" },
+          { date: "1980s 起", title: "中国台湾地区光学产业的国际技术合作历史", fact: "亚洲光学 1980 年成立于台中，1982 年与日本 SEKON 技术合作生产光学镜片、代工 Ricoh 镜头，并在美国 TASCO 技术移转下生产猎枪用瞄准镜。", implication: "可作为『台湾地区光学不是从零开始』的产业史背景；来源为百科类条目，正式对外提案前应找一手企业史料再引用。", src: "百度百科 / aVenture 公司资料", url: "baike.baidu.com/view/3282353.htm", v: "verified" },
+          { date: "2026-11-19", title: "台湾地区精密光学厂玉晶光与 3M 达成战略合作，切入 AI 基础设施光学", fact: "中央社报道，中国台湾地区光学镜头厂玉晶光（3406）与 3M 集团战略合作，共同推进 3M 扩束光学技术（EBO）方案的研发、制造与产能扩充；董事长陈天庆称这是从消费性电子光学延伸至高速运算与 AI 基础设施光学的里程碑，产能预计 2026 年第 4 季至 2027 年依客户需求放量。报道未涉及枪用光学、射击赛事或 GUNBASE。", implication: "新增一条可核实的『台湾地区精密光学制造进入国际大厂长期合作』事实，支持我方以制造与协同能力参与合作的叙事；但它不是同品类光学奖项或射击渠道背书，严禁写成枪用光学获国际认可。", src: "中央社 CNA（2026-11-19 18:31）", url: "https://www.cna.com.tw/news/afe/202611190325.aspx", v: "verified" },
+        ],
+        playbook: [
+          { id: "B1", title: "产地只做事实描述，不做信任主张", detail: "邮件与提案里 GUNBASE 写作 Taiwan-based / based in Taiwan，随后立刻接可验证细节（镜片来源、测试项目、第三方奖项、合作俱乐部名称）。不写『来自台湾，所以品质更好』这类无证据断言。", guard: "对外英文用 Taiwan-based / Taiwan region，不与国家并列；不做政治表述。" },
+          { id: "B2", title: "复刻 Integrix 结构：材料 + 冠军 + 媒体 + 本地库存", detail: "四项背书按优先级补齐：镜片或镀膜来源、至少一位射手或教练的共创与署名、一篇第三方评测、欧洲或中东本地样品与库存点。每补一项就更新本区证据。", guard: "未有第三方文件或书面同意前，不得宣称已有合作或获奖。" },
+          { id: "B3", title: "把工厂与品控变成内容，而不是保密", detail: "参考 Polenar 案例：邀请欧洲射击类内容创作者、俱乐部教练到产线或线上看品控流程，换取真实评测与经销或活动转化，与我方体验日打法合并。", guard: "涉及客户身份、报价、内部工艺参数的内容需所有者审批。" },
+          { id: "B4", title: "体验优先于产地说明", detail: "英国快闪展数据显示上手体验能把观感提升 95%，所以俱乐部与靶场合作先给样品实测，再谈品牌故事；不在首封邮件里堆产地论述。", guard: "该数据来自展会访客自选样本，仅作方向参考，不当作普遍民意。" },
+          { id: "B5", title: "讲合作结构，不讲产地自夸", detail: "新证据显示国际合作是按角色搭建的：玉晶光承担精密光学研发与量产、3M 提供 EBO 技术；ISSF 以 MOU 引入 FICS 做赛场服务；ESC 用三年媒体协议放大赛事。GUNBASE 对外提案应直接写明自己承担的具体角色（样品、测试、奖品、体验位、内容），不要先讲产地。", guard: "跨领域案例只作结构参考，不冒充同品类背书；所有合作身份需对方书面确认。" }
+        ]
+      },
+
+      /* ===== 重点跟踪对象：已发 / 已入队 / 未触达 ===== */
+      partners: [
+        {
+          name: "European Shooting Confederation (ESC)", country: "欧洲", region: "欧洲", type: "国际协会",
+          contact: "uncontacted", owner: "未分配", sourceFile: "公开网络 / 组织雷达（新进）",
+          tag: "未触达 · 新进 · 媒体放大中",
+          news: [
+            { date: "2026-11-12", title: "ESC 与 Warner Bros. Discovery Sports 签三年转播合作，并公布青训与赛制改革", detail: "SVG Europe 专访 ESC 秘书长 Yahor Aleinik：协议覆盖 Eurosport 1/2、TNT Sports 与 HBO Max，含直播、回放与集锦；首场为 10 月初希腊 Malakasa 欧飞碟锦标赛，下一场为 12 月马耳他 European Champions League。ESC 设 U16/U18/U23 与新 Solo/Duet/Trio 挑战赛制，并在 2025 年大会宣布拨款 20 万欧元支持成员协会发展项目（可用于购买运动器材与训练设施）；Aleinik 称首场内容的社交媒体与付费推广触达约 400 万。", src: "SVG Europe", url: "https://www.svgeurope.org/blog/headlines/focused-growth-the-european-shooting-confederation-on-growing-its-audience-through-a-new-deal-with-warner-bros-discovery-sports/", v: "verified" }
+          ],
+          strategy: "这是本轮势能最高的新对象：它同时具备欧洲覆盖、电视与流媒体放大、明确的青训与器材议题。对 GUNBASE 的现实入口不是买大赞助，而是围绕 U16/U18/U23 与挑战赛制提供光学器材支持或体验位，让装备出现在 ESC 的内容里。注意报道只讲到成员协会发展拨款，并未公布企业赞助方案，不能把『可接触』说成『已开放赞助』。",
+          opp: { level: "yellow", title: "青训 / 挑战赛光学器材支持与内容曝光", why: "媒体协议把赛事价值放大，且 ESC 自述正在投资器材、设施与年轻运动员；但企业合作通道未见公开规则", action: "整理一页英文提案（身份写 Taiwan-based，只写可承担角色，不报价），等所有者授权后经官网公开渠道询问", gate: "不虚构赞助身份；未获授权不接触；需确认欧洲合规与样品落地", v: "model" }
+        },
+        {
+          name: "ISSF 国际射击运动联合会", country: "全球", region: "全球", type: "国际协会",
+          contact: "uncontacted", owner: "未分配", sourceFile: "公开网络 / 组织雷达",
+          tag: "未触达 · 多哈世锦赛刚结束",
+          news: [
+            { date: "2026-11-09", title: "ISSF 多哈世锦赛引入 FICS 免费赛场脊医服务，依据去年签署的 MOU", detail: "ISSF 官网称，国际运动脊医联合会（FICS）在 Lusail Shooting Complex 为持赛事证件者提供免费服务，持续至 11 月 13 日；该安排来自 ISSF 与 FICS 去年签署的谅解备忘录，属 Athletes First 倡议。", src: "ISSF 官网 news/5330", url: "https://issf-sports.org/news/5330", v: "verified" },
+            { date: "2026-11-02", title: "2026 多哈步枪/手枪/飞碟世锦赛开幕，11 月 1 日至 14 日举行", detail: "ISSF 官网报道开幕式在卡塔尔举行，卡塔尔射击射箭协会代表与 ISSF 主席 Luciano Rossi 出席；该赛事是通往洛杉矶 2028 的资格周期开端。", src: "ISSF 官网 news/5307", url: "https://issf-sports.org/news/5307", v: "verified" }
+          ],
+          strategy: "本轮新信号是 ISSF 的合作不只卖展位：它用 MOU 把专业服务组织嵌进赛场支持体系，并把运动员福利放在叙事中心。GUNBASE 若走 ISSF 路线，应把提案写成『可持续的赛事支持角色』而不是一次性赞助；11-23 已确认的 Relegend 内地品牌先例仍然不得作为我方定位依据。",
+          opp: { level: "yellow", title: "官方供应商 / 青年项目器材支持", why: "合作结构对外部组织开放，但多哈赛事已结束，需等下一轮周期节点", action: "把 FICS-MOU 模式写入英文提案的『合作形态』页，不报金额，等授权", gate: "赞助预算与代表权需所有者决定；不沿用内地品牌叙事", v: "model" }
+        },
+        {
+          name: "SHOT Show 2027（NSSF）", country: "美国", region: "北美", type: "行业展会",
+          contact: "uncontacted", owner: "未分配", sourceFile: "公开网络 / 行业日历",
+          tag: "未触达 · 展前 55 天",
+          news: [
+            { date: "2026-11-04", title: "NSSF 发布参展提醒：酒店紧张、多项截止节点已过、体验区仍余少量席位", detail: "官方 Insider 称 Palazzo、Caesars Palace、Wynn 折扣房已售罄，Venetian 等接近满房；11/6 供应商展示名录、11/11 线索采集早鸟、11/13 签证函、11/17 新品指南与车辆许可等节点集中到期；Caesars Forum 内的 SHOT Show Archery Range 仍余少量名额，供参展商做现场试用演示。", src: "SHOT Show 官网 Insider", url: "https://shotshow.org/?p=46920", v: "verified" },
+            { date: "2026-11-25", title: "官方参展页显示展位仍可预订，倒计时约 56 天", detail: "SHOT Show 2027 参展页仍列 Still Available Exhibit Floor Space，并列出 50K 观众、2K 媒体、100 国家的上届口径；展会 2027 年 1 月 19 日至 22 日在拉斯维加斯 Venetian Expo 与 Caesars Forum 举行。本条为本次检索时页面状态，非新闻发布日期。", src: "SHOT Show 官网参展页", url: "https://www.shotshow.org/en/Exhibitors/", v: "verified" }
+          ],
+          strategy: "官方的『现场试用演示』思路与 GUNBASE 的体验日打法完全一致，是可以借用的展会形式；但 11 月多数省钱与资料节点已过，酒店紧张，临时参展的成本与执行风险升高。即使不参展，1 月 19 日至 22 日仍是全年决策者最集中的外联窗口。",
+          opp: { level: "yellow", title: "体验式展位 / 展期集中外联", why: "窗口势能最高，但截止节点、预算与 B2B 资质是硬门槛", action: "请所有者尽快做 go/no-go；不参展也锁定 1 月外联周", gate: "展位与酒店预算、行业资质、美国合规；未授权不接触", v: "model" }
+        },
+        {
+          name: "Walther (Carl Walther GmbH)", country: "德国", region: "欧洲/北美", type: "枪械生产商",
+          contact: "uncontacted", owner: "未分配", sourceFile: "07_枪械生产商名录 / 手枪类",
+          tag: "未触达 · 赛事距 2 天",
+          news: [
+            { date: "2026-11-21", title: "第 12 届 Walther Youth Cup 发布最终赛程与各国报名名单，11/27-29 开赛", detail: "赛事官网 sdshooting.rs 列出 11 月 19 日最终赛程与 11 月 21 日报名名单：塞尔维亚 Smederevo，U16/U18/U21，40 个射击位、决赛馆 10 位、观众容量 300+，来自 16 国以上；总赞助商 Carl Walther GmbH Sportwaffen 提供 LP 500 气手枪与 LG 400 气步枪等奖品。", src: "SD Shooting 官方赛事页", url: "https://www.sdshooting.rs/", v: "verified" }
+          ],
+          strategy: "赛程与名单已发布，说明赛事进入执行状态；距开赛仅 2 天，实物样品跨境寄送基本来不及，硬塞赞助既不现实也伤品牌。合理动作是把 2026 作为观察场，直接锁定 2027 赛季的奖品或体验位谈判，并用本届结果与主办方公开联系方式作为依据。",
+          opp: { level: "yellow", title: "2027 青年杯光学奖品 / 体验位", why: "赛事结构已验证且明确接受器材类奖品，但 2026 窗口实质关闭", action: "赛后整理一页提案，等授权后询问 2027 合作；本轮不发邮件", gate: "奖品样品与跨境寄送成本需确认；不承诺现金赞助", v: "model" }
+        },
+        {
+          name: "Purdey at the Royal Berkshire（James Purdey & Sons）", country: "英国", region: "欧洲", type: "持牌靶场 / 品牌赛事",
+          contact: "uncontacted", owner: "未分配", sourceFile: "公开网络 / 英国持牌靶场（新进）",
+          tag: "未触达 · 赛事进行中",
+          news: [
+            { date: "2026-10-16", title: "Purdey 首届 Game Cup 于 11 月 23 至 28 日举行，100 靶模拟猎鸟场景", detail: "Fieldsports Journal 报道，英国枪厂 James Purdey & Sons 在其 Royal Berkshire 射击学校办首届 Game Cup：单人 100 靶、每人 55 英镑（含靶不含弹），设 Top Gun 与 Top Side-by-Side 两个组别，奖品各含 1000 发弹药与 Purdey Sporting Agency 猎场日席位。赛事报道发布于 10 月 16 日，但赛事本身在本次检索时正在进行。官方活动链接经访问返回 404，故以行业媒体为来源并标注该限制。", src: "Fieldsports Journal", url: "https://fieldsports-journal.com/news/purdey-game-cup-clay-competition", v: "verified" }
+          ],
+          strategy: "这是英国持牌场地里少见的品牌自办赛事，奖品结构已经有明确赞助位（弹药与猎场日），说明它愿意用实物与服务组合做合作。2026 赛事已在场内，本轮只做赛况观察；真正可谈的是 2027 年奖品或精度体验区，并把『不出现武器功能宣传』作为内容边界。",
+          opp: { level: "yellow", title: "2027 Game Cup 光学奖品 / 体验区", why: "奖品赞助结构已验证、场地持牌、时间固定；但 2026 已开赛且官方活动页失效", action: "赛后核实结果与官方联系入口，形成 2027 提案；等所有者授权", gate: "英国持牌场地与合规、样品成本、官方联系方式需先核实", v: "model" }
+        },
+        {
+          name: "Sabatti S.p.A.", country: "意大利", region: "欧洲", type: "枪械生产商",
+          contact: "sent", owner: "GB-Marketing", sourceFile: "07_枪械生产商名录 / 归属表",
+          tag: "11-23 16:30 已投递 · 禁止重发",
+          news: [
+            { date: "2026-11-25", title: "本轮未检得该机构近 30 天独立公开动态", detail: "官网 sabatti.it 最新可见新闻仍为 2025-08-13 的美国碳纤维单体枪托专利，未见 10 月 26 日至 11 月 25 日的独立新品、赛事或合作公告；11-23 情报中列出的 Trofeo Fiocchi-Sabatti 与 IWA 2026 内容不重复计入本轮新增。", src: "Sabatti 官网新闻页（检索日 2026-11-25）", url: "https://www.sabatti.it/it/news", v: "verified" }
+          ],
+          strategy: "合作信已于 11-23 真实投递，Marketing 现在唯一合规动作是等待回信，不追加邮件、不借新动态二次触达。若对方回复，沿用 F-Class 赛事已有光学品牌在场的切入逻辑谈第二赞助位或体验枪方案。",
+          opp: { level: "yellow", title: "回信后谈 F-Class 光学赞助 / 体验日", why: "对象已占用且已触达，新增动作取决于对方回信", action: "不做任何新外发；把本轮『官网无新动态』写入后续跟进备注", gate: "30 天锁定期；重发会构成骚扰；报价需所有者授权", v: "model" }
+        },
+        {
+          name: "ASV Prins Hendrik", country: "荷兰", region: "欧洲", type: "射击俱乐部",
+          contact: "sent", owner: "GB-Marketing", sourceFile: "08_全球枪店与俱乐部名录 / 归属表",
+          tag: "11-23 18:00 已投递 · 禁止重发",
+          news: [
+            { date: "2026-11-25", title: "本轮未检得该俱乐部近 30 天独立新闻，官网确认持牌与青训结构", detail: "官网确认其为 Amersfoortse Schietsportvereniging Prins Hendrik，青少年用气步枪/气手枪并由资深会员与教练带训，场馆有 3 个靶区、每区 5 个射击位，可设 10/12/25/50 米，所有会员登记于荷兰 KNSA。官网没有 10 月 26 日至 11 月 25 日的独立新闻条目；这补充了联系依据，但不构成新动态。", src: "ASV Prins Hendrik 官网（检索日 2026-11-25）", url: "https://www.asvprinshendrik.nl", v: "verified" }
+          ],
+          strategy: "官网信息把体验日提案的前提坐实了：10 米气步枪/气手枪、青训有人带、靶位与 KNSA 体系明确。合作信已投递，后续只能在对方回信后给样品清单与流程模板，不得再发新邮件。",
+          opp: { level: "yellow", title: "回信后安排会员光学体验日", why: "场地与青训结构已核实，但对象已触达且本轮无新公开动态", action: "等待回信；把 10 米气枪与青少年带训信息存入跟进备注", gate: "30 天锁定期；样品寄送与荷兰持牌场地合规需确认", v: "model" }
+        },
+        {
+          name: "GUNBASE 已发客户群（Sales 侧 24 家）", country: "德国/法国/西班牙/意大利/瑞士/荷兰/中东等", region: "欧洲/中东", type: "已发客户动态",
+          contact: "sent", owner: "GB-Sales", sourceFile: "outbound_owners.json（本机，仅域名）",
+          tag: "已发/已入队 · Marketing 一律跳过",
+          news: [
+            { date: "2026-11-25", title: "本轮未逐家检得独立公开动态，仅记录类别级信号", detail: "本轮按归属表逐家核对后，未检得这 24 家在近 30 天的独立公开新闻；可核实的类别信号是 ESC 的媒体协议与 Purdey 的品牌自办赛事，说明欧洲射击市场正在同时放大内容曝光与体验型赛事。它们是类别信号，不代表上述具体客户自身动态。", src: "本机归属表 + ESC / Fieldsports Journal 公开来源", url: "", v: "verified" }
+          ],
+          strategy: "Marketing 对该群只做情报反哺：把 ESC 内容放大与 Purdey 赛事奖品结构整理成话术包给 Sales，自己不触达。遵守一个机构一个归属方与 30 天锁定期。",
+          opp: { level: "yellow", title: "归属锁定 + 类别情报反哺 Sales", why: "24 家已被 Sales 占用，直接触达会破坏契约", action: "把两条类别信号写入给 Sales 的周话术包，不发任何邮件", gate: "不得外联；不把类别信号冒充具体客户动态", v: "model" }
+        },
+        {
+          name: "跨产业联名标杆群（Columbia x BEAMS / Community Coffee x Mossy Oak）", country: "美国/日本", region: "北美/亚太", type: "跨产业标杆",
+          contact: "reference", owner: "参考", sourceFile: "公开网络 / 跨产业线索",
+          tag: "仅策略参考 · 非触达对象",
+          news: [
+            { date: "2026-11-21", title: "Columbia x BEAMS 复古户外胶囊在日本发售，含狩猎图案卫衣与迷彩抓绒帽", detail: "BEAMS 与 Columbia 以 1986 年 Bugaboo Jacket 为蓝本做双面穿复刻，11 月 4 日开启预售、11 月 21 日在日本 BEAMS 门店与网店发售；三件单品含 reversible 夹克 37,400 日元、狩猎图案卫衣 15,400 日元、迷彩/棕色抓绒帽 5,940 日元。该报道依据 BEAMS 官方商品页与社媒信息整理。", src: "JustFresh（引 BEAMS 官方商品页与社媒）", url: "https://www.justfresh.co/fashion/columbia-beams-bugaboo-reversible-jacket-november-21", v: "verified" },
+            { date: "2026-11-17", title: "Community Coffee x Mossy Oak Camp Blend 进入在售期，持续至 2027 年 2 月", detail: "官方新闻稿确认该限量咖啡 11 月 17 日上线官网、便利店与独立杂货，12 月进 Amazon，12 盎司建议价 12.99 美元，售至 2027 年 2 月；包装用 Mossy Oak Bottomland 迷彩，叙事围绕出猎前的清晨仪式。此条为 11-23 已记录案例的持续状态，不计入本轮新增。", src: "PR Newswire / Community Coffee 公告", url: "https://www.prnewswire.com/news-releases/fuel-your-hunt-community-coffee-and-mossy-oak-launch-limited-edition-camp-blend-302941184.html", v: "verified" }
+          ],
+          strategy: "新案例把『地域文化资产 + 复古户外符号 + 限时胶囊』又验证了一次：不造新品类、不谈性能，用既有日常物件承载身份。GUNBASE 可复刻为精度主题的晨间仪式周边，但全程不出现枪支图像、不做武器功能宣传。",
+          opp: { level: "green", title: "复刻限时联名模板", why: "两个 2026 年 11 月案例都验证了低风险联名结构", action: "把胶囊时长、价格带与渠道选择写进联名 proposal 素材", gate: "落地城市、预算与联名方需所有者决定；本轮不接触任何品牌", v: "model" }
+        },
+        {
+          name: "玉晶光（Genius Electronic Optical）x 3M", country: "中国台湾地区", region: "亚太", type: "精密光学标杆 / 定位证据",
+          contact: "reference", owner: "参考", sourceFile: "公开网络 / 定位证据雷达（新进）",
+          tag: "仅定位证据 · 非合作对象",
+          news: [
+            { date: "2026-11-19", title: "玉晶光与 3M 战略合作推进 EBO 光学方案研发制造与产能扩充", detail: "中央社报道，双方共同推进 3M 扩束光学技术（EBO）方案的研发、制造与产能扩充，应用指向 AI 服务器与数据中心；公司目标 2027 年整体营收成长 20%，EBO 产能 2026 年第 4 季起放量。报道未涉及枪用光学或射击运动。", src: "中央社 CNA", url: "https://www.cna.com.tw/news/afe/202611190325.aspx", v: "verified" }
+          ],
+          strategy: "此条只进入品牌定位证据库，用于说明台湾地区精密光学制造能进入国际长期技术合作；它是跨领域案例，不是同品类背书。GUNBASE 不因此宣称自己有 3M 或同等材料合作，也不把它写进对客户的资质描述。",
+          opp: { level: "red", title: "仅作定位证据，不作合作对象", why: "跨领域龙头不是可触达伙伴，且借其背书会造成事实误述", action: "只在内部提案的产业背景页引用，并附来源与边界说明", gate: "不得宣称合作、供应关系或同品类获奖", v: "model" }
+        }
+      ],
+
+      /* ===== 跨对象战略打法 ===== */
+      plays: [
+        {
+          id: "P1", title: "两条正在发生的时间窗，一条马上关上", level: "核心",
+          detail: "Purdey Game Cup 11/23-28 正在进行，Walther Youth Cup 11/27-29 仅剩 2 天，12 月 ESC European Champions League 在马耳他。实物样品已赶不上前两场，正确动作是观察赛果、锁定 2027 赞助位；12 月 ESC 线也不做临时硬塞，先做提案。",
+          basis: "Fieldsports Journal 2026-10-16 / SD Shooting 官方赛事页 2026-11-21 / SVG Europe 2026-11-12"
+        },
+        {
+          id: "P2", title: "合作价值正在被媒体放大，但入口仍要从小到大", level: "核心",
+          detail: "ESC 用三年协议把赛事送上 Eurosport 与 HBO Max，首场推广已报约 400 万触达；ISSF 用 MOU 把 FICS 赛场服务纳入 Athletes First。两者都说明外部伙伴有位置，但公开的都不是『买赞助』入口。GUNBASE 应从器材支持、体验位、内容素材这类可承担角色切入。",
+          basis: "SVG Europe 2026-11-12 / ISSF news/5330 2026-11-09"
+        },
+        {
+          id: "P3", title: "产地只做事实描述，同品类证据才做信任主张", level: "核心",
+          detail: "新证据是台湾地区精密光学厂玉晶光与 3M 的 EBO 合作，证明的是制造与协同能力，不是枪用光学获奖。沿用 11-23 的判断：NIM 调查中 Made in Taiwan 信任度 33%，仅高于内地 31%，远低于德国 66% 与日本 63%；对外只写 Taiwan-based，随后接可验证的具体角色与第三方法实。",
+          basis: "中央社 2026-11-19 / Visual Capitalist 引 NIM 2025-03 / 11-23 定位证据库"
+        },
+        {
+          id: "P4", title: "联名卖的是仪式与符号，不是参数", level: "重点",
+          detail: "Community Coffee x Mossy Oak 售至 2027 年 2 月，Columbia x BEAMS 用 1986 年经典款做限时胶囊。两者的共同点是既有的日常仪式、可识别的地域或复古符号、明确限时窗口，且都不需要新品类研发。",
+          basis: "PR Newswire 2026-11-17 / JustFresh 引 BEAMS 官方信息 2026-11-21"
+        },
+        {
+          id: "P5", title: "归属与诚信优先于凑数", level: "铁律",
+          detail: "26 家已发或已入队对象仍在 30 天锁定期内，Marketing 只做类别反哺；本轮新增的 4 个对象全部标未分配，未经所有者授权不接触。Sabatti 与 Prins Hendrik 官网本轮没有新动态，不为了制造『新进展』而改写旧新闻。",
+          basis: "outbound_owners.json（本机）/ 指令板 D-03 / 各对象官网检索结果"
+        }
+      ],
+
+      /* ===== 时间窗日历 ===== */
+      windows: [
+        { date: "2026-11-23 ~ 28", item: "Purdey Game Cup（英国 Royal Berkshire，进行中）", gap: "剩 3 天", action: "本轮不追投；看赛果，谈 2027 奖品或体验位", tone: "amber" },
+        { date: "2026-11-27 ~ 29", item: "第 12 届 Walther Youth Cup（塞尔维亚 Smederevo）", gap: "2 天", action: "实物样品已来不及；锁定 2027 赛季", tone: "amber" },
+        { date: "2026-12", item: "ESC European Champions League（马耳他，WBD 平台直播）", gap: "本月", action: "以器材支持提案切入，不做临时硬塞", tone: "blue" },
+        { date: "2027-01-19 ~ 22", item: "SHOT Show 2027（拉斯维加斯）", gap: "55 天", action: "所有者做 go/no-go；不参展也锁定 1 月外联周", tone: "amber" },
+        { date: "2027-02-12 ~ 14", item: "British Shooting Show（NEC Birmingham）", gap: "79 天", action: "作为英国线下曝光的备选窗口，先观察成本", tone: "green" }
+      ],
+
+      /* ===== 归属提醒（给 Sales）===== */
+      dedupNotice: [
+        "Sabatti S.p.A.（GB-Marketing，11-23 16:30 已投递）与 ASV Prins Hendrik（GB-Marketing，11-23 18:00 已投递）严禁重发；两者官网本轮未检得近 30 天新动态，不制造新由头。",
+        "Sales 已发/已入队 24 家 + Marketing 已发 2 家，共 26 家在 30 天锁定期内；Marketing 只做类别情报反哺，不触达。",
+        "本轮新增的 ESC、ISSF、NSSF/SHOT Show、Walther、Purdey 均标 owner=未分配；按 D-03 需所有者批准后才可入队，本任务不发对外邮件、不改发送队列。",
+        "指令板 D-03 要求 18:00 前交付 ≥3 个真实协会/俱乐部/媒体对象（含官网 URL、联系依据、当地净空窗）；本条目的 ESC / ISSF / SHOT Show / Walther / Purdey 可供 M2 另线筛选，是否入队由所有者决定。"
+      ],
+
+      escalations: [
+        { item: "是否授权接触 ESC 的青训 / 挑战赛器材支持窗口", why: "媒体放大与 20 万欧元成员协会发展拨款同时存在，但企业合作通道未见公开规则", blocks: "欧洲协会线从情报转提案" },
+        { item: "SHOT Show 2027 参展 go / no-go", why: "酒店紧张、11 月多项截止已过，展位与预算需立即决定", blocks: "1 月外联与体验式展位打法" },
+        { item: "Purdey 2027 Game Cup 是否预留奖品 / 体验位预算", why: "2026 赛事已开赛，只有转 2027 才谈得动", blocks: "英国持牌靶场线" },
+        { item: "D-03 的真实对象池是否批准入队（≥3 个）", why: "本任务只研究不触达；M2 另线须经所有者批准后才可发信，且不得重发 11-23 两封", blocks: "Marketing 今日 0/2 封邀约的后续推进" }
+      ],
+
+      dataNote: "已读指令板 · 2026-11-25 11:05（M1 按 D-03 执行）。本条目为 08:10 调度后的补跑，generatedAt 记录实际完成时刻 11:17（延迟 187 分钟），不伪称按时。新增 10 条动态均来自本次可核实的公开来源，逐条在对象卡内附 URL 与日期；Sabatti、Prins Hendrik 与 Sales 已发群本轮未检得独立新动态，已如实写明。品牌定位继承 11-23 全部 6 条证据，只增补 1 条 2026-11-19 中央社证据与 1 条打法；玉晶光与 3M 合作属跨领域事实，不是枪用光学或射击渠道背书。策略与机会均标 v:model，不代表已建立合作；真实邮箱、Token 一律不写入公开文件。中国台湾地区品牌对外只写 Taiwan-based / based in Taiwan，不与国家并列、不做政治表述。"
+    },
     {
       date: "2026-11-23",
       weekday: "周一",
