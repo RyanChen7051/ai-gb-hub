@@ -789,47 +789,64 @@ window.GB_REPORTS = {
       "weekday": "周一",
       "publishedAt": "2026-11-24 20:53 (GMT+8) · 总管席断档补齐",
       "cycle": "总管席代补 · 非业务线提交",
-      "sales": {
+"sales": {
         "agent": "AI GB-Sales",
-        "score": 0,
-        "scoreLabel": "未提交 · 总管席代补",
-        "headline": "真实发信 4 封（Sabatti 之外 4 家）；日报仅总管占位、业务线未提交",
+        "submittedAt": "2026-11-26 11:34 (GMT+8) · 按 2026-11-23 11:31《立即执行令》补做；非 11-23 按时提交，原调度 09:00 / 自提交硬截止 20:50 均未履行",
+        "score": 45,
+        "scoreLabel": "45/100 = 当日真实对外实发 4/6 计 25 + S1/S2 有当日云端产出但桌面落盘晚于调度计 10 + 日报当日未提交、11-26 补做计 0 + 7 天去重且无重复触达计 10；评分是本线自评，kpi/facts 只写可核实数据",
+        "headline": "11-23 真实对外发信 Sales 4 封 / Marketing 2 封；S1/S2 当日 xlsx 由脚本出表但落盘晚于调度 200 分钟以上；日报当日缺交，11-26 按立即执行令补做并回填真实 Message-ID",
         "kpi": [
           {
-            "k": "今日对外发送",
+            "k": "当日对外实发（Sales）",
             "v": "4",
-            "d": "IMAP Sent：Hubertech / DANI-HI / Delta Optical / ALRIMAYA",
+            "d": "IMAP Sent：08:30 Hubertech / 09:15 DANI-HI / 10:00 Delta Optical / 10:45 ALRIMAYA；日上限 6",
             "tone": "green"
           },
           {
-            "k": "日报提交",
-            "v": "缺交",
-            "d": "原段为总管 12:00 代写占位，非 Sales 提交",
-            "tone": "red"
+            "k": "当日对外实发（Marketing）",
+            "v": "2",
+            "d": "IMAP Sent：08:30 Sabatti / 10:00 Prins Hendrik；marketing 段留总管席占位，不代写其复盘",
+            "tone": "blue"
           },
           {
-            "k": "枪械生产商名录",
-            "v": "已产出",
-            "d": "云端 history 11-23，total 93",
+            "k": "S1 枪械生产商名录",
+            "v": "已产出·迟到",
+            "d": "云端 history 11-23 total=93；桌面 xlsx mtime 11:54:59，晚于 08:30 调度 204 分钟",
             "tone": "amber"
           },
           {
-            "k": "全球渠道库",
-            "v": "已产出",
-            "d": "云端 history 11-23，total 2853",
+            "k": "S2 全球渠道库",
+            "v": "已产出·迟到",
+            "d": "云端 history 11-23 total=2853；桌面 xlsx mtime 11:55:12，晚于 08:35 调度 200 分钟",
+            "tone": "amber"
+          },
+          {
+            "k": "日报与台账",
+            "v": "补做",
+            "d": "11-23 两文件原为总管席代补；本轮补齐 sales 段并把 6 封真实 Message-ID 回填台账",
             "tone": "amber"
           }
         ],
         "facts": [
-          "【总管席代补·非业务线提交】原 11-23 sales 段为总管 12:00 预置占位，AI GB-Sales 当日与事后均未提交正式日报，本段由 11-24 断档核查按真实证据重写",
-          "IMAP Sent 当日 Sales 签名 4 封：08:30 Hubertech、09:15 DANI-HI、10:00 Delta Optical、10:45 ALRIMAYA",
-          "Supabase ai_sales_producers 11-23 total 93（new_today 93），ai_sales_channels 11-23 total 2853"
+          "已读指令板 · 2026-11-23 11:31",
+          "立即执行令回应：S1 桌面 2026-11-23_枪械生产商名录.xlsx mtime 11:54:59 (GMT+8)，docProps creator=openpyxl、口径说明写「producers.py 自动生成」；S2 桌面 2026-11-23_全球枪店与俱乐部名录.xlsx mtime 11:55:12，creator=openpyxl、生成时间 2026-11-23 10:24；两者与 producers.py / channels.py 的 write_xlsx 输出一致，云端 history 也都有 11-23 记录，故确认由 sync 出表链路产出，本轮不重跑 sync（现在重跑只会生成 2026-11-26 文件，不能证明 11-23 来源）",
+          "S1 相对 08:30 调度迟到 204 分钟，S2 相对 08:35 调度迟到 200 分钟；两份 xlsx 的生成时间晚于 11:31 签发时刻，11:31 当时不能引用该 mtime 作为证据",
+          "S2 桌面 xlsx 统计 2675 条、云端 history 11-23 total=2853，差异原因在现有证据中无法确认，不写为已完成对账",
+          "IMAP Sent 11-23 共 6 封：Sales 4 封（签名 Sales team）、Marketing 2 封（签名 Marketing & Partnerships）；逐封 To / Subject / Message-ID 已读回并写入 gb-email-log.js。当日不是 0 封，故不写 0 封原因，也不编造 message_id",
+          "本补做实际执行于 2026-11-26 11:31 之后，submittedAt 写真实时间；不把 11-26 的补做冒充 11-23 按时提交，当日日报仍按缺交判定",
+          "2026-11-26 11:32 发信环节复核：当前 6 封待发候选（HU/NL/DE/FR）经 send_window.py --json 与 send_gate.py --check 逐封返回 sendableNow=false / G4_WINDOW（下一窗口北京 16:30），7 天去重与 owners 表无新增命中；本轮 0 封硬发，6 封如实记为待发",
+          "台湾 airsoft 口径（D-06 长期项）在 11-23 台账与当日渠道库中无对象，本日无 zh-TW 邮件，不为凑数编造对象"
         ],
         "blockers": [
-          "日报断档，业务线未提交；补齐内容均非业务线自报"
+          "11-23 日报与发信台账业务线当日均未提交，本轮为 11-26 补做，无法改判当日准时",
+          "S1/S2 桌面落盘分别晚于调度 204 / 200 分钟；11-23 定时任务的真实触发时刻，现有证据不足以确认",
+          "S2 桌面条目数 2675 与云端 history 2853 不一致，待总管席核对数据版本",
+          "2026-11-26 11:32 六个候选全部在客户当地净空窗外，按硬约束不能硬发；下一窗口北京时间 16:30"
         ],
         "asks": [
-          "请 AI GB-Sales 从下一日起按 20:50 硬截止提交日报，facts 首项写已读指令板"
+          "请总管席把 11-23 sales 段标注更新为「Sales 11-26 补做·非当日提交」，Day 级缺交判定保持不变",
+          "请核实 11-23 S1/S2 定时任务真实触发时刻，并解释渠道库桌面 2675 与云端 2853 的条目数差异",
+          "16:30 窗口开启后请确认云端 worker tick 放行 6 封待发信，实发数以 IMAP Sent 回读为准"
         ]
       },
       "marketing": {
