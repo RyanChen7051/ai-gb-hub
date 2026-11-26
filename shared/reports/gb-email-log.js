@@ -32,8 +32,88 @@ window.GB_EMAIL_LOG = {
           "mode": "预览",
           "status": "已发送·内部预览（收件人为所有者本人，不计对外业绩）",
           "note": "待审两封：FOCUS Jagd- und Schiesssportzentrum（AT, range@focusrange.at）/ Strzelnica Czacz（PL, kontakt@strzelnicaczacz.pl）。队列 queue/2026-11-26.json approved=false，未推云端、未对外；正文含当地+北京双落点（当地 10:15=北京 17:15 / 当地 13:45=北京 20:45）。本日 M2 实际起草 09:56，相对调度 +86 分钟，如实标注。"
+        },
+        {
+          "time": "10:02",
+          "localTime": "11-26 03:05",
+          "netWindow": "09:30-12:20/13:40-15:45",
+          "agent": "AI-GB-Sales",
+          "to": "info@tactical.hu",
+          "subject": "Optika – Tactical Kft",
+          "type": "开发信",
+          "mode": "对外（队列）",
+          "status": "已入队·待当地净空窗派发",
+          "messageId": "",
+          "note": "2026-11-25 19:00 入队；云端队列 Q007；匈牙利 Tactical Kft（Shield 经销商名录，A/8）；messageId 待 IMAP Sent 回读补录"
+        },
+        {
+          "time": "10:02",
+          "localTime": "11-26 03:05",
+          "netWindow": "09:30-11:50/13:10-15:15",
+          "agent": "AI-GB-Sales",
+          "to": "info@3gun.nl",
+          "subject": "Optics for 3Gun",
+          "type": "开发信",
+          "mode": "对外（队列）",
+          "status": "已入队·待当地净空窗派发",
+          "messageId": "",
+          "note": "2026-11-25 19:45 入队；云端队列 Q008；荷兰 3Gun（Shield 经销商名录，A/8）；messageId 待 IMAP Sent 回读补录"
+        },
+        {
+          "time": "10:02",
+          "localTime": "11-26 03:05",
+          "netWindow": "09:30-12:20/13:40-15:45",
+          "agent": "AI-GB-Sales",
+          "to": "support@cesar-shop.com",
+          "subject": "Optika za CESAR SHOP",
+          "type": "开发信",
+          "mode": "对外（队列）",
+          "status": "已入队·待当地净空窗派发",
+          "messageId": "",
+          "note": "2026-11-25 20:30 入队；云端队列 Q009；斯洛文尼亚 CESAR SHOP（Shield 经销商名录，A/8）；messageId 待 IMAP Sent 回读补录"
+        },
+        {
+          "time": "10:02",
+          "localTime": "11-26 03:05",
+          "netWindow": "09:30-11:50/13:10-15:15",
+          "agent": "AI-GB-Sales",
+          "to": "info@norconia.de",
+          "subject": "Re: Optics supply for Norconia's dealer network - GunBase tactical range",
+          "type": "跟进信",
+          "mode": "对外（队列）",
+          "status": "已入队·待当地净空窗派发",
+          "messageId": "",
+          "note": "2026-11-26 10:02 入队；云端队列 Q010；D7 跟进，原信 2026-11-18 间隔 8 天未回复；follow_up.py 草稿消费 1/3；messageId 待 IMAP Sent 回读补录"
+        },
+        {
+          "time": "10:02",
+          "localTime": "11-26 03:05",
+          "netWindow": "09:30-11:50/13:10-15:15",
+          "agent": "AI-GB-Sales",
+          "to": "info@helmuthofmann.de",
+          "subject": "Re: Value-tier optics for Hofmann's dealer portfolio - GunBase",
+          "type": "跟进信",
+          "mode": "对外（队列）",
+          "status": "已入队·待当地净空窗派发",
+          "messageId": "",
+          "note": "2026-11-26 10:02 入队；云端队列 Q011；D7 跟进，原信 2026-11-18 间隔 8 天未回复；follow_up.py 草稿消费 2/3；messageId 待 IMAP Sent 回读补录"
+        },
+        {
+          "time": "10:02",
+          "localTime": "11-26 03:05",
+          "netWindow": "09:30-11:50/13:10-15:15",
+          "agent": "AI-GB-Sales",
+          "to": "contact@argos-armurerie.fr",
+          "subject": "Re: Optiques & lampes tactiques pour Argos Armurerie - GunBase",
+          "type": "跟进信",
+          "mode": "对外（队列）",
+          "status": "已入队·待当地净空窗派发",
+          "messageId": "",
+          "note": "2026-11-26 10:02 入队；云端队列 Q012；D7 跟进，原信 2026-11-18 间隔 8 天未回复；follow_up.py 草稿消费 3/3；messageId 待 IMAP Sent 回读补录"
         }
-      ]
+      ],
+      "queuedToday": 6,
+      "queuedNote": "6 封 = 当日上限 6，全部留在云端队列等净空窗；本轮执行 10:02（GMT+8）时欧洲当地 03:05，属净空窗外，按规则未硬发"
     },
     {
       "date": "2026-11-25",
