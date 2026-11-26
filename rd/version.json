@@ -1,9 +1,19 @@
 {
-  "version": "1.4.0",
-  "build": "20261123j",
-  "updatedAt": "2026-11-23 16:56 (GMT+8)",
+  "version": "1.4.6",
+  "build": "20261125a",
+  "updatedAt": "2026-11-26 09:44 (GMT+8) · R1 补交：原调度 08:00，实际 09:44，延迟 104 分钟；本轮为定时触发（runKind=scheduled，08:17:59 入队、09:40:09 实际启动），result_success 待运行结束判定",
   "name": "AI GB-RD",
   "changelog": [
+    "v1.4.6 R1 补交 11-26 每日技术报告：8 条可核实信号（Leupold VX-5HD Gen 2 Speed Set CDS、Pulsar Trail 3 / Thermion 3 趋势、HIKMICRO 4.0、2026 光学上市追踪、Scalarworks LEAP/08、WO2026006282A1 旋钮盒申请、US 12,693,097 双楔块授权），4 项图纸储备、4 条观察项；新专利 2 件，事实 verified 与推演 model 分列，全部附 URL/日期/caveat。R1 原调度 08:00，自动化 08:17:59 入队、09:40:09 启动，按实际时间补交。",
+    "v1.4.5a 补交 11-25 每日技术报告：8 条可核实信号（Nitehog Viper Gen2 650 LRF 12µm/NETD<15mK 集成 LRF+弹道机、DNT HYDRA 三合一、GUIDE TB650LS、Arken EP-8/ZeroTech Trace ED 玻璃 LPVO、Trijicon Q-LOC/LaRue 快拆座），4 项图纸储备、3 条观察项；事实 verified 与推演 model 分列，全部附 URL 与 caveat。原 08:00 自动化 interrupted 未产出，按实际时间补跑留档。",
+    "v1.4.4i 跟随减法重构：RD 哨兵删除 autoHeal 与全部自动校验监听，横幅不再自己弹；SW 升 v14，版本门指向 e-20261124i.html。",
+    "v1.4.4h 跟随页面恢复清理修复，SW 升 v13，版本门指向 e-20261124h.html。",
+    "v1.4.4g 跟随切换器重构，SW 升 v12，版本门指向 e-20261124g.html。",
+    "v1.4.4f 修复「更新按钮无限弹」：data.js 数据版本 1.4.0 与 version.json 的 1.4.4 不一致，哨兵每次重载都判定有新版、点更新后循环。已对齐数据版本为 1.4.4，并新增 dataVersion 字段专供哨兵比对，今后只升 build/改代码不会再误报。",
+    "v1.4.4 跟随全站顶层导航路径修复，SW 升 v10，版本门指向 e-20261124d.html。",
+    "v1.4.3 跟随全站切换器路径修复，SW 升 v9，版本门指向 e-20261124c.html。",
+    "v1.4.2 跟随全站切换器修复：切换页面时清理旧页浮层，SW 升 v8，版本门指向 e-20261124b.html。",
+    "v1.4.1 跟随全站切换器修复：RD 页的 shared/tabbar.js 同步升级，同事切换改为同窗口平滑切换；SW 升 v7，版本门指向新的不可变快照 e-20261124a.html。",
     "v1.4.0 入口结构改造为「版本门」：rd/index.html 不再承载任何内容，只做一件永不改变的事——用 cache:'no-store' 现取 version.json 的 build，再跳到该 build 的不可变页面 e-<build>.html（真实内容在 app.html）。这样无论浏览器 / CDN / 桌面端预览隧道把入口冻结多久，跳转目标始终是最后一次构建，不会再出现「页面停在几小时前」。version.json 取不到时退回 app.html（离线由 SW 缓存兜底）；SW 升 v6，预缓存改逐项 add（一项 404 不再整体失败），页面导航的离线兜底指向 app.html。",
     "v1.3.2 补注册 Service Worker：此前只有 sales 页面注册过，rd/sw.js 从未生效（离线能力与缓存控制均为空转）。现已注册并主动 update 检查；配合 SW 内 cache:'no-store'，发布后首次访问即取到新版本。",
     "v1.3.1 修复「文件已更新但页面仍是旧副本」：SW 的 fetch 改为 cache:'no-store' 绕过 Pages 的 max-age=600 HTTP 缓存；新增版本哨兵——页面比对 version.json，远端版本更高时顶部弹提示条，一键清缓存 + 注销 SW + 强制重载；「更新」按钮改为注销 SW。",
@@ -13,5 +23,6 @@
     "v1.0.0 首版：全球技术与图纸储备中心上线，每日 08:00 自动扫描三大技术方向。"
   ],
   "released": "2026-11-23",
-  "title": "技术情报 + 使用者痛点 + 快赢图纸 + 打样闭环"
+  "title": "技术情报 + 使用者痛点 + 快赢图纸 + 打样闭环",
+  "dataVersion": "1.4.6"
 }
