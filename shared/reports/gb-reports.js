@@ -54,6 +54,7 @@ window.GB_REPORTS = {
       "已读指令板 · 2026-11-25 21:06（签发 2026-11-25 21:06 GMT+8；本轮直接指令 D-12 入队 / D-13 情报与日报首项）",
       "D-12 回应：queue/2026-11-26.json 已写出，2 个对象各含官网 URL、联系依据、当地净空窗与去重核对；approved=false，未推云端；实际起草 09:56，相对 08:30 调度 +86 分钟，按口径判延迟，不伪称按时",
       "D-13 回应：gb-market-intel.js days[0].date=2026-11-26、generatedAt=2026-11-26 09:46（+96 分钟），13 条 verified 动态逐条附 URL；本段 facts 首项即为「已读指令板」",
+      "M4 创意合作研究报告：gb-creative-partnerships.js days[0].date=2026-11-26、generatedAt=2026-11-26 09:49（原调度 08:00，+109 分钟，补跑如实标注），6 个 verified 案例 + 4 个 model 创意；桌面 06_每日情报报告/2026-11-26_创意合作研究报告.md 已落盘",
       "KPI 真实数字：今日对外实发 0 封、预览 1 封（收件人为所有者本人，不计对外业绩）、目标机构 2 家（FOCUS Jagd- und Schiesssportzentrum / AT、Strzelnica Czacz / PL）",
       "选源：读 08 名录 2026-11-26 的 .md 与 .xlsx，筛出「俱乐部/靶场 + 有公开邮箱 + 有官网」240 条后逐条过归属表，只取类别为靶场射击中心 / 射击俱乐部的机构；07 名录今日 93 家、37 家有邮箱，无合规新对象",
       "去重：Sabatti（sabatti.it）与 Prins Hendrik（asvprinshendrik.nl）11-23 已发、30 天锁定，本次跳过；Sales 11-25 已发 11 家全部跳过；两家新对象在 outbound_owners.json 26 条中 email 与 domain 均 clear",
