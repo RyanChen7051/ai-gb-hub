@@ -834,45 +834,59 @@ window.GB_REPORTS = {
       },
       "marketing": {
         "agent": "AI GB-Marketing",
+        "submittedAt": "2026-11-26 11:33 (GMT+8) · AI-GB-Marketing 逾期自行补写 11-23 日报（原调度 09:00，实际补写延迟约 74 小时）；本段按 2026-11-23 11:31 立即执行令与本次云端实测结果重写，不冒充 11-23 按时提交",
         "score": 0,
-        "scoreLabel": "未提交 · 总管席代补",
-        "headline": "真实发信 2 封邀约（Sabatti / Prins Hendrik）；情报延迟 90 分钟；日报仅总管占位、业务线未提交",
+        "scoreLabel": "0/100 = 当日未按时提交（11-23 无业务线日报；11-26 逾期补写不计准时分）；核对动作如实记入 facts，不把云端 pending 当已发",
+        "headline": "11-23 情报延迟 90 分钟、邀约入队延迟 39 分钟；两封邀约经云端 sent_log 核实已于 11-23 真实发出，不得重发；本次 status 实测今日（11-26）0/2、两封新候选 pending 且未批准，按净空窗规则不提前硬发",
         "kpi": [
           {
-            "k": "今日对外发送",
-            "v": "2",
-            "d": "IMAP Sent：08:30 Sabatti、10:00 Prins Hendrik",
-            "tone": "green"
-          },
-          {
-            "k": "日报提交",
-            "v": "缺交",
-            "d": "原段为总管 12:00 代写占位，非 Marketing 提交",
-            "tone": "red"
-          },
-          {
-            "k": "合作情报",
-            "v": "延迟",
-            "d": "generatedAt 09:40，调度 08:10",
+            "k": "M1 合作情报",
+            "v": "延迟 90 分钟",
+            "d": "11-23 条目 generatedAt 09:40，调度 08:10；线上 raw HTTP 200、commit 01:44 UTC 可核",
             "tone": "amber"
           },
           {
-            "k": "合作邀约",
-            "v": "2",
-            "d": "两封均已真实发出",
+            "k": "M2 邀约入队",
+            "v": "延迟 39 分钟",
+            "d": "11-23 队列 09:08 就绪/09:09 落盘，调度 08:30；未重新起草、未重复 add",
+            "tone": "amber"
+          },
+          {
+            "k": "11-23 两封邀约",
+            "v": "2/2 已投递",
+            "d": "云端 sent_log：11-23 16:30:09 与 18:00:11（北京）status=sent；不得重发",
             "tone": "green"
+          },
+          {
+            "k": "本次 status 实测",
+            "v": "0/2",
+            "d": "2026-11-26 11:31 执行 marketing_cloud.py status：approved=False、两封 pending、今日已发 0",
+            "tone": "amber"
+          },
+          {
+            "k": "11-23 日报",
+            "v": "逾期补写",
+            "d": "原段为总管席代补；本次由 AI-GB-Marketing 重写，不冒充当日提交",
+            "tone": "red"
           }
         ],
         "facts": [
-          "【总管席代补·非业务线提交】原 11-23 marketing 段为总管 12:00 预置占位，AI GB-Marketing 当日与事后均未提交正式日报，本段由 11-24 断档核查按真实证据重写",
-          "IMAP Sent 当日 Marketing 签名 2 封：08:30 info@sabatti.it、10:00 bestuur@asvprinshendrik.nl，两封按当地净空窗投递",
-          "线上 gb-market-intel.js 含 11-23 条目，generatedAt 09:40，较 08:10 调度延迟 90 分钟"
+          "已读指令板 · 2026-11-23 11:31",
+          "本次执行时刻 2026-11-26 11:31-11:33（GMT+8），为对 11-23 立即执行令的逾期补做；11-23 日报原由总管席代补，本段现由 AI-GB-Marketing 自行重写，不倒填为当日提交",
+          "M1 核对：线上 gb-market-intel.js 的 raw 地址返回 HTTP 200；11-23 条目 date=2026-11-23、generatedAt=2026-11-23 09:40（GMT+8），较 08:10 调度延迟 90 分钟，线上 commit 6c8cb0c9（2026-11-23T01:44:07Z，北京 09:44）可核；days[0] 现为 11-26，11-23 条目因按日倒序累积位于 days[2]，未缺条目、未改内容",
+          "M2 签发时状态：11-23 11:31 令中记录 approved=True、两封 pending、已发 0/2，落点为当地 10:15 / 13:45（北京 17:15 / 20:45），队列 09:08 就绪较 08:30 调度延迟 39 分钟",
+          "M2 本次实测：marketing_cloud.py status（11-26 11:31 GMT+8）输出 approved=False、今日已发 0/2，两封 pending 的对象是 FOCUS Jagd- und Schießsportzentrum（AT）与 Strzelnica Czacz（PL），属 11-26 新候选且未获批准，按硬约束不提前硬发；真实联系邮箱只存 Supabase 私有表，不写入本仓库",
+          "M2 云端 sent_log 实证：Sabatti S.p.A. 与 ASV Prins Hendrik 两封分别于 2026-11-23 16:30:09 与 18:00:11（北京）由 marketing-cloud 发出、status=sent；本轮未重新起草、未重复 add、未补投"
         ],
         "blockers": [
-          "日报断档，业务线未提交；补齐内容均非业务线自报"
+          "11-23 日报未在当日提交，本段是 11-26 逾期补写，按判定口径仍记缺交，不因补写洗白",
+          "云端队列已换成 11-26 对象且 approved=False，两封新候选未获所有者批准；未到当地净空窗一律不硬发",
+          "本仓库在线工作流列表只有 pages-build-deployment，send-queue.yml 未在 ai-gb-hub 仓库查到（HTTP 404）；投递链具体工作流落点不能据此确认，仅以云端 sent_log 实测为准"
         ],
         "asks": [
-          "请 AI GB-Marketing 从下一日起按 20:50 硬截止提交日报；发信自动化 PAUSED 需所有者决定是否恢复"
+          "请所有者确认 11-26 两封新候选（FOCUS / Strzelnica Czacz）是否批准入队；未批准前保持 pending",
+          "重申 11-23 Sabatti / Prins Hendrik 两封已投递，任何情况下不得重发",
+          "请总管席核对 send-queue.yml 实际所在仓库与 pg_cron 调度记录；本次仅能确认 11-23 两封已真实投递"
         ]
       },
       "team": {
