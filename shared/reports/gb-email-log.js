@@ -382,7 +382,9 @@ window.GB_EMAIL_LOG = {
           "type": "对外开发/合作信",
           "mode": "对外",
           "status": "已发送",
-          "note": "由真实已发送箱回填，messageId 见邮件原文"
+          "note": "由真实已发送箱回填，messageId 见邮件原文",
+          "signedAs": "Marketing & Partnerships | Gun Base Inc.",
+          "messageId": "<179542261491.2081.6925558009912229508@gunbase-optics.com>"
         },
         {
           "time": "08:30",
@@ -392,7 +394,9 @@ window.GB_EMAIL_LOG = {
           "type": "对外开发/合作信",
           "mode": "对外",
           "status": "已发送",
-          "note": "由真实已发送箱回填，messageId 见邮件原文"
+          "note": "由真实已发送箱回填，messageId 见邮件原文",
+          "signedAs": "Sales team | Gun Base Inc.",
+          "messageId": "<179542261494.2075.14891115392296492421@gunbase-optics.com>"
         },
         {
           "time": "09:15",
@@ -402,7 +406,9 @@ window.GB_EMAIL_LOG = {
           "type": "对外开发/合作信",
           "mode": "对外",
           "status": "已发送",
-          "note": "由真实已发送箱回填，messageId 见邮件原文"
+          "note": "由真实已发送箱回填，messageId 见邮件原文",
+          "signedAs": "Sales team | Gun Base Inc.",
+          "messageId": "<179542531579.2067.18403698069552231229@gunbase-optics.com>"
         },
         {
           "time": "10:00",
@@ -412,7 +418,9 @@ window.GB_EMAIL_LOG = {
           "type": "对外开发/合作信",
           "mode": "对外",
           "status": "已发送",
-          "note": "由真实已发送箱回填，messageId 见邮件原文"
+          "note": "由真实已发送箱回填，messageId 见邮件原文",
+          "signedAs": "Marketing & Partnerships | Gun Base Inc.",
+          "messageId": "<179542801414.2266.14096854704903346580@gunbase-optics.com>"
         },
         {
           "time": "10:00",
@@ -422,7 +430,9 @@ window.GB_EMAIL_LOG = {
           "type": "对外开发/合作信",
           "mode": "对外",
           "status": "已发送",
-          "note": "由真实已发送箱回填，messageId 见邮件原文"
+          "note": "由真实已发送箱回填，messageId 见邮件原文",
+          "signedAs": "Sales team | Gun Base Inc.",
+          "messageId": "<179542802688.2296.12838423550794864150@gunbase-optics.com>"
         },
         {
           "time": "10:45",
@@ -432,9 +442,12 @@ window.GB_EMAIL_LOG = {
           "type": "对外开发/合作信",
           "mode": "对外",
           "status": "已发送",
-          "note": "由真实已发送箱回填，messageId 见邮件原文"
+          "note": "由真实已发送箱回填，messageId 见邮件原文",
+          "signedAs": "Sales team | Gun Base Inc.",
+          "messageId": "<179543073525.2153.17937104804625153172@gunbase-optics.com>"
         }
-      ]
+      ],
+      "note": "2026-11-26 11:34 (GMT+8) 按 2026-11-23 11:31《立即执行令》补做核对：本日 6 封均由 IMAP Sent 逐封读回（Sales 4 / Marketing 2），本轮按真实 Message-ID 回填 messageId 与 signedAs；11:31 签发时本日并非 0 封，故不写 0 封原因；原有 time/to/subject/status 未改动。"
     },
     {
       "date": "2026-11-19",
