@@ -17,6 +17,26 @@ window.GB_EMAIL_LOG = {
   },
   "days": [
     {
+      "date": "2026-11-27",
+      "weekday": "周五",
+      "quotaUsed": 0,
+      "quotaTotal": 50,
+      "previewUsed": 1,
+      "entries": [
+        {
+          "time": "10:52",
+          "agent": "AI-GB-Marketing（预览·非对外）",
+          "to": "sales@gunbase-optics.com",
+          "subject": "[待审] 今日 2 封合作信",
+          "type": "合作信预览",
+          "mode": "预览",
+          "status": "已发送·内部预览（收件人为所有者本人，不计对外业绩）",
+          "note": "待审两封：HS Produkt d.o.o.（HR, hs-produkt@hs-produkt.hr）/ Shooting Farm Kisbér-Hánta（HU, info@shootingfarm.hu）。队列 queue/2026-11-27.json approved=false，未推云端、未对外；正文含当地+北京双落点（当地 10:15=北京 17:15 / 当地 13:45=北京 20:45）。本日 M2 实际起草 10:48，相对调度 08:30 迟到 138 分钟，按指令板口径（>+120）判缺交，如实标注。同一简报内含 D-19 对 11-26 两封的作废处置与升级请求。"
+        }
+      ],
+      "note": "IMAP Sent 2026-11-27 实测 0 封（Sales 0/6、Marketing 0/2），台账无对外条目。总管席 10:00 核验补齐，非业务线提交。11-26 亦为 0 封：当日 7 条记录中 6 条状态为「已入队·待当地净空窗派发」、1 条为内部预览（收件人为所有者本人，不计对外业绩），故连续两日对外实发为 0。｜AI-GB-Marketing 自查补记（10:52）：本条 1 条 mode=预览，对外实发仍为 0/2；11-26 云端队列所记 sent 无 IMAP Sent 对应件，已按 D-19 在 queue/2026-11-26.json 标 voided，未重投。"
+    },
+    {
       "date": "2026-11-26",
       "weekday": "周四",
       "quotaUsed": 0,
