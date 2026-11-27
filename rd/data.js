@@ -13,9 +13,9 @@ window.GB_RD_DATA = {
     shortName: "AI GB-RD",
     en: "AI GB Research & Development",
     org: "GunBase 火械基地 · 全球技术与图纸储备中心",
-    version: "1.4.6",
-    reportDate: "2026-11-26",
-    generatedAt: "2026-11-26 09:44 (GMT+8) · R1 补交：原调度 08:00，实际 09:44，延迟 104 分钟；本轮为定时触发（runKind=scheduled，08:17:59 入队、09:40:09 实际启动），result_success 待运行结束判定",
+    version: "1.4.7",
+    reportDate: "2026-11-27",
+    generatedAt: "2026-11-27 08:14 (GMT+8) · R1 补交：原调度 08:00，实际 08:14，延迟 14 分钟；本轮为定时触发（automation 68d95d11），automation_runs.result_success 待运行结束判定，产物落地不等于自动化成功",
     scope: "全球 · 瞄准镜 / 枪械配件 / 战术装备",
     tagline: "每日全球技术扫描 → 可落图纸的设计储备",
     cadence: "每日 08:00（北京时间）自动更新",
@@ -24,14 +24,13 @@ window.GB_RD_DATA = {
   },
 
   kpis: [
-    { label: "当日技术信号", value: "8", unit: "条", tone: "blue", sub: "含 2 件新专利", v: "verified" },
+    { label: "当日技术信号", value: "8", unit: "条", tone: "blue", sub: "6 新增 + 2 进展更新", v: "verified" },
     { label: "图纸储备方向", value: "4", unit: "项", tone: "green", sub: "基于已核实事实的工程推演", v: "model" },
-    { label: "可核实来源", value: "8", unit: "个", tone: "teal", sub: "媒体 / 厂商 / 专利库 / 经销商", v: "verified" },
-    { label: "公开专利", value: "2", unit: "件", tone: "purple", sub: "1 公开申请 + 1 授权，需 FTO", v: "verified" },
-    { label: "接口标准", value: "1", unit: "项", tone: "amber", sub: "本轮检得 MIL-STD-1913 多槽导轨口径", v: "verified" },
-    { label: "累计报告", value: "3", unit: "天", tone: "blue", sub: "11-23 / 11-25 / 11-26", v: "verified" }
+    { label: "可核实来源", value: "8", unit: "个", tone: "teal", sub: "媒体 / 厂商 / 专利库", v: "verified" },
+    { label: "公开专利", value: "3", unit: "件", tone: "purple", sub: "2 公开申请 + 1 授权，需 FTO", v: "verified" },
+    { label: "接口基准策略", value: "2", unit: "套", tone: "amber", sub: "固定座三面 / QD 两面，分开验收", v: "verified" },
+    { label: "累计报告", value: "4", unit: "天", tone: "blue", sub: "11-23 / 11-25 / 11-26 / 11-27", v: "verified" }
   ],
-
   // ===== 三大技术方向（关键词矩阵为方法，不是已抓取结果）=====
   domains: [
     {
@@ -56,6 +55,187 @@ window.GB_RD_DATA = {
 
   // ===== 每日报告：新的一天插到 days[] 首位 =====
   days: [
+    {
+      date: "2026-11-27",
+      weekday: "周五",
+      generatedAt: "2026-11-27 08:14 (GMT+8) · R1 补交：原调度 08:00，实际 08:14，延迟 14 分钟；本轮为定时触发（automation 68d95d11），automation_runs.result_success 待运行结束判定，产物落地不等于自动化成功",
+      headline: "锁定只做单轴、快拆先谈基准：SIGHTRON 仰角锁定旋钮与 Spuhr 导轨基准取舍同日入账，三件新公开专利补齐壳体与锥面快拆路径",
+      verdict: "本轮检得 8 条可核实技术信号（6 条新发现 + 2 条对既有信号的进展更新）与 3 件新专利（2 件公开申请、1 件已授权）。对 GUNBASE 最有价值的是三点：① SIGHTRON 把锁定旋钮明确限定在仰角单轴并与 zero stop 共存，说明防误触可收敛为独立旋钮模块；② Spuhr 明确固定座走 STANAG 4694 三面基准、QD 座走 MIL-STD-1913 两面基准，QD 与固定座的验收指标必须拆开；③ Trijicon 公开申请给出「侧面可达、顶部不可达」的紧固件腔布局，Sellmark 授权专利给出锥面定心加闩锁的第三条可脱开路径。四项图纸储备均为基于事实的工程推演（model），不是已量产设计；三件专利只做公开技术情报，任何设计落地前必须做自由实施（FTO）检索。热成像 / 夜视 / 火控仅做通用趋势与机械接口，不做仿制图纸、不碰受控算法。",
+      kpi: [
+        { k: "技术信号", v: "8", d: "6 新增 + 2 进展 · 附 URL 与日期", tone: "b" },
+        { k: "图纸储备", v: "4", d: "model · 非量产设计", tone: "g" },
+        { k: "新专利", v: "3", d: "2 公开申请 + 1 授权 · 需 FTO", tone: "t" },
+        { k: "来源", v: "8", d: "行业媒体 / 厂商 / 专利库", tone: "a" }
+      ],
+      signals: [
+        {
+          id: "T-29",
+          domain: "optic",
+          type: "新品·旋钮机构",
+          title: "SIGHTRON S6 5-30×56 ED IR：锁定功能明确限于仰角单轴，与 zero stop 并存",
+          fact: "Shooting News Weekly 2026-11-24 报道，SIGHTRON 三款日本产 S6 5-30×56 ED IR 新增锁定旋钮；厂商产品页明确写为「strictly an elevation locking turret」，即仅仰角锁定，并与该系列既有 zero stop 系统同时提供。型号口径：SKU 66013 为 SFP / MOA-7 IR / 1,899.99 美元；SKU 66014 与 66015 为 FFP，分别配 MH-7 IR（0.1 MRAD）与 MOA-8 IR（1/4 MOA），各 1,999.99 美元。机身口径：34mm 单体工业级铝管、ED 玻璃与 Zact-7 Revcoat Plus 镀膜、11 档 CR2032 照明、ExacTrack W&E，仰角调整量 80 MOA / 23.3 MRAD、风偏 60 MOA / 17.5 MRAD，视差 10 码至无穷远，长 16.7 英寸、重 36 oz，IPX7 且抗冲击 1,000G。FirearmAI 2026-11-24 转载厂商新闻稿，文内公告日期为 11-15。",
+          implication: "把锁定收敛到仰角单轴、并与 zero stop 叠加，说明防误触可以做成独立旋钮模块而不必重做整镜；图纸端优先定义锁止与 zero stop 的共轴堆叠高度和角向定位，不复制整镜光学。",
+          src: "Luke C. \"Sightron S6 5-30×56 ED IR Riflescopes With A New Lockable Turret.\" Shooting News Weekly, 24 Nov. 2026.",
+          url: "https://www.shootingnewsweekly.com/optics/sightron-s6-5-30x56-ed-ir-riflescopes-with-a-new-lockable-turret",
+          date: "2026-11-24",
+          v: "verified",
+          caveat: "行业媒体转述厂商新闻稿与产品页；锁定力、IPX7 与 1,000G 为厂商标称，未见独立测试。FirearmAI 新闻稿笼统写 lockable turrets，以厂商产品页与 Shooting News Weekly 的 elevation-only 口径为准"
+        },
+        {
+          id: "T-30",
+          domain: "mount",
+          type: "实测·安装接口",
+          title: "Leupold LCO Pro F2：三交叉键 + 两颗张力螺钉固定皮卡汀尼导轨，课程中约 600 发保持零位",
+          fact: "Gun USA All Day 2026-11-23 转述 American Rifleman 编辑 Tamara Keel 的实操记录：她在与 Hornady 合办、由 Kyle Lamb 与 Doug Koenig 带训的一天半卡宾枪课程及随后小型比赛中测试 LCO Pro F2。该光学件以三个 cross key 与两颗 tension screw 固定到皮卡汀尼导轨；配置锁定可在现场禁用设置变更与运动感应；提供四种可选分划（1 MOA 点到 65 MOA 圈点）、20 档昼间加 10 档夜视亮度、单节 CR123 标称 30,000 小时；铝合金壳体防水标称 66 英尺；该次约 600 发高强度训练与比赛后仍保持零位。尺寸 3.5 英寸长、含电池 9.6 oz。",
+          implication: "三键定心加两张力螺钉提供了一条不靠槽宽过盈的夹持路径，可作为快拆座公差链的对照方案；图纸端应把它与双楔块入槽、弹簧张力加后坐耳并列做有限元与实弹复现验证。",
+          src: "\"Leupold's LCO Pro F2 Holds Zero Through 600 Rounds in Carbine Class.\" Gun USA All Day, 23 Nov. 2026.",
+          url: "https://gunusaallday.com/leupolds-lco-pro-f2-holds-zero-through-600-rounds-in-carbine-class",
+          date: "2026-11-23",
+          v: "verified",
+          caveat: "二手转述 American Rifleman 编辑实测，非独立实验室；约 600 发保持零位是单次课程观察，不是标准化耐久测试；30,000 小时与 66 英尺为厂商标称"
+        },
+        {
+          id: "T-31",
+          domain: "elec",
+          type: "新品·热成像整机",
+          title: "Pulsar Thermion 3 LRF XT60 / XR60：测距模块移出物镜，30mm 管身 + 6000J 后坐等级",
+          fact: "American Rifleman 2026-11-10：Thermion 3 LRF 两个型号，内置测距最远 1,312 码（1,200 米）；XT60 为 1280×1024 传感器、2–24×、14.6 度视场，XR60 为 640×480 传感器、4–40×；两者均为 2.4 英寸物镜与 2560×2560 AMOLED，顶部旋钮调焦、配变倍拨杆，集成弹道计算器并兼容 Stream Vision Ballistics。Rifle Configurator 2026-11-06 补充：905 nm Class 1 激光测距组件从热像物镜移到机壳内，采用 30mm 管身与普通镜环，出瞳距 65 mm，后坐等级 6000 J，防护 IP67，工作温度 -25 至 +50 摄氏度；XT60 系统 NETD 低于 20 mK，XR60 低于 18 mK。",
+          implication: "测距模块移出物镜后，物镜保留完整 F1.0 光路，机械上变成「30mm 管身 + 独立测距窗」的壳体布局；我方只取机械接口、防护与后坐指标，不碰探测器、图像处理或弹道算法。",
+          src: "American Rifleman Staff. \"New for 2026: Pulsar Thermion 3 Riflescope.\" American Rifleman, 10 Nov. 2026.",
+          url: "https://www.americanrifleman.org/content/new-for-2026-pulsar-thermion-3-riflescope",
+          date: "2026-11-10",
+          v: "verified",
+          caveat: "厂商规格经行业媒体转述；探测距离为厂商标称且不等于保证识别距离，6000 J / IP67 / NETD 未见独立复现；属受管制品类，只做通用机械接口趋势，不做仿制图纸"
+        },
+        {
+          id: "T-32",
+          domain: "mount",
+          type: "专利·壳体机构",
+          title: "US 2026/0309463 A1：Trijicon 公开「侧面可达、顶部不可达」的紧固件腔",
+          fact: "Patents-Review 公开文本显示，US 2026/0309463 A1 题名 Optical Sight Mounting System，公开日 2026-10-08，申请人 Trijicon, Inc.，发明人为 Jerry Glen Sabaldan Elpedes 与 Matthew Stephen Bindon。文本记载：壳体第一表面限定第一腔体，该腔体可从壳体第一侧与底部进入，但被配置为无法从上方进入；紧固件头部由该表面支撑，杆部穿过底部进入底座螺纹孔，头部可从侧面用工具旋转；壳体还可有第二腔体；腔体与光学开口之间有隔离部分，使照明组件可置于壳体内受保护。",
+          implication: "侧向维护紧固件让「照明组件内置」与「底部装导轨座」两件事不再互相挤占；图纸端可评估把电池与照明电路、底座螺钉、光学开口做三层分区，而不是把螺钉从顶部穿入光路区。",
+          src: "Patents-Review. \"US 2026/0309463 A1 - Optical Sight Mounting System.\" Patents-Review, 8 Oct. 2026.",
+          url: "https://www.patents-review.com/a/20260309463-optical-sight-mounting-system.html",
+          date: "2026-10-08",
+          v: "verified",
+          caveat: "公开申请文本；未检索法律状态与权利要求保护范围，FTO 未完成，不得据此直接落地"
+        },
+        {
+          id: "T-33",
+          domain: "mount",
+          type: "专利·授权·快拆",
+          title: "US 12,674,639：Sellmark 授权「锥面定心 + 闩锁轴向锁」快拆座",
+          fact: "Patents.us 显示 US 12,674,639 于 2026-07-07 授权，受让人 Sellmark Corporation，发明人 Cody Bench、Andrew Pischke、Seth D. Fritz，申请日 2024-11-29。独立权利要求 1 与 5 均记载：装置侧含向顶点收拢的锥形凸台与闩锁容纳部；支撑侧含对应的锥形凹座与闩锁件；装配时至少锥面与顶点相互贴合，闩锁件接合闩锁容纳部完成固定。从属权利要求 4 把支撑限定为独脚架、两脚架或三脚架。",
+          implication: "这是继双楔块入槽、弹簧张力加后坐耳之后的第三条可脱开路径，可纳入接口概念对照；但原文实施例指向脚架类支撑，迁移到枪轨不是等同替换，需单独做规避设计。",
+          src: "Patents.us. \"US 12,674,639 - Quick Attach and Detach Mount for Firearms and Other Objects.\" Patents.us, 7 July 2026.",
+          url: "https://patents.us/US12674639",
+          date: "2026-07-07",
+          v: "verified",
+          caveat: "已授权专利，权利要求保护范围未做 FTO；其支撑对象为脚架/支架，不可直接等同于枪轨接口"
+        },
+        {
+          id: "T-34",
+          domain: "optic",
+          type: "专利·显示布局",
+          title: "EP4733707A1：Light Optical Works 把信息显示部放在观察环框体上",
+          fact: "Google Patents 显示 EP4733707A1 题名 Optical sight and information display method，公开日 2026-04-29，申请日 2025-03-31，申请人 Light Optical Works Ltd，发明人 Kensuke Sakai 等五人。文本记载：信息显示部与光学系统同装在壳体内，显示在用户经光学系统可见视场的周围；显示部可设在观察环（viewing ring）的框体上，或利用框体中与视场孔分开的通孔；用户可经目镜侧看到该信息而经物镜侧看不到；显示控制部可显示来自外部设备的风速、风向与距离等信息。",
+          implication: "对图纸有用的是「不改物镜光路、在目镜端视场边缘预留显示窗口」的机械布局；本条只记录结构与可视路径，不接触任何图像处理或弹道算法。",
+          src: "Google Patents. \"EP4733707A1 - Optical Sight and Information Display Method.\" EPO, 29 Apr. 2026.",
+          url: "https://patents.google.com/patent/EP4733707A1/en",
+          date: "2026-04-29",
+          v: "verified",
+          caveat: "公开申请，法律状态与权利要求未做 FTO；外部数据如何生成不在本条技术情报范围"
+        },
+        {
+          id: "T-35",
+          domain: "mount",
+          type: "工程进展·公差链（T-08 更新）",
+          title: "Spuhr 明确固定座与 QD 座采用不同导轨基准：三面 0.6mm 累计 vs 两面 0.1mm 宽度",
+          fact: "Soldier Systems Daily 2026-02-16 转载 Spuhr 的技术说明：MIL-STD-1913 原始设计只用两侧 45 度面做夹紧与基准，顶面公差刻意放宽，总宽度公差约 0.1 mm，对不同导轨兼容性好，但座体随导轨实际宽度略有倾斜；NATO 自 2009 年（STANAG 4694）建议改用两侧加顶面三面基准，座体可保持水平，但顶面新增约 0.25 mm 公差，累计可达约 0.6 mm（0.024 英寸）。Spuhr 的做法是固定座采用三面基准以取直线与重复精度，QD 座仍采用两面基准以压低累计公差、扩大兼容范围。",
+          implication: "这是对 11-23 条目 T-08 尺寸链条目的进展更新：QD 与固定座不应共用同一基准策略。图纸端据此把「固定座定位精度」和「QD 跨轨归零复现」拆成两套独立验收指标。",
+          src: "Spuhr. \"Picatinny - How It Really Works!\" Soldier Systems Daily, 16 Feb. 2026.",
+          url: "https://soldiersystems.net/?p=260070/",
+          date: "2026-02-16",
+          v: "verified",
+          caveat: "厂商工程师口径经媒体转载；0.1 / 0.25 / 0.6 mm 为文中给出的近似值，未见与 MIL-STD-1913 / STANAG 4694 标准原文逐项核对"
+        },
+        {
+          id: "T-36",
+          domain: "mount",
+          type: "进展·厂商正式规格（T-25 更新）",
+          title: "Scalarworks LEAP/08 厂商正式公告补齐材料牌号与双夹结构口径",
+          fact: "FirearmAI 2026-09-17 转载 Scalarworks 正式公告：新一代 LEAP/08 30mm 快拆座有 1.57 与 1.93 英寸两种高度，适配 MIL-STD-1913；采用 No-Gap 开口环、升级的双 ClickDrive 免工具自调节夹具、集成 LevelDrive 水平机构，并兼容 KICK 顶部或偏置辅助红点生态；材料为 7075-T6 铝、4140 CrMo 钢与 406 不锈钢，表面为 Type III 硬阳极与 BlackNitride，售价 419 美元。11-25 / 11-26 两条既有记录只引用经销商页面，本条补上厂商正式公告口径。",
+          implication: "把 7075-T6 / 4140 / 406 的材料组合与自调节双夹作为对照基准；我方图纸仍按 6061-T6 的成本路线做公差预算，不照抄材料牌号与结构。本条为 T-25 的进展更新，不作为新型号入库。",
+          src: "FirearmAI Staff. \"Scalarworks Announces All-New LEAP/08 30mm Quick-Detach Scope Mounts.\" FirearmAI, 17 Sept. 2026.",
+          url: "https://firearmai.com/tactical-gear/scalarworks-announces-all-new-leap-08-30mm-quick-detach-scope-mounts",
+          date: "2026-09-17",
+          v: "verified",
+          caveat: "厂商新闻稿；归零复现与 world-class 属宣传口径，未见独立复现；本条是对 T-25 的进展更新"
+        }
+      ],
+      designs: [
+        {
+          id: "D-27",
+          name: "仰角锁定 + zero stop 共轴旋钮模块",
+          domain: "optic",
+          priority: "P0",
+          status: "概念推演",
+          basis: "T-29（SIGHTRON 仰角单轴锁定与 zero stop 并存）、T-21（Leupold 免工具重设）、T-26（WO2026006282A1 旋钮盒接口，待 FTO）",
+          input: "34mm 镜筒；仅仰角轴锁止；锁止与 zero stop 共轴堆叠；角向定位；IPX7 / 1000G 作为目标条件而非已达指标",
+          drawing: ["旋钮组件轴向剖面与堆叠高度链", "锁止拨杆与球 detent 配合剖面", "圈数指示与 zero stop 复位行程", "旋钮与镜筒螺纹/压圈接口公差"],
+          verify: "锁定前后零位漂移、拨杆循环寿命、浸水后功能、旋钮总高与眼部间隙",
+          gate: "FTO：WO2026006282A1 的通用旋钮接口与角向定位权利要求；样机前工程评审",
+          v: "model"
+        },
+        {
+          id: "D-28",
+          name: "三交叉键 + 双张力螺钉夹持接口（QD / 固定座分基准）",
+          domain: "mount",
+          priority: "P0",
+          status: "概念推演",
+          basis: "T-30（LCO Pro F2 三键两螺钉）、T-08（导轨尺寸链）、T-35（Spuhr 固定座三面 / QD 两面基准）",
+          input: "三键跨槽定位、两张力螺钉夹紧；QD 版按两面 0.1mm 宽度预算，固定座版按三面顶面基准；6061-T6 成本路线",
+          drawing: ["底面三键位置与槽距匹配图", "张力螺钉与压块剖面", "导轨宽度公差敏感性对照表", "固定座顶面基准版本"],
+          verify: "跨多厂导轨归零复现、约 600 发等效后坐、夹持力与夹持变形",
+          gate: "需实测多厂导轨样件；不得复制 LCO Pro F2 具体结构；专利检索后再定型",
+          v: "model"
+        },
+        {
+          id: "D-29",
+          name: "侧向维护紧固件腔的镜体壳体分层",
+          domain: "mount",
+          priority: "P1",
+          status: "技术跟踪",
+          basis: "T-32（US20260309463A1 侧可达/顶不可达紧固件腔）、T-34（EP4733707A1 观察环显示窗口）",
+          input: "紧固件从侧面工具可达、顶部不可达；照明组件内置；目镜端视场边缘预留显示窗口；底部保留导轨座接口",
+          drawing: ["壳体侧向剖面与紧固件腔位置", "紧固件腔与光学开口之间的隔墙", "观察环框体显示窗口布置", "底部导轨座与壳体分层装配图"],
+          verify: "侧向工具可达性、密封与进水、照明组件可维护性、装配重复性",
+          gate: "FTO：US20260309463A1 与 EP4733707A1；只做机械布局，不做显示或弹道算法",
+          v: "model"
+        },
+        {
+          id: "D-30",
+          name: "30mm 管身热成像整机机械接口边界",
+          domain: "elec",
+          priority: "P1",
+          status: "技术跟踪",
+          basis: "T-31（Thermion 3 的 30mm 镜环、65mm 出瞳距、6000J、IP67、测距组件移位）、T-28（夹片两级转接）",
+          input: "标准 30mm 镜环夹持区；测距窗在机壳上的独立位置；65mm 出瞳距；6000J 后坐与 IP67 作为设计输入",
+          drawing: ["30mm 管身夹持区与镜环接触带", "测距窗禁布区与机壳开口", "后坐载荷传递路径", "密封分区与电池仓隔离"],
+          verify: "镜环不打滑、后坐等效加载、IP67 密封、热循环",
+          gate: "出口合规红线：只做通用机械接口趋势；探测器、图像处理、弹道算法与受控规格一律不入图",
+          v: "model"
+        }
+      ],
+      watchlist: [
+        "三件新专利 US20260309463A1、US 12,674,639、EP4733707A1 的法律状态与权利要求范围均未做 FTO，D-27 至 D-30 不得进入样机。",
+        "SIGHTRON 锁定旋钮在厂商产品页为 elevation-only，但 FirearmAI 新闻稿笼统写 lockable turrets；后续以厂商规格页为准，不把风偏锁定当成已确认事实。",
+        "Thermion 3 的 6000J、IP67、NETD 与探测距离都是厂商口径；热成像属受管制品类，只做通用机械接口趋势，不做仿制图纸。",
+        "Spuhr 的 0.1 / 0.25 / 0.6 mm 为媒体转载的近似值，需取 MIL-STD-1913 与 STANAG 4694 标准原文逐项核对后再进入公差计算。",
+        "延续跟踪：WO2026006282A1 与 US 12,693,097 仍待 FTO；11-26 记录的 HIKMICRO 约 1 MOA 落点偏差仍待独立复现。"
+      ],
+      dataNote: "本轮使用公开网络检索（行业媒体、厂商新闻稿与产品页、Google Patents / Patents.us / Patents-Review）。每条信号附 URL 与日期；厂商测试口径、行业评论、展前预览规格与二手转述均已单独标注 caveat，不与独立测试事实混用。事实 v=verified 与工程推演 v=model 严格分列。"
+    },
     {
       date: "2026-11-26",
       weekday: "周四",
@@ -590,6 +770,14 @@ window.GB_RD_DATA = {
 
   // ===== 检索来源（MLA）=====
   sources: [
+    { t: "Shooting News Weekly", ttl: "Sightron S6 5-30x56 ED IR Riflescopes With A New Lockable Turret", u: "https://www.shootingnewsweekly.com/optics/sightron-s6-5-30x56-ed-ir-riflescopes-with-a-new-lockable-turret", y: "2026-11-24", mla: "Luke C. \"Sightron S6 5-30×56 ED IR Riflescopes With A New Lockable Turret.\" Shooting News Weekly, 24 Nov. 2026." },
+    { t: "Gun USA All Day", ttl: "Leupold's LCO Pro F2 Holds Zero Through 600 Rounds in Carbine Class", u: "https://gunusaallday.com/leupolds-lco-pro-f2-holds-zero-through-600-rounds-in-carbine-class", y: "2026-11-23", mla: "\"Leupold's LCO Pro F2 Holds Zero Through 600 Rounds in Carbine Class.\" Gun USA All Day, 23 Nov. 2026." },
+    { t: "American Rifleman", ttl: "New for 2026: Pulsar Thermion 3 Riflescope", u: "https://www.americanrifleman.org/content/new-for-2026-pulsar-thermion-3-riflescope", y: "2026-11-10", mla: "American Rifleman Staff. \"New for 2026: Pulsar Thermion 3 Riflescope.\" American Rifleman, 10 Nov. 2026." },
+    { t: "Patents-Review", ttl: "US 2026/0309463 A1 - Optical Sight Mounting System", u: "https://www.patents-review.com/a/20260309463-optical-sight-mounting-system.html", y: "2026-10-08", mla: "Patents-Review. \"US 2026/0309463 A1 - Optical Sight Mounting System.\" Patents-Review, 8 Oct. 2026." },
+    { t: "Patents.us", ttl: "US 12,674,639 - Quick Attach and Detach Mount", u: "https://patents.us/US12674639", y: "2026-07-07", mla: "Patents.us. \"US 12,674,639 - Quick Attach and Detach Mount for Firearms and Other Objects.\" Patents.us, 7 July 2026." },
+    { t: "Google Patents", ttl: "EP4733707A1 - Optical sight and information display method", u: "https://patents.google.com/patent/EP4733707A1/en", y: "2026-04-29", mla: "Google Patents. \"EP4733707A1 - Optical Sight and Information Display Method.\" EPO, 29 Apr. 2026." },
+    { t: "Soldier Systems Daily", ttl: "Picatinny - How It Really Works!", u: "https://soldiersystems.net/?p=260070/", y: "2026-02-16", mla: "Spuhr. \"Picatinny - How It Really Works!\" Soldier Systems Daily, 16 Feb. 2026." },
+    { t: "FirearmAI", ttl: "Scalarworks Announces All-New LEAP/08 30mm Quick-Detach Scope Mounts", u: "https://firearmai.com/tactical-gear/scalarworks-announces-all-new-leap-08-30mm-quick-detach-scope-mounts", y: "2026-09-17", mla: "FirearmAI Staff. \"Scalarworks Announces All-New LEAP/08 30mm Quick-Detach Scope Mounts.\" FirearmAI, 17 Sept. 2026." },
     { t: "American Rifleman", ttl: "Rifleman Review: Leupold VX-5HD Gen 2 Riflescopes", u: "https://www.americanrifleman.org/content/rifleman-review-leupold-vx-5hd-gen-2-riflescopes", y: "2026-11-18", mla: "American Rifleman Staff. \"Rifleman Review: Leupold VX-5HD Gen 2 Riflescopes.\" American Rifleman, 18 Nov. 2026." },
     { t: "Grand View Outdoors", ttl: "Pulsar Trail 3 LRF XR50 Thermal Riflescope", u: "https://www.grandviewoutdoors.com/product-profile/pulsar-trail-3-lrf-xr50-thermal-riflescope", y: "2026-02-16", mla: "Krahn, Gordy. \"Pulsar Trail 3 LRF XR50 Thermal Riflescope.\" Grand View Outdoors, 16 Feb. 2026." },
     { t: "PR Newswire", ttl: "HIKMICRO Launches X-1280 STELLAR 4.0 and THUNDER 4.0", u: "https://www.prnewswire.co.uk/news-releases/when-seeing-becomes-knowing-hikmicro-launches-x-1280-stellar-4-0-and-thunder-4-0-for-the-moments-that-demand-certainty-302920482.html", y: "2026-10-27", mla: "PR Newswire. \"When Seeing Becomes Knowing: HIKMICRO Launches X-1280 STELLAR 4.0 and THUNDER 4.0.\" The News This Week, 27 Oct. 2026." },
