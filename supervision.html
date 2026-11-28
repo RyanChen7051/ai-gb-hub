@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="gb-build" content="20261128i">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#123a5e">
+<title>监督账本 · AI GB-Team</title>
+<style>
+  :root{--bg:#eef2f7;--card:#fff;--ink:#16212e;--sub:#5b6b7c;--line:#dde5ee;--navy:#123a5e;--navy2:#1d5486;--accent:#b8461f;--red:#b3261e;--redbg:#fdecea;--green:#1f7a4d;--greenbg:#e7f4ec;--amber:#9a6b12;--amberbg:#fbf1d9;--r:14px;--shadow:0 2px 12px rgba(18,58,94,.07)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6;font-size:15px;padding-bottom:60px}
+  .wrap{max-width:960px;margin:0 auto;padding:0 16px}
+  header{background:linear-gradient(135deg,#0f3252,#1d5486);color:#fff;padding:22px 0}
+  header h1{font-size:20px;font-weight:800}
+  header p{font-size:12px;color:#cfe0ef;margin-top:5px}
+  .src{display:inline-block;margin-top:10px;font-size:11px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);padding:4px 10px;border-radius:14px}
+  section{margin-top:18px}
+  .sh{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+  .sh .bar{width:4px;height:19px;background:var(--accent);border-radius:2px}
+  .sh h2{font-size:16px;color:var(--navy);font-weight:750}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .n{font-size:28px;font-weight:850;line-height:1.1}
+  .kpi .l{font-size:11.5px;color:var(--sub);margin-top:4px}
+  .kpi.bad .n{color:var(--red)} .kpi.good .n{color:var(--green)} .kpi.warn .n{color:var(--amber)}
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:#f5f8fb;color:var(--navy);font-weight:700;font-size:11.5px;position:sticky;top:0}
+  tr:last-child td{border-bottom:none}
+  .badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:9px;white-space:nowrap}
+  .badge.ok{background:var(--greenbg);color:var(--green)}
+  .badge.no{background:var(--redbg);color:var(--red)}
+  .badge.never{background:var(--amberbg);color:var(--amber)}
+  .badge.red{background:var(--redbg);color:var(--red)}
+  .badge.amber{background:var(--amberbg);color:var(--amber)}
+  .badge.green{background:var(--greenbg);color:var(--green)}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:var(--sub);word-break:break-all}
+  .note{font-size:12px;color:var(--sub);padding:12px 16px;background:#fbfcfe;border-top:1px solid var(--line)}
+  .warn{background:var(--redbg);color:var(--red);font-weight:700}
+  a.back{display:inline-block;margin:14px 0 0;color:var(--navy2);font-size:13px;text-decoration:none}
+  .scroll{overflow-x:auto}
+  /* 每日复盘 */
+  .day{border:1px solid var(--line);border-radius:12px;margin-bottom:12px;overflow:hidden;background:#fff;box-shadow:var(--shadow)}
+  .day-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 15px;background:#f7fafd;border-bottom:1px solid var(--line)}
+  .day-h .dt{font-size:15px;font-weight:800;color:var(--navy)}
+  .day-h .wd{font-size:11.5px;color:var(--sub)}
+  .day-h .pub{margin-left:auto;font-size:10.5px;color:var(--sub)}
+  .day-b{padding:13px 15px}
+  .line{display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;font-size:12.5px}
+  .line .who{flex:0 0 96px;font-weight:700;color:var(--navy)}
+  .line .txt{flex:1;color:var(--ink)}
+  .verdict{margin:9px 0;padding:10px 12px;border-radius:9px;font-size:12.5px;line-height:1.7}
+  .verdict.red{background:var(--redbg);color:#7d1f19;border-left:4px solid var(--red)}
+  .verdict.amber{background:var(--amberbg);color:#6f4d0d;border-left:4px solid var(--amber)}
+  .verdict.green{background:var(--greenbg);color:#145c39;border-left:4px solid var(--green)}
+  .metrics{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--sub);margin-top:4px}
+  .metrics b{color:var(--navy)}
+  details{margin-top:8px;border-top:1px dashed var(--line);padding-top:7px}
+  summary{cursor:pointer;font-size:11.5px;color:var(--navy2);font-weight:700;list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  .dtl{padding:8px 0 2px 6px;font-size:11.5px;color:var(--sub);line-height:1.75}
+  .dtl ul{margin:0 0 6px 16px}
+  .dtl li{margin-bottom:2px}
+  .cnt{font-size:11px;color:var(--sub);font-weight:400}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>监督账本 · 真实执行记录</h1>
+  <p>本页数字由脚本/数据文件直接读取，非人工填写、非口头结论。每天复盘结论按日留档，永久可查。</p>
+  <span class="src" id="src">数据源载入中…</span>
+</div></header>
+<div class="wrap">
+  <a class="back" href="./index.html">← 返回团队中心</a>
+  <a class="back" href="./tasks.html" style="margin-left:14px">📋 每日任务清单 →</a>
+
+  <section>
+    <div class="kpis" id="kpis"></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="bar"></span><h2>今日事实板 <span class="cnt">（脚本直读原始数据源 · 不经人工转述 · <span id="factsDate"></span>）</span></h2></div>
+    <div class="card"><div class="scroll"><table>
+      <thead><tr><th>分组</th><th>指标</th><th>真实值</th><th>状态</th><th>数据源 / 说明</th></tr></thead>
+      <tbody id="factsBody"></tbody>
+    </table></div><div class="note" id="factsNote"></div></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="bar"></span><h2>一、每日日报与复盘结论 <span class="cnt">（按日留档 · 你要看的复盘结果在这里）</span></h2></div>
+    <div id="reportDays"></div>
+    <div class="note" id="reportNote"></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="bar"></span><h2>二、今日调研报告交付 <span class="cnt">（五份必交 · 脚本直读真实产出文件）</span></h2></div>
+    <div class="card"><div class="scroll"><table>
+      <thead><tr><th>判定</th><th>编号</th><th>归属线</th><th>报告</th><th>调度</th><th>实际产出 / 数据日期</th><th>证据</th></tr></thead>
+      <tbody id="reportDeliverBody"></tbody>
+    </table></div>
+    <div class="note">只认真实文件：S1/S2 看当日 xlsx 的 mtime；M1 看 gb-market-intel.js 的 days[0].date；R1 看 rd/data.js 的 days[0].date 与桌面报告 md。缺交就是缺交，补跑按实际时间标注，不伪称按时。</div></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="bar"></span><h2>三、自动化真实执行情况</h2></div>
+    <div class="card"><div class="scroll"><table>
+      <thead><tr><th>状态</th><th>自动化</th><th>触发</th><th>成功</th><th>最后成功</th><th>最近「立即运行」真实结果</th></tr></thead>
+      <tbody id="autoBody"></tbody>
+    </table></div>
+    <div class="note" id="autoNote"></div>
+    <div class="note">「立即运行」列直读 <b>automation_runs</b> 里最近一次手动触发的 <b>failure_code</b> 与解析出的 cwd：<br>
+      · <b>真实失败·工作目录错误</b>＝你点"立即运行"确实没跑成，根因是 cwd 被写成 <span class="mono">["/path"]</span>（昨天 21:02 那批就是这样）；<br>
+      · <b>已入队待执行 / 真实执行成功</b>＝点击其实生效了，App 弹的「触发失败，请稍后重试」是提示与实际不一致，以本列为准。<br>
+      判定只认日志，不认 App 弹窗，也不认任何口头说法。</div></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="bar"></span><h2>四、今日真实发出的邮件（IMAP Sent）</h2></div>
+    <div class="card"><div class="scroll"><table>
+      <thead><tr><th>时间</th><th>收件人</th><th>主题</th><th>Message-ID</th></tr></thead>
+      <tbody id="sentBody"></tbody>
+    </table></div>
+    <div class="note">以邮箱「已发送」读回为准；发信脚本自身返回的 Message-ID 可能被邮件服务器改写，故不作数。</div></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="bar"></span><h2>五、RD 每日任务盯守 <span class="cnt">（08:00 · 自动化 / 报告 / 日报复盘 三项分开判定）</span></h2></div>
+    <div class="card"><div class="scroll"><table>
+      <thead><tr><th style="width:92px">维度</th><th style="width:160px">判定</th><th>真实证据</th></tr></thead>
+      <tbody id="rdBody"></tbody>
+    </table></div>
+    <div class="note" id="rdNote"></div>
+    <div class="note">自动化成功只认 <b>automation_runs.result_success=1</b>；报告按时只认真实产出时间（08:00 前落盘），补交按实际时间标注；日报自行提交要求 facts 首项含「已读指令板」。三者分开判定，不互相替代，也不拿「已建立/已启用」冒充「已运行」。</div></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="bar"></span><h2>六、退信当日闭环 <span class="cnt">（硬退信逐封定性 · 补发 / 不补发 都有证据）</span></h2></div>
+    <div class="card"><div class="scroll"><table>
+      <thead><tr><th>被拒地址</th><th>原因</th><th>定性</th><th>处理与证据</th></tr></thead>
+      <tbody id="bounceBody"></tbody>
+    </table></div>
+    <div class="note" id="bounceNote"></div>
+    <div class="note">判读取自退信闭环脚本的 <b>bounce_loop_report_latest.json</b> 与 <b>bounce_action_queue.json</b>。<b>不可修复</b>＝正确地址查无公开来源，按「不猜测邮箱」原则淘汰、当日不硬发；<b>严禁补发</b>＝主收件人已送达，被拒的只是对方内部转发别名；<b>已补发</b>＝换址后 IMAP Sent 有 Message-ID 可核。</div></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="bar"></span><h2>七、投递失败清单 <span class="cnt">（每日 21:05 刷新 · 只列没送达的邮件 · 区分「地址失效」与「对方策略拒绝」）</span></h2></div>
+    <div class="kpis" id="failKpis" style="margin-bottom:12px"></div>
+    <div class="card"><div class="scroll"><table>
+      <thead><tr><th style="width:100px">失败时间</th><th style="min-width:196px">被拒收件人</th><th style="min-width:230px">原主题</th><th style="width:86px">失败码</th><th style="min-width:150px">失败类型</th><th style="width:104px">是否送达</th><th style="min-width:250px">处置</th></tr></thead>
+      <tbody id="failBody"></tbody>
+    </table></div>
+    <div class="note" id="failNote"></div>
+    <div class="note"><b>口径</b>：只统计「没送达的邮件」，被发信闸门拦下、根本没发出的邮件不在此清单。<b>是否送达</b>列的「已进对方邮箱」＝我们的信确实到达了对方邮件服务器（例如转发被对方管理员拦下），<b>不等于对方已读</b>；「未送达」＝信停在半路或域名根本不收信。失败码显示 <span class="mono">5.0.0</span> 表示回执只给了笼统状态、没给具体原因，以「失败类型」一列的文字为准。本清单每日 21:05 由脚本重扫收件箱刷新，历史记录累积保留。</div></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="bar"></span><h2>八、DMARC 每日核验 <span class="cnt">（域名是否被冒用 · 直读聚合报告 + 实时 DNS 策略）</span></h2></div>
+    <div class="card"><div class="scroll"><table>
+      <thead><tr><th style="width:130px">核验项</th><th style="width:150px">判定</th><th>真实证据</th></tr></thead>
+      <tbody id="dmarcBody"></tbody>
+    </table></div>
+    <div class="note" id="dmarcNote"></div>
+    <div class="note"><b>核验口径</b>：IMAP 收件箱 + DMARC-Reports 双文件夹扫描，按 Report-ID 去重；<b>伪造</b>＝SPF 与 DKIM 均失败且域不对齐；<b>SPF 仅未对齐</b>＝DKIM 对齐通过（如第三方转发），DMARC 整体仍放行，不算伪造。DNS 策略经 DoH 实时查询，p=quarantine/reject 才判达标。</div></div>
+  </section>
+  <section>
+    <div class="sh"><span class="bar"></span><h2>八、AI GB-Fin 财务线监控 <span class="cnt">（对内角色 · 只看情报健康度，不含成本与客户报价）</span></h2></div>
+    <div class="card"><div class="kpis" id="finKpis"></div><div class="pad" id="finBody"></div></div>
+  </section>
+
+</div>
+
+<script src="./shared/reports/gb-daily-facts.js"></script>
+<script src="./shared/reports/gb-reports.js"></script>
+<script src="./shared/reports/gb-supervision.js"></script>
+<script src="./shared/reports/gb-delivery-failures.js"></script>
+<script src="./shared/reports/gb-fin.js"></script>
+<script>
+(function(){
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  var F=window.GB_DAILY_FACTS, el=document.getElementById('factsBody');
+  if(!F||!el){if(document.getElementById('factsNote'))document.getElementById('factsNote').textContent='事实板数据未加载';return;}
+  document.getElementById('factsDate').textContent=F.date;
+  var cls={good:'green',warn:'amber',bad:'red',info:'never'};
+  var lbl={good:'达标',warn:'注意',bad:'未达标',info:'信息'};
+  el.innerHTML=F.facts.map(function(x){
+    return '<tr><td>'+esc(x.group)+'</td><td><b>'+esc(x.item)+'</b></td><td>'+esc(x.value)+
+      '</td><td><span class="badge '+esc(cls[x.status]||'never')+'">'+esc(lbl[x.status]||'未判定')+'</span></td>'+
+      '<td class="mono">'+esc(x.source)+(x.note?'<br>'+esc(x.note):'')+'</td></tr>';
+  }).join('');
+  document.getElementById('factsNote').textContent='生成于 '+F.generatedAt+' · '+F.source;
+})();
+</script>
+<script>
+(function(){
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  var D=window.GB_SUPERVISION;
+  if(!D){document.getElementById('src').textContent='数据文件未加载';return;}
+  document.getElementById('src').textContent='数据源：'+D.source+' · 生成于 '+D.generatedAt;
+
+  var days=((window.GB_REPORTS||{}).days)||[];
+  var today=new Date();
+  var todayStr=today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0');
+  var hasToday=days.some(function(d){return d.date===todayStr;});
+  var selfSubmit=days.filter(function(d){return /第\s*\d+\s*日/.test(d.cycle||'');}).length;
+  var latest=days[0]||null;
+  var lvl=latest&&latest.team&&latest.team.verdictLevel;
+
+  var rw=D.rdWatch||{}, dm=D.dmarc||{};
+  document.getElementById('kpis').innerHTML=
+    '<div class="kpi '+(hasToday?'good':'bad')+'"><div class="n">'+(hasToday?'已留档':'缺失')+'</div><div class="l">今日日报（'+todayStr+'）</div></div>'+
+    '<div class="kpi '+(days.length>=7?'good':'warn')+'"><div class="n">'+days.length+'</div><div class="l">累计日报留档天数</div></div>'+
+    '<div class="kpi '+(selfSubmit>0?'good':'bad')+'"><div class="n">'+selfSubmit+'</div><div class="l">业务线自行提交天数</div></div>'+
+    '<div class="kpi '+(lvl==='green'?'good':(lvl==='amber'?'warn':'bad'))+'"><div class="n">'+(lvl==='green'?'绿':lvl==='amber'?'黄':lvl==='red'?'红':'—')+'</div><div class="l">最新复盘判定</div></div>'+
+    '<div class="kpi '+(D.automationVerified>0?'good':'bad')+'"><div class="n">'+D.automationVerified+' / '+D.automationTotal+'</div><div class="l">自动化有成功记录</div></div>'+
+    '<div class="kpi '+(D.sentToday.sales>0?'good':'bad')+'"><div class="n">'+D.sentToday.sales+'</div><div class="l">今日 Sales 实发</div></div>'+
+    '<div class="kpi '+(D.sentToday.marketing>0?'good':'bad')+'"><div class="n">'+D.sentToday.marketing+'</div><div class="l">今日 Marketing 实发</div></div>'+
+    '<div class="kpi '+((D.reportDelivered===D.reportTotal)?'good':'bad')+'"><div class="n">'+D.reportDelivered+' / '+D.reportTotal+'</div><div class="l">今日调研报告已交</div></div>'+
+    '<div class="kpi '+(((rw.report||{}).onTime)?'good':'bad')+'"><div class="n">'+(((rw.report||{}).onTime)?'按时':'补交')+'</div><div class="l">RD R1（08:00）· '+esc((rw.report||{}).delayedMin==null?'—':((rw.report||{}).delayedMin+' 分钟延迟'))+'</div></div>'+
+    '<div class="kpi '+(((rw.daily||{}).submittedByRD)?'good':'bad')+'"><div class="n">'+(((rw.daily||{}).submittedByRD)?'已交':'未交')+'</div><div class="l">RD 日报/复盘自行提交</div></div>'+
+    '<div class="kpi '+(((dm.forged||[]).length===0 && dm.dnsOK)?'good':'bad')+'"><div class="n">'+esc((dm.forged||[]).length)+'</div><div class="l">DMARC 伪造记录（累计）</div></div>'+
+    '<div class="kpi '+((dm.dnsOK)?'good':'bad')+'"><div class="n">'+esc((dm.dnsPolicy||{}).p||'—')+'</div><div class="l">DNS 策略 · '+esc((dm.dnsPolicy||{}).pct||'—')+'% · '+esc(dm.records||0)+' 封记录</div></div>';
+
+  function badge(lv){
+    var m={red:'红 · 未达标',amber:'黄 · 偏弱',green:'绿 · 达标'};
+    return '<span class="badge '+(lv||'red')+'">'+(m[lv]||'未判定')+'</span>';
+  }
+  function ul(arr){return '<ul>'+(arr||[]).map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>';}
+
+  document.getElementById('reportDays').innerHTML=days.map(function(d,i){
+    var t=d.team||{};
+    var s=d.sales||{},m=d.marketing||{};
+    var el=d.emailLog||{};
+    var lvv=t.verdictLevel||'red';
+    var detail=[];
+    if((s.facts||[]).length) detail.push('<div><b>Sales 事实/动作：</b>'+ul(s.facts)+'</div>');
+    if((s.blockers||[]).length) detail.push('<div><b>Sales 卡点：</b>'+ul(s.blockers)+'</div>');
+    if((m.facts||[]).length) detail.push('<div><b>Marketing 事实/动作：</b>'+ul(m.facts)+'</div>');
+    if((m.blockers||[]).length) detail.push('<div><b>Marketing 卡点：</b>'+ul(m.blockers)+'</div>');
+    if((t.directives||[]).length) detail.push('<div><b>监督指令：</b>'+ul((t.directives||[]).map(function(x){return typeof x==='string'?x:(x.text||x.item||x.desc||JSON.stringify(x));}))+'</div>');
+    if((t.escalations||[]).length) detail.push('<div><b>升级事项：</b>'+ul((t.escalations||[]).map(function(x){return (x.item||'')+(x.why?' — '+x.why:'');}))+'</div>');
+    if((t.checkins||[]).length) detail.push('<div><b>逐任务打卡：</b>'+ul((t.checkins||[]).map(function(c){return (c.id||'')+' '+(c.task||'')+' · '+(c.verdict||'')+' · 证据：'+(c.evidence||'—');}))+'</div>');
+    return '<div class="day">'+
+      '<div class="day-h"><span class="dt">'+esc(d.date)+'</span><span class="wd">'+esc(d.weekday||'')+'</span>'+badge(lvv)+
+        '<span class="pub">'+esc(d.publishedAt||'')+'</span></div>'+
+      '<div class="day-b">'+
+        '<div class="line"><span class="who">提交状态</span><span class="txt">'+esc(d.cycle||'—')+'</span></div>'+
+        '<div class="line"><span class="who">AI GB-Sales</span><span class="txt"><b>'+esc(s.scoreLabel||'—')+'</b><br>'+esc(s.headline||'')+'</span></div>'+
+        '<div class="line"><span class="who">AI GB-Marketing</span><span class="txt"><b>'+esc(m.scoreLabel||'—')+'</b><br>'+esc(m.headline||'')+'</span></div>'+
+        '<div class="verdict '+lvv+'"><b>Team 复盘判定：</b>'+esc(t.verdict||'—')+'</div>'+
+        '<div class="metrics"><span>今日发信 <b>'+esc(el.quotaUsed!=null?el.quotaUsed:'—')+'</b> / '+esc(el.quotaTotal||'—')+'</span>'+
+          '<span>Sales 实发 <b>'+esc((el.sales||{}).sent!=null?el.sales.sent:'—')+'</b></span>'+
+          '<span>Marketing 实发 <b>'+esc((el.marketing||{}).sent!=null?el.marketing.sent:'—')+'</b></span>'+
+          '<span>冲突裁决 <b>'+esc(t.conflicts||'无')+'</b></span></div>'+
+        (detail.length?'<details'+(i===0?' open':'')+'><summary>展开当日完整复盘明细（事实 · 卡点 · 指令 · 打卡）</summary><div class="dtl">'+detail.join('')+'</div></details>':'')+
+      '</div></div>';
+  }).join('')||'<div class="card"><div class="note">日报数据未加载。</div></div>';
+
+  var missingSelf=days.length-selfSubmit;
+  document.getElementById('reportNote').innerHTML=
+    '判读取自 <b>shared/reports/gb-reports.js</b>（每日 20:40 兜底 / 21:00 汇整写入），非人工填写。'+
+    '累计 '+days.length+' 天中，业务线自行提交 '+selfSubmit+' 天、总管席代补 '+missingSelf+' 天；'+
+    '代补均标注「非业务线提交」，不冒充。最新判定为 <b>'+esc(lvl||'—')+'</b>。'+
+    (hasToday?' 今日日报已留档。':' <span style="color:#b3261e;font-weight:700">⚠ 今日日报尚未留档，20:40 兜底将按真实证据补齐。</span>');
+
+  document.getElementById('reportDeliverBody').innerHTML=(D.reports||[]).map(function(r){
+    return '<tr><td><span class="badge '+(r.delivered?'ok':'no')+'">'+(r.delivered?'已交':'缺交')+'</span></td>'+
+      '<td class="mono">'+esc(r.id)+'</td><td>'+esc(r.line)+'</td><td>'+esc(r.name)+'</td>'+
+      '<td class="mono">'+esc(r.due)+'</td><td class="mono">'+esc(r.actual||'—')+'</td>'+
+      '<td class="mono">'+esc(r.evidence)+'</td></tr>';
+  }).join('');
+
+  document.getElementById('autoBody').innerHTML=(D.automations||[]).map(function(a){
+    var b=a.successes>0?'<span class="badge ok">已验证</span>':(a.runs>0?'<span class="badge no">从未成功</span>':'<span class="badge never">从未触发</span>');
+    var m=a.manual;
+    var mcell='<span class="mono">—</span>';
+    if(m){
+      var cls=/真实失败/.test(m.real)?'no':(/已入队|成功/.test(m.real)?'ok':'never');
+      mcell='<span class="badge '+cls+'">'+esc(m.real)+'</span><div class="mono" style="margin-top:3px">'+esc(m.at||'')+'</div>';
+    }
+    return '<tr><td>'+b+'</td><td>'+esc(a.name)+'</td><td class="mono">'+esc(a.runs)+'</td><td class="mono">'+esc(a.successes)+'</td><td class="mono">'+esc(a.last_success||'—')+'</td><td>'+mcell+'</td></tr>';
+  }).join('');
+  var never=(D.automations||[]).filter(function(a){return a.successes===0;}).length;
+  document.getElementById('autoNote').className='note '+(never>0?'warn':'');
+  document.getElementById('autoNote').textContent=never>0?('⚠ 有 '+never+' 条自动化从无任何成功记录。「已建立/已启用」不等于「在运行」，只看 result_success=1。'):'全部自动化均有成功记录。';
+
+  document.getElementById('sentBody').innerHTML=(D.sentDetails||[]).map(function(r){
+    return '<tr><td class="mono">'+esc(r.time)+'</td><td>'+esc(r.to)+'</td><td>'+esc(r.subject)+'</td><td class="mono">'+esc(r.msgid||'—')+'</td></tr>';
+  }).join('')||'<tr><td colspan="4">今日邮箱已发送箱无对外邮件。</td></tr>';
+
+  var ra=rw.automation||{}, rr=rw.report||{}, rdw=rw.daily||{};
+  var autoOK=(ra.successToday||0)>0;
+  var rdRows=[
+    ['自动化', autoOK?'<span class="badge ok">今日真实成功</span>':'<span class="badge no">今日未成功</span>',
+      esc(ra.schedule||'每日 08:00 (GMT+8)')+' · 状态 '+esc(ra.status||'—')+' · 最后尝试 '+esc(ra.lastAttempt||'—')+
+      '<br>最近结果：'+esc(ra.lastResult||'—')+'<br>最近错误：'+esc(ra.lastError||'无')+
+      '<br>累计成功 '+esc(ra.successTotal||0)+'/'+esc(ra.runsTotal||0)],
+    ['R1 报告', rr.delivered?(rr.onTime?'<span class="badge ok">按时</span>':'<span class="badge amber">'+esc(rr.timeVerdict||'补交')+'</span>'):'<span class="badge no">缺交</span>',
+      esc(rr.evidence||'—')],
+    ['日报/复盘', rdw.submittedByRD?'<span class="badge ok">RD 自行提交</span>':'<span class="badge no">未自行提交</span>',
+      esc(rdw.scoreLabel||'—')+'<br>'+esc(rdw.headline||'—')+'<br>首项：'+esc(rdw.firstFact||'—')]
+  ];
+  document.getElementById('rdBody').innerHTML=rdRows.map(function(x){
+    return '<tr><td>'+x[0]+'</td><td>'+x[1]+'</td><td class="mono">'+x[2]+'</td></tr>';
+  }).join('');
+  var rn=document.getElementById('rdNote');
+  rn.className='note '+(((rw.gaps||[]).length)?'warn':'');
+  rn.innerHTML='<b>综合判定：</b>'+esc(rw.verdict||'无数据')+'<br>'+(((rw.gaps||[]).length)?'<b>缺口：</b>'+ul(rw.gaps):'三项全达标');
+
+  var bl=D.bounceLoop||{};
+  var bm={resend:'<span class="badge amber">待补发</span>',no_need:'<span class="badge ok">严禁补发</span>',
+          manual:'<span class="badge amber">待人工查证</span>',done:'<span class="badge ok">已补发</span>',
+          unfixable:'<span class="badge no">不可修复·已淘汰</span>'};
+  document.getElementById('bounceBody').innerHTML=(bl.bounces||[]).map(function(b){
+    var cls=b.status==='unfixable'?'no':(b.status==='done'||b.action==='no_need'?'ok':'amber');
+    var extra=(b.resolvedTo?'<br>换址：<b>'+esc(b.resolvedTo)+'</b>':'')+
+              (b.sentAt?'<br>补发：'+esc(b.sentAt):'')+(b.msgid?'<br>Message-ID：'+esc(b.msgid):'');
+    return '<tr><td class="mono">'+esc(b.rejected||'—')+'</td><td>'+esc(b.reason||'—')+'</td><td>'+
+      (bm[b.status]||bm[b.action]||'<span class="badge '+cls+'">'+esc(b.action||'—')+'</span>')+
+      '</td><td class="mono">'+esc(b.detail||'—')+(b.note?'<br>'+esc(b.note):'')+extra+'</td></tr>';
+  }).join('')||'<tr><td colspan="4">闭环脚本未识别到硬退信。</td></tr>';
+  var bn=document.getElementById('bounceNote');
+  var pend=(bl.bounces||[]).filter(function(b){
+    return (b.action==='manual'||b.action==='resend') && ['unfixable','done'].indexOf(b.status)<0;
+  }).length;
+  bn.className='note '+(pend>0?'warn':'');
+  bn.innerHTML='扫描时间 '+esc(bl.scannedAt||'—')+' · 收件箱 '+esc(bl.scanned||0)+' 封 · 判定汇总 '+esc(JSON.stringify(bl.summary||{}))+'。'+
+    (pend>0?'<b>仍有 '+pend+' 封待处理，盯守继续。</b>':'<b>本轮硬退信全部闭环。</b>');
+
+  var dns=dm.dnsPolicy||{}, forged=dm.forged||[], spfOnly=dm.spfOnly||[];
+  var dmarcRows=[
+    ['综合判定', (dm.gaps||[]).length?'<span class="badge no">有缺口</span>':'<span class="badge ok">达标</span>',
+      esc(dm.verdict||'无数据')+'<br>核验时间：'+esc(dm.generatedAt||'—')],
+    ['DNS 策略', dm.dnsOK?'<span class="badge ok">实时核验通过</span>':'<span class="badge no">查询失败</span>',
+      esc(typeof dns==='object'?JSON.stringify(dns):dns)],
+    ['报告覆盖', '<span class="badge ok">'+esc(dm.reports||0)+' 份</span>',
+      '投递记录 '+esc(dm.records||0)+' 封 · SPF 通过 '+esc(dm.spfPass||0)+'/'+esc(dm.records||0)+
+      ' · DKIM 通过 '+esc(dm.dkimPass||0)+'/'+esc(dm.records||0)+'<br>数据源：'+esc(dm.source||'—')],
+    ['伪造记录', forged.length?'<span class="badge no">'+forged.length+' 条</span>':'<span class="badge ok">0 条</span>',
+      forged.length?forged.map(function(r){return esc(r.ip||'—')+' · '+esc(JSON.stringify(r));}).join('<br>'):'SPF 与 DKIM 均无双失败记录，未发现冒用域名'],
+    ['SPF 仅未对齐', spfOnly.length?'<span class="badge amber">'+spfOnly.length+' 条</span>':'<span class="badge ok">0 条</span>',
+      spfOnly.length?spfOnly.map(function(r){
+        return esc(r.ip||'—')+' · SPF原始域 '+esc(r.spf_detail||'—')+' · DKIM '+esc(r.dkim_detail||'—')+' · 处置 '+esc(r.disp||'—');
+      }).join('<br>'):'无']
+  ];
+  document.getElementById('dmarcBody').innerHTML=dmarcRows.map(function(x){
+    return '<tr><td>'+x[0]+'</td><td>'+x[1]+'</td><td class="mono">'+x[2]+'</td></tr>';
+  }).join('');
+  var dn=document.getElementById('dmarcNote');
+  dn.className='note '+(((dm.gaps||[]).length)?'warn':'');
+  dn.innerHTML=((dm.gaps||[]).length)?'<b>缺口：</b>'+ul(dm.gaps):'DNS 策略生效、无伪造记录、核验数据新鲜，本轮达标。';
+})();
+</script>
+<script>
+(function(){
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  var D=window.GB_DELIVERY_FAILURES, tb=document.getElementById('failBody');
+  if(!D||!tb){if(document.getElementById('failNote'))document.getElementById('failNote').textContent='投递失败清单数据未加载';return;}
+  var s=D.summary||{};
+  document.getElementById('failKpis').innerHTML=
+    '<div class="kpi '+(s.today?'warn':'good')+'"><div class="n">'+esc(s.today||0)+'</div><div class="l">今日投递失败</div></div>'+
+    '<div class="kpi '+((s.last7||0)>0?'warn':'good')+'"><div class="n">'+esc(s.last7||0)+'</div><div class="l">近 7 日</div></div>'+
+    '<div class="kpi '+((s.hard||0)>0?'bad':'good')+'"><div class="n">'+esc(s.hard||0)+'</div><div class="l">永久失败（累计）</div></div>'+
+    '<div class="kpi '+((s.reachedOnly||0)>0?'warn':'good')+'"><div class="n">'+esc(s.reachedOnly||0)+'</div><div class="l">已进对方邮箱（不等于已读）</div></div>'+
+    '<div class="kpi '+((s.pending||0)>0?'warn':'good')+'"><div class="n">'+esc(s.pending||0)+'</div><div class="l">待处理</div></div>';
+
+  tb.innerHTML=(D.items||[]).map(function(x){
+    var a=x.action||'manual';
+    var cls=(a==='done'||a==='no_need')?'ok':(a==='unfixable'?'no':'amber');
+    var reach=x.reached?'<span class="badge amber">已进对方邮箱</span>':'<span class="badge no">未送达</span>';
+    var code=x.code?esc(x.code):(x.statusCode?'<span title="回执只给笼统状态">'+esc(x.statusCode)+'</span>':'—');
+    var orig=(x.orig_to&&x.orig_to!==x.to)?'<div style="font-size:10px;color:#5b6b7c">原定 '+esc(x.orig_to)+'</div>':'';
+    return '<tr><td class="mono" style="white-space:nowrap">'+esc(x.at)+'</td><td class="mono" style="white-space:nowrap">'+esc(x.to||'—')+orig+
+      '</td><td>'+esc(x.subject||'—')+'</td><td class="mono" style="white-space:nowrap">'+code+'</td><td>'+esc(x.kindName||'—')+
+      '</td><td>'+reach+'</td><td><span class="badge '+cls+'">'+esc(x.actionLabel||'待人工查证')+'</span>'+
+      (x.advice?'<div class="mono" style="margin-top:3px">'+esc(x.advice)+'</div>':'')+'</td></tr>';
+  }).join('')||'<tr><td colspan="7">近期无投递失败记录。</td></tr>';
+
+  var kinds=(D.byKind||[]).map(function(k){
+    return '<span class="badge never" style="margin:0 6px 0 0">'+esc(k.name)+' '+esc(k.count)+'</span>';
+  }).join('');
+  var fn=document.getElementById('failNote');
+  fn.className='note '+(((s.pending||0)>0)?'warn':'');
+  fn.innerHTML='生成于 '+esc((D.generatedAt||'').slice(0,16).replace('T',' '))+' · 扫描收件箱 '+esc((D.window||{}).inboxScanned||0)+
+    ' 封 · 累计 '+esc(s.total||0)+' 条（今日 '+esc(s.today||0)+' / 近 7 日 '+esc(s.last7||0)+'）'+
+    (kinds?'<br>类型分布：'+kinds:'')+
+    '<br>'+((s.pending||0)>0?('<b>仍有 '+esc(s.pending)+' 条待处理（需人工查证 / 待补发）。</b>'):'<b>当前无待处理项。</b>')+
+    '<br>数据源：'+esc(D.source||'—');
+})();
+</script>
+
+<script>
+(function(){
+  var B=document.getElementById('finBody');if(!B)return;
+  var D=window.GB_FIN_REPORT;
+  if(!D||!D.days||!D.days.length){B.textContent='AI GB-Fin 监督数据未加载';return;}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  var d=D.days[0];
+  document.getElementById('finKpis').innerHTML=(d.kpi||[]).map(function(k){
+    var cls=k.state==='ok'?'good':(k.state==='warn'?'warn':'bad');
+    return '<div class="kpi '+cls+'"><div class="n">'+esc(k.value)+'</div><div class="l">'+esc(k.name)+'</div></div>';
+  }).join('');
+  B.innerHTML='<div style="font-size:12.5px;line-height:1.85"><b>'+esc(d.headline||'')+'</b>'+
+    '<div style="margin-top:7px">'+(d.facts||[]).map(function(x){return '· '+esc(x);}).join('<br>')+'</div>'+
+    '<div class="note" style="margin-top:7px"><b>缺口：</b>'+(d.gaps||[]).map(esc).join('；')+'</div>'+
+    '<div class="note"><b>门禁：</b>'+esc(d.quotes&&d.quotes.note||'')+'</div>'+
+    '<div class="note">发布 '+esc(d.publishedAt||'')+' · '+esc(D.meta.cadence||'')+' · 监督 '+esc(D.meta.supervisor||'')+'</div></div>';
+})();
+</script>
+<script src="./shared/gb-bfcache-heal.js"></script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="gb-build" content="20261128i">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>创意合作研究报告 · AI GB-Marketing</title>
+<script src="./shared/tabbar.js?v=20261128h"></script>
+<script>
+/* 导航自愈：老缓存里的 tabbar.js 只认 5 个标签，会把 PM / AS 删掉。
+   检测到底部标签不足 7 个时自动重载一次（每会话只刷一次，不会循环）。 */
+(function () {
+  function fix() {
+    var nav = document.querySelector('.gb-tabbar');
+    if (!nav || nav.querySelectorAll('a').length >= 7) return;
+    try {
+      if (sessionStorage.getItem('gbNavFix')) return;
+      sessionStorage.setItem('gbNavFix', '1');
+    } catch (e) { return; }
+    setTimeout(function () { location.reload(); }, 90);
+  }
+  window.addEventListener('load', function () { setTimeout(fix, 900); });
+})();
+</script>
+<style>
+:root{--bg:#eef3f8;--card:#ffffff;--ink:#1a1a1a;--sub:#5b6b7c;--navy:#1a3a5c;--line:#d5dfea;--teal:#18807a;--amber:#9a6b12;--red:#b3261e;--green:#1f7a4d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;padding:18px 16px 90px}
+a{color:var(--navy)}
+.wrap{max-width:1000px;margin:0 auto}
+.top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:14px}
+.back{display:inline-block;padding:7px 12px;background:#fff;border:1px solid var(--line);border-radius:9px;text-decoration:none;font-size:13px;font-weight:600}
+h1{font-size:22px;margin:2px 0 4px;color:var(--navy)}
+.meta{color:var(--sub);font-size:12px;margin-bottom:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+.sh{display:flex;align-items:center;gap:10px;margin:20px 0 10px}
+.sh .bar{width:4px;height:20px;background:var(--teal);border-radius:3px}
+.sh h2{font-size:17px;margin:0;color:var(--navy)}
+.cnt{font-size:11px;font-weight:400;color:var(--sub)}
+.theme{font-size:16px;font-weight:600;color:var(--navy);border-left:3px solid var(--teal);padding-left:12px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:12px}
+.kpi{background:#f7f9fb;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.kpi .n{font-size:21px;font-weight:800;color:var(--navy)}
+.kpi .l{font-size:12px;color:var(--sub)}
+.kpi.good .n{color:var(--green)}.kpi.warn .n{color:var(--amber)}
+.item{border:1px solid var(--line);border-radius:10px;padding:13px 15px;margin-bottom:11px;background:#fff}
+.item.alt{background:#f7f9fb}
+.itop{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:7px}
+.id{font:700 12px/1.4 ui-monospace,Menlo,Consolas,monospace;background:#eef3f8;border:1px solid var(--line);border-radius:6px;padding:2px 7px;color:var(--navy)}
+.tt{font-weight:700;font-size:15px;flex:1;min-width:200px}
+.badge{font-size:11px;border-radius:20px;padding:2px 9px;font-weight:700;white-space:nowrap}
+.badge.v{background:#eaf5ec;color:var(--green)}
+.badge.m{background:#fff6e0;color:var(--amber)}
+.badge.t{background:#eaf1f8;color:var(--navy)}
+.dt{font-size:11px;color:var(--sub)}
+.fact{font-size:13.5px;color:#33404e;margin:5px 0}
+.ins{font-size:13px;background:#fff6e0;border-radius:7px;padding:7px 10px;margin:8px 0;color:#6b4a12}
+.src{font-size:11.5px;color:var(--sub);word-break:break-all}
+.scores{display:flex;gap:14px;flex-wrap:wrap;margin:7px 0;font-size:12px;color:var(--sub)}
+.scores b{color:var(--navy)}
+.risk{font-size:12.5px;color:var(--red);margin:5px 0}
+.next{font-size:13px;background:#eaf5ec;border-radius:7px;padding:7px 10px;color:#1b5c3a}
+.pick{background:#fff6e0;border:1px solid #e6cf95;border-radius:11px;padding:13px 15px}
+ul{margin:6px 0 0;padding-left:20px}
+li{font-size:13px;color:#33404e;margin:4px 0}
+.note{font-size:12px;color:var(--sub);margin-top:8px}
+.sel{font-size:12px;padding:5px 9px;border:1px solid var(--line);border-radius:7px;background:#fff}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="back" href="./index.html">← 返回团队中心</a>
+    <a class="back" href="./tasks.html">📋 每日任务清单</a>
+    <a class="back" href="./supervision.html">📊 监督账本</a>
+    <select class="sel" id="daySel" onchange="render()"></select>
+  </div>
+  <h1>创意合作研究报告</h1>
+  <div class="meta" id="meta"></div>
+
+  <div class="card">
+    <div class="sh"><span class="bar"></span><h2>今日主题 <span class="cnt">· 传播品牌 / 同业合作 / 异业合作</span></h2></div>
+    <div class="theme" id="theme"></div>
+    <div class="kpis" id="kpis"></div>
+    <div class="note" id="headline"></div>
+  </div>
+
+  <div class="sh"><span class="bar"></span><h2>一、真实案例 <span class="cnt">· verified · 逐条附 URL 与日期</span></h2></div>
+  <div id="cases"></div>
+
+  <div class="sh"><span class="bar" style="background:var(--amber)"></span><h2>二、GUNBASE 创意方案 <span class="cnt">· model 推演 · 非已建立合作</span></h2></div>
+  <div id="ideas"></div>
+
+  <div class="sh"><span class="bar" style="background:var(--red)"></span><h2>三、今日首选与红线</h2></div>
+  <div class="card"><div class="pick" id="pick"></div>
+    <div style="margin-top:12px"><b style="color:var(--navy);font-size:13px">红线</b><ul id="guards"></ul></div>
+  </div>
+</div>
+<script src="./shared/reports/gb-creative-partnerships.js"></script>
+<script>
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+var D=(window.GB_CREATIVE||{days:[]});
+var cur=0;
+(function init(){
+  var sel=document.getElementById('daySel');
+  sel.innerHTML=(D.days||[]).map(function(d,i){return '<option value="'+i+'">'+esc(d.date)+'</option>';}).join('');
+  if(D.days&&D.days.length)cur=0;
+})();
+function render(){
+  var d=(D.days||[])[cur];if(!d)return;
+  document.getElementById('meta').textContent=(D.meta?D.meta.title:'')+' · '+d.date+' '+d.weekday+' · '+d.generatedAt;
+  document.getElementById('theme').textContent=d.theme||'';
+  document.getElementById('kpis').innerHTML=(d.kpi||[]).map(function(k){
+    var cls=(k.tone==='green'||k.tone==='teal')?'good':(k.tone==='amber'?'warn':'');
+    return '<div class="kpi '+cls+'"><div class="n">'+esc(k.v)+'</div><div class="l">'+esc(k.k)+' · '+esc(k.d)+'</div></div>';
+  }).join('');
+  document.getElementById('headline').textContent=d.headline||'';
+  document.getElementById('cases').innerHTML=(d.cases||[]).map(function(c,i){
+    return '<div class="item'+(i%2?' alt':'')+'"><div class="itop"><span class="id">'+esc(c.id)+'</span>'+
+      '<span class="badge '+(c.v==='verified'?'v':'m')+'">'+(c.v==='verified'?'verified':'model')+'</span>'+
+      '<span class="badge t">'+esc(c.type)+'</span><span class="dt">'+esc(c.date)+'</span></div>'+
+      '<div class="tt">'+esc(c.title)+'</div><div class="fact">'+esc(c.fact)+'</div>'+
+      '<div class="ins">可借鉴：'+esc(c.insight)+'</div>'+
+      '<div class="src">来源：'+esc(c.src)+' · <a href="'+esc(c.url)+'" target="_blank" rel="noopener">'+esc(c.url)+'</a></div></div>';
+  }).join('');
+  document.getElementById('ideas').innerHTML=(d.ideas||[]).map(function(g,i){
+    return '<div class="item'+(i%2?' alt':'')+'"><div class="itop"><span class="id">'+esc(g.id)+'</span>'+
+      '<span class="badge m">model</span><span class="badge t">'+esc(g.kind)+'</span></div>'+
+      '<div class="tt">'+esc(g.title)+'</div>'+
+      '<div class="fact">'+esc(g.concept)+'</div>'+
+      '<div class="ins">为什么适合：'+esc(g.why)+'</div>'+
+      '<div class="scores"><span>传播价值 <b>'+g.value+'/5</b></span><span>可行性 <b>'+g.feasibility+'/5</b></span><span>引用案例 <b>'+esc((g.ref||[]).join(', '))+'</b></span></div>'+
+      '<div class="risk">风险：'+esc(g.risk)+'</div>'+
+      '<div class="next">下一步：'+esc(g.next)+'</div></div>';
+  }).join('');
+  var p=d.topPick||{};
+  document.getElementById('pick').innerHTML='<b style="color:var(--navy)">今日首选：'+esc(p.id)+'</b><div style="font-size:13px;margin-top:4px">'+esc(p.why)+'</div>'+
+    '<div style="font-size:12.5px;color:var(--sub);margin-top:6px">并行试验：'+esc(p.parallel||'—')+'</div>';
+  document.getElementById('guards').innerHTML=(d.guardrails||[]).map(function(g){return '<li>'+esc(g)+'</li>';}).join('');
+}
+render();
+</script>
+<script src="./shared/gb-bfcache-heal.js"></script>
+</body>
+</html>

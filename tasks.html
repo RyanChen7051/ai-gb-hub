@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="gb-build" content="20261128i">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#123a5e">
+<title>每日任务清单 · AI GB-Team</title>
+<style>
+  :root{--bg:#eef2f7;--card:#fff;--ink:#16212e;--sub:#5b6b7c;--line:#dde5ee;--navy:#123a5e;--navy2:#1d5486;--accent:#b8461f;--red:#b3261e;--redbg:#fdecea;--green:#1f7a4d;--greenbg:#e7f4ec;--amber:#9a6b12;--amberbg:#fbf1d9;--r:14px;--shadow:0 2px 12px rgba(18,58,94,.07)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6;font-size:15px;padding-bottom:74px}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 16px}
+  header{background:linear-gradient(135deg,#0f3252,#1d5486);color:#fff;padding:22px 0}
+  header h1{font-size:20px;font-weight:800}
+  header p{font-size:12px;color:#cfe0ef;margin-top:5px}
+  .hd-pills{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;position:relative;z-index:1}
+  .pill{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);padding:5px 12px;border-radius:20px;font-size:12px;color:#eaf2f9;text-decoration:none}
+  .pill.hot{background:rgba(230,120,90,.22);border-color:rgba(255,170,140,.55);color:#ffe0d2;font-weight:700}
+  .src{display:inline-block;margin-top:10px;font-size:11px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);padding:4px 10px;border-radius:14px}
+  section{margin-top:18px}
+  .sh{display:flex;align-items:center;gap:9px;margin-bottom:10px;flex-wrap:wrap}
+  .sh .bar{width:4px;height:19px;background:var(--accent);border-radius:2px}
+  .sh h2{font-size:16px;color:var(--navy);font-weight:750}
+  .cnt{font-size:11px;color:var(--sub);font-weight:400}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;box-shadow:var(--shadow)}
+  .kpi .n{font-size:26px;font-weight:850;line-height:1.1;color:var(--navy)}
+  .kpi .l{font-size:11.5px;color:var(--sub);margin-top:4px}
+  .line{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;margin-bottom:14px}
+  .line-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:13px 16px;border-bottom:1px solid var(--line);border-left:5px solid var(--lc,var(--navy2));background:#f7fafd}
+  .line-h .nm{font-size:15px;font-weight:800;color:var(--navy)}
+  .line-h .sb{font-size:11.5px;color:var(--sub)}
+  .line-h .num{margin-left:auto;font-size:11px;font-weight:700;color:var(--navy2);background:#e8f0f8;padding:3px 10px;border-radius:12px}
+  .line-b{padding:6px 16px 14px}
+  .task{padding:13px 0;border-bottom:1px dashed var(--line)}
+  .task:last-child{border-bottom:none}
+  .t-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+  .tid{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:800;color:#fff;background:var(--navy2);padding:2px 8px;border-radius:6px;min-width:30px;text-align:center}
+  .tid.kpi{background:var(--amber)}
+  .tname{font-size:14px;font-weight:750;color:var(--ink)}
+  .badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:9px;white-space:nowrap}
+  .badge.time{background:#e8f0f8;color:var(--navy2)}
+  .badge.on{background:var(--greenbg);color:var(--green)}
+  .badge.kpi{background:var(--amberbg);color:var(--amber)}
+  .t-act{font-size:12.5px;color:var(--ink);line-height:1.7;margin:4px 0}
+  .t-evi{font-size:11.5px;color:var(--sub);line-height:1.6}
+  .t-evi b,.t-act b{color:var(--navy)}
+  .t-cons{font-size:11px;color:var(--amber);background:var(--amberbg);border-radius:7px;padding:6px 9px;margin-top:6px}
+  .t-rep{font-size:11px;border-radius:7px;padding:6px 9px;margin-top:7px;line-height:1.6}
+  .t-rep.ok{background:var(--greenbg);color:var(--green)}
+  .t-rep.no{background:var(--redbg);color:var(--red);font-weight:700}
+  .foot{font-size:11.5px;color:var(--sub);background:#fbfcfe;border-top:1px solid var(--line);padding:9px 16px}
+  .rules{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;box-shadow:var(--shadow);font-size:12.5px;line-height:1.85}
+  .rules div{padding-left:14px;position:relative}
+  .rules div:before{content:"·";position:absolute;left:2px;color:var(--accent);font-weight:800}
+  .rules b{color:var(--navy)}
+  a.back{display:inline-block;margin:14px 0 0;color:var(--navy2);font-size:13px;text-decoration:none}
+  .footer{font-size:11px;color:var(--sub);margin:22px 0 8px;line-height:1.8}
+  @media(max-width:520px){
+    header h1{font-size:18px}
+    .line-h .num{margin-left:0}
+    .tname{font-size:13.5px}
+  }
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>每日任务清单 · 四线</h1>
+  <p>只列 AI-GB-Team / Sales / Marketing / RD 四线本身的任务；不混入 AI业务员通用工具链与其它无关项目。</p>
+  <div class="hd-pills">
+    <a class="pill" href="./index.html">← 团队中心</a>
+    <a class="pill hot" href="./supervision.html">📊 监督账本 · 查真实执行 →</a>
+  </div>
+  <span class="src" id="src">数据源载入中…</span>
+</div></header>
+<div class="wrap">
+  <a class="back" href="./index.html">← 返回团队中心</a>
+
+  <section>
+    <div class="kpis" id="kpis"></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="bar"></span><h2>统一判定口径 <span class="cnt">（Team 逐任务打卡按此执行）</span></h2></div>
+    <div class="rules" id="rules"></div>
+  </section>
+
+  <div id="lines"></div>
+
+  <div class="footer" id="footer"></div>
+</div>
+
+<script src="./shared/reports/gb-tasks.js"></script>
+<script src="./shared/reports/gb-supervision.js"></script>
+<script src="./shared/tabbar.js?v=20261128h"></script>
+<script>
+/* 导航自愈：老缓存里的 tabbar.js 只认 5 个标签，会把 PM / AS 删掉。
+   检测到底部标签不足 7 个时自动重载一次（每会话只刷一次，不会循环）。 */
+(function () {
+  function fix() {
+    var nav = document.querySelector('.gb-tabbar');
+    if (!nav || nav.querySelectorAll('a').length >= 7) return;
+    try {
+      if (sessionStorage.getItem('gbNavFix')) return;
+      sessionStorage.setItem('gbNavFix', '1');
+    } catch (e) { return; }
+    setTimeout(function () { location.reload(); }, 90);
+  }
+  window.addEventListener('load', function () { setTimeout(fix, 900); });
+})();
+</script>
+<script>
+(function(){
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  var D=window.GB_TASKS;
+  if(!D){document.getElementById('src').textContent='数据文件未加载';return;}
+  document.getElementById('src').textContent='数据源：'+D.source+' · 整理于 '+D.generatedAt;
+
+  var allTasks=[];
+  D.lines.forEach(function(l){allTasks=allTasks.concat(l.tasks);});
+  var active=allTasks.filter(function(t){return t.status==='ACTIVE';}).length;
+  var kpi=allTasks.filter(function(t){return t.status==='KPI';}).length;
+  var daily=allTasks.filter(function(t){return t.kind==='daily';}).length;
+
+  document.getElementById('kpis').innerHTML=[
+    ['<div class="kpi"><div class="n">'+D.lines.length+'</div><div class="l">业务线数量（Team / Sales / Marketing / RD）</div></div>'],
+    ['<div class="kpi"><div class="n">'+allTasks.length+'</div><div class="l">每日任务总数</div></div>'],
+    ['<div class="kpi"><div class="n">'+active+'</div><div class="l">ACTIVE 自动化任务</div></div>'],
+    ['<div class="kpi"><div class="n">'+kpi+'</div><div class="l">发信 KPI（IMAP Sent 判定）</div></div>']
+  ].map(function(a){return a[0];}).join('');
+
+  var J=D.judgement;
+  document.getElementById('rules').innerHTML=
+    '<div><b>准时：</b>'+esc(J.ontime)+'</div>'+
+    '<div><b>延迟：</b>'+esc(J.late)+'</div>'+
+    '<div><b>严重延迟 / 缺交：</b>'+esc(J.severe)+'</div>'+
+    '<div><b>来源待核：</b>'+esc(J.unverified)+'</div>'+
+    '<div><b>证据源：</b>'+esc(J.evidence)+'</div>'+
+    '<div>'+esc(D.note)+'</div>';
+
+  var repMap={};
+  (window.GB_SUPERVISION&&window.GB_SUPERVISION.reports||[]).forEach(function(r){repMap[r.id]=r;});
+  var colors={sales:'#1d5486',mkt:'#18807a',rd:'#6b4fa0',team:'#b8461f'};
+  document.getElementById('lines').innerHTML=D.lines.map(function(l){
+    var tasks=l.tasks.map(function(t){
+      var st=t.status==='KPI'?'<span class="badge kpi">KPI 判定</span>':'<span class="badge on">ACTIVE</span>';
+      var cons=t.constraint?'<div class="t-cons">硬约束：'+esc(t.constraint)+'</div>':'';
+      var rep='';
+      if(t.report){var rr=repMap[t.id];rep=rr
+        ?'<div class="t-rep '+(rr.delivered?'ok':'no')+'">今日必交报告 · '+(rr.delivered?'已交':'缺交')+' · 证据：'+esc(rr.actual||rr.date||'—')+'</div>'
+        :'<div class="t-rep no">今日必交报告 · 状态未加载</div>';}
+      return '<div class="task">'+
+        '<div class="t-top"><span class="tid'+(t.kind==='kpi'?' kpi':'')+'">'+esc(t.id)+'</span>'+
+        '<span class="tname">'+esc(t.name)+'</span>'+
+        '<span class="badge time">'+esc(t.schedule)+'</span>'+st+'</div>'+
+        '<div class="t-act">'+esc(t.action)+'</div>'+
+        '<div class="t-evi"><b>产物 / 证据：</b>'+esc(t.evidence)+'</div>'+rep+cons+'</div>';
+    }).join('');
+    var foot=l.footnote?'<div class="foot">'+esc(l.footnote)+'</div>':'';
+    return '<section><div class="sh"><span class="bar"></span><h2>'+esc(l.name)+'</h2></div>'+
+      '<div class="line" style="--lc:'+(colors[l.id]||'#1d5486')+'">'+
+      '<div class="line-h"><span class="nm">'+esc(l.name)+'</span><span class="sb">'+esc(l.subtitle)+'</span><span class="num">'+l.tasks.length+' 项</span></div>'+
+      '<div class="line-b">'+tasks+'</div>'+foot+'</div></section>';
+  }).join('');
+
+  document.getElementById('footer').innerHTML='本页任务取自本机自动化配置（workbuddy.db / automations）与守门脚本 daily_guard.py，属于内部运行配置，非外部文献引用；如任务调整，更新 shared/reports/gb-tasks.js 后本页自动同步。整理于 '+esc(D.generatedAt)+'。';
+})();
+</script>
+<script src="./shared/gb-bfcache-heal.js"></script>
+</body>
+</html>

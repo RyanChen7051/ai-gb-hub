@@ -4,7 +4,7 @@
  *     fetch(req) 会命中 HTTP 缓存拿到旧文件 → 必须 fetch(req,{cache:'no-store'})。
  * 作用域：/ai-gb-hub/ 全域（含 marketing、sales）；rd/ 与 pm/ 有自己更窄的 SW，优先级更高。
  */
-const CACHE = 'ai-gb-team-hub-v45';
+const CACHE = 'ai-gb-team-hub-v46';
 const BASE = './';
 const CORE = [
   BASE,
@@ -15,6 +15,13 @@ const CORE = [
   BASE + 'fin/data.js',
   BASE + 'shared/reports/gb-reports.js',
   BASE + 'shared/reports/gb-supervision.js',
+  BASE + 'shared/reports/gb-tasks.js',
+  BASE + 'shared/reports/gb-daily-facts.js',
+  BASE + 'shared/reports/gb-delivery-failures.js',
+  BASE + 'shared/reports/gb-creative-partnerships.js',
+  BASE + 'supervision.html',
+  BASE + 'tasks.html',
+  BASE + 'creative.html',
   BASE + 'shared/reports/gb-email-log.js',
   BASE + 'shared/reports/gb-market-intel.js',
   BASE + 'shared/market-intel-widget.js',

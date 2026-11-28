@@ -1,0 +1,144 @@
+window.GB_DELIVERY_FAILURES = {
+ "generatedAt": "2026-11-27T21:12:18.456569+08:00",
+ "date": "2026-11-27",
+ "source": "IMAP INBOX 只读扫描投递失败回执（DSN/postmaster）；定性优先取 bounce_loop_report_latest.json",
+ "window": {
+  "since": "2026-10-13",
+  "inboxScanned": 15
+ },
+ "scope": "只统计「没送达的邮件」；发信闸门拦下未发出的邮件不在此清单",
+ "summary": {
+  "total": 5,
+  "today": 1,
+  "last7": 4,
+  "hard": 5,
+  "soft": 0,
+  "reachedOnly": 2,
+  "pending": 2
+ },
+ "byKind": [
+  {
+   "kind": "USER_UNKNOWN",
+   "name": "收件人不存在（5.1.1）",
+   "count": 2
+  },
+  {
+   "kind": "DNS_MX",
+   "name": "域名无 MX 记录（从未送达）",
+   "count": 2
+  },
+  {
+   "kind": "FWD_BLOCKED",
+   "name": "对方禁止外部转发（5.7.520）",
+   "count": 1
+  }
+ ],
+ "items": [
+  {
+   "fp": "dd181f9ac5b3",
+   "at": "2026-11-27 17:17",
+   "date": "2026-11-27",
+   "to": "p***@sss.no",
+   "subject": "Optics for Safety and Security Services",
+   "orig_to": "p***@sss.no",
+   "code": "5.7.520",
+   "statusCode": "5.7.520",
+   "kind": "FWD_BLOCKED",
+   "kindName": "对方禁止外部转发（5.7.520）",
+   "hard": true,
+   "reached": true,
+   "advice": "信已进对方邮箱，是转发那一步被对方管理员拦下；重发同一地址结果不变",
+   "dsn_subject": "Undeliverable: Optics for Safety and Security Services",
+   "relayed_ok": false,
+   "action": "no_need",
+   "actionSource": "bounce_loop_report_latest.json",
+   "actionLabel": "严禁补发（主收件人已送达）"
+  },
+  {
+   "fp": "81ceb575335e",
+   "at": "2026-11-25 16:30",
+   "date": "2026-11-25",
+   "to": "p***@gmail.com",
+   "subject": "Оптика за Inter-Holding doo",
+   "orig_to": "p***@gmail.com",
+   "code": "5.1.1",
+   "statusCode": "5.1.1",
+   "kind": "USER_UNKNOWN",
+   "kindName": "收件人不存在（5.1.1）",
+   "hard": true,
+   "reached": false,
+   "advice": "未在当前正确地址库，需联网核验正确邮箱后补发；查不到则淘汰，禁止猜测硬发",
+   "dsn_subject": "Delivery Status Notification (Failure)",
+   "relayed_ok": false,
+   "action": "manual",
+   "actionSource": "bounce_loop_report_latest.json",
+   "actionLabel": "待人工查证"
+  },
+  {
+   "fp": "28d4fd99a0d4",
+   "at": "2026-11-24 15:15",
+   "date": "2026-11-24",
+   "to": "i***@arabianhunter.sa",
+   "subject": "Optics for Ben Humaid National Trading",
+   "orig_to": "i***@arabianhunter.sa",
+   "code": "",
+   "statusCode": "5.0.0",
+   "kind": "DNS_MX",
+   "kindName": "域名无 MX 记录（从未送达）",
+   "hard": true,
+   "reached": false,
+   "advice": "可修复：i***@arabianhunter.sa -> c***@arabianhunter.com（官网 arabianhunter.com/contactus 公布 c***@arabianhunter.com；.sa域名dig无MX硬退信）",
+   "dsn_subject": "Delivery Status Notification (Failure)",
+   "relayed_ok": false,
+   "action": "done",
+   "actionSource": "bounce_loop_report_latest.json",
+   "actionLabel": "已补发（IMAP Sent 可核）"
+  },
+  {
+   "fp": "baa5e17d6e64",
+   "at": "2026-11-24 14:30",
+   "date": "2026-11-24",
+   "to": "g***@beyteknoloji.com",
+   "subject": "Optik – BEY TEKNOLOJI",
+   "orig_to": "i***@beyteknoloji.com",
+   "code": "5.1.1",
+   "statusCode": "5.1.1",
+   "kind": "USER_UNKNOWN",
+   "kindName": "主信已送达·仅内部别名失效",
+   "hard": true,
+   "reached": true,
+   "advice": "beyteknoloji 主收件人 info@ 已成功送达（同批 MTA-BLOCKED 报告证实）；本地址是对方内部转发列表成员失效 → 严禁补发，防重复骚扰",
+   "dsn_subject": "Delivery status notification, MTA-BLOCKED",
+   "relayed_ok": true,
+   "action": "no_need",
+   "actionSource": "bounce_loop_report_latest.json",
+   "actionLabel": "严禁补发（主收件人已送达）"
+  },
+  {
+   "fp": "0ea5f4281b03",
+   "at": "2026-11-18 13:37",
+   "date": "2026-11-18",
+   "to": "i***@lobo-tactical.com",
+   "subject": "Optics & weapon lights for Lobo Tactical's outdoor range - GunBase",
+   "orig_to": "i***@lobo-tactical.com",
+   "code": "",
+   "statusCode": "5.0.0",
+   "kind": "DNS_MX",
+   "kindName": "域名无 MX 记录（从未送达）",
+   "hard": true,
+   "reached": false,
+   "advice": "地址无效：该域名不收信，必须换域名或换址",
+   "dsn_subject": "Delivery Status Notification (Failure)",
+   "relayed_ok": false,
+   "action": "manual",
+   "actionSource": "delivery_failure_list.py 规则推断",
+   "actionLabel": "待人工查证"
+  }
+ ],
+ "notes": [
+  "「对方禁止外部转发」表示信已进对方邮箱，转发那一步被对方管理员拦下，地址本身有效，重发同址无效。",
+  "「主信已送达·仅内部别名失效」表示主收件人已收到，被拒的只是对方内部转发列表成员，严禁补发。",
+  "「未分类退信」必须人工看原文核验，不得当成地址失效直接淘汰客户。",
+  "本清单只读收件箱回执，不判断邮件是否被阅读；已读信号看事实板的「已读回执」一项。"
+ ]
+};
