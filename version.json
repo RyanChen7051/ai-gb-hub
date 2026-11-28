@@ -1,9 +1,10 @@
 {
-  "version": "2.2.4",
-  "build": "20261128j",
+  "version": "2.2.5",
+  "build": "20261128k",
   "released": "2026-11-28",
-  "title": "监督账本补底部导航；三张 404 页面落库并做公开脱敏",
+  "title": "缓存破冰：修手机端锁死旧界面；新增一键修复页 /reset/",
   "changelog": [
+    "v2.2.5 缓存破冰 —— 手机端（尤其 iOS 主屏 Web App）会被冻结的内存快照或旧 Service Worker 锁死在旧界面：即使服务器已是新版，页面也不会重新发一次导航请求。本版做了三件事：① 版本号升到 20261128k，任何还带自愈脚本的页面一开就强制换 query 重取；② 自愈脚本跳过 RD 的 e-<build>.html 不可变快照，避免快照页每次进来白刷一次；③ 新增 /reset/ 一键修复页，注销全部 Service Worker + 清空全部 Cache Storage 后跳回首页，用于救已经彻底锁死的设备。",
     "v2.2.4 补监督账本的底部导航 —— 该页原先只挂了 tabbar 自愈脚本、没挂 tabbar.js 本体，手机进得去出不来，只能按浏览器后退。现补 tabbar.js + 手机端为固定底栏让出 80px（env(safe-area-inset-bottom) 兜住 iOS 玻璃条）。同批把「监督账本 / 每日任务 / 创意合作」三页及其 5 个数据脚本纳入仓库（此前线上 404），并在输出端与生成端双重脱敏：gb-supervision.js 的 8 个真实收件地址、gb-delivery-failures.js 的 7 个，全部改为「首字母 + ***@域名」，自有域名 gunbase-optics.com 不脱敏；supervision_ledger.py / delivery_failure_list.py 新增 scrub()，今后每日重算也不会写回完整地址。七个 SW 缓存 +1（根 v47 / sales v54 / mkt v35 / rd v24 / pm v4 / as v4 / fin v5），RD 快照 e-20261128j.html。",
     "v2.2.3 版本自愈守卫 v3 —— 修「发布会新版、页面还是几小时前那版」。①真实成因有两层：一是 14:16 那次修底部导航时，把 shared/gb-bfcache-heal.js 的引用整行删掉了，标签页从早上一直开着、再没重新加载，于是永远停在那次加载的 HTML（截图里 build 20261128e 就是证据）；二是即使有自愈脚本，原版只用 location.reload()，会被 Pages 的 max-age=600 HTTP 缓存原地接住，看起来「刷了但还是旧的」。②新版守卫：从脚本自身 URL 推出上一级 version.json，用 cache:no-store 取线上 build，与本页 <meta name=\"gb-build\"> 比对，不一致就把 ?_gb=<build> 挂到 URL 上 location.replace —— 查询串一变，HTTP 缓存与 SW 缓存的键全变，旧副本不可能再被命中；同页面同 build 每会话只刷一次，不循环。③触发时机：首屏立刻 / load / bfcache 还原(pageshow.persisted) / 回到前台聚焦 / 网络恢复。④十一个页面统一挂载（团队中心、Sales、Marketing、RD 门与 app、PM、AS、Fin、监督账本、每日任务、创意合作），全部带 meta gb-build=20261128i，全站只认总部一个版本号。⑤七个 SW 缓存 +1（根 v45 / sales v53 / mkt v34 / rd v23 / pm v3 / as v3 / fin v4），RD 生成不可变快照 e-20261128i.html。",
     "v2.2.0 新增第六条业务线 AI GB-AS（售后服务部），依据所有者 2026-11-28 指令：与 Sales 平行协作、同受总部 AI GB-Team 管辖；Sales 开发邮件中「已开始服务」客户的客诉转给 AS；与 RD 配合；PWA 强闪烁提示客诉回复；AS 只采集信息并通知所有者，延伸动作由所有者本人执行。①新建 as/ 独立 PWA（manifest / 独立 SW 前缀 ai-gb-as-v1 / version.json / data.js / app.js / style.css / as-logo.svg / assets），七个视图：总览、客诉台账、客诉采集、Sales 转交、通知中心、RD 协同、章程。②强闪烁提醒：红色横幅发光+文字闪烁+角标、浏览器标题栏闪烁、提示音（可关）；有「待通知/待回复」客诉时触发，点「复制通知摘要」后标记已通知并停止，AS 不自动外发。③Sales 转交：只读拉取真实回信池 Supabase ai_sales_inbox（与 Sales 页同数据源），使用者判断为客诉后一键预填为客诉单，不回写 Sales 台账、不自动发信、不自动判客诉。④RD 协同：按脱敏口径生成痛点线索移交单草稿，需所有者确认后交 RD，不自动写入 rd/data.js。⑤客诉单只写本机 localStorage，首条演示数据标 demo=true 可一键清空，不编造真实客诉。⑥四处同步：gb-team.js 新增 GB-AS 角色与 F5/F6/F7 协作流、共享实体 complaint、三条护栏；tabbar.js 增至七个标签且 ≤430px 改短名（Sales/MKT/RD/PM/AS/Fin🔒）；总部首页顶部/底部导航、入口卡（AS 专属砖红色）、「五个角色」改「六个角色」、已上线计数同步；根 SW v42 预缓存 AS 文件，AS 独立 SW v1。",

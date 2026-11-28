@@ -34,6 +34,10 @@
   } catch (e) { return; }
   if (!verURL) return;
 
+  // RD 的 e-<build>.html 是不可变快照：它的 meta 天生比线上版本旧，
+  // 不该被自愈逻辑当成「旧副本」反复强刷（否则每次进 RD 都要白刷一次）。
+  if (/\/e-\d{8}[a-z]?\.html$/.test(location.pathname)) return;
+
   var meta = document.querySelector('meta[name="gb-build"]');
   var mine = meta ? (meta.getAttribute('content') || '') : '';
   var base = null;          // 本次加载时线上实际版本（bfcache 还原后仍留在 JS 堆里）

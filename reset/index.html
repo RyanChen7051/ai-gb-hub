@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#123a5e">
+<meta name="robots" content="noindex">
+<title>PWA 一键修复 · 清缓存回新版</title>
+<style>
+  :root{--navy:#123a5e;--navy2:#1c4c78;--line:#d8e2ec;--ink:#1a1a1a;--muted:#5b6b7b;--ok:#1f7a4d;--warn:#b8461f}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;min-height:100%}
+  body{background:#eef2f7;color:var(--ink);
+       font:15px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+       display:flex;align-items:center;justify-content:center;padding:22px 16px calc(22px + env(safe-area-inset-bottom))}
+  .card{width:100%;max-width:420px;background:#fff;border:1px solid var(--line);border-radius:16px;
+        box-shadow:0 10px 30px rgba(18,58,94,.10);overflow:hidden}
+  .hd{background:var(--navy);color:#fff;padding:16px 18px}
+  .hd h1{margin:0;font-size:16px;font-weight:700;letter-spacing:.2px}
+  .hd p{margin:4px 0 0;font-size:12px;color:#cfe0f0}
+  .bd{padding:16px 18px 18px}
+  ol{margin:0 0 14px;padding-left:20px}
+  li{margin:0 0 8px;font-size:13.5px;color:var(--muted)}
+  li b{color:var(--ink)}
+  .stat{display:flex;align-items:center;gap:9px;background:#f4f8fc;border:1px solid var(--line);
+        border-radius:10px;padding:10px 12px;font-size:13px;color:var(--navy);margin:0 0 12px}
+  .dot{width:9px;height:9px;border-radius:50%;background:#b8c6d4;flex:none}
+  .dot.run{background:#e0a020;animation:bl 1s ease-in-out infinite}
+  .dot.ok{background:var(--ok)}
+  @keyframes bl{50%{opacity:.25}}
+  .row{display:flex;gap:9px;flex-wrap:wrap}
+  button,a.btn{flex:1 1 140px;appearance:none;border:1px solid var(--navy);background:var(--navy);color:#fff;
+        font:600 14px/1 inherit;padding:12px 14px;border-radius:10px;text-align:center;text-decoration:none;cursor:pointer}
+  a.btn.ghost{background:#fff;color:var(--navy)}
+  .tip{margin:12px 0 0;font-size:12px;color:var(--muted);line-height:1.6}
+  .ver{margin-top:10px;font-size:11.5px;color:#8a99a8;text-align:center}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="hd">
+    <h1>PWA 一键修复</h1>
+    <p>清掉手机上锁死的旧界面缓存</p>
+  </div>
+  <div class="bd">
+    <div class="stat"><span class="dot run" id="dot"></span><span id="msg">正在清理…</span></div>
+    <ol>
+      <li>注销本站全部 <b>Service Worker</b>（旧版离线脚本是最常见的锁死源）</li>
+      <li>清空本站全部 <b>Cache Storage</b> 缓存副本</li>
+      <li>用带时间戳的新地址重新打开首页，绕开 HTTP 缓存</li>
+    </ol>
+    <div class="row">
+      <a class="btn" id="go" href="../../index.html?fresh=1">立即回首页</a>
+      <a class="btn ghost" href="javascript:location.reload()">再清一次</a>
+    </div>
+    <p class="tip" id="tip">清理完会自动跳回首页。若首页仍是旧界面，说明是 iOS 把整个 Web App 冻结在内存里了 —— 见下方「彻底修复」。</p>
+    <p class="tip"><b>彻底修复（iOS 30 秒）</b>：<br>① 从多任务里上划划掉这个 App；<br>② 删除桌面图标；<br>③ 用 Safari 打开本站，重新「添加到主屏幕」。</p>
+    <div class="ver" id="ver"></div>
+  </div>
+</div>
+<script>
+(function () {
+  var dot = document.getElementById('dot');
+  var msg = document.getElementById('msg');
+  var tip = document.getElementById('tip');
+  var ver = document.getElementById('ver');
+  var go = document.getElementById('go');
+
+  function say(t) { msg.textContent = t; }
+  function done(t, ok) {
+    say(t);
+    dot.className = 'dot ' + (ok === false ? '' : 'ok');
+  }
+
+  // 首页新地址：带时间戳，HTTP 缓存与 SW 缓存的键都变
+  var next = new URL('../../index.html', location.href);
+  next.searchParams.set('fresh', String(Date.now()));
+  go.href = next.href;
+
+  var jobs = [];
+
+  // ① 注销 Service Worker
+  if ('serviceWorker' in navigator) {
+    jobs.push(navigator.serviceWorker.getRegistrations().then(function (rs) {
+      return Promise.all(rs.map(function (r) {
+        return r.unregister().catch(function () {});
+      })).then(function () { return 'sw:' + rs.length; });
+    }).catch(function () { return 'sw:err'; }));
+  }
+
+  // ② 清 Cache Storage
+  if (window.caches && caches.keys) {
+    jobs.push(caches.keys().then(function (ks) {
+      return Promise.all(ks.map(function (k) {
+        return caches.delete(k).catch(function () {});
+      })).then(function () { return 'cache:' + ks.length; });
+    }).catch(function () { return 'cache:err'; }));
+  }
+
+  Promise.all(jobs).then(function (res) {
+    var swN = 0, cN = 0;
+    res.forEach(function (r) {
+      var a = String(r).split(':');
+      if (a[0] === 'sw') swN = a[1];
+      if (a[0] === 'cache') cN = a[1];
+    });
+    done('已清理：Service Worker ' + swN + ' 个 / 缓存桶 ' + cN + ' 个', true);
+    ver.textContent = '本页是破冰页 · ' + new Date().toLocaleString('zh-CN');
+    // 给浏览器 1.2 秒落地注销结果，再跳
+    setTimeout(function () {
+      location.replace(next.href);
+    }, 1200);
+  }).catch(function () {
+    done('清理未完成，可直接点「立即回首页」', false);
+  });
+})();
+</script>
+</body>
+</html>
