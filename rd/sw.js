@@ -2,7 +2,7 @@
  * 网络优先（强制绕过 HTTP 缓存）+ Cache API 离线兜底。
  * 改任何前端文件后，同步递增 CACHE 版本号，否则旧 SW 会继续提供旧副本。
  */
-const CACHE = 'ai-gb-rd-v23';
+const CACHE = 'ai-gb-rd-v24';
 const BASE = './';
 const CORE = [
   BASE,

@@ -2,7 +2,7 @@
  * 门禁提醒：本 SW 只缓存公开宏观数据 data.js 与锁屏页面本身。
  * 成本输入从不进入网络请求，也不进 Cache Storage —— 只在 file:// 的 localStorage。
  */
-const CACHE = 'ai-gb-fin-v4';
+const CACHE = 'ai-gb-fin-v5';
 const BASE = './';
 const CORE = [
   BASE + 'index.html',
