@@ -93,7 +93,7 @@
 
 <script src="./shared/reports/gb-tasks.js"></script>
 <script src="./shared/reports/gb-supervision.js"></script>
-<script src="./shared/tabbar.js?v=20261128h"></script>
+<script src="./shared/tabbar.js?v=20261128l"></script>
 <script>
 /* 导航自愈：老缓存里的 tabbar.js 只认 5 个标签，会把 PM / AS 删掉。
    检测到底部标签不足 7 个时自动重载一次（每会话只刷一次，不会循环）。 */
@@ -167,6 +167,6 @@
   document.getElementById('footer').innerHTML='本页任务取自本机自动化配置（workbuddy.db / automations）与守门脚本 daily_guard.py，属于内部运行配置，非外部文献引用；如任务调整，更新 shared/reports/gb-tasks.js 后本页自动同步。整理于 '+esc(D.generatedAt)+'。';
 })();
 </script>
-<script src="./shared/gb-bfcache-heal.js"></script>
+<script src="./shared/gb-bfcache-heal.js?v=20261128l"></script>
 </body>
 </html>

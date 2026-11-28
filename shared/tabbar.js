@@ -49,6 +49,24 @@
   var inSub = /\/(sales|marketing|rd|fin|pm|as)\//.test(path);
   var P = inSub ? '../' : './';
   var here = /\/sales\//.test(path) ? 'sales' : (/\/marketing\//.test(path) ? 'mkt' : (/\/rd\//.test(path) ? 'rd' : (/\/fin\//.test(path) ? 'fin' : (/\/pm\//.test(path) ? 'pm' : (/\/as\//.test(path) ? 'as' : 'team')))));
+
+  /* 站点根（2026-11-28）：一律用**绝对路径**拼链接，不再用 ../ 相对路径。
+   * 为什么：只要页面被打开在非预期深度（例如 .../ai-gb-hub/pm/、带尾斜杠、
+   * 或在子目录里再点一次），相对路径就会拼成 /ai-gb-hub/pm/as/index.html 这种
+   * 不存在的地址 → 除了当前这页，其余标签全 404。绝对路径与当前深度无关。
+   * 根从脚本自身地址推：.../ai-gb-hub/shared/tabbar.js → /ai-gb-hub/ */
+  var ROOT = './';
+  try {
+    var self = document.currentScript;
+    if (!self || !self.src) {
+      var all = document.querySelectorAll('script[src*="tabbar.js"]');
+      self = all[all.length - 1];
+    }
+    if (self && self.src) {
+      ROOT = new URL(self.src, location.href).pathname.replace(/shared\/[^\/]*$/, '');
+    }
+  } catch (e) { ROOT = './'; }
+  if (ROOT.charAt(ROOT.length - 1) !== '/') ROOT += '/';
   /* 版本指纹：给每个入口加 ?v=<build>。
    * 为什么必须加：某条路径一旦在旧版里 404 过（例如 pm/ 曾经整目录没提交），
    * 旧 Service Worker 会把那条 404 响应按 URL 缓存下来，之后即使服务器修好了，
@@ -58,15 +76,15 @@
     var bm = document.querySelector('meta[name="gb-build"]');
     BUILD = bm ? (bm.getAttribute('content') || '') : '';
   } catch (e) { BUILD = ''; }
-  function u(p) { return BUILD ? p + '?v=' + BUILD : p; }
+  function u(p) { return ROOT + p + (BUILD ? '?v=' + BUILD : ''); }
   var TABS = [
-    ['team', '团队中心', u(P + 'index.html')],
-    ['sales', 'AI GB-Sales', u(P + 'sales/index.html')],
-    ['mkt', 'AI GB-MKT', u(P + 'marketing/index.html')],
-    ['rd', 'AI GB-RD', u(P + 'rd/index.html')],
-    ['pm', 'AI GB-PM', u(P + 'pm/index.html')],
-    ['as', 'AI GB-AS', u(P + 'as/index.html')],
-    ['fin', 'Fin 🔒', u(P + 'fin/index.html')]
+    ['team', '团队中心', u('index.html')],
+    ['sales', 'AI GB-Sales', u('sales/index.html')],
+    ['mkt', 'AI GB-MKT', u('marketing/index.html')],
+    ['rd', 'AI GB-RD', u('rd/index.html')],
+    ['pm', 'AI GB-PM', u('pm/index.html')],
+    ['as', 'AI GB-AS', u('as/index.html')],
+    ['fin', 'Fin 🔒', u('fin/index.html')]
   ];
   /* 窄屏短标签：七个全名并排会在 360px 被截成半个字；这里给一套短名，
      fit() 之前先按可视宽度决定用全名还是短名（团队中心保持全名） */
