@@ -112,6 +112,22 @@
 <script src="../shared/gb-team.js"></script>
 <script src="./data.js"></script>
 <script src="./app.js"></script>
-<script src="../shared/tabbar.js"></script>
+<script src="../shared/tabbar.js?v=20261128h"></script>
+<script>
+/* 导航自愈：老缓存里的 tabbar.js 只认 5 个标签，会把 PM / AS 删掉。
+   检测到底部标签不足 7 个时自动重载一次（每会话只刷一次，不会循环）。 */
+(function () {
+  function fix() {
+    var nav = document.querySelector('.gb-tabbar');
+    if (!nav || nav.querySelectorAll('a').length >= 7) return;
+    try {
+      if (sessionStorage.getItem('gbNavFix')) return;
+      sessionStorage.setItem('gbNavFix', '1');
+    } catch (e) { return; }
+    setTimeout(function () { location.reload(); }, 90);
+  }
+  window.addEventListener('load', function () { setTimeout(fix, 900); });
+})();
+</script>
 </body>
 </html>

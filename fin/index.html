@@ -294,7 +294,23 @@
   <a class="here" href="./index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h4M7 16h4"/></svg><span>Fin 🔒</span></a>
 </nav>
 <script src="./data.js"></script>
-<script src="../shared/tabbar.js"></script>
+<script src="../shared/tabbar.js?v=20261128h"></script>
+<script>
+/* 导航自愈：老缓存里的 tabbar.js 只认 5 个标签，会把 PM / AS 删掉。
+   检测到底部标签不足 7 个时自动重载一次（每会话只刷一次，不会循环）。 */
+(function () {
+  function fix() {
+    var nav = document.querySelector('.gb-tabbar');
+    if (!nav || nav.querySelectorAll('a').length >= 7) return;
+    try {
+      if (sessionStorage.getItem('gbNavFix')) return;
+      sessionStorage.setItem('gbNavFix', '1');
+    } catch (e) { return; }
+    setTimeout(function () { location.reload(); }, 90);
+  }
+  window.addEventListener('load', function () { setTimeout(fix, 900); });
+})();
+</script>
 <script>
 /* 版本自愈：HTTP 缓存/CDN 可能供旧页面，读到更新 build 时换带版本号的地址重载一次。 */
 (function(){

@@ -1,6 +1,6 @@
 {
-  "version": "1.1.0",
-  "build": "20261128b",
+  "version": "1.1.1",
+  "build": "20261128c",
   "released": "2026-11-28",
   "title": "AI GB-Fin v1.1.0：云端/手机口令解锁（本机 file:// 仍自动进入）",
   "cache": "ai-gb-fin-v2",
