@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#123a5e">
+<meta name="description" content="AI GB-Fin · 对内成本与报价测算（内部专用，不对外）">
+<meta name="robots" content="noindex,nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="AI GB-Fin">
+<link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./assets/icon-192.png">
+<link rel="manifest" href="./manifest.webmanifest">
+<title>AI GB-Fin · 成本与报价测算（内部）</title>
+<style>
+  :root{
+    --bg:#eef2f7;--card:#fff;--ink:#16212e;--sub:#5b6b7c;--line:#dde5ee;
+    --navy:#123a5e;--navy2:#1d5486;--accent:#b8461f;--gold:#c08a2e;
+    --green:#1f7a4d;--greenbg:#e7f4ec;--amber:#9a6b12;--amberbg:#fbf1d9;
+    --red:#b42318;--redbg:#fdeceb;--teal:#126b6b;--tealbg:#e4f2f1;
+    --shadow:0 2px 12px rgba(18,58,94,.07);--r:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6;font-size:14px;padding-bottom:64px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 18px}
+  .gb-bar{background:#0d2a45;color:#dce9f5;font-size:12px}
+  .gb-lab-row{display:flex;gap:10px;align-items:center;padding:5px 0;font-size:10.5px;opacity:.85;flex-wrap:wrap}
+  .gb-lab-row .sp{opacity:.75}
+  .gb-tabs{display:flex;gap:4px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+  .gb-tabs::-webkit-scrollbar{display:none}
+  .gb-tabs a{color:#c8dced;text-decoration:none;padding:5px 10px;border-radius:7px;white-space:nowrap;font-size:12px}
+  .gb-tabs a:hover{background:rgba(255,255,255,.1)}
+  .gb-tabs a.here{background:rgba(255,255,255,.18);color:#fff;font-weight:700}
+  header{background:linear-gradient(135deg,#0f3252 0%,#1d5486 60%,#23669c 100%);color:#fff;padding:24px 0 22px;position:relative;overflow:hidden}
+  header::before{content:"";position:absolute;right:-60px;top:-90px;width:280px;height:280px;border:1px solid rgba(255,255,255,.1);border-radius:50%;box-shadow:0 0 0 50px rgba(255,255,255,.03),0 0 0 100px rgba(255,255,255,.018)}
+  .hd{display:flex;align-items:center;gap:14px;position:relative;z-index:1}
+  .hd img{width:58px;height:58px;border-radius:12px;background:rgba(255,255,255,.13);padding:4px}
+  .hd h1{font-size:23px;font-weight:800}
+  .hd .sub{font-size:12.5px;color:#cfe0ef;margin-top:2px}
+  .hd-pills{margin-top:14px;display:flex;gap:7px;flex-wrap:wrap;position:relative;z-index:1}
+  .pill{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);padding:4px 11px;border-radius:20px;font-size:11.5px;color:#eaf2f9}
+  .pill.lock{background:rgba(255,200,120,.18);border-color:rgba(255,210,150,.5);color:#ffe4bd;font-weight:700}
+  .pill.live{background:rgba(90,220,150,.16);border-color:rgba(120,235,170,.45);color:#c9f7dd}
+  section{margin-top:20px}
+  .sh{display:flex;align-items:center;gap:9px;margin-bottom:11px;flex-wrap:wrap}
+  .sh .bar{width:4px;height:19px;background:var(--accent);border-radius:2px}
+  .sh h2{font-size:16.5px;color:var(--navy);font-weight:750}
+  .sh .hint{font-size:11px;color:var(--sub);margin-left:auto}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+  .pad{padding:15px 17px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:860px){.grid2,.grid3{grid-template-columns:1fr}}
+  .card-h{display:flex;align-items:center;gap:9px;padding:11px 15px;background:#f6f9fc;border-bottom:1px solid var(--line)}
+  .card-h .ic{width:22px;height:22px;border-radius:6px;background:var(--navy);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .card-h h3{font-size:13.5px;color:var(--navy);font-weight:750}
+  .card-h .tag{margin-left:auto;font-size:10px;color:var(--sub)}
+  .frow{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px dashed #eef2f7;font-size:12.5px}
+  .frow:last-child{border-bottom:0}
+  .frow label{flex:1;color:#33465a}
+  .frow .u{font-size:10.5px;color:var(--sub);min-width:56px}
+  input.num,select.sel{border:1px solid #ccd8e5;border-radius:7px;padding:6px 8px;font-size:12.5px;background:#fff;color:var(--ink);width:112px;font-variant-numeric:tabular-nums}
+  input.num:focus,select.sel:focus{outline:2px solid rgba(29,84,134,.25);border-color:var(--navy2)}
+  input.num[data-manual="1"]{background:#fff8e8;border-color:#d9a441}
+  .sub-h{font-size:10.5px;font-weight:800;color:var(--navy2);letter-spacing:.5px;margin:10px 0 3px;text-transform:uppercase}
+  .note{font-size:11px;color:var(--sub);line-height:1.65}
+  .fm{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid #f0f4f8}
+  .fm:last-child{border-bottom:0}
+  .fm .fl{flex:1;min-width:0}
+  .fm .fl b{display:block;font-size:12px;font-weight:650}
+  .fm code{font-size:10px;color:#7a8a99;display:block;margin-top:1px;word-break:break-all;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  .fm .fv{font-size:13.5px;font-weight:750;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--navy)}
+  .fm.hi{background:#f4f9fd;margin:0 -15px;padding:9px 15px;border-left:3px solid var(--navy2)}
+  .fm.hi .fv{color:var(--accent);font-size:15px}
+  .warnbox{margin-bottom:12px;padding:10px 13px;border-radius:10px;font-size:12px;line-height:1.75;background:var(--amberbg);border:1px solid #e8c980;color:#6f4d08}
+  .warnbox.ok{background:var(--greenbg);border-color:#a9d9bd;color:#155c39}
+  .fxbar{display:flex;align-items:center;gap:8px;margin-top:10px;padding:8px 11px;border-radius:9px;background:#f2f7fb;border:1px solid var(--line);font-size:11px;color:var(--sub);flex-wrap:wrap}
+  .fxbar b{color:var(--navy)}
+  .btn{border:0;border-radius:8px;padding:8px 13px;font-size:12px;font-weight:700;cursor:pointer;background:var(--navy);color:#fff}
+  .btn:hover{background:var(--navy2)}
+  .btn.ghost{background:#fff;color:var(--navy2);border:1px solid #b9cde0}
+  .btn.warn{background:var(--accent)}
+  table{width:100%;border-collapse:collapse;font-size:11.5px}
+  th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:#f6f9fc;color:var(--navy);font-size:10.5px;font-weight:750;position:sticky;top:0}
+  td.num{text-align:right;font-variant-numeric:tabular-nums}
+  .tw{overflow-x:auto;max-height:460px;overflow-y:auto}
+  .badge{display:inline-block;font-size:9.5px;font-weight:800;padding:1px 6px;border-radius:8px;white-space:nowrap}
+  .badge.v{background:var(--greenbg);color:var(--green)}
+  .badge.a{background:var(--amberbg);color:var(--amber)}
+  .badge.p{background:var(--redbg);color:var(--red)}
+  .src{font-size:10.5px;color:var(--sub);line-height:1.8}
+  .src li{margin-bottom:5px}
+  .quote{background:#fbfcfe;border:1px dashed #b9cde0;border-radius:10px;padding:13px;font-size:12px;line-height:1.9}
+  .quote .ln{display:flex;gap:8px;border-bottom:1px solid #eef2f7;padding:2px 0}
+  .quote .ln b{width:96px;flex:none;color:var(--navy2)}
+  .quote .ln span{flex:1;word-break:break-word}
+  .lock{display:none;min-height:70vh;align-items:center;justify-content:center;padding:30px 18px}
+  .lock .box{max-width:560px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px;box-shadow:var(--shadow)}
+  .lock h2{color:var(--red);font-size:19px;margin-bottom:10px}
+  .lock p{font-size:13px;color:var(--sub);margin:8px 0;line-height:1.8}
+  .lock code{background:#f2f5f9;padding:2px 6px;border-radius:5px;font-size:12px}
+  .gb-tabbar{display:none}
+  @media(max-width:720px){
+    .gb-tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:50;background:#fff;border-top:1px solid var(--line);box-shadow:0 -3px 16px rgba(18,58,94,.09);padding:5px 2px calc(5px + env(safe-area-inset-bottom))}
+    .gb-tabbar a{flex:1;text-decoration:none;color:#6d7d8d;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:9.5px}
+    .gb-tabbar a.here{color:var(--navy2);font-weight:800}
+    .gb-tabbar svg{width:19px;height:19px}
+  }
+</style>
+</head>
+<body>
+<div class="gb-bar"><div class="wrap">
+  <div class="gb-lab-row"><span class="gb-lab">AI GB TEAM · 对内财务线</span><span class="sp">成本与报价测算 · 仅限所有者本机</span></div>
+  <nav class="gb-tabs">
+    <a href="../index.html">团队中心</a>
+    <a href="../sales/index.html">AI GB-Sales</a>
+    <a href="../marketing/index.html">AI GB-Marketing</a>
+    <a href="../rd/index.html">AI GB-RD</a>
+    <a class="here" href="./index.html">AI GB-Fin 🔒</a>
+  </nav>
+</div></div>
+<header><div class="wrap">
+  <div class="hd">
+    <img src="./assets/icon-192.png" alt="AI GB-Fin 徽章">
+    <div><h1>AI GB-Fin · 财务部</h1><div class="sub">对内不对外 · 从产品成本一路算到 DDP 完税报价</div></div>
+  </div>
+  <div class="hd-pills">
+    <span class="pill lock">🔒 内部专用 · 云端自动只读</span>
+    <span class="pill live" id="datePill">日期 —</span>
+    <span class="pill">汇报对象：AI GB-Team · 每日 09:00 情报</span>
+    <span class="pill" id="buildPill">build —</span>
+  </div>
+</div></header>
+
+<div class="lock" id="lockScreen"><div class="box">
+  <h2>🔒 内部专用页面，需要本机打开</h2>
+  <p>AI GB-Fin 处理产品成本、目标毛利与客户报价，<b>不对任何外部访问开放</b>。云端与手机上只保留团队中心的公开宏观摘要（汇率、关税、政策），不含成本与价格。</p>
+  <p>请在所有者本机用浏览器打开本地文件：<code>/Users/chenbangjie/WorkBuddy/2026-11-20-13-47-04/ai-gb-hub/fin/index.html</code></p>
+  <p class="note">判定依据：<code>location.protocol === 'file:'</code>。分享链接、手机 PWA、任何 http(s) 访问都停在这一屏，不会加载成本输入与测算结果。</p>
+</div></div>
+
+<div class="wrap" id="app" style="display:none">
+  <section>
+    <div class="sh"><span class="bar"></span><h2>今日财务情报 · 09:00 自动发布</h2><span class="hint" id="fxHint">—</span></div>
+    <div class="fxbar" id="fxBar">汇率加载中…</div>
+    <div class="grid2" style="margin-top:12px">
+      <div class="card"><div class="card-h"><div class="ic">A</div><h3>各国汇率 · 对比人民币</h3><span class="tag" id="fxCount">—</span></div>
+        <div class="tw"><table><thead><tr><th>国家/地区</th><th>币种</th><th class="num">1 CNY =</th><th class="num">1 外币 = CNY</th></tr></thead><tbody id="fxTable"></tbody></table></div>
+      </div>
+      <div class="card"><div class="card-h"><div class="ic">B</div><h3>重点市场关税 · HS 9013.10</h3><span class="tag" id="dutyCount">—</span></div>
+        <div class="tw"><table><thead><tr><th>市场</th><th>税号</th><th>关税</th><th>增值税/消费税</th><th>口径</th></tr></thead><tbody id="dutyTable"></tbody></table></div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:12px"><div class="card-h"><div class="ic">C</div><h3>与 GUNBASE 有关的进出口政策</h3><span class="tag" id="polCount">—</span></div>
+      <div class="pad" id="polList"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="bar"></span><h2>报价测算 · EXW → FOB → CFR → CIF → DDP</h2><span class="hint">公式与 FALCORA 获客通 AI《成本与报价测算》v64 同口径</span></div>
+    <div id="warnBox" class="warnbox">—</div>
+    <div class="grid2">
+      <div class="card"><div class="card-h"><div class="ic">0</div><h3>基础参数</h3><span class="tag">计价币种 · 数量 · 目标利润</span></div><div class="pad">
+        <div class="frow"><label for="cur">报价币种</label><select class="sel" id="cur"></select><span class="u">报价币</span></div>
+        <div class="frow"><label for="terms">报价术语</label><select class="sel" id="terms"><option>EXW</option><option>FOB</option><option>CFR</option><option>CIF</option><option>DDP</option></select><span class="u">Incoterms</span></div>
+        <div class="frow"><label for="market">目的市场（自动带出关税）</label><select class="sel" id="market"></select><span class="u">关税源</span></div>
+        <div class="frow"><label for="qty">订单数量 N</label><input class="num" id="qty" type="number" min="1" step="1"><span class="u">件 · 必填</span></div>
+        <div class="frow"><label for="fxQuote">报价汇率 e_q</label><input class="num" id="fxQuote" type="number" min="0" step="0.0001"><span class="u">1 报价币 = ? CNY</span></div>
+        <div class="frow"><label for="fxNow">当前汇率 e_n</label><input class="num" id="fxNow" type="number" min="0" step="0.0001"><span class="u">1 报价币 = ? CNY</span></div>
+        <div class="frow"><label for="margin">目标毛利率</label><input class="num" id="margin" type="number" min="0" max="99" step="0.1"><span class="u">%</span></div>
+        <div class="frow"><label for="floorM">最低毛利率（底价）</label><input class="num" id="floorM" type="number" min="0" max="99" step="0.1"><span class="u">%</span></div>
+        <div class="frow"><label for="comm">佣金率</label><input class="num" id="comm" type="number" min="0" max="99" step="0.1"><span class="u">%</span></div>
+        <div class="fxbar" id="fxStatus">—</div>
+        <div style="margin-top:10px;display:flex;gap:7px;flex-wrap:wrap"><button class="btn ghost" id="btnAuto">恢复自动汇率 / 税率</button><button class="btn ghost" id="btnSave">保存本机</button><button class="btn ghost" id="btnClear">清空本机</button></div>
+        <div class="note" style="margin-top:8px">成本输入只存在本机浏览器 localStorage，不上传、不进 git、不发到任何线上页面。同一台机器重开自动带出。</div>
+      </div></div>
+      <div class="card"><div class="card-h"><div class="ic">1</div><h3>一、单位成本（料工费 → 完全成本）</h3><span class="tag">每件 · CNY</span></div><div class="pad">
+        <div class="frow"><label for="mat">材料费 M</label><input class="num" id="mat" type="number" min="0" step="0.01"><span class="u">CNY/件</span></div>
+        <div class="frow"><label for="lab">人工费 L</label><input class="num" id="lab" type="number" min="0" step="0.01"><span class="u">CNY/件</span></div>
+        <div class="frow"><label for="ovh">制造费用 O</label><input class="num" id="ovh" type="number" min="0" step="0.01"><span class="u">CNY/件</span></div>
+        <div class="frow"><label for="pack">包装费 P</label><input class="num" id="pack" type="number" min="0" step="0.01"><span class="u">CNY/件</span></div>
+        <div class="frow"><label for="cert">认证/检测费 C</label><input class="num" id="cert" type="number" min="0" step="0.01"><span class="u">CNY/件</span></div>
+        <div class="frow"><label for="other">其他 X</label><input class="num" id="other" type="number" min="0" step="0.01"><span class="u">CNY/件</span></div>
+        <div class="frow"><label for="loss">损耗率 r_loss</label><input class="num" id="loss" type="number" min="0" max="99" step="0.1"><span class="u">%</span></div>
+        <div class="frow"><label for="period">期间费用率 r_period</label><input class="num" id="period" type="number" min="0" max="99" step="0.1"><span class="u">%</span></div>
+        <div class="fm"><div class="fl"><b>单位制造成本</b><code>MC = M + L + O + P + C + X</code></div><div class="fv" id="rMfg">—</div></div>
+        <div class="fm"><div class="fl"><b>含损耗成本</b><code>MC′ = MC ÷ (1 − r_loss)</code></div><div class="fv" id="rLoss">—</div></div>
+        <div class="fm hi"><div class="fl"><b>完全成本</b><code>FC = MC′ × (1 + r_period)</code></div><div class="fv" id="rFull">—</div></div>
+        <div class="note" style="margin-top:9px">损耗按「投入即损耗」口径：成本 ÷ (1 − 损耗率)，不是成本 × (1 + 损耗率)。</div>
+      </div></div>
+    </div>
+
+    <div class="grid2" style="margin-top:12px">
+      <div class="card"><div class="card-h"><div class="ic">2</div><h3>二、出口费用与术语换算</h3><span class="tag">EXW → FOB → CFR → CIF → DDP</span></div><div class="pad">
+        <div class="sub-h">国内段（整批 · CNY）</div>
+        <div class="frow"><label for="inland">内陆运费</label><input class="num" id="inland" type="number" min="0" step="0.01"><span class="u">CNY</span></div>
+        <div class="frow"><label for="clear">报关费</label><input class="num" id="clear" type="number" min="0" step="0.01"><span class="u">CNY</span></div>
+        <div class="frow"><label for="port">港口杂费</label><input class="num" id="port" type="number" min="0" step="0.01"><span class="u">CNY</span></div>
+        <div class="frow"><label for="exOther">出口其他</label><input class="num" id="exOther" type="number" min="0" step="0.01"><span class="u">CNY</span></div>
+        <div class="sub-h">国际段（整批 · 报价币）</div>
+        <div class="frow"><label for="freight">国际运费 F_freight</label><input class="num" id="freight" type="number" min="0" step="0.01"><span class="u">报价币</span></div>
+        <div class="frow"><label for="insRate">保险费率 r_ins</label><input class="num" id="insRate" type="number" min="0" max="99" step="0.01"><span class="u">%</span></div>
+        <div class="frow"><label for="insMarkup">投保加成 k</label><input class="num" id="insMarkup" type="number" min="0" step="1"><span class="u">%</span></div>
+        <div class="sub-h">目的国段（整批 · 报价币）</div>
+        <div class="frow"><label for="broker">清关代理费</label><input class="num" id="broker" type="number" min="0" step="0.01"><span class="u">报价币</span></div>
+        <div class="frow"><label for="destPort">目的港杂费</label><input class="num" id="destPort" type="number" min="0" step="0.01"><span class="u">报价币</span></div>
+        <div class="frow"><label for="lastMile">末端派送</label><input class="num" id="lastMile" type="number" min="0" step="0.01"><span class="u">报价币</span></div>
+        <div class="fm"><div class="fl"><b>EXW 单价</b><code>EXW = FC ÷ e_q ÷ (1 − r_gm)</code></div><div class="fv" id="rExw">—</div></div>
+        <div class="fm"><div class="fl"><b>FOB 单价</b><code>FOB = EXW + d，d = D ÷ N ÷ e_q</code></div><div class="fv" id="rFob">—</div></div>
+        <div class="fm"><div class="fl"><b>CFR 单价</b><code>CFR = FOB + F_freight ÷ N</code></div><div class="fv" id="rCfr">—</div></div>
+        <div class="fm"><div class="fl"><b>CIF 单价</b><code>CIF = CFR ÷ (1 − r_ins × (1 + k))</code></div><div class="fv" id="rCif">—</div></div>
+        <div class="fm"><div class="fl"><b>其中保险费</b><code>Ins = CIF − CFR</code></div><div class="fv" id="rIns">—</div></div>
+        <div class="note" style="margin-top:8px">保费本身也计入保险金额，所以先反推 CIF 再倒推保费，不能用 CFR × 费率。</div>
+      </div></div>
+      <div class="card"><div class="card-h"><div class="ic">3</div><h3>三、关税与进口税费</h3><span class="tag">完税价格 DPV = CIF</span></div><div class="pad">
+        <div class="frow"><label for="dutyRate">进口关税率</label><input class="num" id="dutyRate" type="number" min="0" max="99" step="0.01"><span class="u">%</span></div>
+        <div class="frow"><label for="antiRate">反倾销 / 加征率</label><input class="num" id="antiRate" type="number" min="0" max="99" step="0.01"><span class="u">%</span></div>
+        <div class="frow"><label for="vatRate">进口增值税率</label><input class="num" id="vatRate" type="number" min="0" max="99" step="0.01"><span class="u">%</span></div>
+        <div class="fm"><div class="fl"><b>完税价格</b><code>DPV = CIF</code></div><div class="fv" id="rDpv">—</div></div>
+        <div class="fm"><div class="fl"><b>进口关税</b><code>Duty = DPV × r_duty</code></div><div class="fv" id="rDuty">—</div></div>
+        <div class="fm"><div class="fl"><b>进口增值税</b><code>VAT = (DPV + Duty + Anti) × r_vat</code></div><div class="fv" id="rVat">—</div></div>
+        <div class="fm hi"><div class="fl"><b>DDP 单价</b><code>DDP = CIF + Duty + Anti + VAT + B ÷ N</code></div><div class="fv" id="rDdp">—</div></div>
+        <div class="note" style="margin-top:9px" id="dutyNote">税率来自当日情报；「待核验」市场不会自动填 0，必须手工向报关行确认。欧盟进口 VAT 通常可由进口商申报抵扣，是否构成最终成本取决于进口方资质。</div>
+      </div></div>
+    </div>
+
+    <div class="grid2" style="margin-top:12px">
+      <div class="card"><div class="card-h"><div class="ic">4</div><h3>四、利润 · 毛利率 · 盈亏平衡</h3><span class="tag">每件 · 报价币</span></div><div class="pad">
+        <div class="frow"><label for="price">当前报价 P</label><input class="num" id="price" type="number" min="0" step="0.01"><span class="u">报价币/件</span></div>
+        <div class="frow"><label for="varCost">单位变动成本 V</label><input class="num" id="varCost" type="number" min="0" step="0.01"><span class="u">报价币/件</span></div>
+        <div class="frow"><label for="fixedCost">固定费用总额 K</label><input class="num" id="fixedCost" type="number" min="0" step="0.01"><span class="u">整批 · 报价币</span></div>
+        <div class="frow"><label for="netPrice">净价（不含佣）</label><input class="num" id="netPrice" type="number" min="0" step="0.01"><span class="u">报价币/件</span></div>
+        <div class="fm"><div class="fl"><b>完全成本（折报价币）</b><code>FC_q = FC ÷ e_q</code></div><div class="fv" id="rFullQ">—</div></div>
+        <div class="fm"><div class="fl"><b>成本基数（按术语）</b><code>CB = L_T − EXW × r_target</code></div><div class="fv" id="rCostB">—</div></div>
+        <div class="fm"><div class="fl"><b>毛利</b><code>GM = P − CB</code></div><div class="fv" id="rGm">—</div></div>
+        <div class="fm"><div class="fl"><b>实际毛利率</b><code>r_gm = GM ÷ P</code></div><div class="fv" id="rGmRate">—</div></div>
+        <div class="fm"><div class="fl"><b>成本加成率</b><code>r_mk = GM ÷ CB</code></div><div class="fv" id="rMarkup">—</div></div>
+        <div class="fm"><div class="fl"><b>盈亏平衡数量</b><code>Q_be = K ÷ (P − V)</code></div><div class="fv" id="rBe">—</div></div>
+        <div class="fm"><div class="fl"><b>底价（最低毛利率）</b><code>Floor = ladderAt(r_floor)[T]</code></div><div class="fv" id="rFloor">—</div></div>
+        <div class="fm"><div class="fl"><b>议价空间</b><code>Room = P − Floor</code></div><div class="fv" id="rRoom">—</div></div>
+        <div class="note" style="margin-top:8px">毛利率 ≠ 加成率。想赚 30% 毛利，售价 = 成本 ÷ (1 − 30%) = 成本的 1.4286 倍，不是 ×1.3。</div>
+      </div></div>
+      <div class="card"><div class="card-h"><div class="ic">5</div><h3>五、汇率 · 佣金 · 出口退税</h3><span class="tag">成交前后的账要算清</span></div><div class="pad">
+        <div class="frow"><label for="buyIncl">采购含税额</label><input class="num" id="buyIncl" type="number" min="0" step="0.01"><span class="u">CNY</span></div>
+        <div class="frow"><label for="vatOut">采购增值税率</label><input class="num" id="vatOut" type="number" min="0" max="99" step="0.1"><span class="u">%</span></div>
+        <div class="frow"><label for="refundRate">出口退税率</label><input class="num" id="refundRate" type="number" min="0" max="99" step="0.1"><span class="u">%</span></div>
+        <div class="fm"><div class="fl"><b>本币收入</b><code>R = P × e_n × N</code></div><div class="fv" id="rRev">—</div></div>
+        <div class="fm"><div class="fl"><b>汇率损益</b><code>FX = P × (e_n − e_q) × N</code></div><div class="fv" id="rFx">—</div></div>
+        <div class="fm"><div class="fl"><b>含佣金报价</b><code>Price_c = Net ÷ (1 − r_comm)</code></div><div class="fv" id="rComm">—</div></div>
+        <div class="fm"><div class="fl"><b>退税估算（采购口径）</b><code>Refund = 含税额 ÷ (1 + VAT) × r_refund</code></div><div class="fv" id="rRefund">—</div></div>
+        <div class="fm hi"><div class="fl"><b>免抵退上限（FOB 口径）</b><code>Refund* = FOB × e_q × r_refund</code></div><div class="fv" id="rRefund2">—</div></div>
+        <div class="note" style="margin-top:9px">退税是事后收回的钱，且实际退税额受留抵税额与「不得免征和抵扣税额」限制；这里只给上限，实际以税务机关核定为准。</div>
+      </div></div>
+    </div>
+
+    <div class="card" style="margin-top:12px"><div class="card-h"><div class="ic">→</div><h3>报价草稿 · 11 要素（对齐 AI GB-Sales 授权规则）</h3><span class="tag">仅生成草稿，绝不自动发送</span></div><div class="pad">
+      <div class="quote" id="quoteBox">填入基础参数与成本后自动生成。</div>
+      <div style="margin-top:11px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="btnCopy">复制草稿到剪贴板</button><span class="note" style="align-self:center">复制后交由所有者逐次授权；AI GB-Sales 不得凭本草稿自动发信。</span></div>
+    </div></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="bar"></span><h2>数据来源 · MLA 引用</h2><span class="hint">引用内容注明出处，其余为本页计算口径说明</span></div>
+    <div class="card pad"><ol class="src" id="srcList"></ol>
+      <div class="note" style="margin-top:10px;border-top:1px solid var(--line);padding-top:9px">
+        本页为内部测算辅助工具，不构成税务、法律或投资意见。汇率取自公开参考牌价，非银行结汇价；税率与费率仍需按目的国海关税则、税局公告及报关行/律师书面意见核定。
+        六位 HS 编码不能代替目的国申报税号；未记录不等于免税。
+      </div>
+    </div>
+  </section>
+</div>
+
+<nav class="gb-tabbar" aria-label="同事切换">
+  <a href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5"/></svg><span>团队中心</span></a>
+  <a href="../sales/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="7" width="19" height="13" rx="2.5"/><path d="M8.5 7V5.2A1.2 1.2 0 0 1 9.7 4h4.6a1.2 1.2 0 0 1 1.2 1.2V7"/><path d="M2.5 12.5h19"/></svg><span>Sales</span></a>
+  <a href="../marketing/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4a1.5 1.5 0 0 0 1.5 1.5H7l6.5 4V4.5L7 8.5H4.5"/></svg><span>Mkt</span></a>
+  <a href="../rd/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/></svg><span>RD</span></a>
+  <a class="here" href="./index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h4M7 16h4"/></svg><span>Fin 🔒</span></a>
+</nav>
+<script src="./data.js"></script>
+<script src="../shared/tabbar.js"></script>
+<script>
+(function(){
+  'use strict';
+  var D = window.GB_FIN_DATA || {fx:{rates:{}},markets:[],policies:[],meta:{sources:[]}};
+  var RATES = D.fx && D.fx.rates ? D.fx.rates : {};
+  var CURRENCY_NAME = {USD:'美元',EUR:'欧元',JPY:'日元',KRW:'韩元',TWD:'新台币',THB:'泰铢',INR:'印度卢比',GBP:'英镑',HKD:'港元',SGD:'新加坡元',AUD:'澳元',CAD:'加元',MYR:'马来西亚林吉特',VND:'越南盾',IDR:'印尼盾',PHP:'菲律宾比索',AED:'阿联酋迪拉姆',SAR:'沙特里亚尔',TRY:'土耳其里拉',RUB:'俄罗斯卢布',BRL:'巴西雷亚尔',ZAR:'南非兰特',MXN:'墨西哥比索',PLN:'波兰兹罗提',CHF:'瑞士法郎',SEK:'瑞典克朗',NOK:'挪威克朗',DKK:'丹麦克朗',CZK:'捷克克朗',HUF:'匈牙利福林',RON:'罗马尼亚列伊',KWD:'科威特第纳尔',QAR:'卡塔尔里亚尔',EGP:'埃及镑',NGN:'尼日利亚奈拉',KES:'肯尼亚先令',ILS:'以色列谢克尔',PKR:'巴基斯坦卢比',BDT:'孟加拉塔卡',LKR:'斯里兰卡卢比',NPR:'尼泊尔卢比'};
+  var MAIN = ['USD','EUR','GBP','JPY','TWD','KRW','THB','INR','AED','SAR','SGD','AUD','CAD','MYR','VND','HKD'];
+  var STORE = 'gb_fin_cost_v1';
+  var TERMS = ['EXW','FOB','CFR','CIF','DDP'];
+  var CALC = {};
+  var BAD = [];
+
+  function $(id){return document.getElementById(id);}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function fmt(n,d){if(!isFinite(n))return '—';d=(d==null)?2:d;try{return new Intl.NumberFormat('zh-CN',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n);}catch(e){return n.toFixed(d);}}
+  function pct(n){if(!isFinite(n))return '—';return fmt(n*100,1)+'%';}
+  function money(n,d){if(!isFinite(n))return '—';return cur()+ ' ' + fmt(n,d==null?2:d);}
+  function cny(n,d){if(!isFinite(n))return '—';return 'CNY ' + fmt(n,d==null?2:d);}
+  function cur(){return ($('cur')&&$('cur').value)||'USD';}
+
+  /* ---------- 门禁：先于任何其他初始化 ---------- */
+  if(location.protocol !== 'file:'){
+    $('lockScreen').style.display='flex';
+    $('app').style.display='none';
+    return;
+  }
+  $('lockScreen').style.display='none';
+  $('app').style.display='block';
+
+  /* ---------- 情报展示 ---------- */
+  $('datePill').textContent='数据日期 '+(D.meta&&D.meta.date||'—');
+  $('fxHint').textContent=(D.meta&&D.meta.cadence)||'—';
+  fetch('./version.json',{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+    $('buildPill').textContent='build '+(j.build||'—');
+  }).catch(function(){});
+
+  var srcById={};(D.meta.sources||[]).forEach(function(s){srcById[s.id]=s;});
+  function cites(ids){return (ids||[]).map(function(i){return srcById[i]?srcById[i].citation:null;}).filter(Boolean);}
+  $('srcList').innerHTML=(D.meta.sources||[]).map(function(s){
+    return '<li>'+esc(s.citation)+' <a href="'+esc(s.url)+'" target="_blank" rel="noopener">'+esc(s.url)+'</a><br><span style="color:#7a8a99">用途：'+esc(s.use)+'</span></li>';
+  }).join('')||'<li>暂无来源。</li>';
+
+  var fxCodes=MAIN.filter(function(c){return RATES[c]>0;});
+  $('fxCount').textContent=fxCodes.length+' 个币种';
+  $('fxTable').innerHTML=fxCodes.map(function(c){
+    return '<tr><td>'+esc(CURRENCY_NAME[c]||c)+'</td><td>'+c+'</td><td class="num">'+fmt(RATES[c],RATES[c]>=100?2:4)+'</td><td class="num">'+fmt(1/RATES[c],RATES[c]>=100?6:4)+'</td></tr>';
+  }).join('');
+  var stale=(D.meta.date!==new Date().toISOString().slice(0,10));
+  $('fxBar').innerHTML='<b>'+esc(D.fx.date||'—')+'</b> · 基准 '+esc(D.fx.base||'CNY')+' · 来源 '+esc(D.fx.source||'—')+
+    ' · 方向 '+esc(D.fx.direction||'—')+' · 抓取 '+esc(D.fx.fetchedAt||'—')+
+    (stale?' · <span style="color:#b42318;font-weight:700">非当日数据，报价前请复核</span>':'');
+  $('fxStatus').innerHTML='自动汇率：'+esc(D.fx.date||'—')+' · '+esc(D.fx.source||'—')+'<br><span class="note">手填任一汇率框会标黄并锁定；点「恢复自动汇率 / 税率」回到当日参考牌价。</span>';
+
+  var mk=D.markets||[];
+  $('dutyCount').textContent=mk.length+' 个市场';
+  $('dutyTable').innerHTML=mk.map(function(m){
+    var b=m.v==='verified'?'<span class="badge v">已核验</span>':(m.v==='aggregate'?'<span class="badge a">均值参考</span>':'<span class="badge p">待核验</span>');
+    return '<tr><td><b>'+esc(m.name)+'</b> <span style="color:#7a8a99">'+m.code+'</span></td><td>'+esc(m.hs)+'</td><td>'+esc(m.dutyLabel)+'</td><td>'+esc(m.vatLabel)+'</td><td>'+b+'</td></tr>';
+  }).join('');
+  var pol=D.policies||[];
+  $('polCount').textContent=pol.length+' 条';
+  $('polList').innerHTML=pol.map(function(p){
+    var b=p.v==='verified'?'<span class="badge v">已核验</span>':(p.v==='pending'?'<span class="badge p">待核验</span>':'<span class="badge a">参考</span>');
+    var cs=cites(p.sourceIds);
+    return '<div style="padding:9px 0;border-bottom:1px solid #f0f4f8"><b>'+esc(p.title)+'</b> '+b+' <span style="color:#7a8a99;font-size:10.5px">'+esc(p.country)+' · '+esc(p.verifiedAt||'—')+'</span>'+
+      '<div style="font-size:11.5px;color:#33465a;margin-top:3px">'+esc(p.summary)+'</div>'+
+      '<div class="note" style="margin-top:3px"><b>对报价的影响：</b>'+esc(p.impact)+'</div>'+
+      (cs.length?'<div class="note" style="margin-top:3px">出处：'+cs.map(esc).join('；')+'</div>':'')+'</div>';
+  }).join('');
+
+  /* ---------- 表单初始化 ---------- */
+  $('cur').innerHTML=Object.keys(RATES).map(function(c){return '<option value="'+c+'">'+c+' '+(CURRENCY_NAME[c]||'')+'</option>';}).join('');
+  $('market').innerHTML='<option value="">— 不自动带出 —</option>'+mk.map(function(m){return '<option value="'+esc(m.code)+'">'+esc(m.name)+' ('+m.code+')</option>';}).join('');
+
+  var IDS=['qty','fxQuote','fxNow','margin','floorM','comm','mat','lab','ovh','pack','cert','other','loss','period',
+    'inland','clear','port','exOther','freight','insRate','insMarkup','broker','destPort','lastMile',
+    'dutyRate','antiRate','vatRate','price','varCost','fixedCost','netPrice','buyIncl','vatOut','refundRate'];
+  var DEF={qty:'500',margin:'28',floorM:'18',comm:'3',mat:'168',lab:'42',ovh:'26',pack:'9',cert:'5',other:'4',
+    loss:'2',period:'8',inland:'1800',clear:'600',port:'1200',exOther:'300',freight:'4200',insRate:'0.35',
+    insMarkup:'10',broker:'260',destPort:'480',lastMile:'900',dutyRate:'4.7',antiRate:'0',vatRate:'0',
+    price:'68',varCost:'46',fixedCost:'18000',netPrice:'62',buyIncl:'195',vatOut:'13',refundRate:'0',terms:'EXW',cur:'USD'};
+
+  function rateFor(c){return (RATES[c]>0)?(1/RATES[c]):NaN;} /* 1 外币 = ? CNY */
+  function setv(id,v,auto){var e=$(id);if(!e)return;e.value=v;if(auto)e.removeAttribute('data-manual');}
+  function applyAuto(){
+    var r=rateFor(cur());setv('fxQuote',isFinite(r)?r.toFixed(6):'',true);setv('fxNow',isFinite(r)?r.toFixed(6):'',true);
+    applyMarket(true);compute();
+  }
+  function applyMarket(force){
+    var m=mk.filter(function(x){return x.code===$('market').value;})[0];
+    if(!m){setv('dutyRate','',true);setv('vatRate','',true);$('dutyNote').textContent='未选择市场，关税与增值税留空，必须手填。';compute();return;}
+    setv('dutyRate',m.dutyRate==null?'':String(m.dutyRate),true);
+    setv('vatRate',m.vatRate==null?'':String(m.vatRate),true);
+    $('dutyNote').innerHTML='<b>'+esc(m.name)+'</b> · '+esc(m.hs)+'：'+esc(m.dutyLabel)+'；'+esc(m.vatLabel)+
+      '。口径 '+esc(m.v)+'，核验于 '+esc(m.verifiedAt||'—')+'。<br>'+esc(m.note)+
+      '<br><span style="color:#b42318">无论是否自动带出，正式报价前必须由报关行/律师书面确认具体税号与税率。</span>';
+    compute();
+  }
+
+  function load(){
+    var saved=null;
+    try{saved=JSON.parse(localStorage.getItem(STORE)||'null');}catch(e){}
+    var s=saved&&saved.v===1?saved.data:{};
+    if(s.cur&&RATES[s.cur]) $('cur').value=s.cur; else $('cur').value=(RATES.USD?'USD':Object.keys(RATES)[0]||'USD');
+    if(s.terms&&TERMS.indexOf(s.terms)>=0) $('terms').value=s.terms; else $('terms').value=DEF.terms;
+    $('market').value=s.market||'';
+    IDS.forEach(function(id){setv(id,(s[id]!=null?s[id]:DEF[id]||''),!!(s['auto_'+id]));});
+    if(!s.fxQuote){applyAuto();return;}
+    applyMarket(true);compute();
+  }
+  function save(){
+    var d={v:1,cur:cur(),terms:$('terms').value,market:$('market').value};
+    IDS.forEach(function(id){d[id]=$(id).value;d['auto_'+id]=$(id).getAttribute('data-manual')?'0':'1';});
+    try{localStorage.setItem(STORE,JSON.stringify(d));alert('已保存到本机浏览器。成本数据不会上传。');}
+    catch(e){alert('保存失败：'+e.message);}
+  }
+
+  /* ---------- 计算：与 FALCORA v64 同口径 ---------- */
+  function raw(id){var e=$(id);return e?String(e.value).trim():'';}
+  function opt(id,hi){var s=raw(id);if(s==='')return 0;var n=parseFloat(s);if(!isFinite(n)||n<0||(hi!=null&&n>hi)){BAD.push(id);return NaN;}return n;}
+  function req(id){var s=raw(id);if(s===''){BAD.push(id);return NaN;}var n=parseFloat(s);return (isFinite(n)&&n>0)?n:NaN;}
+  function r(id,hi){var n=opt(id,hi==null?100:hi);return n/100;}
+
+  function compute(){
+    BAD=[];
+    var N=req('qty');
+    var eqRaw=req('fxQuote'), enRaw=req('fxNow');
+    var eq=eqRaw>0?eqRaw:(cur()==='CNY'?1:NaN);
+    var en=enRaw>0?enRaw:(cur()==='CNY'?1:NaN);
+    var MC=opt('mat')+opt('lab')+opt('ovh')+opt('pack')+opt('cert')+opt('other');
+    var rl=r('loss'),okLoss=rl<1;
+    var MC2=okLoss?MC/(1-rl):NaN;
+    var rp=r('period');
+    var FC=okLoss?MC2*(1+rp):NaN;
+    var Dsum=opt('inland')+opt('clear')+opt('port')+opt('exOther');
+    var d=Dsum/N/eq;
+    var rins=r('insRate'),k=r('insMarkup',1000),denom=1-rins*(1+k),okIns=denom>0;
+    var rd=r('dutyRate'),ra=r('antiRate'),rv=r('vatRate');
+    var Ff=opt('freight');
+    var B=(opt('broker')+opt('destPort')+opt('lastMile'))/N;
+    function ladderAt(gm){
+      var EXW=(gm<1&&isFinite(FC))?FC/(1-gm)/eq:NaN;
+      var FOB=EXW+d,CFR=FOB+Ff/N,CIF=okIns?CFR/denom:NaN,INS=CIF-CFR;
+      var Duty=CIF*rd,Anti=CIF*ra,VAT=(CIF+Duty+Anti)*rv;
+      var DDP=CIF+Duty+Anti+VAT+B;
+      return {EXW:EXW,FOB:FOB,CFR:CFR,CIF:CIF,INS:INS,DPV:CIF,Duty:Duty,Anti:Anti,VAT:VAT,DDP:DDP};
+    }
+    var rgm=r('margin'),TM=($('terms').value&&TERMS.indexOf($('terms').value)>=0)?$('terms').value:'EXW';
+    var L=ladderAt(rgm);
+    var CB=L[TM]-L.EXW*rgm;
+    var FCq=FC/eq;
+    var P=req('price');
+    var GM=P-CB;
+    var rgmNow=(P>0)?GM/P:NaN;
+    var rmk=(CB>0)?GM/CB:NaN;
+    var Vc=opt('varCost'),Kfix=opt('fixedCost');
+    var Qbe=((P-Vc)>0)?Kfix/(P-Vc):NaN;
+    var rcm=r('comm');
+    var netP=req('netPrice');
+    var PriceC=(rcm<1)?netP/(1-rcm):NaN;
+    var rf=r('floorM');
+    var Floor=(rf<1)?ladderAt(rf)[TM]:NaN;
+    var Room=P-Floor;
+    var Rev=P*en*N,FXP=P*(en-eq)*N;
+    var rf2=r('refundRate');
+    var Refund=opt('buyIncl')/(1+r('vatOut'))*rf2;
+    var Refund2=L.FOB*eq*rf2;
+
+    CALC={N:N,eq:eq,en:en,term:TM,MC:MC,MC2:MC2,FC:FC,FCq:FCq,EXW:L.EXW,FOB:L.FOB,CFR:L.CFR,CIF:L.CIF,
+      INS:L.INS,DPV:L.DPV,Duty:L.Duty,Anti:L.Anti,VAT:L.VAT,DDP:L.DDP,CB:CB,P:P,GM:GM,rgmNow:rgmNow,
+      rmk:rmk,Qbe:Qbe,PriceC:PriceC,Floor:Floor,Room:Room,Rev:Rev,FXP:FXP,Refund:Refund,Refund2:Refund2};
+
+    var set=function(id,v){$(id).textContent=v;};
+    set('rMfg',cny(MC));set('rLoss',cny(MC2));set('rFull',cny(FC));
+    set('rExw',money(L.EXW));set('rFob',money(L.FOB));set('rCfr',money(L.CFR));set('rCif',money(L.CIF));set('rIns',money(L.INS));
+    set('rDpv',money(L.DPV));set('rDuty',money(L.Duty));set('rVat',money(L.VAT));set('rDdp',money(L.DDP));
+    set('rFullQ',money(FCq));set('rCostB',money(CB));set('rGm',money(GM));set('rGmRate',pct(rgmNow));
+    set('rMarkup',pct(rmk));set('rBe',isFinite(Qbe)?fmt(Qbe,0)+' 件':'—');set('rFloor',money(Floor));set('rRoom',money(Room));
+    set('rRev',cny(Rev));set('rFx',cny(FXP));set('rComm',money(PriceC));set('rRefund',cny(Refund));set('rRefund2',cny(Refund2));
+
+    var msgs=[];
+    if(!(N>0))msgs.push('订单数量未填，每件分摊费用无法计算。');
+    if(!(en>0))msgs.push('当前汇率未填，本币收入与汇率损益无法计算。');
+    if(P>0&&Floor>0&&P<Floor)msgs.push('当前报价低于底价，按此价成交达不到最低毛利率。');
+    if(rcm>=1)msgs.push('佣金率必须小于 100%。');
+    if(BAD.length){
+      var names=[];BAD.slice(0,4).forEach(function(id){var lb=document.querySelector('label[for="'+id+'"]');var t=lb?lb.textContent.trim():'';if(t&&names.indexOf(t)<0)names.push(t);});
+      msgs.push('有 '+BAD.length+' 个输入无效（空必填 / 负数 / 超范围），相关结果已标「—」。'+(names.length?'无效项：'+names.join(' / '):''));
+    }
+    if(!$('market').value && !(raw('dutyRate')>0) && !(raw('vatRate')>0))msgs.push('未选择目的市场且关税/增值税留空，当前按 0 计算；这不是免税结论，正式报价前必须向报关行书面确认。');
+    if(stale&&cur()!=='CNY')msgs.push('情报数据不是当日日期，报价前请刷新并复核汇率与税率。');
+    var srt=rateFor(cur());
+    if(isFinite(srt)&&srt>0&&isFinite(eq)&&eq>0){
+      var kk=eq/srt;
+      if(kk>3||kk<1/3)msgs.push('报价汇率 '+fmt(eq,4)+' 与当日参考 '+fmt(srt,4)+' 相差 '+fmt(kk>1?kk:1/kk,0)+' 倍：本页要填「1 '+cur()+' = ? CNY」，不是反方向。');
+    }
+    var w=$('warnBox');
+    w.className='warnbox'+(msgs.length?'':' ok');
+    w.innerHTML=msgs.length?('<b>⚠️ '+msgs.length+' 项需要你先看清楚：</b><br>· '+msgs.join('<br>· ')):'✓ 输入完整，未发现会直接导致报价出错的缺口。仍须人工复核税率与结汇价。';
+
+    var m=mk.filter(function(x){return x.code===$('market').value;})[0];
+    var q=[
+      ['客户', '[待填 · 由 AI GB-Sales 提供]'],
+      ['收件地址', '[待填]'],
+      ['SKU / 产品', '[待填]'],
+      ['数量', (isFinite(N)?fmt(N,0):'—')+' 件'],
+      ['单价与币种', (isFinite(P)?money(P):'—')+' / 件'],
+      ['总价', (isFinite(P)&&isFinite(N)?money(P*N):'—')],
+      ['贸易条款', TM+' · 目的市场 '+(m?m.name:'[待填]')],
+      ['交期', '[待填]'],
+      ['付款条件', '50% 订金 + 50% 出货前（模板口径，逐单确认）'],
+      ['报价有效期', '[待填]'],
+      ['发送渠道', '[待填]']
+    ];
+    var extra='<div class="ln"><b>内部口径</b><span>CIF '+money(L.CIF)+' · DDP '+money(L.DDP)+' · 实际毛利率 '+pct(rgmNow)+' · 底价 '+money(Floor)+'</span></div>'+
+      '<div class="ln"><b>授权状态</b><span style="color:#b42318;font-weight:700">内部测算草稿 · 未经所有者逐次授权，不得对外发送</span></div>';
+    $('quoteBox').innerHTML=q.map(function(x){return '<div class="ln"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></div>';}).join('')+extra;
+  }
+
+  /* ---------- 事件 ---------- */
+  IDS.forEach(function(id){$(id).addEventListener('input',function(){this.setAttribute('data-manual','1');compute();});});
+  $('cur').addEventListener('change',applyAuto);
+  $('terms').addEventListener('change',compute);
+  $('market').addEventListener('change',function(){applyMarket(false);});
+  $('btnAuto').addEventListener('click',applyAuto);
+  $('btnSave').addEventListener('click',save);
+  $('btnClear').addEventListener('click',function(){
+    if(!confirm('确认清空本机保存的成本数据？此操作只影响本机浏览器，不可撤销。'))return;
+    localStorage.removeItem(STORE);location.reload();
+  });
+  $('btnCopy').addEventListener('click',function(){
+    var txt=$('quoteBox').innerText;
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){alert('草稿已复制。请交所有者逐次授权后再对外。');},function(){alert('复制失败，请手动选中文本。');});}
+    else{alert('当前环境不支持剪贴板，请手动选中文本。');}
+  });
+  load();
+})();
+</script>
+<script>
+/* 只在本机注册 SW；云端访问停在锁屏，不装 SW，避免缓存任何财务页面。 */
+if(location.protocol==='file:' && 'serviceWorker' in navigator){
+  window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js').catch(function(){});});
+}
+</script>
+</body>
+</html>

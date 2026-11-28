@@ -48,6 +48,7 @@
   .entry.sales .top{background:linear-gradient(135deg,#1d5486,#2f7cb8)}
   .entry.mkt .top{background:linear-gradient(135deg,#126b6b,#1f9c9c)}
   .entry.pm .top{background:linear-gradient(135deg,#6b4a9c,#8b6cc0)}
+  .entry.fin .top{background:linear-gradient(135deg,#123a5e,#2f7cb8)}
   .entry .top img{width:40px;height:40px;background:rgba(255,255,255,.14);border-radius:9px;padding:3px}
   .entry .top h3{font-size:15.5px;font-weight:750}
   .entry .top h3 span{display:block;font-size:10.5px;opacity:.85;font-weight:500;margin-top:1px}
@@ -250,6 +251,7 @@
     <a href="./sales/index.html">AI GB-Sales</a>
     <a href="./marketing/index.html">AI GB-Marketing</a>
     <a href="./rd/index.html">AI GB-RD</a>
+    <a href="./fin/index.html">AI GB-Fin 🔒</a>
   </nav>
 </div></div>
 <header>
@@ -262,7 +264,7 @@
       </div>
     </div>
     <div class="hd-pills">
-      <span class="pill live">3 个已上线</span>
+      <span class="pill live">4 个已上线</span>
       <span class="pill plan">1 个规划中 · AI GB-PM</span>
       <span class="pill">汇报关系由所有者指定</span>
       <span class="pill" id="verPill"></span>
@@ -271,6 +273,12 @@
 </header>
 
 <div class="wrap">
+  <section id="finBrief">
+    <div class="sh"><span class="bar"></span><h2>AI GB-Fin · 每日财务情报（公开宏观层）</h2><span class="hint" id="finMeta"></span></div>
+    <div class="card pad" id="finCard">财务情报加载中…</div>
+    <div class="note" style="margin-top:6px">本卡只展示公开的汇率、关税与政策摘要；产品成本与客户报价属内部数据，仅在本机 AI GB-Fin 页面可见，<a href="./fin/index.html">打开内部测算 →</a></div>
+  </section>
+
   <section id="dailyReport">
     <div class="sh"><span class="bar"></span><h2>每日战报 · Team 汇整</h2><span class="hint" id="rpMeta"></span></div>
     <div class="rp-days" id="rpDays"></div>
@@ -345,6 +353,7 @@
 <script src="./shared/team-intel-digest.js"></script>
 <script src="./shared/partner-assessment.js"></script>
 <script src="./shared/gb-team.js"></script>
+<script src="./fin/data.js"></script>
 <script>
 (function(){
   var T=window.GB_TEAM;
@@ -356,8 +365,8 @@
   document.getElementById('footMeta').textContent=T.meta.note;
 
   document.getElementById('entries').innerHTML=T.org.map(function(o){
-    var cls=o.id==='GB-Sales'?'sales':(o.id==='GB-Marketing'?'mkt':'pm');
-    var ic=o.id==='GB-Sales'?'./sales/assets/icon-192.png':(o.id==='GB-Marketing'?'./marketing/assets/icon-192.png':'./assets/pm-logo.svg');
+    var cls=o.id==='GB-Sales'?'sales':(o.id==='GB-Marketing'?'mkt':(o.id==='GB-Fin'?'fin':'pm'));
+    var ic=o.id==='GB-Sales'?'./sales/assets/icon-192.png':(o.id==='GB-Marketing'?'./marketing/assets/icon-192.png':(o.id==='GB-Fin'?'./fin/assets/icon-192.png':'./assets/pm-logo.svg'));
     var tag=o.status==='live'?'<span class="tag g">已上线</span>':'<span class="tag p">规划中</span>';
     var link=o.entry?'href="'+esc(o.entry)+'"':'';
     var go=o.entry?'<div class="go">打开 PWA →</div>':'<div class="go" style="color:#9aa8b6">系统未建立，暂不可打开</div>';
@@ -521,6 +530,7 @@
   <a href="./sales/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="7" width="19" height="13" rx="2.5"/><path d="M8.5 7V5.2A1.2 1.2 0 0 1 9.7 4h4.6a1.2 1.2 0 0 1 1.2 1.2V7"/><path d="M2.5 12.5h19"/></svg><span>AI GB-Sales</span></a>
   <a href="./marketing/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4a1.5 1.5 0 0 0 1.5 1.5H7l6.5 4V4.5L7 8.5H4.5A1.5 1.5 0 0 0 3 10Z"/><path d="M17 8.5a4 4 0 0 1 0 7"/><path d="M7 15.5V20"/></svg><span>AI GB-Mkt</span></a>
   <a href="./rd/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v4M12 18.5v4M1.5 12h4M18.5 12h4"/></svg><span>AI GB-RD</span></a>
+  <a href="./fin/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h4M7 16h4"/></svg><span>Fin 🔒</span></a>
 </nav>
 <script src="./shared/tabbar.js"></script>
 <script src="./shared/back-to-top.js"></script>
@@ -646,5 +656,31 @@ if('serviceWorker' in navigator){
 }
 </script>
 
+
+<script>
+/* AI GB-Fin 公开宏观摘要：只读 fin/data.js，不读任何成本/报价数据。 */
+(function(){
+  var D=window.GB_FIN_DATA;var box=document.getElementById('finCard');
+  if(!box)return;
+  if(!D||!D.fx||!D.fx.rates){box.textContent='财务情报数据未加载';return;}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  var N={USD:'美元',EUR:'欧元',GBP:'英镑',JPY:'日元',TWD:'新台币'};
+  var codes=['USD','EUR','GBP','JPY','TWD'];
+  var top=codes.filter(function(c){return D.fx.rates[c]>0;}).map(function(c){
+    return '<b>'+c+'</b> 1 CNY = '+D.fx.rates[c].toFixed(c==='JPY'||c==='TWD'?3:4);
+  }).join(' · ');
+  var mk=(D.markets||[]).filter(function(m){return m.v==='verified';}).slice(0,4).map(function(m){
+    return esc(m.name)+' '+esc(m.dutyLabel);
+  }).join(' · ');
+  var pol=(D.policies||[]).slice(0,2).map(function(p){return esc(p.title);}).join('；');
+  var day=(D.days||[])[0]||{};
+  document.getElementById('finMeta').textContent=(D.meta.date||'—')+' · '+(D.meta.cadence||'');
+  box.innerHTML='<div style="font-size:12.5px;line-height:1.9">'+
+    '<div><b style="color:#123a5e">汇率</b>　'+top+'</div>'+
+    '<div><b style="color:#123a5e">关税</b>　'+(mk||'—')+'</div>'+
+    '<div><b style="color:#123a5e">政策</b>　'+(pol||'—')+'</div>'+
+    '<div class="note" style="margin-top:6px">'+esc(day.headline||'')+'</div></div>';
+})();
+</script>
 </body>
 </html>

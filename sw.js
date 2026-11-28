@@ -4,13 +4,15 @@
  *     fetch(req) 会命中 HTTP 缓存拿到旧文件 → 必须 fetch(req,{cache:'no-store'})。
  * 作用域：/ai-gb-hub/ 全域（含 marketing、sales）；rd/ 有自己更窄的 SW，优先级更高。
  */
-const CACHE = 'ai-gb-team-hub-v36';
+const CACHE = 'ai-gb-team-hub-v37';
 const BASE = './';
 const CORE = [
   BASE,
   BASE + 'index.html',
   BASE + 'supervision.html',
   BASE + 'shared/gb-team.js',
+  BASE + 'shared/reports/gb-fin.js',
+  BASE + 'fin/data.js',
   BASE + 'shared/reports/gb-reports.js',
   BASE + 'shared/reports/gb-supervision.js',
   BASE + 'shared/reports/gb-email-log.js',
@@ -33,6 +35,7 @@ const CORE = [
 ];
 // 说明：marketing/ 与 sales/ 各有更窄作用域的自己的 SW，根 SW 不预缓存它们的页面
 // （sales 页面受 sharecode 会话保护，无会话抓取会存下无效副本）。
+// fin/index.html 故意不预缓存：内部测算页有 file:// 门禁，根 SW 不碰它；fin/ 有自己的 SW。
 
 self.addEventListener('install', e => {
   e.waitUntil(

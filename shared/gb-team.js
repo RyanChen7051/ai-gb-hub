@@ -48,6 +48,13 @@ window.GB_TEAM = {
       status: "live", statusLabel: "已上线 · 本地 v1.3.0",
       scope: "瞄准镜/枪械配件/战术装备每日技术情报、三大检索矩阵、图纸端设计储备与合规闸门；使用者痛点库（14 条 / 6 簇，A/B/C 分级）；打样闭环八段产线（痛点 → 图纸 → 打印 → 喷漆 → 模拟 → 实拍 → 移交 Sales）",
       entry: "./rd/", factBasis: "owner-specified-2026-11-23"
+    },
+    {
+      id: "GB-Fin", name: "AI GB-Fin", en: "AI GB Finance",
+      role: "财务部 · 成本、关税、运费、清关、报税与报价测算", reportsTo: "GB-PM",
+      status: "live", statusLabel: "已上线 · 内部专用 v1.0.0",
+      scope: "对内不对外。产品成本 → 完全成本 → EXW/FOB/CFR/CIF/DDP 阶梯 → 关税与进口税费 → 毛利与退税；每日 09:00 发布各国汇率（对比人民币）、关税与 GUNBASE 相关进出口政策。成本输入仅存本机，报价草稿须所有者逐次授权。",
+      entry: "./fin/", supervisedBy: "GB-Team", factBasis: "owner-specified-2026-11-28"
     }
   ],
 
@@ -106,6 +113,8 @@ window.GB_TEAM = {
     "本仓库不含明文密码、Token 或客户个人信息；Sales 的 Supabase publishable key 为浏览器前端公钥，非私密凭据。",
     "Sales 的决策操作仍限本机 file:// 打开，云端/手机访问自动只读，不因部署而改变。",
     "任何『互通』目前是展示层与契约层互通，不是数据库实时双向同步；不得对外声称已完成系统级打通。",
-    "AI GB-PM 尚未建立，本页展示的汇报关系是组织设计，不是已运行的软件系统。"
+    "AI GB-PM 尚未建立，本页展示的汇报关系是组织设计，不是已运行的软件系统。",
+    "AI GB-Fin 为对内角色：云端与手机访问只显示锁屏，成本与客户报价不进入线上仓库、监督账本与公开情报。",
+    "AI GB-Fin 的税率与汇率均为公开参考值；正式报价前须由报关行/律师书面确认具体税号、税率与银行结汇价。"
   ]
 };

@@ -1,9 +1,10 @@
 {
-  "version": "1.5.3",
-  "build": "20261123i",
-  "released": "2026-11-23",
-  "title": "全站补上 Service Worker 注册 + 修根 SW 缓存陷阱",
+  "version": "2.1.0",
+  "build": "20261128c",
+  "released": "2026-11-28",
+  "title": "AI GB-Fin 财务部上线：对内报价测算 + 每日 09:00 财务情报，挂载 AI GB-Team 监督",
   "changelog": [
+    "v2.1.0 新增第五条业务线 AI GB-Fin（财务部，对内不对外），由所有者 2026-11-28 指定并挂在 AI GB-Team 下做管理监控。①新建 fin/ 独立子 PWA（manifest / 独立 SW 前缀 ai-gb-fin-v1 / version.json / data.js / assets）；云端与手机访问只显示锁屏，判定条件 location.protocol===\"file:\"，成本输入只存本机 localStorage，不进 git、不上传、不发信。②报价测算沿用 FALCORA 获客通 AI《成本与报价测算》v64 已验证口径：MC→MC′→FC→EXW→FOB→CFR→CIF→DDP；关税按 CIF 计、VAT 按 CIF+关税计；毛利率按所选术语的成本基数计算（避免 CIF/DDP 报价把 pass-through 费用算进利润导致高估）；区分报价汇率 e_q 与结算汇率 e_n；空值/负数一律显示「—」不静默兜底；含佣金、底价、盈亏平衡与退税上限。③每日 09:00 自动发布汇率（42 币种对 CNY）、16 个市场 HS 9013.10 关税、3 条 GUNBASE 相关进出口政策，未查到可靠来源的市场留空标「待核验」，不填 0；全部附 MLA 引用。④团队中心新增公开宏观摘要卡（只展示汇率/关税/政策，无成本）；监督账本新增「八、AI GB-Fin 财务线监控」。⑤四处导航、共享 tabbar、gb-team.js 角色契约、根 SW v37 同步。根 sw 不预缓存内部测算页。",
     "v1.5.3 修复：团队中心「跨线冲突裁决」区块整块渲染失败——11-23 那条数据把 conflicts 写成了字符串，渲染器按数组 .map 直接抛 TypeError。gb-reports.js 末尾新增数据归一（字符串→[{note}]、单对象→[obj]、null→[]），渲染器对 note 兜底展示，原文不改。",
     "v1.5.2 新增 shared/gb-bfcache-heal.js：标签页被浏览器冻结保存（bfcache）后还原时不发任何请求，旧 DOM 直接复活，SW 与 no-store 全部失效——团队中心 / Marketing / Sales 三页均挂上该守卫，还原/聚焦/联网/重新可见时校验 version.json 的 build，变了自动重载一次（按版本打标，每会话只一次）。",
     "v1.5.1 修复：团队中心与 Marketing 页此前只调 getRegistration、从未 register，导致根 sw.js 在全站是死文件、这两页从未被离线缓存接管——两页现已补注册（marketing 用 ../sw.js，作用域同为 /ai-gb-hub/）。",
