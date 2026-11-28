@@ -1,9 +1,10 @@
 {
-  "version": "1.4.7",
+  "version": "1.4.8",
   "build": "20261125a",
-  "updatedAt": "2026-11-27 08:14 (GMT+8) · R1 补交：原调度 08:00，实际 08:14，延迟 14 分钟；本轮为定时触发（automation 68d95d11），automation_runs.result_success 待运行结束判定，产物落地不等于自动化成功",
+  "updatedAt": "2026-11-28 08:47 (GMT+8) · R1 补交：原调度 08:00，实际 08:47，延迟 47 分钟；本轮为定时触发（automation 68d95d11），启动已过 08:00；result_success 待运行结束判定，产物落地不等于自动化成功；version/dataVersion 同步为 1.4.8，build 保持 20261125a 不变，SW 升 v18",
   "name": "AI GB-RD",
   "changelog": [
+    "v1.4.8 R1 补交 11-28 每日技术报告：9 条可核实信号（3 新增 + 6 进展）、1 件新公开专利 US20260341187A1（Vortex 柔性旋钮刻度环，独立权项 1/9/12），并按 D-25 对 6 件专利逐件给出独立权项号、图纸重叠点与 FTO 结论；新增 Vortex Pro Cantilever 模块平台、Nocpix ACE 2 人机布局、Arken EP-8 双分划实测；4 项 model 图纸储备。build 保持 20261125a，SW 升 v18。",
     "v1.4.7 R1 补交 11-27 每日技术报告：8 条可核实技术信号（6 条新发现 + 2 条进展更新）与 3 件新专利（US20260309463A1 Trijicon 侧面紧固件腔公开申请、US 12,674,639 Sellmark 锥面快拆座授权、EP4733707A1 Light Optical Works 显示布局公开申请），4 项 model 图纸储备；新增 SIGHTRON 仰角单轴锁定、LCO Pro F2 三键两螺钉、Thermion 3 测距模块移位、Spuhr 固定座三面/QD 两面基准。build 保持 20261125a 不变，SW 升 v17。",
     "v1.4.6 R1 补交 11-26 每日技术报告：8 条可核实信号（Leupold VX-5HD Gen 2 Speed Set CDS、Pulsar Trail 3 / Thermion 3 趋势、HIKMICRO 4.0、2026 光学上市追踪、Scalarworks LEAP/08、WO2026006282A1 旋钮盒申请、US 12,693,097 双楔块授权），4 项图纸储备、4 条观察项；新专利 2 件，事实 verified 与推演 model 分列，全部附 URL/日期/caveat。R1 原调度 08:00，自动化 08:17:59 入队、09:40:09 启动，按实际时间补交。",
     "v1.4.5a 补交 11-25 每日技术报告：8 条可核实信号（Nitehog Viper Gen2 650 LRF 12µm/NETD<15mK 集成 LRF+弹道机、DNT HYDRA 三合一、GUIDE TB650LS、Arken EP-8/ZeroTech Trace ED 玻璃 LPVO、Trijicon Q-LOC/LaRue 快拆座），4 项图纸储备、3 条观察项；事实 verified 与推演 model 分列，全部附 URL 与 caveat。原 08:00 自动化 interrupted 未产出，按实际时间补跑留档。",
@@ -25,5 +26,5 @@
   ],
   "released": "2026-11-23",
   "title": "技术情报 + 使用者痛点 + 快赢图纸 + 打样闭环",
-  "dataVersion": "1.4.7"
+  "dataVersion": "1.4.8"
 }
