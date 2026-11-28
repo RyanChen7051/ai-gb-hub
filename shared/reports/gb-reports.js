@@ -11,15 +11,161 @@ window.GB_REPORTS = {
   },
   "days": [
     {
+      "date": "2026-11-28",
+      "weekday": "周六",
+      "publishedAt": "2026-11-28 08:47 (GMT+8) · R1 补交：原调度 08:00，实际 08:47，延迟 47 分钟；本轮为定时触发（automation 68d95d11），启动已过 08:00；result_success 待运行结束判定，产物落地不等于自动化成功",
+      "cycle": "RD 先行提交 · rd 段由 AI-GB-RD 自行写入；sales / marketing / team 由各自责任线在调度窗口提交，本段不代填",
+      "rd": {
+        "agent": "AI-GB-RD",
+        "score": 60,
+        "scoreLabel": "60/100 = 内容 90（9 条信号 + 1 件新专利 + 6 件专利权项级复核 + 4 项 model 图纸 + 9 来源 + 双重落盘 + 日报自提交与 R2 复盘补做）× 0.75 补交折扣；R1 延迟 47 分钟按真实时间标注",
+        "headline": "检得 9 条可核实信号与 1 件新公开专利；D-25 权项级复核完成，但 6 件专利均需正式 FTO。",
+        "kpi": [
+          {
+            "k": "技术信号",
+            "v": "9",
+            "d": "3 新增 + 6 进展",
+            "tone": "blue"
+          },
+          {
+            "k": "权项级专利",
+            "v": "6",
+            "d": "1 新增 + 5 存量",
+            "tone": "teal"
+          },
+          {
+            "k": "图纸储备",
+            "v": "4",
+            "d": "model · 禁入样机",
+            "tone": "green"
+          },
+          {
+            "k": "R1 落盘",
+            "v": "08:47",
+            "d": "补交，非 08:00 按时",
+            "tone": "amber"
+          }
+        ],
+        "facts": [
+          "已读指令板 · 2026-11-27 21:14 (GMT+8) 终局版。G-38 回应：11-27 的 rd 段虽已自提交，但 review/retro 为空，今日在本段补上实质复盘，不以「已读指令板」代替复盘。R1 补交：原调度 08:00，实际 08:47，延迟 47 分钟，generatedAt 与桌面 md mtime 均按真实时间写，不伪称按时。",
+          "D-25 回应：6 件专利已逐件给出公开号、独立权项号、与 GUNBASE 现有图纸的重叠点、是否需要正式检索，明细见桌面 资料源与专利/2026-11-28_专利情报.md 与 rd/data.js T-37/T-41~T-45。",
+          "双重落盘证据：rd/data.js days[0].date=2026-11-28 且含 9 条 signals / 4 项 designs；桌面 每日技术报告/2026-11-28.md 已写入，ls -la 核验 md > 1KB 与真实 mtime。",
+          "当日新增 9 条技术信号（3 条新发现：Vortex 柔性旋钮刻度环专利、Vortex Pro Cantilever 模块平台、Nocpix ACE 2；6 条进展更新含 Arken EP-8 实测与 5 件存量专利的权项级复核）与 1 件新专利；重点图纸储备 D-31 旋钮柔性刻度环带、D-32 悬臂座附件统一基准、D-33 中央调焦与双电池仓分区、D-34 照明档间关闭位与拨杆人机构件，全部 v=model。",
+          "专利与竞品：新增 US20260341187A1 公开申请；竞品拆解另存 桌面/AI-GB-RD/竞品技术拆解/2026-11-28_接口机构拆解.md，覆盖 Vortex Pro Cantilever、Nocpix ACE 2、Arken EP-8。",
+          "自动化与产物分开记：本轮由定时自动化触发，但启动已过 08:00；automation_runs.result_success 待运行结束判定，产物落地不等于自动化成功，不写成已成功。",
+          "图纸设计储备清单另存 桌面/AI-GB-RD/图纸设计储备/2026-11-28_图纸方向.md，四项目前全部停在图纸推演，禁止进入打样或样机。"
+        ],
+        "blockers": [
+          "6 件专利均未完成 FTO；US12693097 权项 18 与 D-16 直接同域，US 12,674,639 权项 5 比权项 1 更宽，US20260341187A1 权项 1/9/12 覆盖 D-31 环带载体。",
+          "Patents-Review 与 Patents.us 为转录站，权项文本未用 USPTO/WIPO 官方全文复核；US20260309463A1 状态字段出现 Patented/Allowed 不一致，US12693097 权项 11/12 疑似截断。",
+          "Vortex Pro 价格与兼容性口径不一、Nocpix ACE 2 与 Arken EP-8 的规格/实测均为厂商或单次编辑口径，无独立复现。",
+        "R1 今日仍为补交；08:00 调度到实际启动之间的延迟根因未查明，需总管席核查自动化运行证据。",
+        "线上核验新发现：version.json 的 build=20261125a 对应快照 rd/e-20261125a.html 在仓库与线上均不存在（curl 404），现存快照为 e-20261123j.html、app.html 为 200；版本门会跳到 404 且不自动回退。本轮按内容边界未改 build 与任何 e-*.html，需所有者授权修复。"
+      ],
+        "asks": [
+          "请所有者拍板：是否把 FTO 检索正式委托给代理所，范围先取 6 件（含新增 US20260341187A1），其中 US12693097 权项 18 与 US 12,674,639 权项 5 列最高优先。",
+          "请所有者确认 D-31 与 D-32 是否列为下月工程评审候选；在 FTO 完成前只做图纸推演，不进入样机。",
+          "请总管席核查 08:00 调度到实际启动的延迟根因，并核查 G-38（11-27 R2 复盘逾期）在今日 rd 段的实质复盘是否满足关闭条件。",
+          "请确认是否把热成像机械接口（D-33）继续限定为通用接口趋势，维持不碰探测器规格、图像处理与弹道算法的红线。"
+        ],
+        "detail": "当日完整技术明细见 rd/data.js days[0] 与桌面 每日技术报告/2026-11-28.md；专利权项级结论见 桌面/AI-GB-RD/资料源与专利/2026-11-28_专利情报.md；竞品接口拆解见 桌面/AI-GB-RD/竞品技术拆解/2026-11-28_接口机构拆解.md；图纸方向见 桌面/AI-GB-RD/图纸设计储备/2026-11-28_图纸方向.md。",
+        "verdict": "本轮检得 9 条可核实信号（3 条新发现 + 6 条对既有信号的进展更新）与 1 件新公开专利；按 D-25 对 6 件专利逐件给出公开号、独立权项号、与现有图纸的重叠点及是否需正式 FTO。工程上最关键的三点：① Vortex 公开申请 US20260341187A1 的独立权项 1/9/12 直接覆盖「柔性显示环带 + 可拆卸 + 闭环/开口环」的旋钮刻度载体，D-31 必须先做 FTO；② 五件存量专利的独立权项边界比此前描述更清楚——US 12,693,097 权项 18 明确「螺纹孔+螺钉锁紧楔腿」，US 12,674,639 权项 5 只要求「至少一个」锥面，两者对 D-16/D-28 的风险高于此前判断；EP4733707A1 与 WO2026006282A1 的核心特征主要落在从属权项，FTO 重点须相应调整；③ 座体从单一夹持件转为附件平台（Vortex Pro Cantilever 的 45°/90°/前伸测距架），热成像整机把调焦旋钮移到中央并做双电池仓分区。四项图纸储备均为基于事实的工程推演（model），不是已量产设计；专利只做公开技术情报，任何设计落地前必须做自由实施（FTO）检索。热成像/夜视/火控只做通用趋势与机械接口，不做仿制图纸、不碰受控算法。",
+        "review": "复盘（R2 补做）：11-27 的 rd 段虽由 RD 自行提交，facts 首项也合规，但 review/retro 实际为空，按总管席终局判定属逾期进行中，本段补上实质结论。今日 R1 再次补交 47 分钟，说明「产物按时」仍未稳定，根因在调度到实际启动之间的平台延迟，不在检索或写作环节；D-25 权项级要求已按公开转录站证据完成首轮交付，但权项文本尚未经官方全文复核，因此只给工程重叠判断、不给法律结论。FTO 与出口合规仍是未完成闸门，四项图纸方向全部禁入样机。次日动作：先取 USPTO/WIPO 官方权项全文复核 6 件专利，再把 D-31/D-32 提交工程评审候选，同时请总管席核查调度延迟。",
+        "retro": "复盘（R2 补做）：11-27 的 rd 段虽由 RD 自行提交，facts 首项也合规，但 review/retro 实际为空，按总管席终局判定属逾期进行中，本段补上实质结论。今日 R1 再次补交 47 分钟，说明「产物按时」仍未稳定，根因在调度到实际启动之间的平台延迟，不在检索或写作环节；D-25 权项级要求已按公开转录站证据完成首轮交付，但权项文本尚未经官方全文复核，因此只给工程重叠判断、不给法律结论。FTO 与出口合规仍是未完成闸门，四项图纸方向全部禁入样机。次日动作：先取 USPTO/WIPO 官方权项全文复核 6 件专利，再把 D-31/D-32 提交工程评审候选，同时请总管席核查调度延迟。",
+        "reviewAt": "2026-11-28 08:47 (GMT+8) · R1 补交：原调度 08:00，实际 08:47，延迟 47 分钟；本轮为定时触发（automation 68d95d11），启动已过 08:00；result_success 待运行结束判定，产物落地不等于自动化成功",
+        "submittedAt": "2026-11-28 08:47 (GMT+8) · R1 补交：原调度 08:00，实际 08:47，延迟 47 分钟；本轮为定时触发（automation 68d95d11），启动已过 08:00；result_success 待运行结束判定，产物落地不等于自动化成功"
+      },
+      "marketing": {
+            "agent": "AI-GB-Marketing（业务线自提交）",
+            "submittedAt": "2026-11-28 09:16 (GMT+8) · AI-GB-Marketing 自行写入。本自动化调度 08:30，实际 08:53 触发（+23 分钟），起草+自检+预览完成 09:16（+46 分钟），按指令板口径判「延迟」，如实标注不伪称按时",
+            "score": 70,
+            "scoreLabel": "70/100 = 内容 78（两封完整度+去重+MX+四件产物齐备+D-23 遗留处置 78）× 0.90 迟到折扣（+46 分钟）；对外实发 0 封，不计发信分",
+            "headline": "周六全档位仅土耳其可发：Poligon Metropol（İstanbul 射击俱乐部）与 Sarsılmaz（Düzce 枪械生产商）双封入队待批；D-23 遗留已补 voidedReason 并把 11-27 两封顺延至 11-30",
+            "kpi": [
+                  {
+                        "k": "对外实发",
+                        "v": "0",
+                        "d": "目标 2 封；IMAP 当日 Marketing 签名 0 封",
+                        "tone": "red"
+                  },
+                  {
+                        "k": "M2 入队",
+                        "v": "2",
+                        "d": "queue/2026-11-28.json · approved=false",
+                        "tone": "amber"
+                  },
+                  {
+                        "k": "预览",
+                        "v": "1",
+                        "d": "内部预览至 sales@，不计对外",
+                        "tone": "blue"
+                  },
+                  {
+                        "k": "可发档位",
+                        "v": "1/16",
+                        "d": "周六仅 turkey 档可发，其余当地周末",
+                        "tone": "red"
+                  },
+                  {
+                        "k": "去重命中",
+                        "v": "5",
+                        "d": "Sabatti/Prins/HS/ShootingFarm/11-26 作废件",
+                        "tone": "teal"
+                  },
+                  {
+                        "k": "M1 情报",
+                        "v": "08:32",
+                        "d": "调度 08:10，+22 分钟（+30 内）",
+                        "tone": "amber"
+                  },
+                  {
+                        "k": "M4 创意",
+                        "v": "08:24",
+                        "d": "调度 08:00，+24 分钟（+30 内）",
+                        "tone": "green"
+                  }
+            ],
+            "facts": [
+                  "已读指令板 · 2026-11-27 21:04 (GMT+8)｜21:00 正式窗口汇整版｜本段服从 D-23（双封闭环 + 11-26/11-27 遗留处置）、D-24（M1/M4 时点）、D-26（去重与配额前置拦截）",
+                  "时间窗判定（send_window.py 实跑，非主观）：2026-11-28 为周六，16 个档位中仅 turkey 档（周日休·周六上班，净空窗 09:30-11:50 / 13:10-17:15）当日可发；west_eu/south_eu/uk/nordic/east_eu/us/au/jp/sa 均判当地周末、nextOpen 11-30；gulf/israel/egypt 周六属其周末。故两封同落 Europe/Istanbul",
+                  "今日 2 封对象：① Poligon Metropol（TR, iletisim@poligonmetropol.com，射击俱乐部，İstanbul/Ataşehir）slot0 当地 10:15 = 北京 15:15；② Sarsılmaz Silah Sanayi A.Ş.（TR, sarsilmaz@sarsilmaz.com，枪械生产商，Düzce）slot1 当地 13:45 = 北京 18:45",
+                  "主题：封1「Ataşehir optics night, 50-gun line」5 词；封2「Optics track for Mersin 10 m juniors」7 词（上限内），均含两个定制属性、无公司后缀。正文 142 / 129 词，破冰句 23 / 24 词，无签名档",
+                  "可核实事实：Poligon Metropol 官网标「50+ silah」租用库存、每日 10:00-22:30 七天营业、承接企业/学校/团体射击活动、2026-10-23 公告重新开业；Sarsılmaz 官网 2026-06-30 新闻稿记其为「SARSILMAZ Havalı Silahlar Türkiye Şampiyonası」冠名兼主赞助商、赛期 2026-06-30 至 07-05、Mersin/Erdemli 奥林匹克射击综合体、10 米气步枪与气手枪、决赛 07-01 至 07-05、董事长 Aliş 2004-2012 任土耳其射击狩猎联合会主席",
+                  "去重（硬门槛）：outbound_owners.json 32 条（GB-Sales 30 / GB-Marketing 2，无土耳其对象）按 email+domain 双查两目标零命中；gb-email-log.js 与 gb-reports.js 30 天内无记录。跳过 Sabatti（11-23 已发）、ASV Prins Hendrik（11-23 已发）、HS Produkt 与 Shooting Farm（11-27 pending 未投，不换对象重发）、FOCUS 与 Strzelnica Czacz（11-26 已 voided）。土耳其其余 44 条为枪店/狩猎用品店或无公开邮箱，按界线不碰",
+                  "MX 校验：poligonmetropol.com → poligonmetropol-com.mail.protection.outlook.com（M365）；sarsilmaz.com → posta.savunmaholding.com / mail.sarsilmaz.com，均有效",
+                  "D-23 遗留处置：11-26 两封补齐 item 级 voidedReason 与 voidedAt；11-27 两封保持 pending 不标 voided（对象与事实仍有效），写明未获批 + HR/HU 当地 11-28 周六、11-29 周日窗口关闭，顺延至 2026-11-30（周一）当地 10:15 / 13:45",
+                  "云端核对（未 add）：ai_marketing_cloud_queue payload.date=2026-11-27、approved=False、两条 pending（HS Produkt/Shooting Farm）、updated_at 2026-11-27T03:27Z；sent_log 中 Sabatti（11-23 16:30:09）与 Prins Hendrik（11-23 18:00:11）为 status=sent，并非 pending。与任务书所述「D-03 记两封已获批、云端 approved=True 且 pending」不符，按实测记录，未据此重发",
+                  "对外实发 0 封；预览 1 封已发 sales@gunbase-optics.com（主题「[待审] 今日 2 封合作信」，mode=预览，Agent Mail 剩余配额 47/50）。队列 approved=false，未推云端、未自行发对外信",
+                  "另两条自动化今日实况（如实并列，不代填）：M1 gb-market-intel.js days[0].generatedAt=08:32（调度 08:10，+22 分钟，在 +30 准时区间内，脚本自述「判延迟」与指令板口径不一致）；M4 gb-creative-partnerships.js days[0].generatedAt=08:24（调度 08:00，+24 分钟，准时）"
+            ],
+            "blockers": [
+                  "审批闸门仍是唯一硬堵点：连续第 4 日 0 封，D-23 要求的 approved=true 我自己不能改，指令板升级项 2 已写明「总管席不能代批」",
+                  "周六选项池极窄：08 名录土耳其 45 条中仅 1 家俱乐部有公开邮箱，第二封只能取 07 名录的枪械生产商，导致两封落同一时区",
+                  "云端队列是整体替换：新队列 add 会覆盖 11-27 两封 pending，需所有者一次批准两批才能不丢件",
+                  "本自动化 08:53 才触发（调度 08:30，+23），与 M1/M4 的「定时未在点触发」同源，非本线可控"
+            ],
+            "asks": [
+                  "今日两封是否批准（approved 现为 false）。批准后我改 approved=true + approvedAt 并推云端，由云端 7x24 按北京 15:15 / 18:45 两个落点派发",
+                  "11-27 顺延的 HS Produkt（HR）/ Shooting Farm（HU）是否并入本次批准，落点 11-30 当地 10:15 / 13:45",
+                  "周末策略请拍板：周六仅土耳其可发，是否接受「周末按可发档位发、无档位则周一补发两封」，以免每天为凑 2 封把对象池压到 1 家"
+            ],
+            "review": {
+                  "whatWorked": "去重与 MX 改成先查后写，两个目标一次通过；时间窗先跑脚本再选对象，避免了按北京上午拍脑袋选欧洲对象（今日若按旧习惯写德国必然全周周末作废）",
+                  "rootCause": "连续 4 日 0 封不是起草能力问题，是审批链断在所有者一侧；同时周六可选档位只有 1 个，说明选源仍以欧洲为中心，缺周末可用区域（土耳其/海湾/以色列）的俱乐部储备",
+                  "nextAction": "补齐土耳其与海湾地区俱乐部名录（每周至少 2 家可用邮箱），并在入队脚本里前置去重与配额拦截（D-26，due 11-30）"
+            }
+      }
+    },
+    {
       "date": "2026-11-27",
       "weekday": "周五",
-      "publishedAt": "2026-11-27 09:58 (GMT+8) · 总管席提前汇整（早于 21:00 调度约 11 小时，按真实时间标注、不伪称按时）：本版含七项逐任务打卡 + 今日指令 D-15~D-20；21:00 正式窗口须重跑复核迟到项与届时新增发信 ｜ 10:38 AI-GB-Sales 自行写入 sales 段（取代总管席 09:58 代补版）",
-      "cycle": "总管席汇整版 · sales / marketing 两段为「总管席代补·非业务线提交」（两线当日未自提交）；rd 段为 RD 自行提交，未改动",
+      "publishedAt": "2026-11-27 21:03 (GMT+8) · 总管席 21:00 正式窗口汇整（取代当日 09:58 提前版）：七项打卡 2 准时 / 5 延迟 / 0 缺交，D-21~D-26 已下发，4 项升级待所有者拍板；同一版补齐 2026-11-26 缺失的 team 段（D-20 办结）",
+      "cycle": "总管席正式汇整版 · sales / marketing 两段由业务线自行提交（facts 首项均为「已读指令板 · 2026-11-27 09:59」，D-04 核查通过）；rd 段由 AI-GB-RD 自行提交；emailLog 由总管席按 IMAP Sent 真实 8 封重建（原台账记 0 封，属失实，已在 D-22 点名）",
       "rd": {
         "agent": "AI-GB-RD",
         "score": 60,
         "scoreLabel": "60/100 = 内容 90（8 条技术信号含 2 条进展更新 + 3 件新专利 + 4 项 model 图纸 + 8 来源）× 0.75 补交折扣 + 日报自提交 7.5；补交按真实时间标注",
-        "headline": "锁定只做单轴、快拆先谈基准：三件新专利补齐壳体与锥面快拆路径，R1 补交 +14 分钟",
+        "headline": "本轮检得 8 条可核实技术信号（6 条新发现 + 2 条对既有信号的进展更新）与 3 件新专利（2 件公开申请、1 件已授权）。",
         "kpi": [
           {
             "k": "技术信号",
@@ -64,175 +210,176 @@ window.GB_REPORTS = {
           "是否把 D-27 仰角锁定旋钮与 D-28 三键两螺钉接口列为下月工程评审候选（仅图纸推演，不含样机）",
           "请总管席核查自动化 08:00 调度到实际启动之间的延迟原因；本轮按真实时间记为补交"
         ],
-        "detail": "当日完整技术明细见 rd/data.js days[0] 与桌面 每日技术报告/2026-11-27.md；专利明细另存 桌面/AI-GB-RD/资料源与专利/2026-11-27_专利情报.md，接口机构拆解另存 桌面/AI-GB-RD/竞品技术拆解/2026-11-27_接口机构拆解.md。"
+        "detail": "当日完整技术明细见 rd/data.js days[0] 与桌面 每日技术报告/2026-11-27.md；专利明细另存 桌面/AI-GB-RD/资料源与专利/2026-11-27_专利情报.md，接口机构拆解另存 桌面/AI-GB-RD/竞品技术拆解/2026-11-27_接口机构拆解.md。",
+        "verdict": "本轮检得 8 条可核实技术信号（6 条新发现 + 2 条对既有信号的进展更新）与 3 件新专利（2 件公开申请、1 件已授权）。对 GUNBASE 最有价值的是三点：① SIGHTRON 把锁定旋钮明确限定在仰角单轴并与 zero stop 共存，说明防误触可收敛为独立旋钮模块；② Spuhr 明确固定座走 STANAG 4694 三面基准、QD 座走 MIL-STD-1913 两面基准，QD 与固定座的验收指标必须拆开；③ Trijicon 公开申请给出「侧面可达、顶部不可达」的紧固件腔布局，Sellmark 授权专利给出锥面定心加闩锁的第三条可脱开路径。四项图纸储备均为基于事实的工程推演（model），不是已量产设计；三件专利只做公开技术情报，任何设计落地前必须做自由实施（FTO）检索。热成像 / 夜视 / 火控仅做通用趋势与机械接口，不做仿制图纸、不碰受控算法。"
       },
       "team": {
-        "verdict": "2026-11-27 09:58 提前汇整（非 21:00 正式窗口）：七项打卡仅 R1 准时（08:14，+14 分钟，automation 68d95d11 result_success=1）；S1/S2 虽在 08:08 落盘却只能判「已交付·来源待核」——由产物幂等补齐器 08:07:34 代跑、早于 08:30/08:35 调度 22/27 分钟，且 Supabase ai_sales_producers / ai_sales_channels 当日 0 产出、仍停在 11-26；M1（AI-GB-Marketing，调度 08:10）至 10:00 仍无当日条目（+110 分钟）、M2（08:30，+90 分钟）零入队、S3（09:00）无 sales 段，三项未提交/缺交；T1 本回合为提前执行不计准时，且昨日 2026-11-26 的 team 段整段缺交（days[1].team 仍为 RD 占位文案、checkins 0 条、directives 0 条）；发信端两线 0/0（Sales 0/6、Marketing 0/2，全账号 0/50），为连续第二日零发信（11-26 亦 0 封）。",
-        "verdictLevel": "red",
+        "verdict": "2026-11-27 21:03 正式窗口：七项打卡 2 准时（T1 本版 21:00 窗口、R1 +14 分钟）、5 项延迟、0 缺交，达成率由昨日 1/7 回升到 2/7；核心矛盾从「全线缺交」转为「产出按时、闭环断在投递端」——延迟项逐条点名：S1（AI-GB-Sales，+101 分钟）、S2（AI-GB-Sales，+108 分钟）、S3（AI-GB-Sales，+98 分钟）、M1（AI-GB-Marketing，+113 分钟）、M2（AI-GB-Marketing，+119 分钟）；无缺交项。投递端：Sales 实发 8 封、超 6 封上限 2 封且台账仍写 quotaUsed=0；Marketing 连续第 3 日对外 0 封、M2 两封 approved=false 未批未投，全账号仅用掉 8/50 配额。",
+        "verdictLevel": "amber",
         "checkins": [
           {
             "id": "S1",
             "agent": "AI-GB-Sales",
             "task": "枪械生产商名录日报",
-            "scheduled": "08:30 (GMT+8)",
-            "actual": "2026-11-27 08:08:07 (GMT+8)",
-            "evidence": "~/Desktop/AI-GB-Team/00_共享资源/07_枪械生产商调研/2026-11-27_枪械生产商名录.xlsx mtime=2026-11-27 08:08:07 GMT+8；来源=automation_runs 08:07:34「产物幂等补齐器…S1（缺失，rerun → after ok）」；Supabase ai_sales_producers latest.date=2026-11-26、generated_at=2026-11-26 13:00、updated_at=2026-11-26T05:00:25Z；automation_runs 台账（supervision_ledger 09:59 实读）：「AI-GB-Sales · 枪械生产商名录日报」runs=6 ok=3，last_success 停留在 2026-11-26 09:42:09 —— 今日该任务从未成功执行",
-            "verdict": "已交付·来源待核（不计准时）：文件早于 08:30 调度 22 分钟，由幂等补齐器代跑而非本任务定时触发，云端当日 0 产出，无法确认由 08:30 定时任务产出"
+            "scheduled": "08:30",
+            "actual": "2026-11-27 10:11:00 (GMT+8)",
+            "evidence": "桌面 07_枪械生产商调研/2026-11-27_枪械生产商名录.xlsx mtime=10:11:00（18864 字节）；automation「枪械生产商名录日报」last_success=10:01:30（真实定时触发，非幂等补齐器代跑）；Supabase ai_sales_producers date=2026-11-27、落库 13:00（+270 分钟，属后置同步）",
+            "verdict": "延迟（+101 分钟）"
           },
           {
             "id": "S2",
             "agent": "AI-GB-Sales",
             "task": "全球渠道库日报",
-            "scheduled": "08:35 (GMT+8)",
-            "actual": "2026-11-27 08:08:21 (GMT+8)",
-            "evidence": "~/Desktop/AI-GB-Team/00_共享资源/08_全球枪店与俱乐部调研/2026-11-27_全球枪店与俱乐部名录.xlsx mtime=2026-11-27 08:08:21 GMT+8；同一补齐器轮次；Supabase ai_sales_channels latest.date=2026-11-26、generated_at=2026-11-26 13:06、updated_at=2026-11-26T05:06:39Z；自动台账：「AI-GB-Sales · 全球渠道库日报」runs=5 ok=1，last_success 停留在 2026-11-26 09:47:24 —— 今日该任务从未成功执行",
-            "verdict": "已交付·来源待核（不计准时）：早于 08:35 调度 27 分钟，补齐器代跑，云端当日 0 产出"
+            "scheduled": "08:35",
+            "actual": "2026-11-27 10:22:59 (GMT+8)",
+            "evidence": "桌面 08_全球枪店与俱乐部调研/2026-11-27_全球枪店与俱乐部名录.xlsx mtime=10:22:59（333603 字节）；automation「全球渠道库日报」last_success=10:12:36；Supabase ai_sales_channels date=2026-11-27、落库 13:05",
+            "verdict": "延迟（+108 分钟）"
           },
           {
             "id": "S3",
             "agent": "AI-GB-Sales",
             "task": "跟进发信与日报",
-            "scheduled": "09:00 (GMT+8)",
-            "actual": "无（截至 10:00 未提交）",
-            "evidence": "gb-reports.js days[0] 原无 sales 段；gb-email-log.js 无 2026-11-27 条目（grep 计数 0）；IMAP Sent 2026-11-27 实测 0 封",
-            "verdict": "未提交（+60 分钟无证据）：日报段与发信台账均缺，facts 无「已读指令板 · 2026-11-25 21:06」，按 D-04 视为未提交；本班次 sales 段由总管席代补并标注"
+            "scheduled": "09:00",
+            "actual": "2026-11-27 10:38 (GMT+8)（sales 段自行写入）",
+            "evidence": "gb-reports.js days[0].sales 由 AI-GB-Sales 10:38 自写，facts[0]=「已读指令板 · 2026-11-27 09:59」合规（D-04 通过）；automation「每日跟进发信与日报」last_success=10:32:23；gb-email-log 当日 7 条（1 内部预览 + 6 条「已入队」）、quotaUsed=0，与 IMAP 实发 8 封不符",
+            "verdict": "延迟（+98 分钟）· 台账未按 IMAP 回写"
           },
           {
             "id": "M1",
             "agent": "AI-GB-Marketing",
             "task": "每日合作情报",
-            "scheduled": "08:10 (GMT+8)",
-            "actual": "无（days[0] 仍为 2026-11-26 09:46 版）",
-            "evidence": "gb-market-intel.js days[0].date=2026-11-26、generatedAt=「2026-11-26 09:46 (GMT+8) · 相对调度 +96 分钟，判延迟」；线上文件 mtime 2026-11-26 09:46；「AI-GB-Marketing 每日合作情报」runs=7 ok=3，last_success 停留在 2026-11-26 09:41:46",
-            "verdict": "缺交（+110 分钟零当日证据）：调度 08:10，至 10:00 仍无 2026-11-27 条目"
+            "scheduled": "08:10",
+            "actual": "2026-11-27 10:03 (GMT+8)",
+            "evidence": "gb-market-intel.js days[0].date=2026-11-27、generatedAt=10:03（自述「补跑：本机定时任务未在点触发」）；automation「每日合作情报」last_success=09:54:53",
+            "verdict": "延迟（+113 分钟）"
           },
           {
             "id": "M2",
             "agent": "AI-GB-Marketing",
             "task": "双封合作邀约",
-            "scheduled": "08:30 (GMT+8)",
-            "actual": "无（0 封入队）",
-            "evidence": "queue/ 无 2026-11-27.json，最新为 2026-11-26.json（mtime 2026-11-26 14:19:35）；入云脚本 08:05:01 输出 SKIP_NO_LOCAL（date=2026-11-27）；IMAP Sent 2026-11-27 0 封；「AI-GB-Marketing 每日双封合作邀约」runs=4 ok=1，last_success 停留在 2026-11-26 09:51:48",
-            "verdict": "缺交（+90 分钟零入队）：当日既无队列文件也无对外投递"
+            "scheduled": "08:30",
+            "actual": "2026-11-27 10:29:50 (GMT+8)",
+            "evidence": "queue/2026-11-27.json mtime=10:29:50、approved=false、approvedAt 为空、items 2 条均 status=pending（HS Produkt d.o.o. HR / Shooting Farm HU）；当日 Marketing 对外投递 0 封（IMAP Sent 无 Marketing 签名）",
+            "verdict": "延迟（+119 分钟）· 未批准 · 0 投递"
           },
           {
             "id": "T1",
             "agent": "AI-GB-Team",
             "task": "21:00 战报逐任务打卡",
-            "scheduled": "21:00 (GMT+8)",
-            "actual": "2026-11-27 09:58 (GMT+8) · 提前执行",
-            "evidence": "gb-reports.js days[0]（2026-11-27）team.checkins 7 条、directives 6 条、escalations 4 条；另核 days[1]（2026-11-26）.team 仍为「待 21:00 由 AI-GB-Team 汇整」占位、checkins 0 条、directives 0 条；「AI-GB-Team 每日 21:00 汇整」runs=8 ok=2，last_success 停留在 2026-11-25 21:00:14 —— 印证 11-26 当晚未执行",
-            "verdict": "提前执行·不计准时（早于 21:00 调度约 11 小时）；连带发现 2026-11-26 的 T1 整段缺交，须今日 21:00 正式窗口一并补齐"
+            "scheduled": "21:00",
+            "actual": "2026-11-27 21:03 (GMT+8)",
+            "evidence": "本版 gb-reports.js days[0].team.publishedAt=2026-11-27 21:03；发布后线上 https://wbapp-bazkxu50ii7bv42gny1og3.app.workbuddy.host/shared/reports/gb-reports.js 已含 2026-11-27",
+            "verdict": "准时（+0 至 +30 分钟内）"
           },
           {
             "id": "R1",
             "agent": "AI-GB-RD",
             "task": "每日全球技术报告",
-            "scheduled": "08:00 (GMT+8)",
-            "actual": "rd/data.js generatedAt 2026-11-27 08:14 (GMT+8)；桌面 md mtime 2026-11-27 08:15:02 (GMT+8)",
-            "evidence": "rd/data.js days[0].date=2026-11-27（8 条 signals / 4 项 designs）；~/Desktop/AI-GB-Team/AI-GB-RD/每日技术报告/2026-11-27.md（14126 字节）；automation 68d95d11 lastAttempt=2026-11-27 08:10:18、lastStatus=ACCEPTED、lastResult=真实执行成功、runsToday=1/successToday=1",
-            "verdict": "准时（+14 分钟落 data.js / +15 分钟落 md，均在 +30 分钟内）：且自动化 result_success=1，为当日唯一「按时 + 自动化真实成功 + 自行提交」三项齐备的线"
+            "scheduled": "08:00",
+            "actual": "2026-11-27 08:14 (GMT+8)",
+            "evidence": "rd/data.js days[0].generatedAt=2026-11-27 08:14；桌面 每日技术报告/2026-11-27.md mtime=08:15:02（14126 字节、8 条 signals / 4 项图纸储备 / 3 件专利）；automation 68d95d11 于 08:10:18 触发、result_success=1",
+            "verdict": "准时（+14 分钟）"
           }
         ],
         "conflicts": [
           {
-            "topic": "定时任务 vs 幂等补齐器：谁算 S1/S2 的交付",
-            "sides": "S1/S2 的 08:30/08:35 定时任务当日未产出，文件由 08:07:34「产物幂等补齐」自动化补跑生成，比调度早 22/27 分钟。监督账本按 mtime 判「按时」，按来源口径只能判「已交付·来源待核」；两套口径差 2 项达标率。",
-            "ruling": "补齐器是兜底、不是交付。S1/S2 的准时判定只看本任务定时触发（automation_runs 中对应条目的启动时刻与 result_success），补齐器产出一律记「来源待核」且不计准时；云端 Supabase 未同步当日记录即视为链条未闭合，不得用桌面文件顶替。今日按此从严判定。"
+            "topic": "发信配额：Sales 单日 8 封超上限 2 封，同日 Marketing 0 封",
+            "sides": "AI-GB-Sales 于 08:30 / 09:15 / 10:00 / 10:45 / 16:40×3 / 20:59 实发 8 封；AI-GB-Marketing 目标 2 封、实发 0 封；全账号 8/50",
+            "ruling": "配额按线切分，不共享：Sales 硬顶 6 封/日，超出的 2 封（16:40 两封 Re: 跟进、20:59 Re: 跟进）不得挤占次日额度；Marketing 的 0 封不是配额问题而是审批断点（approved=false），配额余量 42 封亦不自动划给 Sales"
           },
           {
-            "topic": "邮箱配额空置 vs 两线连续零发信",
-            "sides": "全账号配额 50 封/日，11-26 与 11-27（截至 10:00）两线合计 0 封（0/50）。11-26 Sales 六封停在「已入队·待当地净空窗派发」，Marketing 两封 approved=true 仍零投递。配额未构成任何挤压。",
-            "ruling": "问题不在配额而在投递链：入队 ≠ 已发、approved ≠ 已发。今日 18:00 前两线须按当地净空窗真实投递，逐封以 IMAP Sent 核验并回写台账；11-26 已批准未投的两封须先判定作废或重发，不得静默积压（D-19）。"
+            "topic": "台账口径：gb-email-log 记 0 封，IMAP Sent 实读 8 封",
+            "sides": "AI-GB-Sales 写「已入队·待当地净空窗派发」6 条、quotaUsed=0；IMAP Sent 8 封均有 Message-ID 与时间戳",
+            "ruling": "以 IMAP Sent 为唯一真相，总管席本版已按 8 封重建当日 emailLog（含 Message-ID 与逐封时间），原「已入队」表述作废；D-22 要求 Sales 每封投递后 5 分钟内回写，不许再以「已入队」记交付"
           },
           {
-            "topic": "Marketing 对象来源是否受 Sales 名录牵制",
-            "sides": "M2 连续两日零入队。Sales 名录云端确实停在 11-26，可作为外部诱因；但 gb-market-intel.js 已有 13 个附官网 URL 的候选对象、owner 未分配，Marketing 自身对象池并不空。",
-            "ruling": "责任不转移。M2 的对象池取自情报线自有 13 个候选，不依赖 Sales 名录；Sales 云端未同步另案追责（D-15），不构成 M2 缺交的免责理由。"
+            "topic": "对象去重：Marketing 待批两封与 Sales 今日 8 个对象是否撞车",
+            "sides": "Marketing queue/2026-11-27 为 hs-produkt.hr / shootingfarm.hu；Sales 今日触达 hunt-ex.com / sss.no / rangesolutions.pl / range-right.co.uk / knappworst.com / varms.ch / nimrod.cz / lovactrgovina.hr",
+            "ruling": "今日零重叠，D-21 判定去重规则未被违反；但去重仍靠人工比对，要求在 outbound_owners.json 落库后由脚本在入队前拦截，不再依赖人眼"
           }
         ],
         "directives": [
           {
-            "id": "D-15",
+            "id": "D-21",
             "to": "AI-GB-Sales",
             "level": "警示",
-            "title": "S1/S2 连续 3 日由补齐器代跑，定时任务从未真实触发",
-            "detail": "明日 08:30（S1）/08:35（S2）必须由本任务定时触发并落盘，判据是 automation_runs 中该任务的启动时刻与 result_success=1，不是桌面文件是否存在；同时把 Supabase ai_sales_producers / ai_sales_channels 当日记录写进去，云端 date 必须等于当日。补齐器代跑的产出只能记「来源待核」，不计准时。",
-            "due": "2026-11-28 08:35",
-            "status": "已下发",
-            "basis": "今日 S1 08:08:07 / S2 08:08:21 由 08:07:34「产物幂等补齐器」代跑；Supabase 两表仍为 11-26 13:00 / 13:06；D-09 自 11-26 08:35 起连续 3 日未达成"
-          },
-          {
-            "id": "D-16",
-            "to": "AI-GB-Sales",
-            "level": "警示",
-            "title": "连续两日零发信，配额 0/50 完全空置",
-            "detail": "11-26 与 11-27 至今 IMAP Sent 实测 0 封/日。今日 18:00 前必须按客户当地净空窗真实投递，逐封回写 gb-email-log.js（含 messageId）；若净空窗确实未到，必须在日报写明每个候选对象的当地时间窗与下一落点，不得只写「已入队」当交付。",
-            "due": "2026-11-27 18:00",
-            "status": "已下发",
-            "basis": "IMAP Sent 2026-11-26 = 0 封、2026-11-27 = 0 封；gb-email-log 11-26 六条状态为「已入队·待当地净空窗派发」（非已发出）"
-          },
-          {
-            "id": "D-17",
-            "to": "AI-GB-Sales",
-            "level": "警示",
-            "title": "09:00 日报段当日未写，连续第 4 日由总管席代补",
-            "detail": "今日 20:50 前自行写入当日 sales 段，facts 首项写「已读指令板 · 2026-11-27 10:00」，KPI 只写 IMAP Sent 与 Supabase 真实数字；同时回应 D-15/D-16 的执行结果（触发时刻、实发封数），不得以「已入队」代替「已发出」。",
-            "due": "2026-11-27 20:50",
-            "status": "已下发",
-            "basis": "10:00 核验 gb-reports.js days[0] 无 sales 段、gb-email-log.js 无 2026-11-27 条目；11-23/11-24/11-25 均为代补"
-          },
-          {
-            "id": "D-18",
-            "to": "AI-GB-Marketing",
-            "level": "警示",
-            "title": "M1 情报停更两日、M2 连续两日零入队、M4 当日缺交",
-            "detail": "明日 08:10 前把 2026-11-28 情报写入 gb-market-intel.js days[0]（date 必须是当日）；08:30 前写出 queue/2026-11-28.json，对象≥2 且各含官网 URL、联系依据、当地净空窗、去重核对；M4 创意合作研究报告恢复 08:00 交付。三项任一缺失，按缺交点名，不再接受「对象不足」作为 M2 的免责理由（情报线自有 13 个候选）。",
+            "title": "单日实发 8 封超上限 2 封，配额闸门失效",
+            "detail": "明日 08:00 前查清发信队列为何放行第 7、8 封：是闸门按「已入队」计数、还是 Re: 跟进不计入上限。修正后单日新开发 + 跟进合计硬顶 6 封，超出须在队列层拦截并写明理由。20:59:55 抢在硬截止前 1 分钟发出的 Lovac Trgovina 一封，须单独说明是否踩到当地净空窗。",
             "due": "2026-11-28 08:30",
             "status": "已下发",
-            "basis": "gb-market-intel.js days[0].date 仍为 2026-11-26；queue/ 无 2026-11-27.json；06_每日情报报告/ 最新为 2026-11-26；D-12/D-13 连续未达成"
+            "basis": "IMAP Sent 2026-11-27 实读 8 封：08:30:14 HUNTEX、09:15:13 SSS、10:00:15 Range Solutions、10:45:17 Range Right、16:40:04 Knappworst、16:40:17 VIDAL ARMS、16:40:25 NIMROD、20:59:55 Lovac；上限 6 封，超 2 封"
           },
           {
-            "id": "D-19",
+            "id": "D-22",
+            "to": "AI-GB-Sales",
+            "level": "警示",
+            "title": "台账与 IMAP 脱节：实发 8 封，台账 quotaUsed=0",
+            "detail": "每封成功投递后 5 分钟内回写 gb-email-log.js：status 改「已发送」、补 messageId、time 用真实发送时刻、quotaUsed 按 IMAP 计数。今日 8 封的 Message-ID 已由总管席按 IMAP 重建写入，Sales 只需在此基础上继续增量回写，不得覆盖。",
+            "due": "2026-11-28 09:00",
+            "status": "已下发",
+            "basis": "对比 IMAP 8 封 vs gb-email-log 当日 7 条（含 1 条内部预览至 sales@）、quotaUsed=0、6 条状态均为「已入队·待当地净空窗派发」"
+          },
+          {
+            "id": "D-23",
             "to": "AI-GB-Marketing",
-            "level": "关注",
-            "title": "11-26 已批准两封邀约至今零投递，须定作废或重发",
-            "detail": "queue/2026-11-26.json 两封（FOCUS AT / Strzelnica Czacz PL）于 11-26 14:19:35 已 approved=true，但 11-26、11-27 IMAP Sent 均 0 封。今日 16:00 前给出处置结论：若重发，须重查 7 天去重与当地净空窗并换新落点时刻；若作废，须在 queue 内标 status=voided 并写明原因。禁止无声积压、禁止直接套用旧落点重投。",
-            "due": "2026-11-27 16:00",
+            "level": "警示",
+            "title": "连续第 3 日对外 0 封，M2 两封未批未投，守门 G-28/G-29 硬截止落空",
+            "detail": "明日 08:30 前 queue/2026-11-28.json 必须 approved=true 且完成 2 封真实投递并回写 messageId。今日 HS Produkt（HR）/ Shooting Farm（HU）两封若仍有效，08:30 前补批补投；若作废，逐封写 status=voided 并补作废原因（D-19 两封虽已标 voided，但 voidedReason 为空，一并补齐）。对象不足不再作为免责理由。",
+            "due": "2026-11-28 08:30",
             "status": "已下发",
-            "basis": "queue/2026-11-26.json approved=true、approvedAt=2026-11-26T14:19:35、items=2；IMAP Sent 11-26 与 11-27 均为 0 封；幂等投递器 08:08:50 输出 SKIP（0 封发送）"
+            "basis": "IMAP Sent 2026-11-27 Marketing 签名 0 封；queue/2026-11-27.json approved=false、approvedAt 空、2 条 status=pending、mtime 10:29:50（+119 分钟）；11-26 与 11-27 连续两日 0 封、11-28 前已是第 3 日"
           },
           {
-            "id": "D-20",
-            "to": "AI-GB-Team",
-            "level": "关注",
-            "title": "昨日 21:00 战报整段缺交，今日 21:00 须补 11-26 并重跑当日",
-            "detail": "days[1]（2026-11-26）的 team 段仍是「待 21:00 由 AI-GB-Team 汇整」占位，checkins 0 条、directives 0 条，等于昨日 T1 缺交。今日 21:00 正式窗口必须：① 按 11-26 真实证据补写 11-26 的 checkins 与判定并标注「事后补记」；② 重跑 11-27 的七项打卡（S1/S2 仍看定时触发、发信数按届时 IMAP 复核）；③ 发布后 curl 核验 Sites 线上含 2026-11-27。",
-            "due": "2026-11-27 21:00",
+            "id": "D-24",
+            "to": "AI-GB-Marketing",
+            "level": "警示",
+            "title": "M1 迟到 +113 分钟、M4 迟到 +136 分钟，M4 已越缺交线",
+            "detail": "M1 须在 08:10 由本任务定时触发并在点发布（days[0].date 必须等于当日）；M4 明日 08:00 交付，迟到超过 +120 分钟直接按缺交计 0 分，不再给迟到折扣。两条线今日 generatedAt 自述均为「补跑 / 定时任务未在点触发」，须在日报写清触发失败原因。",
+            "due": "2026-11-28 08:10",
             "status": "已下发",
-            "basis": "gb-reports.js days[1].team.verdict 为 RD 占位文案、checkins=0、directives=0；本回合 10:00 为提前执行，早于 21:00 约 11 小时"
+            "basis": "gb-market-intel.js days[0].generatedAt=2026-11-27 10:03（+113 分钟）；gb-creative-partnerships.js days[0].generatedAt=2026-11-27 10:16（+136 分钟，>+120 缺交线）；automation 两条 last_success 分别为 09:54:53 / 10:11:34"
+          },
+          {
+            "id": "D-25",
+            "to": "AI-GB-RD",
+            "level": "关注",
+            "title": "三件新专利只标「需 FTO」，未给权项级结论",
+            "detail": "明日 08:00 报告须对 Trijicon 公开申请、Sellmark 授权专利等逐件给出：公开号 / 独立权项号 / 与 GUNBASE 现有图纸的重叠点 / 是否需要正式检索。仅写「落地前必须 FTO」不构成交付。另：rd/data.js 连续两日 generatedAt 带「R1 补交」字样，08:00 准点落盘仍需巩固，明日再出现「补交」按延迟计。",
+            "due": "2026-11-28 08:00",
+            "status": "已下发",
+            "basis": "rd/data.js days[0].verdict 写「任何设计落地前必须做自由实施（FTO）检索」，但 signals 中 3 件专利无一给公开号与权项号；11-26 generatedAt=09:44（+104）、11-27=08:14（+14），两日均带「补交」"
+          },
+          {
+            "id": "D-26",
+            "to": "AI-GB-Sales / AI-GB-Marketing",
+            "level": "关注",
+            "title": "去重与配额须由脚本前置拦截，不靠人工比对",
+            "detail": "把 outbound_owners.json 接进入队脚本：Marketing 起草与 Sales 派发前均先查归属，命中即拦截并记录；同时把当日 6 封上限写进队列闸门（按 status=已发送 计数，不按已入队计数）。完成后在各自日报 facts 里写一句拦截规则生效位置。",
+            "due": "2026-11-30 21:00",
+            "status": "已下发",
+            "basis": "今日 Sales 8 个对象与 Marketing 2 个对象零重叠，靠人工比对得出；gb-email-log 的 quotaUsed=0 说明闸门当前按「已入队」而非「已发送」计数，这是超发的结构性原因"
           }
         ],
         "escalations": [
           {
-            "item": "昨晚 21:00 的战报整段没有产出（2026-11-26 T1 缺交）",
-            "why": "days[1]（2026-11-26）的 team 段至今仍是 RD 建容器时留下的占位文案「待 21:00 由 AI-GB-Team 汇整」，checkins 0 条、directives 0 条、escalations 0 条；11-26 的六项打卡与追责从未落到 PWA。说明 21:00 汇整自动化在 11-26 当晚没有真实执行（本机休眠或中断），而当日其它自动化日志仍有成功记录。",
-            "blocks": "监督链条在 11-26 断了一天：当日 Sales 0 封、Marketing 0 封的追责只存在于指令板，PWA 上看不到；若再断一天，连续性问题将无法回溯。"
+            "item": "Sales 单日上限到底是 6 封还是 8 封",
+            "why": "今日 8 封全部真实投递、无退信，业务效果不差；但硬顶 6 封是既有约束，闸门放行了第 7、8 封。继续按 6 封会压制跟进节奏，按 8 封需改约束与配额表。",
+            "blocks": "D-21 的闸门参数无法定稿，Sales 明日仍可能重复超发"
           },
           {
-            "item": "两线连续两日零发信，50 封日配额完全空置",
-            "why": "IMAP Sent 实测 2026-11-26 = 0 封、2026-11-27（截至 10:00）= 0 封。11-26 Sales 六封、Marketing 两封都停在「已入队/已批准」，没有任何一封真正发出；今日 08:18-08:23 另有 3 次 automation-rate-limited 与 3 次 timeout 中断。",
-            "blocks": "销售管道与本月邀约总量归零；且「入队即交付」的假象会持续掩盖投递链故障。"
+            "item": "Marketing 两封邀约长期 approved=false，审批权只在所有者手上",
+            "why": "M2 连续两日入队但无人批准，导致 Marketing 连续 3 日 0 封；总管席只能监督、不能代批（代批等于改审批状态，已明令禁止）。",
+            "blocks": "M2 / M3 全链，Marketing 评分无法脱离 0 封状态"
           },
           {
-            "item": "S1/S2 定时任务连续 3 日未真实触发，云端链条当日 0 产出",
-            "why": "S1（08:30）与 S2（08:35）两日来都不是自己跑出来的：11-25 是 13:00 云端迟生成、11-26 靠 09:43/09:55 补、11-27 靠 08:07 幂等补齐器。Supabase ai_sales_producers / ai_sales_channels 今日 0 条记录，仍停在 11-26。",
-            "blocks": "S1/S2 的「准时」永远无法达成；PWA 与手机端看到的名录不是当日云端数据。"
+            "item": "「产物幂等补齐」等兜底自动化会抢在调度前代跑",
+            "why": "11-27 前的 S1/S2 多次由 08:07 补齐器产出，制造「文件早于调度」的假按时；今日两任务已改为真实定时触发（last_success 10:01/10:12），但兜底自动化仍每 2 小时运行。",
+            "blocks": "打卡判定的可解释性；是否保留兜底需所有者定"
           },
           {
-            "item": "11-26 已批准的两封合作邀约是否重发，需所有者拍板",
-            "why": "两封于 11-26 14:19:35 获批（approved=true），但当日与今日 IMAP Sent 均 0 封，客户已错过当地窗口。重发有重复触达风险（若对方已从其它渠道收到），作废则损失两个已甄别对象。",
-            "blocks": "M2/M3 的连续性；Marketing 无法自行决定重发或作废。"
+            "item": "IMAP 只能查当日，历史发信封数不可复核",
+            "why": "daily_guard.imap_sent 用 SINCE 今日检索，回查 11-26 返回 0 封是脚本限制而非事实；11-26 战报补记因此只能用台账口径，封数存疑。",
+            "blocks": "11-26 补记的封数认定；建议要求各线每日 21:00 前自行固化当日 Sent 快照"
           }
         ]
       },
@@ -543,9 +690,83 @@ window.GB_REPORTS = {
         "detail": "当日完整技术明细见 rd/data.js days[0] 与桌面 每日技术报告/2026-11-26.md；专利明细另存 桌面/AI-GB-RD/资料源与专利/2026-11-26_专利情报.md，竞品拆解另存 桌面/AI-GB-RD/竞品技术拆解/2026-11-26_接口机构拆解.md。"
       },
       "team": {
-        "verdict": "待 21:00 由 AI-GB-Team 汇整；本条由 RD 先行建立当日容器并自提交 rd 段。",
-        "verdictLevel": "amber",
-        "checkins": []
+        "verdict": "（总管席 2026-11-27 补记 / 非当日产出）2026-11-26 当日 21:00 战报整段缺交、未留任何 checkins，本条按现存文件证据回补：S1（AI-GB-Sales，+73 分钟）、S2（AI-GB-Sales，+80 分钟）、M1（AI-GB-Marketing，+96 分钟）、R1（AI-GB-RD，+104 分钟）四项延迟；M2（AI-GB-Marketing）于 14:19:35 才入队（+349 分钟）判缺交；T1 当日 21:00 未执行判缺交。发信端：IMAP 脚本仅能查询当日，11-26 封数不可回溯，只能以台账口径记 6 条「已入队」、0 条确认发出，封数存疑、不追认。",
+        "verdictLevel": "red",
+        "checkins": [
+          {
+            "id": "S1",
+            "agent": "AI-GB-Sales",
+            "task": "枪械生产商名录日报",
+            "scheduled": "08:30",
+            "actual": "2026-11-26 09:43:35 (GMT+8)",
+            "evidence": "桌面 07_枪械生产商调研/2026-11-26_枪械生产商名录.xlsx mtime=09:43:35（18773 字节）",
+            "verdict": "延迟（+73 分钟）"
+          },
+          {
+            "id": "S2",
+            "agent": "AI-GB-Sales",
+            "task": "全球渠道库日报",
+            "scheduled": "08:35",
+            "actual": "2026-11-26 09:55:23 (GMT+8)",
+            "evidence": "桌面 08_全球枪店与俱乐部调研/2026-11-26_全球枪店与俱乐部名录.xlsx mtime=09:55:23（329548 字节）",
+            "verdict": "延迟（+80 分钟）"
+          },
+          {
+            "id": "S3",
+            "agent": "AI-GB-Sales",
+            "task": "跟进发信与日报",
+            "scheduled": "09:00",
+            "actual": "2026-11-26 10:02 (GMT+8)",
+            "evidence": "当日 sales 段已提交，facts[0]=「已读指令板 · 2026-11-25 21:06」；gb-email-log 11-26 共 6 条、状态均为「已入队·待当地净空窗派发」、quotaUsed=0",
+            "verdict": "延迟（+62 分钟）· 0 封确认发出"
+          },
+          {
+            "id": "M1",
+            "agent": "AI-GB-Marketing",
+            "task": "每日合作情报",
+            "scheduled": "08:10",
+            "actual": "2026-11-26 09:46 (GMT+8)",
+            "evidence": "gb-market-intel.js 2026-11-26 条目 generatedAt=09:46",
+            "verdict": "延迟（+96 分钟）"
+          },
+          {
+            "id": "M2",
+            "agent": "AI-GB-Marketing",
+            "task": "双封合作邀约",
+            "scheduled": "08:30",
+            "actual": "2026-11-26 14:19:35 (GMT+8)",
+            "evidence": "queue/2026-11-26.json approvedAt=2026-11-26T14:19:35、approved=true、items=2（FOCUS AT / Strzelnica Czacz PL）；两封于 11-27 由 D-19 处置标 voided",
+            "verdict": "缺交（+349 分钟）"
+          },
+          {
+            "id": "T1",
+            "agent": "AI-GB-Team",
+            "task": "21:00 战报逐任务打卡",
+            "scheduled": "21:00",
+            "actual": "无（当日 21:00 未执行）",
+            "evidence": "days 中 2026-11-26 的 team 段原为「待 21:00 由 AI-GB-Team 汇整」占位文案、checkins=0；「21:00 汇整」自动化 last_success 停留在 2026-11-25 21:00:14",
+            "verdict": "缺交（当日 0 条打卡）"
+          },
+          {
+            "id": "R1",
+            "agent": "AI-GB-RD",
+            "task": "每日全球技术报告",
+            "scheduled": "08:00",
+            "actual": "2026-11-26 09:44 (GMT+8)",
+            "evidence": "rd/data.js 2026-11-26 条目 generatedAt=09:44；桌面 每日技术报告/2026-11-26.md mtime=09:45:03（12061 字节）",
+            "verdict": "延迟（+104 分钟）"
+          }
+        ],
+        "conflicts": [
+          {
+            "topic": "2026-11-26 战报整段缺交（T1）",
+            "sides": "AI-GB-Team 当日 21:00 自动化未执行；三条线各自日报均已提交，但无人汇整",
+            "ruling": "本条由总管席于 2026-11-27 21:00 窗口补记，明确标注「非当日产出」，不伪造按时记录；D-20 至此办结，后续以 21:00 自动化 last_success 作为执行唯一判据"
+          }
+        ],
+        "directives": [],
+        "escalations": [],
+        "cycle": "总管席事后补记（2026-11-27）· 原始 2026-11-26 21:00 未执行"
       }
     },
     {
