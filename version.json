@@ -1,9 +1,10 @@
 {
-  "version": "2.2.2",
-  "build": "20261128h",
+  "version": "2.2.3",
+  "build": "20261128i",
   "released": "2026-11-28",
-  "title": "底部导航脚本加版本指纹与自愈：老缓存设备自动恢复 7 个标签同排",
+  "title": "版本自愈守卫 v3：页面拿到的 HTML 一旧就自动带 ?_gb= 强刷，不再出现「挂了半天还是上一版」",
   "changelog": [
+    "v2.2.3 版本自愈守卫 v3 —— 修「发布会新版、页面还是几小时前那版」。①真实成因有两层：一是 14:16 那次修底部导航时，把 shared/gb-bfcache-heal.js 的引用整行删掉了，标签页从早上一直开着、再没重新加载，于是永远停在那次加载的 HTML（截图里 build 20261128e 就是证据）；二是即使有自愈脚本，原版只用 location.reload()，会被 Pages 的 max-age=600 HTTP 缓存原地接住，看起来「刷了但还是旧的」。②新版守卫：从脚本自身 URL 推出上一级 version.json，用 cache:no-store 取线上 build，与本页 <meta name=\"gb-build\"> 比对，不一致就把 ?_gb=<build> 挂到 URL 上 location.replace —— 查询串一变，HTTP 缓存与 SW 缓存的键全变，旧副本不可能再被命中；同页面同 build 每会话只刷一次，不循环。③触发时机：首屏立刻 / load / bfcache 还原(pageshow.persisted) / 回到前台聚焦 / 网络恢复。④十一个页面统一挂载（团队中心、Sales、Marketing、RD 门与 app、PM、AS、Fin、监督账本、每日任务、创意合作），全部带 meta gb-build=20261128i，全站只认总部一个版本号。⑤七个 SW 缓存 +1（根 v45 / sales v53 / mkt v34 / rd v23 / pm v3 / as v3 / fin v4），RD 生成不可变快照 e-20261128i.html。",
     "v2.2.0 新增第六条业务线 AI GB-AS（售后服务部），依据所有者 2026-11-28 指令：与 Sales 平行协作、同受总部 AI GB-Team 管辖；Sales 开发邮件中「已开始服务」客户的客诉转给 AS；与 RD 配合；PWA 强闪烁提示客诉回复；AS 只采集信息并通知所有者，延伸动作由所有者本人执行。①新建 as/ 独立 PWA（manifest / 独立 SW 前缀 ai-gb-as-v1 / version.json / data.js / app.js / style.css / as-logo.svg / assets），七个视图：总览、客诉台账、客诉采集、Sales 转交、通知中心、RD 协同、章程。②强闪烁提醒：红色横幅发光+文字闪烁+角标、浏览器标题栏闪烁、提示音（可关）；有「待通知/待回复」客诉时触发，点「复制通知摘要」后标记已通知并停止，AS 不自动外发。③Sales 转交：只读拉取真实回信池 Supabase ai_sales_inbox（与 Sales 页同数据源），使用者判断为客诉后一键预填为客诉单，不回写 Sales 台账、不自动发信、不自动判客诉。④RD 协同：按脱敏口径生成痛点线索移交单草稿，需所有者确认后交 RD，不自动写入 rd/data.js。⑤客诉单只写本机 localStorage，首条演示数据标 demo=true 可一键清空，不编造真实客诉。⑥四处同步：gb-team.js 新增 GB-AS 角色与 F5/F6/F7 协作流、共享实体 complaint、三条护栏；tabbar.js 增至七个标签且 ≤430px 改短名（Sales/MKT/RD/PM/AS/Fin🔒）；总部首页顶部/底部导航、入口卡（AS 专属砖红色）、「五个角色」改「六个角色」、已上线计数同步；根 SW v42 预缓存 AS 文件，AS 独立 SW v1。",
     "v2.1.3 新增 AI GB-PM（项目管理部）子站框架 pm/：按所有者任务书搭起客制化项目开发管理骨架——项目组合、开发排期、里程碑准出门禁、燃尽图算法、与 AI GB-RD 的输入输出接口、向总部汇报的字段模板、RACI 与延误分类。共享 tabbar 增至六个标签（PM 图标为组织架构图），新标签最低字号放宽到 7.5px 以容纳窄屏。gb-team.js 中 GB-PM 由 planned 改为 framework（框架已搭建 · 数据未接入），F3 汇总流的闸门文案同步；首页五角色入口与汇报关系图加 PM 链接。所有项目数据标 demo=true，不写回 Sales / Marketing / RD / Fin 任何业务文件，也不自动写入共享日报。根 SW v41，PM 独立 SW v1。手机视图实测后把底部栅格改为 repeat(n,minmax(0,1fr)) 并给标签 min-width:0，修掉第六格溢出与顶部导航截断。",
     "v2.1.2 全站页面标题统一为「AI GB-<角色>（部门）」：总部 AI GB-Team（总部）、AI GB-Sales（营销部）、AI GB-MKT（市场部）、AI GB-RD（技术部）、AI GB-Fin（财务部）。要改的是 H1 与 <title> 两个位置，且必须两边同时改——Sales 的 H1 由 JS 用 m.botName 覆盖、MKT 的 H1 与 document.title 也被 JS 二次赋值，只改 HTML 会被脚本还原。职能说明保留在副标题行（Sales 的 org、MKT 的 orgName、RD 的 data.js org、Fin 的 sub）。底部切换栏短标签 AI GB-Mkt 同步改为 AI GB-MKT。RD 因改动涉及页面标记，按版本门规则生成不可变快照 e-20261128a.html、version 1.4.9。SW 根 v40、Sales v50、Marketing v31、RD v20。",

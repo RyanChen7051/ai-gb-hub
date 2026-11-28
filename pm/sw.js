@@ -2,7 +2,7 @@
  * 沿用全站约定：Pages 对所有资源下发 max-age=600，抓取必须 no-store。
  * 作用域仅限 pm/；根 SW 只预缓存本页资源，不接管本目录。
  */
-const CACHE = 'ai-gb-pm-v2';
+const CACHE = 'ai-gb-pm-v3';
 const CORE = [
   './',
   './index.html',
