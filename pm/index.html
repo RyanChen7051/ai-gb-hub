@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#5b3d8a">
+<meta name="robots" content="noindex">
+<meta name="description" content="AI GB-PM（项目管理部）· 客制化项目开发管理框架：排期、里程碑、燃尽图、风险与总部汇报">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="AI GB-PM">
+<link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./assets/icon-192.png">
+<link rel="manifest" href="./manifest.webmanifest">
+<title>AI GB-PM（项目管理部）</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div class="gb-verb" id="gbVerBar">
+  <span class="gb-verb-t">发现新版本 <b id="gbVerNum"></b>，当前显示的是旧副本</span>
+  <button type="button" class="gb-verb-go" id="gbVerGo">立即更新</button>
+  <button type="button" class="gb-verb-x" id="gbVerX" aria-label="稍后">&#215;</button>
+</div>
+<div class="gb-bar"><div class="wrap">
+  <span class="gb-brand">AI GB TEAM · 同事协作</span>
+  <nav aria-label="同事导航">
+    <a href="../index.html">团队中心</a>
+    <a href="../sales/index.html">AI GB-Sales</a>
+    <a href="../marketing/index.html">AI GB-MKT</a>
+    <a href="../rd/index.html">AI GB-RD</a>
+    <a class="here" href="./index.html">AI GB-PM</a>
+    <a href="../as/index.html">AI GB-AS</a>
+    <a href="../fin/index.html?v=20261128b">Fin 🔒</a>
+  </nav>
+</div></div>
+<header>
+  <div class="wrap hd">
+    <img src="./assets/pm-logo.svg" alt="AI GB-PM 徽章" width="72" height="72">
+    <div>
+      <h1>AI GB-PM（项目管理部）</h1>
+      <div class="sub" id="pmSub">客制化项目开发管理 · 框架已搭建，数据未接入</div>
+    </div>
+    <div class="hd-pills">
+      <span class="pill">汇报对象：总部 AI GB-Team</span>
+      <span class="pill">搭配角色：AI GB-RD</span>
+      <span class="pill" id="verPill"></span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="notice" id="truthNotice"></div>
+
+  <div class="switcher" id="viewSwitch" role="tablist" aria-label="PM 管理视图"></div>
+
+  <section data-view="overview">
+    <div class="sh"><span class="bar"></span><h2>总览 · 管理驾驶舱</h2><span class="hint" id="ovMeta"></span></div>
+    <div id="ovBody"></div>
+  </section>
+
+  <section data-view="portfolio" hidden>
+    <div class="sh"><span class="bar"></span><h2>项目组合</h2><span class="hint">客制化项目台账骨架</span></div>
+    <div id="portfolioBody"></div>
+  </section>
+
+  <section data-view="schedule" hidden>
+    <div class="sh"><span class="bar"></span><h2>开发排期 · Schedule</h2><span class="hint">WBS → 责任 → 起止 → 进度</span></div>
+    <div id="scheduleBody"></div>
+  </section>
+
+  <section data-view="milestone" hidden>
+    <div class="sh"><span class="bar"></span><h2>里程碑 · Milestone</h2><span class="hint">准出条件 + 证据，不以口头完成为准</span></div>
+    <div id="milestoneBody"></div>
+  </section>
+
+  <section data-view="burndown" hidden>
+    <div class="sh"><span class="bar"></span><h2>燃尽图 · Burndown</h2><span class="hint">理想线由剩余工作量与时间跨度计算</span></div>
+    <div id="burndownBody"></div>
+  </section>
+
+  <section data-view="rd" hidden>
+    <div class="sh"><span class="bar"></span><h2>与 AI GB-RD 协同</h2><span class="hint">输入 / 输出 / 闸门 / 移交单</span></div>
+    <div id="rdBody"></div>
+  </section>
+
+  <section data-view="report" hidden>
+    <div class="sh"><span class="bar"></span><h2>向总部汇报</h2><span class="hint">进度、延误原因、请求裁决</span></div>
+    <div id="reportBody"></div>
+  </section>
+
+  <section data-view="governance" hidden>
+    <div class="sh"><span class="bar"></span><h2>治理与模板</h2><span class="hint">角色章程 / RACI / 阶段闸门 / 延误分类</span></div>
+    <div id="govBody"></div>
+  </section>
+
+  <footer>
+    <div id="footMeta"></div>
+    <div>本页是组织框架与数据契约；示例项目不是真实客户项目，未接入各业务线实时数据。</div>
+  </footer>
+</div>
+
+<nav class="gb-tabbar" aria-label="同事切换">
+  <a href="../index.html">团队中心</a>
+  <a href="../sales/index.html">AI GB-Sales</a>
+  <a href="../marketing/index.html">AI GB-MKT</a>
+  <a href="../rd/index.html">AI GB-RD</a>
+  <a class="here" href="./index.html">AI GB-PM</a>
+  <a href="../as/index.html">AI GB-AS</a>
+  <a href="../fin/index.html?v=20261128b">Fin 🔒</a>
+</nav>
+
+<script src="../shared/gb-team.js"></script>
+<script src="./data.js"></script>
+<script src="./app.js"></script>
+<script src="../shared/tabbar.js"></script>
+</body>
+</html>

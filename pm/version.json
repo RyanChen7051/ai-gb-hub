@@ -1,0 +1,15 @@
+{
+  "version": "0.1.0",
+  "build": "20261128a",
+  "updatedAt": "2026-11-28 13:50 (GMT+8)",
+  "name": "AI GB-PM（项目管理部）",
+  "title": "框架搭建：项目组合 / 排期 / 里程碑 / 燃尽图 / RD 协同 / 总部汇报 / 治理模板",
+  "changelog": [
+    "v0.1.0 首次搭建 AI GB-PM 子站框架。依据 shared/gb-team.js 的所有者指定关系：汇报对象为 AI GB-Team（总部），搭配角色为 AI GB-RD（技术部）。页面采用与 RD/Sales/Marketing/Fin 同域的独立 PWA 结构（manifest / SW / version.json / assets），但本版不设版本门与不可变快照，版本哨兵只提示不自动刷新。",
+    "八个管理视图：总览、项目组合、排期、里程碑、燃尽图、RD 协同、总部汇报、治理与模板。数据契约在 pm/data.js，渲染只读，不写入任何业务线文件。",
+    "所有项目 / 排期 / 里程碑 / 移交单均标 demo=true，界面顶部有事实边界提示；真实项目接入前不得写进总部战报事实字段。",
+    "总部汇报字段对齐 shared/reports/gb-reports.js 的 agent / submittedAt / headline / kpi / blockers / asks / review 口径，并补 PM 专属 progress / delays；框架阶段只生成草稿，不自动写入共享日报。"
+  ],
+  "released": "2026-11-28",
+  "dataVersion": "0.1.0"
+}

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b8461f"/><stop offset="1" stop-color="#d9663a"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="120" height="120" rx="26" fill="url(#bg)"/>
+  <rect x="4" y="4" width="120" height="120" rx="26" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="2"/>
+  <!-- 客服耳机 -->
+  <path d="M30 66v-8a34 34 0 0 1 68 0v8" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+  <rect x="24" y="62" width="16" height="26" rx="7" fill="#fff"/>
+  <rect x="88" y="62" width="16" height="26" rx="7" fill="#fff"/>
+  <!-- 对话气泡 -->
+  <path d="M44 92h26l9 10v-10h5a7 7 0 0 0 7-7V80a7 7 0 0 0-7-7H51a7 7 0 0 0-7 7v5a7 7 0 0 0 7 7z" fill="#fff" fill-opacity=".92"/>
+  <circle cx="60" cy="82" r="2" fill="#b8461f"/><circle cx="70" cy="82" r="2" fill="#b8461f"/><circle cx="80" cy="82" r="2" fill="#b8461f"/>
+  <!-- AS 字标 -->
+  <text x="64" y="52" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="800" fill="#fff" text-anchor="middle" letter-spacing="1">AS</text>
+</svg>
