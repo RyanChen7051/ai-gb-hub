@@ -50,7 +50,7 @@
       <li>用带时间戳的新地址重新打开首页，绕开 HTTP 缓存</li>
     </ol>
     <div class="row">
-      <a class="btn" id="go" href="../../index.html?fresh=1">立即回首页</a>
+      <a class="btn" id="go" href="../index.html?fresh=1">立即回首页</a>
       <a class="btn ghost" href="javascript:location.reload()">再清一次</a>
     </div>
     <p class="tip" id="tip">清理完会自动跳回首页。若首页仍是旧界面，说明是 iOS 把整个 Web App 冻结在内存里了 —— 见下方「彻底修复」。</p>
@@ -73,7 +73,7 @@
   }
 
   // 首页新地址：带时间戳，HTTP 缓存与 SW 缓存的键都变
-  var next = new URL('../../index.html', location.href);
+  var next = new URL('../index.html', location.href);
   next.searchParams.set('fresh', String(Date.now()));
   go.href = next.href;
 
