@@ -23,8 +23,48 @@ window.GB_EMAIL_LOG = {
           "status": "已预览·待所有者批准",
           "note": "预览 2 封合作草稿：Poligon Metropol（TR / iletisim@poligonmetropol.com，当地 11-28 10:15 = 北京 15:15）、Sarsilmaz（TR / sarsilmaz@sarsilmaz.com，当地 11-28 13:45 = 北京 18:45）。队列 queue/2026-11-28.json approved=false，未推云端。云端现队列仍为 11-27 两封 pending。",
           "messageId": ""
+        },
+        {
+          "time": "09:16",
+          "localTime": "11-28 02:16 (Europe/Berlin) 周六",
+          "netWindow": "09:30-11:50 / 13:10-15:15（西欧/中欧）",
+          "agent": "AI-GB-Sales",
+          "to": "info@waffenschumacher.com",
+          "subject": "Re: Value-tier optics & lights for Schumacher's wholesale range - GunBase",
+          "type": "跟进信（D7+，首触 11-18）",
+          "mode": "队列 Q014（send_queue.py）",
+          "status": "已入队·待当地净空窗派发",
+          "messageId": "",
+          "note": "当地周六周末休息，sendableNow=false，未硬发；下一落点 11-30 09:30 当地（北京 16:30）。首触 2026-11-18 13:49，间隔 10 天、0 回复。旧 D7 模板中「FOB / EXW + 50% 订金」商务条款已删除（硬约束禁承诺性表述），正文无价格。"
+        },
+        {
+          "time": "09:16",
+          "localTime": "11-28 02:16 (Europe/Madrid) 周六",
+          "netWindow": "09:30-13:50 / 15:10-16:15（南欧/地中海）",
+          "agent": "AI-GB-Sales",
+          "to": "info@skyway.es",
+          "subject": "Re: Value-tier optics for SKYWAY TECHNOLOGY's retail range - GunBase",
+          "type": "跟进信（D7+，首触 11-18）",
+          "mode": "队列 Q015（send_queue.py）",
+          "status": "已入队·待当地净空窗派发",
+          "messageId": "",
+          "note": "当地周六周末休息，sendableNow=false，未硬发；下一落点 11-30 09:30 当地（北京 16:30）。首触 2026-11-18 13:56，间隔 10 天、0 回复；原主题含拼写错误「SKWAirsoft's」，本封改为公司全名，内容去重通过。"
+        },
+        {
+          "time": "09:16",
+          "localTime": "11-28 02:16 (Europe/Paris) 周六",
+          "netWindow": "09:30-11:50 / 13:10-15:15（西欧/中欧）",
+          "agent": "AI-GB-Sales",
+          "to": "optyss@orange.fr",
+          "subject": "Re: Optics for OPT'YSS French dealer range",
+          "type": "跟进信（D7+，首触 11-19）",
+          "mode": "队列 Q016（send_queue.py）",
+          "status": "已入队·待当地净空窗派发",
+          "messageId": "",
+          "note": "当地周六周末休息，sendableNow=false，未硬发；下一落点 11-30 09:30 当地（北京 16:30）。首触 2026-11-19 17:27（队列 Q003），间隔 9 天、0 回复。"
         }
-      ]
+      ],
+      "note": "2026-11-28 周六：三封 D7 跟进已入队（Q014-Q016），对外实发 0 封。原因：全部目标当地为周末休息，send_window.py 三地均 sendableNow=false，state=weekend，下一落点 11-30 09:30 当地。硬约束「周末不发 + 不在窗口不硬发」优先于发信数量目标。"
     },
     {
       "date": "2026-11-27",
@@ -888,4 +928,3 @@ window.GB_EMAIL_LOG = {
     }
   ]
 };
-
