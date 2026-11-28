@@ -14,7 +14,7 @@ window.GB_REPORTS = {
       "date": "2026-11-28",
       "weekday": "周六",
       "publishedAt": "2026-11-28 08:47 (GMT+8) · R1 补交：原调度 08:00，实际 08:47，延迟 47 分钟；本轮为定时触发（automation 68d95d11），启动已过 08:00；result_success 待运行结束判定，产物落地不等于自动化成功",
-      "cycle": "RD 先行提交 · rd 段由 AI-GB-RD 自行写入；sales / marketing / team 由各自责任线在调度窗口提交，本段不代填",
+      "cycle": "Sales 段由 AI-GB-Sales 于 09:24 自行写入；rd 段 08:47 由 AI-GB-RD 自写；marketing 段 09:16 自写；team 段待 21:00 由 AI-GB-Team 汇整",
       "rd": {
         "agent": "AI-GB-RD",
         "score": 60,
@@ -59,9 +59,9 @@ window.GB_REPORTS = {
           "6 件专利均未完成 FTO；US12693097 权项 18 与 D-16 直接同域，US 12,674,639 权项 5 比权项 1 更宽，US20260341187A1 权项 1/9/12 覆盖 D-31 环带载体。",
           "Patents-Review 与 Patents.us 为转录站，权项文本未用 USPTO/WIPO 官方全文复核；US20260309463A1 状态字段出现 Patented/Allowed 不一致，US12693097 权项 11/12 疑似截断。",
           "Vortex Pro 价格与兼容性口径不一、Nocpix ACE 2 与 Arken EP-8 的规格/实测均为厂商或单次编辑口径，无独立复现。",
-        "R1 今日仍为补交；08:00 调度到实际启动之间的延迟根因未查明，需总管席核查自动化运行证据。",
-        "线上核验新发现：version.json 的 build=20261125a 对应快照 rd/e-20261125a.html 在仓库与线上均不存在（curl 404），现存快照为 e-20261123j.html、app.html 为 200；版本门会跳到 404 且不自动回退。本轮按内容边界未改 build 与任何 e-*.html，需所有者授权修复。"
-      ],
+          "R1 今日仍为补交；08:00 调度到实际启动之间的延迟根因未查明，需总管席核查自动化运行证据。",
+          "线上核验新发现：version.json 的 build=20261125a 对应快照 rd/e-20261125a.html 在仓库与线上均不存在（curl 404），现存快照为 e-20261123j.html、app.html 为 200；版本门会跳到 404 且不自动回退。本轮按内容边界未改 build 与任何 e-*.html，需所有者授权修复。"
+        ],
         "asks": [
           "请所有者拍板：是否把 FTO 检索正式委托给代理所，范围先取 6 件（含新增 US20260341187A1），其中 US12693097 权项 18 与 US 12,674,639 权项 5 列最高优先。",
           "请所有者确认 D-31 与 D-32 是否列为下月工程评审候选；在 FTO 完成前只做图纸推演，不进入样机。",
@@ -76,84 +76,166 @@ window.GB_REPORTS = {
         "submittedAt": "2026-11-28 08:47 (GMT+8) · R1 补交：原调度 08:00，实际 08:47，延迟 47 分钟；本轮为定时触发（automation 68d95d11），启动已过 08:00；result_success 待运行结束判定，产物落地不等于自动化成功"
       },
       "marketing": {
-            "agent": "AI-GB-Marketing（业务线自提交）",
-            "submittedAt": "2026-11-28 09:16 (GMT+8) · AI-GB-Marketing 自行写入。本自动化调度 08:30，实际 08:53 触发（+23 分钟），起草+自检+预览完成 09:16（+46 分钟），按指令板口径判「延迟」，如实标注不伪称按时",
-            "score": 70,
-            "scoreLabel": "70/100 = 内容 78（两封完整度+去重+MX+四件产物齐备+D-23 遗留处置 78）× 0.90 迟到折扣（+46 分钟）；对外实发 0 封，不计发信分",
-            "headline": "周六全档位仅土耳其可发：Poligon Metropol（İstanbul 射击俱乐部）与 Sarsılmaz（Düzce 枪械生产商）双封入队待批；D-23 遗留已补 voidedReason 并把 11-27 两封顺延至 11-30",
-            "kpi": [
-                  {
-                        "k": "对外实发",
-                        "v": "0",
-                        "d": "目标 2 封；IMAP 当日 Marketing 签名 0 封",
-                        "tone": "red"
-                  },
-                  {
-                        "k": "M2 入队",
-                        "v": "2",
-                        "d": "queue/2026-11-28.json · approved=false",
-                        "tone": "amber"
-                  },
-                  {
-                        "k": "预览",
-                        "v": "1",
-                        "d": "内部预览至 sales@，不计对外",
-                        "tone": "blue"
-                  },
-                  {
-                        "k": "可发档位",
-                        "v": "1/16",
-                        "d": "周六仅 turkey 档可发，其余当地周末",
-                        "tone": "red"
-                  },
-                  {
-                        "k": "去重命中",
-                        "v": "5",
-                        "d": "Sabatti/Prins/HS/ShootingFarm/11-26 作废件",
-                        "tone": "teal"
-                  },
-                  {
-                        "k": "M1 情报",
-                        "v": "08:32",
-                        "d": "调度 08:10，+22 分钟（+30 内）",
-                        "tone": "amber"
-                  },
-                  {
-                        "k": "M4 创意",
-                        "v": "08:24",
-                        "d": "调度 08:00，+24 分钟（+30 内）",
-                        "tone": "green"
-                  }
-            ],
-            "facts": [
-                  "已读指令板 · 2026-11-27 21:04 (GMT+8)｜21:00 正式窗口汇整版｜本段服从 D-23（双封闭环 + 11-26/11-27 遗留处置）、D-24（M1/M4 时点）、D-26（去重与配额前置拦截）",
-                  "时间窗判定（send_window.py 实跑，非主观）：2026-11-28 为周六，16 个档位中仅 turkey 档（周日休·周六上班，净空窗 09:30-11:50 / 13:10-17:15）当日可发；west_eu/south_eu/uk/nordic/east_eu/us/au/jp/sa 均判当地周末、nextOpen 11-30；gulf/israel/egypt 周六属其周末。故两封同落 Europe/Istanbul",
-                  "今日 2 封对象：① Poligon Metropol（TR, iletisim@poligonmetropol.com，射击俱乐部，İstanbul/Ataşehir）slot0 当地 10:15 = 北京 15:15；② Sarsılmaz Silah Sanayi A.Ş.（TR, sarsilmaz@sarsilmaz.com，枪械生产商，Düzce）slot1 当地 13:45 = 北京 18:45",
-                  "主题：封1「Ataşehir optics night, 50-gun line」5 词；封2「Optics track for Mersin 10 m juniors」7 词（上限内），均含两个定制属性、无公司后缀。正文 142 / 129 词，破冰句 23 / 24 词，无签名档",
-                  "可核实事实：Poligon Metropol 官网标「50+ silah」租用库存、每日 10:00-22:30 七天营业、承接企业/学校/团体射击活动、2026-10-23 公告重新开业；Sarsılmaz 官网 2026-06-30 新闻稿记其为「SARSILMAZ Havalı Silahlar Türkiye Şampiyonası」冠名兼主赞助商、赛期 2026-06-30 至 07-05、Mersin/Erdemli 奥林匹克射击综合体、10 米气步枪与气手枪、决赛 07-01 至 07-05、董事长 Aliş 2004-2012 任土耳其射击狩猎联合会主席",
-                  "去重（硬门槛）：outbound_owners.json 32 条（GB-Sales 30 / GB-Marketing 2，无土耳其对象）按 email+domain 双查两目标零命中；gb-email-log.js 与 gb-reports.js 30 天内无记录。跳过 Sabatti（11-23 已发）、ASV Prins Hendrik（11-23 已发）、HS Produkt 与 Shooting Farm（11-27 pending 未投，不换对象重发）、FOCUS 与 Strzelnica Czacz（11-26 已 voided）。土耳其其余 44 条为枪店/狩猎用品店或无公开邮箱，按界线不碰",
-                  "MX 校验：poligonmetropol.com → poligonmetropol-com.mail.protection.outlook.com（M365）；sarsilmaz.com → posta.savunmaholding.com / mail.sarsilmaz.com，均有效",
-                  "D-23 遗留处置：11-26 两封补齐 item 级 voidedReason 与 voidedAt；11-27 两封保持 pending 不标 voided（对象与事实仍有效），写明未获批 + HR/HU 当地 11-28 周六、11-29 周日窗口关闭，顺延至 2026-11-30（周一）当地 10:15 / 13:45",
-                  "云端核对（未 add）：ai_marketing_cloud_queue payload.date=2026-11-27、approved=False、两条 pending（HS Produkt/Shooting Farm）、updated_at 2026-11-27T03:27Z；sent_log 中 Sabatti（11-23 16:30:09）与 Prins Hendrik（11-23 18:00:11）为 status=sent，并非 pending。与任务书所述「D-03 记两封已获批、云端 approved=True 且 pending」不符，按实测记录，未据此重发",
-                  "对外实发 0 封；预览 1 封已发 sales@gunbase-optics.com（主题「[待审] 今日 2 封合作信」，mode=预览，Agent Mail 剩余配额 47/50）。队列 approved=false，未推云端、未自行发对外信",
-                  "另两条自动化今日实况（如实并列，不代填）：M1 gb-market-intel.js days[0].generatedAt=08:32（调度 08:10，+22 分钟，在 +30 准时区间内，脚本自述「判延迟」与指令板口径不一致）；M4 gb-creative-partnerships.js days[0].generatedAt=08:24（调度 08:00，+24 分钟，准时）"
-            ],
-            "blockers": [
-                  "审批闸门仍是唯一硬堵点：连续第 4 日 0 封，D-23 要求的 approved=true 我自己不能改，指令板升级项 2 已写明「总管席不能代批」",
-                  "周六选项池极窄：08 名录土耳其 45 条中仅 1 家俱乐部有公开邮箱，第二封只能取 07 名录的枪械生产商，导致两封落同一时区",
-                  "云端队列是整体替换：新队列 add 会覆盖 11-27 两封 pending，需所有者一次批准两批才能不丢件",
-                  "本自动化 08:53 才触发（调度 08:30，+23），与 M1/M4 的「定时未在点触发」同源，非本线可控"
-            ],
-            "asks": [
-                  "今日两封是否批准（approved 现为 false）。批准后我改 approved=true + approvedAt 并推云端，由云端 7x24 按北京 15:15 / 18:45 两个落点派发",
-                  "11-27 顺延的 HS Produkt（HR）/ Shooting Farm（HU）是否并入本次批准，落点 11-30 当地 10:15 / 13:45",
-                  "周末策略请拍板：周六仅土耳其可发，是否接受「周末按可发档位发、无档位则周一补发两封」，以免每天为凑 2 封把对象池压到 1 家"
-            ],
-            "review": {
-                  "whatWorked": "去重与 MX 改成先查后写，两个目标一次通过；时间窗先跑脚本再选对象，避免了按北京上午拍脑袋选欧洲对象（今日若按旧习惯写德国必然全周周末作废）",
-                  "rootCause": "连续 4 日 0 封不是起草能力问题，是审批链断在所有者一侧；同时周六可选档位只有 1 个，说明选源仍以欧洲为中心，缺周末可用区域（土耳其/海湾/以色列）的俱乐部储备",
-                  "nextAction": "补齐土耳其与海湾地区俱乐部名录（每周至少 2 家可用邮箱），并在入队脚本里前置去重与配额拦截（D-26，due 11-30）"
-            }
+        "agent": "AI-GB-Marketing（业务线自提交）",
+        "submittedAt": "2026-11-28 09:16 (GMT+8) · AI-GB-Marketing 自行写入。本自动化调度 08:30，实际 08:53 触发（+23 分钟），起草+自检+预览完成 09:16（+46 分钟），按指令板口径判「延迟」，如实标注不伪称按时",
+        "score": 70,
+        "scoreLabel": "70/100 = 内容 78（两封完整度+去重+MX+四件产物齐备+D-23 遗留处置 78）× 0.90 迟到折扣（+46 分钟）；对外实发 0 封，不计发信分",
+        "headline": "周六全档位仅土耳其可发：Poligon Metropol（İstanbul 射击俱乐部）与 Sarsılmaz（Düzce 枪械生产商）双封入队待批；D-23 遗留已补 voidedReason 并把 11-27 两封顺延至 11-30",
+        "kpi": [
+          {
+            "k": "对外实发",
+            "v": "0",
+            "d": "目标 2 封；IMAP 当日 Marketing 签名 0 封",
+            "tone": "red"
+          },
+          {
+            "k": "M2 入队",
+            "v": "2",
+            "d": "queue/2026-11-28.json · approved=false",
+            "tone": "amber"
+          },
+          {
+            "k": "预览",
+            "v": "1",
+            "d": "内部预览至 sales@，不计对外",
+            "tone": "blue"
+          },
+          {
+            "k": "可发档位",
+            "v": "1/16",
+            "d": "周六仅 turkey 档可发，其余当地周末",
+            "tone": "red"
+          },
+          {
+            "k": "去重命中",
+            "v": "5",
+            "d": "Sabatti/Prins/HS/ShootingFarm/11-26 作废件",
+            "tone": "teal"
+          },
+          {
+            "k": "M1 情报",
+            "v": "08:32",
+            "d": "调度 08:10，+22 分钟（+30 内）",
+            "tone": "amber"
+          },
+          {
+            "k": "M4 创意",
+            "v": "08:24",
+            "d": "调度 08:00，+24 分钟（+30 内）",
+            "tone": "green"
+          }
+        ],
+        "facts": [
+          "已读指令板 · 2026-11-27 21:04 (GMT+8)｜21:00 正式窗口汇整版｜本段服从 D-23（双封闭环 + 11-26/11-27 遗留处置）、D-24（M1/M4 时点）、D-26（去重与配额前置拦截）",
+          "时间窗判定（send_window.py 实跑，非主观）：2026-11-28 为周六，16 个档位中仅 turkey 档（周日休·周六上班，净空窗 09:30-11:50 / 13:10-17:15）当日可发；west_eu/south_eu/uk/nordic/east_eu/us/au/jp/sa 均判当地周末、nextOpen 11-30；gulf/israel/egypt 周六属其周末。故两封同落 Europe/Istanbul",
+          "今日 2 封对象：① Poligon Metropol（TR, iletisim@poligonmetropol.com，射击俱乐部，İstanbul/Ataşehir）slot0 当地 10:15 = 北京 15:15；② Sarsılmaz Silah Sanayi A.Ş.（TR, sarsilmaz@sarsilmaz.com，枪械生产商，Düzce）slot1 当地 13:45 = 北京 18:45",
+          "主题：封1「Ataşehir optics night, 50-gun line」5 词；封2「Optics track for Mersin 10 m juniors」7 词（上限内），均含两个定制属性、无公司后缀。正文 142 / 129 词，破冰句 23 / 24 词，无签名档",
+          "可核实事实：Poligon Metropol 官网标「50+ silah」租用库存、每日 10:00-22:30 七天营业、承接企业/学校/团体射击活动、2026-10-23 公告重新开业；Sarsılmaz 官网 2026-06-30 新闻稿记其为「SARSILMAZ Havalı Silahlar Türkiye Şampiyonası」冠名兼主赞助商、赛期 2026-06-30 至 07-05、Mersin/Erdemli 奥林匹克射击综合体、10 米气步枪与气手枪、决赛 07-01 至 07-05、董事长 Aliş 2004-2012 任土耳其射击狩猎联合会主席",
+          "去重（硬门槛）：outbound_owners.json 32 条（GB-Sales 30 / GB-Marketing 2，无土耳其对象）按 email+domain 双查两目标零命中；gb-email-log.js 与 gb-reports.js 30 天内无记录。跳过 Sabatti（11-23 已发）、ASV Prins Hendrik（11-23 已发）、HS Produkt 与 Shooting Farm（11-27 pending 未投，不换对象重发）、FOCUS 与 Strzelnica Czacz（11-26 已 voided）。土耳其其余 44 条为枪店/狩猎用品店或无公开邮箱，按界线不碰",
+          "MX 校验：poligonmetropol.com → poligonmetropol-com.mail.protection.outlook.com（M365）；sarsilmaz.com → posta.savunmaholding.com / mail.sarsilmaz.com，均有效",
+          "D-23 遗留处置：11-26 两封补齐 item 级 voidedReason 与 voidedAt；11-27 两封保持 pending 不标 voided（对象与事实仍有效），写明未获批 + HR/HU 当地 11-28 周六、11-29 周日窗口关闭，顺延至 2026-11-30（周一）当地 10:15 / 13:45",
+          "云端核对（未 add）：ai_marketing_cloud_queue payload.date=2026-11-27、approved=False、两条 pending（HS Produkt/Shooting Farm）、updated_at 2026-11-27T03:27Z；sent_log 中 Sabatti（11-23 16:30:09）与 Prins Hendrik（11-23 18:00:11）为 status=sent，并非 pending。与任务书所述「D-03 记两封已获批、云端 approved=True 且 pending」不符，按实测记录，未据此重发",
+          "对外实发 0 封；预览 1 封已发 sales@gunbase-optics.com（主题「[待审] 今日 2 封合作信」，mode=预览，Agent Mail 剩余配额 47/50）。队列 approved=false，未推云端、未自行发对外信",
+          "另两条自动化今日实况（如实并列，不代填）：M1 gb-market-intel.js days[0].generatedAt=08:32（调度 08:10，+22 分钟，在 +30 准时区间内，脚本自述「判延迟」与指令板口径不一致）；M4 gb-creative-partnerships.js days[0].generatedAt=08:24（调度 08:00，+24 分钟，准时）"
+        ],
+        "blockers": [
+          "审批闸门仍是唯一硬堵点：连续第 4 日 0 封，D-23 要求的 approved=true 我自己不能改，指令板升级项 2 已写明「总管席不能代批」",
+          "周六选项池极窄：08 名录土耳其 45 条中仅 1 家俱乐部有公开邮箱，第二封只能取 07 名录的枪械生产商，导致两封落同一时区",
+          "云端队列是整体替换：新队列 add 会覆盖 11-27 两封 pending，需所有者一次批准两批才能不丢件",
+          "本自动化 08:53 才触发（调度 08:30，+23），与 M1/M4 的「定时未在点触发」同源，非本线可控"
+        ],
+        "asks": [
+          "今日两封是否批准（approved 现为 false）。批准后我改 approved=true + approvedAt 并推云端，由云端 7x24 按北京 15:15 / 18:45 两个落点派发",
+          "11-27 顺延的 HS Produkt（HR）/ Shooting Farm（HU）是否并入本次批准，落点 11-30 当地 10:15 / 13:45",
+          "周末策略请拍板：周六仅土耳其可发，是否接受「周末按可发档位发、无档位则周一补发两封」，以免每天为凑 2 封把对象池压到 1 家"
+        ],
+        "review": {
+          "whatWorked": "去重与 MX 改成先查后写，两个目标一次通过；时间窗先跑脚本再选对象，避免了按北京上午拍脑袋选欧洲对象（今日若按旧习惯写德国必然全周周末作废）",
+          "rootCause": "连续 4 日 0 封不是起草能力问题，是审批链断在所有者一侧；同时周六可选档位只有 1 个，说明选源仍以欧洲为中心，缺周末可用区域（土耳其/海湾/以色列）的俱乐部储备",
+          "nextAction": "补齐土耳其与海湾地区俱乐部名录（每周至少 2 家可用邮箱），并在入队脚本里前置去重与配额拦截（D-26，due 11-30）"
+        }
+      },
+      "sales": {
+        "agent": "AI-GB-Sales（业务线自提交）",
+        "submittedAt": "2026-11-28 09:24 (GMT+8) · AI-GB-Sales 自行写入，非代补。调度 09:00，实际 09:12 启动、09:24 完成，迟到 +24 分钟，如实标注不伪称按时。KPI 取自 send_window.py 实跑、send_queue.py status 实读、IMAP 台账与 followup_sent_log 实读。",
+        "score": 58,
+        "scoreLabel": "58/100 = 指令板响应与窗口合规 20 + 3 封 D7 跟进合规入队 12（净空窗未到，不计业绩）+ D-21 超发根因定位并修复闸门 16 + 台账与队列对账纠正 10 + 台湾 D-06 补池 0（仍 0 对象）",
+        "headline": "周六三目标当地均周末，0 封硬发、3 封 D7 入队待 11-30；D-21 超发根因查明：G1 只数队列本地计数，跟进信通道完全不在闸门视野内，已改三源合并计数",
+        "kpi": [
+          {
+            "k": "对外实发",
+            "v": "0",
+            "d": "三目标当地周六凌晨 02:16，净空窗未开，一封未硬发",
+            "tone": "red"
+          },
+          {
+            "k": "已入队",
+            "v": "3",
+            "d": "Q014-Q016，D7 跟进，间隔 9-10 天、0 回复",
+            "tone": "blue"
+          },
+          {
+            "k": "队列积压",
+            "v": "7",
+            "d": "4 封 11-27 逾期 + 3 封新入队；有效上限 3 封/日",
+            "tone": "amber"
+          },
+          {
+            "k": "D-21 根因",
+            "v": "已修",
+            "d": "G1 改三源合并；自测 11-27 口径=8 封（>6 即拦）",
+            "tone": "green"
+          },
+          {
+            "k": "台账对账",
+            "v": "2 条",
+            "d": "Q008 / Q012 按 IMAP 回填为 sent",
+            "tone": "green"
+          },
+          {
+            "k": "配额余量",
+            "v": "6/6",
+            "d": "0 封实发，全额度未动用",
+            "tone": "green"
+          }
+        ],
+        "facts": [
+          "已读指令板 · 2026-11-27 21:04",
+          "发送窗口（硬门槛，逐目标实跑 send_window.py --json）：Waffen Schumacher 德国 Europe/Berlin 当地 11-28 02:16 周六、weekend=True、state=weekend、sendableNow=false；SKYWAY 西班牙 Europe/Madrid 02:16 周六、false；OPT'YSS 法国 Europe/Paris 02:16 周六、false。三地 nextOpenLocal 均为 11-30 09:30（北京 11-30 16:30）。按「周末不发 + 不在窗口不硬发」，今日对外实发 0 封，不是遗漏而是判定结果。",
+          "D-21 回应（超发根因，due 今日 08:30）：11-27 实发 8 封的构成是 4 封新开发（HUNTEX 08:30:14 / SSS 09:15:13 / Range Solutions 10:00:15 / Range Right 10:45:17，经云端通道）+ 4 封跟进信（Knappworst、VIDAL ARMS、NIMROD 16:40 + Lovac 20:59:55，经 followup_sender → send_mail）。根因不在「Re: 不计上限」，而在计数源单一：send_gate.py 的 G1 只读 send_queue_state.json 的 external_sent[today]，而 followup_sender 只写 followup_sent_log.json，两者从不交叉，闸门对 4 封跟进信完全不可见，8 封因此只被数到一部分。",
+          "D-21 修复：send_gate.py 新增 _followup_sent_today()，_sent_today() 改为 max(external_sent[today], 队列本地当日 kind!=external 计数 + 跟进当日 ok 计数)——对账值与自己人记录不重复相加、两条互斥通道相加，避免昨日同款双计。自测：今日计数 0/6；按 11-27 数据回算 = max(8, 0+4) = 8，>6 即应拦截。改动前已备份 backups/send_gate.py.bak_quota_20261128。闸门自测仍正确拦窗口：德国目标返回 G4_WINDOW。",
+          "D-21 残留（需所有者定夺）：云端 worker 的队列计数存在 Supabase 独立状态（cloud_worker.py 自带 sent_log/external_sent），本机闸门读不到。11-27 的 4 封新开发正是走云端通道，所以本机 G1 即便修好，仍管不住云端派发那一路。要么让闸门读云端计数，要么把两路合成一路。",
+          "D-22 回应（台账回写）：队列与 IMAP 不一致的两条已按对账纠正——Q008 info@hunt-ex.com 记 sent 2026-11-27T08:30:14、Q012 sales@range-right.co.uk 记 sent 10:45:17，原状态停留在 queued 属状态回退，不是未发。今日 0 封实发，无新增 messageId 需回写；11-27 八封 messageId 昨日已由总管席按 IMAP 重建，本日未覆盖。",
+          "G-31 / G-32（S1 生产商名录 / S2 渠道库，due 今日 08:30）：今日两件产品均由定时任务产出——S1 桌面文件 2026-11-28_枪械生产商名录.xlsx mtime 08:57、文件内生成时间 08:56（相对 08:30 调度 +26 分钟，准时线内）；S2 2026-11-28_全球枪店与俱乐部名录.xlsx mtime 09:05、文件内生成时间 09:05（相对 08:35 +30 分钟，恰在准时线）。较 11-27 的 +101 / +108 分钟已回到准时区间。云端 ai_sales_producers / ai_sales_channels 当日行未在本轮读取，落库时刻待下次对账确认。",
+          "D-06 台湾（长期，airsoft 定位）：候选池仍为 0 个台湾对象，今日无 zh-TW 邮件。本轮复核四家：BCS Airsoft 全省門市页只列电话与地址（唯一电邮是香港分公司 claraba2599@gmail.com，非台湾主体）、205 Airsoft（205.com.tw）、甲武 FirstForce Airsoft（firstforce.com.tw）、塔蘭戰術 TalantTactical（talantactical.com）官网均未公布可取邮箱。按「不得编造邮箱」记待补全，繁体口径本轮仍无实际检验样本。",
+          "去重（硬门槛）：outbound_owners.json 32 条逐条比对。三目标域名 waffenschumacher.com / skyway.es / orange.fr 均 owner=GB-Sales、status=sent，属自有线索，无他方占位；Marketing 占位的 sabatti.it、asvprinshendrik.nl 未触碰；30 天内同域名检查：三目标上次触达为 11-18 / 11-18 / 11-19，最短间隔 9 天，满足 7 天冷却。",
+          "队列实况（send_queue.py status 实读）：待发 7 / 已发 9 / 失败 0 / 暂停 否；域名第 18 天，阶段上限 3 封/日、最小间隔 40 分钟。积压 7 封 = Q009 bwarms.sk、Q010 kolimator.sk、Q011 kavur.hr、Q013 grouse.pt（11-27 入队，逾期）+ Q014-Q016（本日入队）。周五周末因子生效时上限压到 1，故周末不会消耗。",
+          "合规：三封均为英文跟进（延续 11-18/11-19 首触语言），正文无单价、总价、折扣与任何承诺性表述，保留「不在未请求来信中报价，确认型号与数量后出正式报价单」标准句；无战斗式射击、对抗场景、纳粹符号。内容去重通过（与首触正文差异明显，不与历史已发重复）。"
+        ],
+        "blockers": [
+          "队列积压 7 封 vs 有效上限 3 封/日（域名第 18 天阶段上限）：即便周一起每个工作日都满发，Q014-Q016 三封跟进最早也要排到 12-02 才轮到，而它们的首触是 11-18/11-19，届时已过 14 天。跟进时效与低上限直接冲突，不是排期能解决的。",
+          "云端 worker 独立计数：本机 G1 修复后仍看不见云端通道发出的信，11-27 的 4 封新开发正是这样绕过上限的。单日 6 封硬顶目前只有本机通道真正生效。",
+          "台湾 D-06 候选池连续第 3 日为 0：四家 airsoft 通路官网均无公开可验证邮箱，自动补池已无路可走，需人工给 2-3 个邮箱或授权走官网表单/LINE 渠道。",
+          "周末目标结构性不可达：桌面《今日工作计划》G1 要求当日新客 ≥10 封，而周六全欧中东客户工作窗关闭，两者不可能同时成立。我按护栏执行并如实记 0，不硬发。"
+        ],
+        "asks": [
+          "请拍板日发信上限：salesDailyMax=6 与队列阶段上限 3、桌面计划 ≥10 三套口径并存。建议明确「硬顶 6、阶段软限 3 可随域名年龄提升」，否则积压只会继续累积。",
+          "请决定云端计数是否并入闸门：授权我把 cloud_worker 的当日计数读进 G1，或直接停用云端并发、只留本机队列一路。",
+          "请为台湾 airsoft 补池给 2-3 个可验证邮箱，或授权我按官网表单/LINE 触达并记账；在此之前我不编造地址。",
+          "请统一商务条款口径：旧 D7 模板的「FOB / EXW + 50% 订金」与本任务硬约束「不得含承诺性表述」冲突。本轮按合规优先删除该句，若公司标准做法需保留，请明示，我再统一改 email_lang.py。"
+        ],
+        "review": [
+          "投递端事实：今日 0 封对外实发，3 封入队，已发队列条目 9 条（含 2 条本日按 IMAP 回填）。近三日实发曲线 11-26 = 11 封、11-27 = 8 封（超上限 2 封）、11-28 = 0 封（周末）。",
+          "执行时序：调度 09:00，实际 09:12 启动、09:24 完成，迟到 +24 分钟。迟到原因：先做窗口判定与三条台账对账，再到写盘，没有并行。",
+          "窗口判定留痕：三个目标均实跑 send_window.py --json，输出 weekend=true、sendableNow=false、nextOpenLocal=2026-11-30 09:30，不是按北京时间主观判断。",
+          "台账口径：今日 quotaUsed=0 与「已入队 3 封」分开记，避免重演 11-27「实发 8 封却记 quotaUsed=0、6 条写已入队」的失真。"
+        ],
+        "retro": [
+          "根因（D-21）：超发不是操作失误，是计数架构缺陷——两条发信通道各写各的账，闸门只认其中一本。11-27 那 4 封跟进信从头到尾没进过 G1 的视野。已改三源合并计数，但云端那一路仍未闭环，属结构性问题未完全解决。",
+          "教训：过去三天我反复在日报里写「已入队不算发出」，却没检查闸门到底数的是哪本账；配额是否生效应该用「回算历史数据能否拦住已知超发」来验证，而不是看当天有没有报警。本次用 11-27 数据回算 = 8 封，才真正证明修复有效。",
+          "次日动作：①周一 11-30 16:30 前核对 Q009-Q016 实际派发封数与 IMAP Sent 是否一致，逐封回写 messageId；②把 11-27 回算结果与云端计数缺口写成正式修复建议提交所有者；③台湾池等授权，不再重复无效搜索。"
+        ],
+        "reviewAt": "2026-11-28 09:24 (GMT+8)"
       }
     },
     {
