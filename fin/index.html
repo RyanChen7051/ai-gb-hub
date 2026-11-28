@@ -100,6 +100,14 @@
   .lock h2{color:var(--red);font-size:19px;margin-bottom:10px}
   .lock p{font-size:13px;color:var(--sub);margin:8px 0;line-height:1.8}
   .lock code{background:#f2f5f9;padding:2px 6px;border-radius:5px;font-size:12px}
+  .lock .login{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+  .lock .login>label:first-child{display:block;font-size:12px;color:var(--navy);font-weight:750;margin-bottom:7px}
+  .lock .row{display:flex;gap:8px;flex-wrap:wrap}
+  .lock input.pw{flex:1;min-width:180px;border:1px solid #b9cde0;border-radius:8px;padding:10px 12px;font-size:15px;color:var(--ink);background:#fff}
+  .lock input.pw:focus{outline:2px solid rgba(29,84,134,.25);border-color:var(--navy2)}
+  .lock label.rem{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--sub);margin:10px 0 0;cursor:pointer}
+  .lock .err{color:var(--red);font-size:12px;min-height:18px;margin-top:7px;font-weight:700}
+  .pill.act{cursor:pointer}
   .gb-tabbar{display:none}
   @media(max-width:720px){
     .gb-tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:50;background:#fff;border-top:1px solid var(--line);box-shadow:0 -3px 16px rgba(18,58,94,.09);padding:5px 2px calc(5px + env(safe-area-inset-bottom))}
@@ -126,7 +134,8 @@
     <div><h1>AI GB-Fin · 财务部</h1><div class="sub">对内不对外 · 从产品成本一路算到 DDP 完税报价</div></div>
   </div>
   <div class="hd-pills">
-    <span class="pill lock">🔒 内部专用 · 云端自动只读</span>
+    <span class="pill lock" id="gatePill">🔒 内部专用 · 口令解锁</span>
+    <span class="pill act" id="btnLock" style="display:none">🔒 退出锁定</span>
     <span class="pill live" id="datePill">日期 —</span>
     <span class="pill">汇报对象：AI GB-Team · 每日 09:00 情报</span>
     <span class="pill" id="buildPill">build —</span>
@@ -134,10 +143,15 @@
 </div></header>
 
 <div class="lock" id="lockScreen"><div class="box">
-  <h2>🔒 内部专用页面，需要本机打开</h2>
-  <p>AI GB-Fin 处理产品成本、目标毛利与客户报价，<b>不对任何外部访问开放</b>。云端与手机上只保留团队中心的公开宏观摘要（汇率、关税、政策），不含成本与价格。</p>
-  <p>请在所有者本机用浏览器打开本地文件：<code>/Users/chenbangjie/WorkBuddy/2026-11-20-13-47-04/ai-gb-hub/fin/index.html</code></p>
-  <p class="note">判定依据：<code>location.protocol === 'file:'</code>。分享链接、手机 PWA、任何 http(s) 访问都停在这一屏，不会加载成本输入与测算结果。</p>
+  <h2>🔒 内部专用页面，需要口令解锁</h2>
+  <p>AI GB-Fin 处理产品成本、目标毛利与客户报价，<b>不对外公开</b>。团队中心的公开情报卡只显示汇率、关税与政策，不含成本与价格。</p>
+  <div class="login">
+    <label for="finPass">输入财务线口令进入</label>
+    <div class="row"><input class="pw" id="finPass" type="password" autocomplete="off" placeholder="口令后按回车即可进入"><button class="btn" id="btnUnlock">进入</button></div>
+    <label class="rem"><input type="checkbox" id="finRemember" checked> 在本机记住 7 天（关掉标签页也不用重输）</label>
+    <div class="err" id="finErr"></div>
+  </div>
+  <p class="note">本机直接打开文件仍会自动进入，无需口令：<code>/Users/chenbangjie/WorkBuddy/2026-11-20-13-47-04/ai-gb-hub/fin/index.html</code>。口令只用于云端/手机的便捷解锁，<b>不是加密保护</b>；成本数据只存在你当前浏览器，不上传服务器。请勿在公用设备勾选「记住 7 天」。</p>
 </div></div>
 
 <div class="wrap" id="app" style="display:none">
@@ -300,14 +314,58 @@
   function cny(n,d){if(!isFinite(n))return '—';return 'CNY ' + fmt(n,d==null?2:d);}
   function cur(){return ($('cur')&&$('cur').value)||'USD';}
 
-  /* ---------- 门禁：先于任何其他初始化 ---------- */
-  if(location.protocol !== 'file:'){
+  /* ---------- 门禁：本机 file:// 自动放行；云端/手机口令解锁 ---------- */
+  var GATE_KEY='gb_fin_unlock_v1';
+  var PASS_SHA256='dacc1fd290de8cc20433ecf44c4c9c074c5c6ea712d9306079f8fc29a4dc14ad';
+  function unlocked(){
+    try{
+      if(sessionStorage.getItem(GATE_KEY)==='1')return true;
+      var until=Number(localStorage.getItem(GATE_KEY)||0);
+      if(until>Date.now())return true;
+    }catch(e){}
+    return false;
+  }
+  function grant(remember){
+    try{
+      sessionStorage.setItem(GATE_KEY,'1');
+      if(remember)localStorage.setItem(GATE_KEY,String(Date.now()+7*24*3600*1000));
+      else localStorage.removeItem(GATE_KEY);
+    }catch(e){}
+  }
+  function openApp(){
+    $('lockScreen').style.display='none';
+    $('app').style.display='block';
+    var lb=$('btnLock');if(lb)lb.style.display='inline-block';
+    var gp=$('gatePill');if(gp)gp.textContent='🔓 已解锁 · 内部专用';
+    var pw=$('finPass');if(pw)pw.value='';
+  }
+  if(location.protocol!=='file:' && !unlocked()){
     $('lockScreen').style.display='flex';
     $('app').style.display='none';
+    var finPass=$('finPass'), finErr=$('finErr'), finRem=$('finRemember');
+    function tryUnlock(){
+      var v=(finPass.value||'').trim();
+      if(!v){finErr.textContent='请输入口令。';return;}
+      finErr.textContent='校验中…';
+      if(!(window.crypto&&crypto.subtle&&window.TextEncoder)){
+        finErr.textContent='当前浏览器不支持安全校验，请用 HTTPS 链接打开。';return;
+      }
+      crypto.subtle.digest('SHA-256',new TextEncoder().encode(v)).then(function(buf){
+        var hex=Array.prototype.map.call(new Uint8Array(buf),function(b){return ('0'+b.toString(16)).slice(-2);}).join('');
+        if(hex===PASS_SHA256){grant(finRem.checked);finErr.textContent='正在进入…';location.reload();return;}
+        else{finErr.textContent='口令不正确，请重试。';finPass.value='';finPass.focus();}
+      }).catch(function(){finErr.textContent='校验失败，请重试。';});
+    }
+    $('btnUnlock').addEventListener('click',tryUnlock);
+    finPass.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();tryUnlock();}});
+    finPass.focus();
     return;
   }
-  $('lockScreen').style.display='none';
-  $('app').style.display='block';
+  openApp();
+  $('btnLock').addEventListener('click',function(){
+    try{sessionStorage.removeItem(GATE_KEY);localStorage.removeItem(GATE_KEY);}catch(e){}
+    location.reload();
+  });
 
   /* ---------- 情报展示 ---------- */
   $('datePill').textContent='数据日期 '+(D.meta&&D.meta.date||'—');
