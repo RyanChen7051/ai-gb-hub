@@ -2,9 +2,9 @@
  * 策略：网络优先 + 缓存兜底。子目录部署，全部相对路径。
  * 坑：Pages 对所有资源下发 cache-control: max-age=600，
  *     fetch(req) 会命中 HTTP 缓存拿到旧文件 → 必须 fetch(req,{cache:'no-store'})。
- * 作用域：/ai-gb-hub/ 全域（含 marketing、sales）；rd/ 有自己更窄的 SW，优先级更高。
+ * 作用域：/ai-gb-hub/ 全域（含 marketing、sales）；rd/ 与 pm/ 有自己更窄的 SW，优先级更高。
  */
-const CACHE = 'ai-gb-team-hub-v37';
+const CACHE = 'ai-gb-team-hub-v43';
 const BASE = './';
 const CORE = [
   BASE,
@@ -20,6 +20,18 @@ const CORE = [
   BASE + 'shared/market-intel-widget.js',
   BASE + 'shared/partner-assessment.js',
   BASE + 'rd/data.js',
+  BASE + 'pm/index.html',
+  BASE + 'pm/data.js',
+  BASE + 'pm/app.js',
+  BASE + 'pm/style.css',
+  BASE + 'pm/version.json',
+  BASE + 'as/index.html',
+  BASE + 'as/style.css',
+  BASE + 'as/data.js',
+  BASE + 'as/app.js',
+  BASE + 'as/version.json',
+  BASE + 'as/manifest.webmanifest',
+  BASE + 'as/assets/as-logo.svg',
   BASE + 'shared/team-intel-digest.js',
   BASE + 'shared/line-report.js',
   BASE + 'shared/tabbar.js',
@@ -63,6 +75,11 @@ self.addEventListener('fetch', e => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
+  // Fin 内部页永不走缓存：旧副本会把口令锁屏留在手机上，必须每次取网络最新版
+  if (url.pathname.indexOf('/fin/index.html') !== -1) {
+    e.respondWith(fetch(req, { cache: 'no-store' }));
+    return;
+  }
   // Sales 的 Supabase 请求不缓存，交给页面自身逻辑
   if (url.hostname.indexOf('supabase.co') !== -1) return;
   e.respondWith(

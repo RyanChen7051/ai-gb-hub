@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="./assets/icon-192.png">
 <link rel="manifest" href="./manifest.webmanifest">
-<title>AI GB-Fin · 成本与报价测算（内部）</title>
+<title>AI GB-Fin（财务部）</title>
 <style>
   :root{
     --bg:#eef2f7;--card:#fff;--ink:#16212e;--sub:#5b6b7c;--line:#dde5ee;
@@ -110,7 +110,7 @@
   .pill.act{cursor:pointer}
   .gb-tabbar{display:none}
   @media(max-width:720px){
-    .gb-tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:50;background:#fff;border-top:1px solid var(--line);box-shadow:0 -3px 16px rgba(18,58,94,.09);padding:5px 2px calc(5px + env(safe-area-inset-bottom))}
+    .gb-tabbar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px;position:fixed;left:0;right:0;bottom:0;z-index:50;background:#fff;border-top:1px solid var(--line);box-shadow:0 -3px 16px rgba(18,58,94,.09);padding:5px 2px calc(5px + env(safe-area-inset-bottom))}
     .gb-tabbar a{flex:1;text-decoration:none;color:#6d7d8d;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:9.5px}
     .gb-tabbar a.here{color:var(--navy2);font-weight:800}
     .gb-tabbar svg{width:19px;height:19px}
@@ -125,13 +125,14 @@
     <a href="../sales/index.html">AI GB-Sales</a>
     <a href="../marketing/index.html">AI GB-Marketing</a>
     <a href="../rd/index.html">AI GB-RD</a>
+    <a href="../as/index.html">AI GB-AS</a>
     <a class="here" href="./index.html">AI GB-Fin 🔒</a>
   </nav>
 </div></div>
 <header><div class="wrap">
   <div class="hd">
     <img src="./assets/icon-192.png" alt="AI GB-Fin 徽章">
-    <div><h1>AI GB-Fin · 财务部</h1><div class="sub">对内不对外 · 从产品成本一路算到 DDP 完税报价</div></div>
+    <div><h1>AI GB-Fin（财务部）</h1><div class="sub">对内不对外 · 从产品成本一路算到 DDP 完税报价</div></div>
   </div>
   <div class="hd-pills">
     <span class="pill lock" id="gatePill">🔒 内部专用 · 口令解锁</span>
@@ -294,6 +295,19 @@
 </nav>
 <script src="./data.js"></script>
 <script src="../shared/tabbar.js"></script>
+<script>
+/* 版本自愈：HTTP 缓存/CDN 可能供旧页面，读到更新 build 时换带版本号的地址重载一次。 */
+(function(){
+  if(location.protocol!=='http:'&&location.protocol!=='https:')return;
+  var EXPECT='20261128b';
+  var q=(location.search.match(/[?&]v=([^&]+)/)||[])[1];
+  fetch('./version.json',{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+    if(!j||!j.build)return;
+    if(q===j.build)return;
+    if(j.build>EXPECT)location.replace(location.pathname+'?v='+j.build);
+  }).catch(function(){});
+})();
+</script>
 <script>
 (function(){
   'use strict';

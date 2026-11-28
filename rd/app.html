@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="./assets/icon-192.png">
 <link rel="manifest" href="./manifest.webmanifest">
-<title>AI GB-RD · 全球技术与图纸储备中心</title>
+<title>AI GB-RD（技术部）</title>
 <style>
   :root{
     --bg:#eef2f7;--card:#fff;--ink:#16212e;--sub:#5b6b7c;--line:#dde5ee;
@@ -128,7 +128,7 @@
   .gb-lab-row{display:flex;align-items:center;gap:8px;font-size:10.5px;color:#bcd3e6;margin-bottom:7px;line-height:1.3}
   .gb-lab{font-weight:800;letter-spacing:.5px;color:#eaf2f9;white-space:nowrap}
   .gb-lab-row .sp{margin-left:auto;text-align:right}
-  .gb-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+  .gb-tabs{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
   .gb-tabs a{display:flex;align-items:center;justify-content:center;min-height:38px;padding:0 5px;border-radius:10px;
     font-size:11.5px;font-weight:700;line-height:1.15;text-align:center;text-decoration:none;color:#eaf2f9;
     background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);transition:.15s}
@@ -149,7 +149,7 @@
   .gb-tabbar{display:none}
   @media(max-width:720px){
     .gb-bar{display:none}
-    .gb-tabbar{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;position:fixed;left:0;right:0;bottom:0;z-index:1100;
+    .gb-tabbar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;position:fixed;left:0;right:0;bottom:0;z-index:1100;
       padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));background:#0d2c49;border-top:1px solid rgba(255,255,255,.18);
       box-shadow:0 -4px 18px rgba(13,44,73,.30)}
     .gb-tabbar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:48px;
@@ -600,7 +600,8 @@
     <a href="../sales/index.html">AI GB-Sales</a>
     <a href="../marketing/index.html">AI GB-Marketing</a>
     <a class="here" href="./index.html">AI GB-RD</a>
-    <a href="../fin/index.html">AI GB-Fin 🔒</a>
+    <a href="../as/index.html">AI GB-AS</a>
+    <a href="../fin/index.html?v=20261128b">AI GB-Fin 🔒</a>
   </nav>
 </div></div>
 <header>
@@ -608,7 +609,7 @@
     <div class="hd">
       <img src="./assets/icon-192.png" alt="AI GB-RD 徽章" width="72" height="72">
       <div>
-        <h1 id="botName">AI GB-RD</h1>
+        <h1 id="botName">AI GB-RD（技术部）</h1>
         <div class="sub" id="orgName"></div>
       </div>
     </div>
@@ -680,9 +681,9 @@
 <nav class="gb-tabbar" aria-label="同事切换">
   <a href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5"/><path d="M10 21v-6h4v6"/></svg><span>团队中心</span></a>
   <a href="../sales/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="7" width="19" height="13" rx="2.5"/><path d="M8.5 7V5.2A1.2 1.2 0 0 1 9.7 4h4.6a1.2 1.2 0 0 1 1.2 1.2V7"/><path d="M2.5 12.5h19"/></svg><span>AI GB-Sales</span></a>
-  <a href="../marketing/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4a1.5 1.5 0 0 0 1.5 1.5H7l6.5 4V4.5L7 8.5H4.5A1.5 1.5 0 0 0 3 10Z"/><path d="M17 8.5a4 4 0 0 1 0 7"/><path d="M7 15.5V20"/></svg><span>AI GB-Mkt</span></a>
+  <a href="../marketing/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4a1.5 1.5 0 0 0 1.5 1.5H7l6.5 4V4.5L7 8.5H4.5A1.5 1.5 0 0 0 3 10Z"/><path d="M17 8.5a4 4 0 0 1 0 7"/><path d="M7 15.5V20"/></svg><span>AI GB-MKT</span></a>
   <a class="here" href="./index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v4M12 18.5v4M1.5 12h4M18.5 12h4"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg><span>AI GB-RD</span></a>
-  <a href="../fin/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h4M7 16h4"/></svg><span>AI GB-Fin 🔒</span></a>
+  <a href="../fin/index.html?v=20261128b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h4M7 16h4"/></svg><span>AI GB-Fin 🔒</span></a>
 </nav>
 <script src="../shared/tabbar.js"></script>
 <script src="../shared/back-to-top.js"></script>
@@ -939,44 +940,23 @@
     fetch('./version.json?t='+Date.now(),{cache:'no-store'}).then(function(r){
       return r.ok?r.json():null;
     }).then(function(v){
-      if(!v||!v.version)return;
-      if(gt(v.version,local)){
-        num.textContent=v.version;
-        bar.dataset.remote=v.version;
+      if(!v)return;
+      /* 用 dataVersion 比对数据版本；老版本文件没有该字段时回退 version。
+         这样只升 build/改代码不会再误报「发现新版本」。 */
+      var remote=v.dataVersion||v.version;
+      if(!remote)return;
+      if(gt(remote,local)){
+        num.textContent=remote;
+        bar.dataset.remote=remote;
         bar.classList.add('on');
         try{document.documentElement.setAttribute('data-newver',v.version);}catch(e){}
-        if(fromRestore)autoHeal(v.version);
+        /* 减法：不再自动 reload；发现新版只更新横幅文案，不强行重载。 */
       }
     }).catch(function(){});
   }
-  /* bfcache / 后台标签页自愈：
-   * 标签页被浏览器冻结保存后再还原时，不发任何网络请求、直接复活旧 DOM，
-   * 表现就是「明明发布了新版本，页面还是几小时前那版，切换栏/提示条都没有」。
-   * 还原时主动校验一次版本，确有新版则自动重载一次（同一版本每个会话只自动一次，防死循环）。
-   */
-  var healer=null;
-  function autoHeal(remote){
-    var key='gbrd_autov_'+remote;
-    try{
-      if(sessionStorage.getItem(key))return;
-      sessionStorage.setItem(key,'1');
-    }catch(e){ return; }
-    clearTimeout(healer);
-    healer=setTimeout(function(){ location.reload(); },300);
-  }
-  window.addEventListener('pageshow',function(e){
-    if(e.persisted)check(true);          // 从 bfcache 还原 → 必须重新校验
-  });
-  window.addEventListener('focus',function(){
-    if(document.visibilityState==='visible')check(true);
-  });
-  window.addEventListener('online',function(){ check(true); });
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){check(false);});
-  else check(false);
-  setTimeout(function(){check(false);},2500);
-  document.addEventListener('visibilitychange',function(){
-    if(document.visibilityState==='visible')check(true);
-  });
+  /* 减法（2026-11-24）：删除全部自动版本校验 / 自动 reload。
+   * check() 不再被自动调用；横幅不会自己弹，切页 / 回前台一律不重载。
+   * 升级方式：关掉窗口从分享链接重新打开，或点各区块的「更新」按钮。 */
 })();
 </script>
 <script>

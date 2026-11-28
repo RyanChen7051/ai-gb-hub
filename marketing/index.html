@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
 <link rel="manifest" href="manifest.webmanifest">
-<title>AI市场战术专家 · GunBase 全球品牌宣传中心</title>
+<title>AI GB-MKT（市场部）</title>
 <style>
   :root{
     --bg:#eef2f7; --card:#ffffff; --ink:#16212e; --sub:#5b6b7c; --line:#dde5ee;
@@ -28,12 +28,12 @@
   body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;line-height:1.6;font-size:15px;padding-bottom:40px;-webkit-font-smoothing:antialiased}
   /* GB-NAV2 顶部协作导航：iOS 安全区避让（不再被状态栏云雾遮住）+ 三段式切换 */
   .gb-bar{background:linear-gradient(135deg,#0d2c49,#1d5486);color:#fff;border-bottom:1px solid rgba(255,255,255,.14);
-    padding-top:env(safe-area-inset-top,0px);position:sticky;top:0;z-index:1100;box-shadow:0 2px 10px rgba(13,44,73,.22)}
+    padding-top:env(safe-area-inset-top,0px);position:sticky;top:0;z-index:1400;box-shadow:0 2px 10px rgba(13,44,73,.22)}
   .gb-bar .wrap{display:block;padding-top:8px;padding-bottom:9px}
   .gb-lab-row{display:flex;align-items:center;gap:8px;font-size:10.5px;color:#bcd3e6;margin-bottom:7px;line-height:1.3}
   .gb-lab{font-weight:800;letter-spacing:.5px;color:#eaf2f9;white-space:nowrap}
   .gb-lab-row .sp{margin-left:auto;text-align:right}
-  .gb-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+  .gb-tabs{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
   .gb-tabs a{display:flex;align-items:center;justify-content:center;min-height:38px;padding:0 5px;border-radius:10px;
     font-size:11.5px;font-weight:700;line-height:1.15;text-align:center;text-decoration:none;color:#eaf2f9;
     background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);transition:.15s}
@@ -278,7 +278,7 @@
   .gb-tabbar{display:none}
   @media(max-width:720px){
     .gb-bar{display:none}
-    .gb-tabbar{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;position:fixed;left:0;right:0;bottom:0;z-index:1100;
+    .gb-tabbar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;position:fixed;left:0;right:0;bottom:0;z-index:1400;
       padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));
       background:#0d2c49;border-top:1px solid rgba(255,255,255,.18);
       box-shadow:0 -4px 18px rgba(13,44,73,.30)}
@@ -329,7 +329,8 @@
     <a href="../sales/index.html">AI GB-Sales</a>
     <a class="here" href="../marketing/index.html">AI GB-Marketing</a>
     <a href="../rd/index.html">AI GB-RD</a>
-    <a href="../fin/index.html">AI GB-Fin 🔒</a>
+    <a href="../as/index.html">AI GB-AS</a>
+    <a href="../fin/index.html?v=20261128b">AI GB-Fin 🔒</a>
   </nav>
 </div></div>
 <header>
@@ -337,7 +338,7 @@
     <div class="hd-top">
       <div class="logo"><img src="assets/brand-logo.svg" alt="AI 市场战术专家徽章"></div>
       <div class="hd-title">
-        <h1 id="botName">AI 市场战术专家</h1>
+        <h1 id="botName">AI GB-MKT（市场部）</h1>
         <div class="org" id="orgName">GunBase 火械基地 · 全球品牌宣传战术中心</div>
       </div>
     </div>
@@ -475,7 +476,6 @@
 
 <script src="../shared/reports/gb-market-intel.js"></script>
 <script src="../shared/market-intel-widget.js"></script>
-<script src="../shared/partner-assessment.js"></script>
 <script src="data.js"></script>
 <script>
 (function(){
@@ -496,9 +496,9 @@
 
   // 头部
   /* 命名统一：页面标题带上所有者指定的 AI GB-Marketing 代号，中文名「市场战术专家」保留 */
-  document.getElementById('botName').textContent = 'AI GB-Marketing · 市场战术专家';
+  document.getElementById('botName').textContent = 'AI GB-MKT（市场部）';
   document.getElementById('orgName').textContent = D.meta.org;
-  document.title = D.meta.botName+' · GunBase 全球品牌宣传中心';
+  document.title = 'AI GB-MKT（市场部）';
   var tags=[
     '<span class="pill live"><span class="dot"></span>'+esc(D.meta.scope)+'</span>',
     '<span class="pill">'+icon('search')+'关键字 + 组织 双引擎</span>',
@@ -678,9 +678,9 @@
 <nav class="gb-tabbar" aria-label="同事切换">
   <a href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5"/><path d="M10 21v-6h4v6"/></svg><span>团队中心</span></a>
   <a href="../sales/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="7" width="19" height="13" rx="2.5"/><path d="M8.5 7V5.2A1.2 1.2 0 0 1 9.7 4h4.6a1.2 1.2 0 0 1 1.2 1.2V7"/><path d="M2.5 12.5h19"/></svg><span>AI GB-Sales</span></a>
-  <a class="here" href="../marketing/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4a1.5 1.5 0 0 0 1.5 1.5H7l6.5 4V4.5L7 8.5H4.5A1.5 1.5 0 0 0 3 10Z"/><path d="M17 8.5a4 4 0 0 1 0 7"/><path d="M7 15.5V20"/></svg><span>AI GB-Mkt</span></a>
+  <a class="here" href="../marketing/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4a1.5 1.5 0 0 0 1.5 1.5H7l6.5 4V4.5L7 8.5H4.5A1.5 1.5 0 0 0 3 10Z"/><path d="M17 8.5a4 4 0 0 1 0 7"/><path d="M7 15.5V20"/></svg><span>AI GB-MKT</span></a>
   <a href="../rd/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v4M12 18.5v4M1.5 12h4M18.5 12h4"/></svg><span>AI GB-RD</span></a>
-  <a href="../fin/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h4M7 16h4"/></svg><span>AI GB-Fin 🔒</span></a>
+  <a href="../fin/index.html?v=20261128b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h4M7 16h4"/></svg><span>Fin 🔒</span></a>
 </nav>
 <script src="../shared/tabbar.js"></script>
 <script src="../shared/back-to-top.js"></script>
@@ -802,7 +802,6 @@
 })();
 </script>
 
-<script src="../shared/gb-bfcache-heal.js" data-ver="version.json" data-key="build"></script>
 
 <script>
 /* 注册 Marketing 自己的 SW（./sw.js，作用域 /ai-gb-hub/marketing/）。

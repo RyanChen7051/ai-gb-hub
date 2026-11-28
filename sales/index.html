@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
 <link rel="manifest" href="manifest.webmanifest">
-<title>AI GB-Sales · GunBase 业务情报中心</title>
+<title>AI GB-Sales（营销部）</title>
 <style>
   :root{
     --bg:#eef2f7; --card:#ffffff; --ink:#16212e; --sub:#5b6b7c; --line:#dde5ee;
@@ -490,6 +490,8 @@
   .hd-body{overflow-y:auto;padding:12px 14px;background:#f7f9fc;flex:1 1 auto}
   .hd-card{background:#fff;border:1px solid var(--line);border-left:4px solid #2e9e63;border-radius:10px;padding:11px 13px;margin-bottom:9px;box-shadow:var(--shadow)}
   .hd-card.warn{border-left-color:#c98a12} .hd-card.critical{border-left-color:#c0392b}
+  .hd-card.quota{border-left-color:#1f5f8b;background:#f4f9fd}
+  .hd-card.quota .hd-tag{background:#e3eef7;color:#15496e}
   .hd-card .hd-tag{font-size:9.5px;font-weight:800;letter-spacing:.4px;padding:2px 8px;border-radius:10px;background:#eaf5ec;color:#1e7a4c;display:inline-block}
   .hd-card.warn .hd-tag{background:#fff3d6;color:#8a5a00} .hd-card.critical .hd-tag{background:#fbe9e6;color:#c0392b}
   .hd-card .hd-title{font-size:13px;color:var(--navy);font-weight:700;margin:6px 0 3px}
@@ -559,12 +561,12 @@
 
   /* GB-NAV2 顶部协作导航：iOS 安全区避让（不再被状态栏云雾遮住）+ 三段式切换 */
   .gb-bar{background:linear-gradient(135deg,#0d2c49,#1d5486);color:#fff;border-bottom:1px solid rgba(255,255,255,.14);
-    padding-top:env(safe-area-inset-top,0px);position:sticky;top:0;z-index:1100;box-shadow:0 2px 10px rgba(13,44,73,.22)}
+    padding-top:env(safe-area-inset-top,0px);position:sticky;top:0;z-index:1400;box-shadow:0 2px 10px rgba(13,44,73,.22)}
   .gb-bar .wrap{display:block;padding-top:8px;padding-bottom:9px}
   .gb-lab-row{display:flex;align-items:center;gap:8px;font-size:10.5px;color:#bcd3e6;margin-bottom:7px;line-height:1.3}
   .gb-lab{font-weight:800;letter-spacing:.5px;color:#eaf2f9;white-space:nowrap}
   .gb-lab-row .sp{margin-left:auto;text-align:right}
-  .gb-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+  .gb-tabs{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
   .gb-tabs a{display:flex;align-items:center;justify-content:center;min-height:38px;padding:0 5px;border-radius:10px;
     font-size:11.5px;font-weight:700;line-height:1.15;text-align:center;text-decoration:none;color:#eaf2f9;
     background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);transition:.15s}
@@ -586,7 +588,7 @@
   .gb-tabbar{display:none}
   @media(max-width:720px){
     .gb-bar{display:none}
-    .gb-tabbar{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;position:fixed;left:0;right:0;bottom:0;z-index:1100;
+    .gb-tabbar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;position:fixed;left:0;right:0;bottom:0;z-index:1400;
       padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));
       background:#0d2c49;border-top:1px solid rgba(255,255,255,.18);
       box-shadow:0 -4px 18px rgba(13,44,73,.30)}
@@ -618,7 +620,8 @@
     <a class="here" href="../sales/index.html">AI GB-Sales</a>
     <a href="../marketing/index.html">AI GB-Marketing</a>
     <a href="../rd/index.html">AI GB-RD</a>
-    <a href="../fin/index.html">AI GB-Fin 🔒</a>
+    <a href="../as/index.html">AI GB-AS</a>
+    <a href="../fin/index.html?v=20261128b">AI GB-Fin 🔒</a>
   </nav>
 </div></div>
 <header>
@@ -626,7 +629,7 @@
     <div class="hd-top">
       <div class="logo"><img src="assets/icon-512.png?v=3.2.0" alt="GunBase" onerror="this.style.display='none'"></div>
       <div class="hd-title">
-        <h1 id="botName">AI GB-Sales · 业务情报中心</h1>
+        <h1 id="botName">AI GB-Sales（营销部）</h1>
         <div class="org" id="org">GunBase 火械基地 · 海外业务执行机器人</div>
       </div>
     </div>
@@ -924,7 +927,7 @@
   <div class="hd-panel">
     <div class="hd-hd">
       <div class="hd-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="M22 4 12 14.01l-3-3"/></svg></div>
-      <div><b>系统健康巡检</b><span id="hdMeta">每 30 分钟自动巡检</span></div>
+      <div><b>系统健康巡检</b><span id="hdMeta">每小时自动巡检</span></div>
       <button class="x" id="hdClose">×</button>
     </div>
     <div class="hd-body" id="hdBody"></div>
@@ -985,7 +988,7 @@ function __bootMain(){
       }
     }
   })();
-  document.getElementById('botName').textContent = m.botName+' · 业务情报中心';
+  document.getElementById('botName').textContent = 'AI GB-Sales（营销部）';
   document.getElementById('org').textContent = m.org;
   document.getElementById('pillDate').textContent = '报告日期 '+m.reportDate;
   document.getElementById('pillCycle').textContent = m.cycle;
@@ -1571,7 +1574,7 @@ function __bootMain(){
   function render(){
     var u=unreadList(), n=u.length;
     if(n>0 && !state.dismissed){
-      banner.classList.add('show');
+      /* 减法：回信横幅不再自动弹出；保留 pill 角标数量 + 提示音。 */
       pill.classList.add('show'); pill.setAttribute('data-n', n>99?'99+':n);
       rbTitle.textContent = n===1 ? '📩 有 1 封客户回信！' : ('📩 有 '+n+' 封客户回信！');
       var top=u.slice(0,2).map(function(r){return (r.matched_company||r.from||'').split('<')[0].trim();}).filter(Boolean).join('、');
@@ -1669,7 +1672,7 @@ function __bootMain(){
   var hdMeta=document.getElementById('hdMeta');
   var lastVer=localStorage.getItem('gb_health_ver')||'';
   var dismissedVer='';
-  var LV={critical:'严重',warn:'注意',ok:'正常'};
+  var LV={critical:'严重',warn:'注意',info:'提示',ok:'正常'};
   var state={overall:'ok',version:'',alerts:[],summary:{},scannedAt:''};
 
   function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
@@ -1688,37 +1691,45 @@ function __bootMain(){
   }
   window.__healthReload=function(){ try{ load(); }catch(e){} };
   function render(){
-    var bad=state.alerts.length>0;
+    var bad=state.alerts.some(function(a){return a.level==='critical'||a.level==='warn';});
     // 徽标
     pill.className='pill health-pill'+(bad?(state.overall==='critical'?' critical':' warn'):'');
     pill.textContent=bad?('⚠ 系统告警 '+state.alerts.length):'✓ 系统正常';
     // 横幅：仅在新版本且未被本会话关闭时弹出
-    var changed = state.version && state.version!==lastVer && state.version!=='ok';
-    if(bad && (changed ? dismissedVer!==state.version : false)){
+    /* 减法：健康横幅不再自动弹出。状态仍在上方 pill（✓ 正常 / ⚠ 告警 N）静态显示，
+       要看详情由用户点 pill 打开抽屉 —— 切页/回前台都不会突然弹窗。 */
+    banner.classList.remove('show','ok');
+    if(bad){
       var first=state.alerts[0];
       hbTitle.textContent=(state.overall==='critical'?'⚠ 严重':'⚠ 注意')+' · '+first.title;
       hbSub.textContent=(state.alerts.length>1?('另有 '+(state.alerts.length-1)+' 条 · '):'')+'巡检 '+fmt(state.scannedAt);
-      banner.classList.toggle('ok',false);
-      banner.classList.add('show');
-    } else if(!bad){
-      banner.classList.remove('show');
-      if(lastVer && state.version!==lastVer){
-        // 恢复正常时短暂提示一次
-        hbTitle.textContent='✓ 系统已恢复正常'; hbSub.textContent='无退信 / 无逾期 / 队列正常';
-        banner.classList.add('ok','show');
-        var t=setTimeout(function(){ banner.classList.remove('show'); clearTimeout(t); },3200);
-      }
     }
     lastVer=state.version||lastVer;
     localStorage.setItem('gb_health_ver',lastVer);
-    var s=state.summary.queue||{}, b=state.summary.bounce||{};
-    hdMeta.textContent='巡检 '+fmt(state.scannedAt)+' · 退信新增 '+(b.new||0)+' · 逾期 '+(s.overdue||0)+' · 失败 '+(s.failed||0);
+    var s=state.summary.queue||{}, b=state.summary.bounce||{}, bu=state.summary.budget||{};
+    hdMeta.textContent='巡检 '+fmt(state.scannedAt)+' · 退信新增 '+(b.new||0)+' · 待发 '+(s.queued||0)
+      +(s.weekend_hold?('（顺延 '+s.weekend_hold+'）'):'')
+      +(s.quota_hold?('（配额占满 '+s.quota_hold+'）'):'')
+      +(bu.cap_total?(' · 今日配额 '+bu.total+'/'+bu.cap_total):'')
+      +' · 失败 '+(s.failed||0);
     renderBody();
   }
   function renderBody(){
-    if(!state.alerts.length){ body.innerHTML='<div class="rd-empty"><span class="em-ic">✓</span>系统健康，暂无异常告警。<br>退信、漏发、队列暂停会在此主动提醒。</div>'; return; }
+    var bu=state.summary.budget||{}, quota='';
+    if(bu.cap_total){
+      var bk=bu.buckets||{}, cp=bu.caps||{};
+      var parts=[['新开发','new_outreach'],['Marketing','marketing'],['跟进','followup'],['回信','reply']].map(function(p){
+        var k=p[1], n=bk[k]||0, c=(typeof cp[k]==='number'&&cp[k]>=0)?cp[k]:null;
+        return p[0]+' '+(c!==null?(n+'/'+c):(n+'/不限'));
+      });
+      quota='<div class="hd-card quota"><span class="hd-tag">配额</span>'
+        +'<div class="hd-title">今日发信 '+bu.total+' / '+bu.cap_total+' 封</div>'
+        +'<div class="hd-detail">'+parts.join(' · ')+'</div>'
+        +'<div class="hd-time">冷接触（新开发 / Marketing）设硬桶；跟进与回信不限桶，只受总量约束</div></div>';
+    }
+    if(!state.alerts.length){ body.innerHTML=quota+'<div class="rd-empty"><span class="em-ic">✓</span>系统健康，暂无异常告警。<br>退信、漏发、队列暂停会在此主动提醒。</div>'; return; }
     var hot=state.alerts.slice().sort(function(a,b){var o={critical:0,warn:1};return (o[a.level]||9)-(o[b.level]||9);});
-    body.innerHTML=hot.map(function(a){
+    body.innerHTML=quota+hot.map(function(a){
       return '<div class="hd-card '+(a.level||'ok')+'">'
         +'<span class="hd-tag">'+(LV[a.level]||a.level)+'</span>'
         +'<div class="hd-title">'+esc(a.title)+'</div>'
@@ -2148,6 +2159,15 @@ function __bootMain(){
     var t0=Date.now();
     var list=document.querySelectorAll('.sec-upd');
     for(var i=0;i<list.length;i++){ list[i].classList.add('busy'); list[i].querySelector('.su-t').textContent='更新中'; }
+    // 数据热刷新不重载页面 —— 先关掉上次可能打开着的健康/回信抽屉与横幅，
+    // 否则点了「更新」后旧抽屉仍浮在脸上，看起来像"更新没用/又自己弹了"。
+    try{
+      var residual=['healthDrawer','replyDrawer','healthBanner','replyBanner'];
+      for(var k=0;k<residual.length;k++){
+        var el=document.getElementById(residual[k]);
+        if(el&&el.classList) el.classList.remove('show');
+      }
+    }catch(e){}
     // 顺带让 SW 检查新版本（有则提示重载）
     try{
       if('serviceWorker' in navigator){
@@ -2207,12 +2227,11 @@ function __bootMain(){
 <nav class="gb-tabbar" aria-label="同事切换">
   <a href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5"/><path d="M10 21v-6h4v6"/></svg><span>团队中心</span></a>
   <a class="here" href="../sales/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="7" width="19" height="13" rx="2.5"/><path d="M8.5 7V5.2A1.2 1.2 0 0 1 9.7 4h4.6a1.2 1.2 0 0 1 1.2 1.2V7"/><path d="M2.5 12.5h19"/></svg><span>AI GB-Sales</span></a>
-  <a href="../marketing/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4a1.5 1.5 0 0 0 1.5 1.5H7l6.5 4V4.5L7 8.5H4.5A1.5 1.5 0 0 0 3 10Z"/><path d="M17 8.5a4 4 0 0 1 0 7"/><path d="M7 15.5V20"/></svg><span>AI GB-Mkt</span></a>
+  <a href="../marketing/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4a1.5 1.5 0 0 0 1.5 1.5H7l6.5 4V4.5L7 8.5H4.5A1.5 1.5 0 0 0 3 10Z"/><path d="M17 8.5a4 4 0 0 1 0 7"/><path d="M7 15.5V20"/></svg><span>AI GB-MKT</span></a>
   <a href="../rd/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v4M12 18.5v4M1.5 12h4M18.5 12h4"/></svg><span>AI GB-RD</span></a>
-  <a href="../fin/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h4M7 16h4"/></svg><span>AI GB-Fin 🔒</span></a>
+  <a href="../fin/index.html?v=20261128b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h4M7 16h4"/></svg><span>Fin 🔒</span></a>
 </nav>
 <script src="../shared/tabbar.js"></script>
 <script src="../shared/back-to-top.js"></script>
-<script src="../shared/gb-bfcache-heal.js" data-ver="version.json" data-key="build"></script>
 </body>
 </html>
