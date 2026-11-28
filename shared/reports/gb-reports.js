@@ -121,7 +121,7 @@ window.GB_REPORTS = {
           {
             "k": "M4 创意",
             "v": "08:24",
-            "d": "调度 08:00，+24 分钟（+30 内）",
+            "d": "调度 08:00，+19 分钟（+30 内）",
             "tone": "green"
           }
         ],
@@ -136,7 +136,7 @@ window.GB_REPORTS = {
           "D-23 遗留处置：11-26 两封补齐 item 级 voidedReason 与 voidedAt；11-27 两封保持 pending 不标 voided（对象与事实仍有效），写明未获批 + HR/HU 当地 11-28 周六、11-29 周日窗口关闭，顺延至 2026-11-30（周一）当地 10:15 / 13:45",
           "云端核对（未 add）：ai_marketing_cloud_queue payload.date=2026-11-27、approved=False、两条 pending（HS Produkt/Shooting Farm）、updated_at 2026-11-27T03:27Z；sent_log 中 Sabatti（11-23 16:30:09）与 Prins Hendrik（11-23 18:00:11）为 status=sent，并非 pending。与任务书所述「D-03 记两封已获批、云端 approved=True 且 pending」不符，按实测记录，未据此重发",
           "对外实发 0 封；预览 1 封已发 sales@gunbase-optics.com（主题「[待审] 今日 2 封合作信」，mode=预览，Agent Mail 剩余配额 47/50）。队列 approved=false，未推云端、未自行发对外信",
-          "另两条自动化今日实况（如实并列，不代填）：M1 gb-market-intel.js days[0].generatedAt=08:32（调度 08:10，+22 分钟，在 +30 准时区间内，脚本自述「判延迟」与指令板口径不一致）；M4 gb-creative-partnerships.js days[0].generatedAt=08:24（调度 08:00，+24 分钟，准时）"
+          "另两条自动化今日实况（如实并列，不代填）：M1 gb-market-intel.js days[0].generatedAt=08:32（调度 08:10，+22 分钟，在 +30 准时区间内，脚本自述「判延迟」与指令板口径不一致）；M4 gb-creative-partnerships.js days[0].generatedAt=08:24（调度 08:00，+19 分钟，准时）"
         ],
         "blockers": [
           "审批闸门仍是唯一硬堵点：连续第 4 日 0 封，D-23 要求的 approved=true 我自己不能改，指令板升级项 2 已写明「总管席不能代批」",
@@ -157,7 +157,7 @@ window.GB_REPORTS = {
       },
       "sales": {
         "agent": "AI-GB-Sales（业务线自提交）",
-        "submittedAt": "2026-11-28 09:19 (GMT+8) · AI-GB-Sales 自行写入，非代补。调度 09:00，实际 09:12 启动、09:19 完成，迟到 +24 分钟，如实标注不伪称按时。KPI 取自 send_window.py 实跑、send_queue.py status 实读、IMAP 台账与 followup_sent_log 实读。",
+        "submittedAt": "2026-11-28 09:19 (GMT+8) · AI-GB-Sales 自行写入，非代补。调度 09:00，实际 09:12 启动、09:19 完成，迟到 +19 分钟，如实标注不伪称按时。KPI 取自 send_window.py 实跑、send_queue.py status 实读、IMAP 台账与 followup_sent_log 实读。",
         "score": 58,
         "scoreLabel": "58/100 = 指令板响应与窗口合规 20 + 3 封 D7 跟进合规入队 12（净空窗未到，不计业绩）+ D-21 超发根因定位并修复闸门 16 + 台账与队列对账纠正 10 + 台湾 D-06 补池 0（仍 0 对象）",
         "headline": "周六三目标当地均周末，0 封硬发、3 封 D7 入队待 11-30；D-21 超发根因查明：G1 只数队列本地计数，跟进信通道完全不在闸门视野内，已改三源合并计数",
@@ -226,7 +226,7 @@ window.GB_REPORTS = {
         ],
         "review": [
           "投递端事实：今日 0 封对外实发，3 封入队，已发队列条目 9 条（含 2 条本日按 IMAP 回填）。近三日实发曲线 11-26 = 11 封、11-27 = 8 封（超上限 2 封）、11-28 = 0 封（周末）。",
-          "执行时序：调度 09:00，实际 09:12 启动、09:19 完成，迟到 +24 分钟。迟到原因：先做窗口判定与三条台账对账，再到写盘，没有并行。",
+          "执行时序：调度 09:00，实际 09:12 启动、09:19 完成，迟到 +19 分钟。迟到原因：先做窗口判定与三条台账对账，再到写盘，没有并行。",
           "窗口判定留痕：三个目标均实跑 send_window.py --json，输出 weekend=true、sendableNow=false、nextOpenLocal=2026-11-30 09:30，不是按北京时间主观判断。",
           "台账口径：今日 quotaUsed=0 与「已入队 3 封」分开记，避免重演 11-27「实发 8 封却记 quotaUsed=0、6 条写已入队」的失真。"
         ],
