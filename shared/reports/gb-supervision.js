@@ -1,16 +1,16 @@
 // 由 supervision_ledger.py 自动生成，数据源：automation_runs + IMAP Sent
 window.GB_SUPERVISION = {
-  "generatedAt": "2026-11-28T10:48:13.400592+08:00",
+  "generatedAt": "2026-11-28T15:20:31.413051+08:00",
   "source": "workbuddy.db automation_runs + IMAP Sent（脚本直读，非人工填写）",
   "automations": [
     {
       "name": "AI GB-Team · 产物幂等补齐（每2小时·产物缺才补跑·解耦 agent 中断）",
       "status": "ACTIVE",
-      "last_success": "2026-11-28 08:11:28",
-      "last_attempt": "2026-11-28 08:11:28",
-      "next_run": "2026-11-28 10:14:34",
-      "runs": 10,
-      "successes": 10,
+      "last_success": "2026-11-28 15:00:00",
+      "last_attempt": "2026-11-28 15:00:00",
+      "next_run": "2026-11-28 17:00:22",
+      "runs": 13,
+      "successes": 13,
       "verdict": "已验证",
       "manual": null
     },
@@ -39,11 +39,11 @@ window.GB_SUPERVISION = {
     {
       "name": "AI GB-Team · 回信入口扫描（每2小时·只生成草稿绝不发信）",
       "status": "ACTIVE",
-      "last_success": "2026-11-28 09:08:31",
-      "last_attempt": "2026-11-28 09:08:31",
-      "next_run": "2026-11-28 11:12:47",
-      "runs": 11,
-      "successes": 11,
+      "last_success": "2026-11-28 15:17:56",
+      "last_attempt": "2026-11-28 15:17:56",
+      "next_run": "2026-11-28 17:18:46",
+      "runs": 14,
+      "successes": 14,
       "verdict": "已验证",
       "manual": {
         "at": "2026-11-26 11:29:53",
@@ -73,11 +73,11 @@ window.GB_SUPERVISION = {
     {
       "name": "AI GB-Team · 已发内容指纹刷新（每日11:30·只读取Sent不发信）",
       "status": "ACTIVE",
-      "last_success": "2026-11-27 11:30:24",
-      "last_attempt": "2026-11-27 11:30:24",
-      "next_run": "2026-11-28 11:30:00",
-      "runs": 1,
-      "successes": 1,
+      "last_success": "2026-11-28 11:30:18",
+      "last_attempt": "2026-11-28 11:30:18",
+      "next_run": "2026-11-29 11:30:00",
+      "runs": 2,
+      "successes": 2,
       "verdict": "已验证",
       "manual": null
     },
@@ -112,11 +112,11 @@ window.GB_SUPERVISION = {
     {
       "name": "AI GB-Team · 每日事实板生成（每2小时·直读原始源）",
       "status": "ACTIVE",
-      "last_success": "2026-11-28 09:12:51",
-      "last_attempt": "2026-11-28 09:12:51",
-      "next_run": "2026-11-28 11:17:48",
-      "runs": 11,
-      "successes": 11,
+      "last_success": "2026-11-28 13:20:34",
+      "last_attempt": "2026-11-28 13:20:34",
+      "next_run": "2026-11-28 15:21:58",
+      "runs": 13,
+      "successes": 13,
       "verdict": "已验证",
       "manual": {
         "at": "2026-11-26 11:30:01",
@@ -146,11 +146,11 @@ window.GB_SUPERVISION = {
     {
       "name": "AI GB-Team · 草稿自动入云端（每30分钟·审批状态绝不改）",
       "status": "ACTIVE",
-      "last_success": "2026-11-28 08:27:20",
-      "last_attempt": "2026-11-28 09:38:02",
-      "next_run": "2026-11-28 09:31:58",
-      "runs": 20,
-      "successes": 19,
+      "last_success": "2026-11-28 14:29:46",
+      "last_attempt": "2026-11-28 14:29:46",
+      "next_run": "2026-11-28 15:30:29",
+      "runs": 23,
+      "successes": 22,
       "verdict": "已验证",
       "manual": {
         "at": "2026-11-26 11:29:45",
@@ -163,11 +163,11 @@ window.GB_SUPERVISION = {
     {
       "name": "AI GB-Team · 跟进草稿安全投递（每2小时·商务条款隔离·闸门放行才投）",
       "status": "ACTIVE",
-      "last_success": "2026-11-28 08:42:50",
-      "last_attempt": "2026-11-28 08:42:50",
-      "next_run": "2026-11-28 10:52:55",
-      "runs": 9,
-      "successes": 9,
+      "last_success": "2026-11-28 15:09:11",
+      "last_attempt": "2026-11-28 15:09:11",
+      "next_run": "2026-11-28 17:10:09",
+      "runs": 12,
+      "successes": 12,
       "verdict": "已验证",
       "manual": {
         "at": "2026-11-26 14:22:52",
@@ -180,11 +180,11 @@ window.GB_SUPERVISION = {
     {
       "name": "AI GB-Team · 达成率守门①（12:10 · 独立证据源 · 缺交即下令）",
       "status": "ACTIVE",
-      "last_success": "2026-11-27 12:10:28",
-      "last_attempt": "2026-11-27 12:10:28",
-      "next_run": "2026-11-28 12:10:00",
-      "runs": 4,
-      "successes": 3,
+      "last_success": "2026-11-28 12:10:15",
+      "last_attempt": "2026-11-28 12:10:15",
+      "next_run": "2026-11-29 12:10:00",
+      "runs": 5,
+      "successes": 4,
       "verdict": "已验证",
       "manual": {
         "at": "2026-11-24 21:02:28",
@@ -231,11 +231,11 @@ window.GB_SUPERVISION = {
     {
       "name": "AI GB-Team · 退信当日闭环（每2小时·发现即定性/补发/告知）",
       "status": "ACTIVE",
-      "last_success": "2026-11-28 08:31:58",
-      "last_attempt": "2026-11-28 08:31:58",
-      "next_run": "2026-11-28 10:39:54",
-      "runs": 17,
-      "successes": 14,
+      "last_success": "2026-11-28 15:06:53",
+      "last_attempt": "2026-11-28 15:06:53",
+      "next_run": "2026-11-28 17:08:41",
+      "runs": 20,
+      "successes": 17,
       "verdict": "已验证",
       "manual": {
         "at": "2026-11-24 21:02:28",
@@ -248,11 +248,11 @@ window.GB_SUPERVISION = {
     {
       "name": "AI-GB-Marketing 幂等兜底（每小时·漏投补位·审批状态绝不自动改）",
       "status": "ACTIVE",
-      "last_success": "2026-11-28 08:39:54",
-      "last_attempt": "2026-11-28 08:39:54",
-      "next_run": "2026-11-28 09:52:21",
-      "runs": 21,
-      "successes": 20,
+      "last_success": "2026-11-28 14:25:54",
+      "last_attempt": "2026-11-28 14:25:54",
+      "next_run": "2026-11-28 15:28:16",
+      "runs": 25,
+      "successes": 24,
       "verdict": "已验证",
       "manual": {
         "at": "2026-11-26 11:00:29",
@@ -299,11 +299,11 @@ window.GB_SUPERVISION = {
     {
       "name": "AI-GB-Marketing 幂等投递③（北京09:30 · 美加/澳洲上午）",
       "status": "ACTIVE",
-      "last_success": "2026-11-27 10:32:58",
-      "last_attempt": "2026-11-27 10:32:58",
-      "next_run": "2026-11-28 09:30:00",
-      "runs": 3,
-      "successes": 2,
+      "last_success": "2026-11-28 11:08:32",
+      "last_attempt": "2026-11-28 11:08:32",
+      "next_run": "2026-11-29 09:30:00",
+      "runs": 4,
+      "successes": 3,
       "verdict": "已验证",
       "manual": {
         "at": "2026-11-26 10:59:05",
@@ -316,11 +316,11 @@ window.GB_SUPERVISION = {
     {
       "name": "AI-GB-Marketing 幂等投递④（北京11:00 · 美加/澳洲上午）",
       "status": "ACTIVE",
-      "last_success": "2026-11-27 11:00:24",
-      "last_attempt": "2026-11-27 11:00:24",
-      "next_run": "2026-11-28 11:00:00",
-      "runs": 4,
-      "successes": 3,
+      "last_success": "2026-11-28 11:13:17",
+      "last_attempt": "2026-11-28 11:13:17",
+      "next_run": "2026-11-29 11:00:00",
+      "runs": 5,
+      "successes": 4,
       "verdict": "已验证",
       "manual": {
         "at": "2026-11-26 10:59:39",
@@ -445,33 +445,33 @@ window.GB_SUPERVISION = {
     {
       "name": "AI业务员·发信队列（每小时·按客户当地工作时段·防漏发）",
       "status": "ACTIVE",
-      "last_success": "2026-11-28 08:08:08",
-      "last_attempt": "2026-11-28 08:08:08",
-      "next_run": "2026-11-28 09:10:48",
-      "runs": 15,
-      "successes": 13,
+      "last_success": "2026-11-28 15:15:10",
+      "last_attempt": "2026-11-28 15:15:10",
+      "next_run": "2026-11-28 16:17:26",
+      "runs": 20,
+      "successes": 18,
       "verdict": "已验证",
       "manual": null
     },
     {
       "name": "AI业务员·台账对齐（每2小时·Sent回执→线索CSV+发信台账+PWA邮箱台账）",
       "status": "ACTIVE",
-      "last_success": "2026-11-28 08:55:58",
-      "last_attempt": "2026-11-28 08:55:58",
-      "next_run": "2026-11-28 10:59:04",
-      "runs": 28,
-      "successes": 17,
+      "last_success": "2026-11-28 13:18:36",
+      "last_attempt": "2026-11-28 13:18:36",
+      "next_run": "2026-11-28 15:20:04",
+      "runs": 30,
+      "successes": 19,
       "verdict": "已验证",
       "manual": null
     },
     {
       "name": "AI业务员·客户回信检测（每小时·发现即告知·简单回复自主发送并告知）",
       "status": "ACTIVE",
-      "last_success": "2026-11-28 08:59:05",
-      "last_attempt": "2026-11-28 08:59:05",
-      "next_run": "2026-11-28 10:08:26",
-      "runs": 39,
-      "successes": 28,
+      "last_success": "2026-11-28 14:25:49",
+      "last_attempt": "2026-11-28 14:25:49",
+      "next_run": "2026-11-28 15:27:25",
+      "runs": 43,
+      "successes": 32,
       "verdict": "已验证",
       "manual": {
         "at": "2026-11-24 19:32:28",
@@ -484,11 +484,11 @@ window.GB_SUPERVISION = {
     {
       "name": "AI业务员·跟进序列（每日09:00·D3/D7/D14自动生成并发送）",
       "status": "ACTIVE",
-      "last_success": "2026-11-27 10:40:39",
+      "last_success": "2026-11-28 10:47:55",
       "last_attempt": "2026-11-28 10:47:55",
-      "next_run": "2026-11-28 09:00:00",
+      "next_run": "2026-11-29 09:00:00",
       "runs": 9,
-      "successes": 2,
+      "successes": 3,
       "verdict": "已验证",
       "manual": null
     },
@@ -531,10 +531,17 @@ window.GB_SUPERVISION = {
   "automationTotal": 35,
   "sentToday": {
     "sales": 0,
-    "marketing": 0,
-    "total": 0
+    "marketing": 1,
+    "total": 1
   },
-  "sentDetails": [],
+  "sentDetails": [
+    {
+      "time": "07:15",
+      "to": "i***@poligonmetropol.com",
+      "subject": "Ataşehir optics night, 50-gun line",
+      "msgid": "<179585011267.2099.15671186063837469613@gunbase-optics.com>"
+    }
+  ],
   "reports": [
     {
       "id": "S1",
@@ -653,8 +660,8 @@ window.GB_SUPERVISION = {
     "verdict": "缺口：R1 非 08:00 按时交付（延迟 47 分钟）"
   },
   "bounceLoop": {
-    "scannedAt": "2026-11-28T08:38:39.911286+08:00",
-    "scanned": 9,
+    "scannedAt": "2026-11-28T15:19:12.620797+08:00",
+    "scanned": 13,
     "bounces": [
       {
         "date": "Tue, 24 Nov 2026 09:30:35 +0300 (+03)",
@@ -720,11 +727,37 @@ window.GB_SUPERVISION = {
         "sentAt": null,
         "msgid": null,
         "note": ""
+      },
+      {
+        "date": "Sat, 28 Nov 2026 10:10:01 +0300 (+03)",
+        "rejected": "a***@beyteknoloji.com",
+        "reason": "收件人不存在/地址错误(5.1.1)",
+        "hard": true,
+        "action": "no_need",
+        "detail": "主收件人已 SUCCESSFULLY RELAYED 送达；被拒的是对方内部转发/别名失效，补发会造成重复骚扰 → 严禁补发",
+        "resolvedTo": null,
+        "status": null,
+        "sentAt": null,
+        "msgid": null,
+        "note": ""
+      },
+      {
+        "date": "Sat, 28 Nov 2026 10:10:02 +0300 (+03)",
+        "rejected": "g***@beyteknoloji.com",
+        "reason": "其他退信",
+        "hard": true,
+        "action": "no_need",
+        "detail": "beyteknoloji 主收件人 info@ 已成功送达（同批 MTA-BLOCKED 报告证实）；本地址是对方内部转发列表成员失效 → 严禁补发，防重复骚扰",
+        "resolvedTo": null,
+        "status": null,
+        "sentAt": null,
+        "msgid": null,
+        "note": ""
       }
     ],
     "summary": {
       "resend": 0,
-      "no_need": 3,
+      "no_need": 5,
       "manual": 1,
       "done": 1
     }

@@ -1,26 +1,26 @@
 window.GB_DELIVERY_FAILURES = {
- "generatedAt": "2026-11-27T21:12:18.456569+08:00",
- "date": "2026-11-27",
+ "generatedAt": "2026-11-28T15:19:50.585209+08:00",
+ "date": "2026-11-28",
  "source": "IMAP INBOX 只读扫描投递失败回执（DSN/postmaster）；定性优先取 bounce_loop_report_latest.json",
  "window": {
-  "since": "2026-10-13",
-  "inboxScanned": 15
+  "since": "2026-10-14",
+  "inboxScanned": 19
  },
  "scope": "只统计「没送达的邮件」；发信闸门拦下未发出的邮件不在此清单",
  "summary": {
-  "total": 5,
+  "total": 6,
   "today": 1,
-  "last7": 4,
-  "hard": 5,
+  "last7": 5,
+  "hard": 6,
   "soft": 0,
-  "reachedOnly": 2,
+  "reachedOnly": 3,
   "pending": 2
  },
  "byKind": [
   {
    "kind": "USER_UNKNOWN",
    "name": "收件人不存在（5.1.1）",
-   "count": 2
+   "count": 3
   },
   {
    "kind": "DNS_MX",
@@ -34,6 +34,26 @@ window.GB_DELIVERY_FAILURES = {
   }
  ],
  "items": [
+  {
+   "fp": "559f2d46fbea",
+   "at": "2026-11-28 15:10",
+   "date": "2026-11-28",
+   "to": "g***@beyteknoloji.com",
+   "subject": "Re: Optik – BEY TEKNOLOJI",
+   "orig_to": "i***@beyteknoloji.com",
+   "code": "5.1.1",
+   "statusCode": "5.1.1",
+   "kind": "USER_UNKNOWN",
+   "kindName": "主信已送达·仅内部别名失效",
+   "hard": true,
+   "reached": true,
+   "advice": "beyteknoloji 主收件人 info@ 已成功送达（同批 MTA-BLOCKED 报告证实）；本地址是对方内部转发列表成员失效 → 严禁补发，防重复骚扰",
+   "dsn_subject": "Delivery status notification, MTA-BLOCKED",
+   "relayed_ok": true,
+   "action": "no_need",
+   "actionSource": "bounce_loop_report_latest.json",
+   "actionLabel": "严禁补发（主收件人已送达）"
+  },
   {
    "fp": "dd181f9ac5b3",
    "at": "2026-11-27 17:17",
