@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#123a5e">
+<meta name="robots" content="noindex">
+<title>这个地址没找到 · AI GB-Team</title>
+<style>
+  :root{--navy:#123a5e;--line:#d8e2ec;--ink:#1a1a1a;--muted:#5b6b7b}
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%}
+  body{background:#eef2f7;color:var(--ink);
+       font:15px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+       display:flex;align-items:center;justify-content:center;padding:24px 16px calc(24px + env(safe-area-inset-bottom))}
+  .card{width:100%;max-width:420px;background:#fff;border:1px solid var(--line);border-radius:16px;
+        box-shadow:0 10px 30px rgba(18,58,94,.10);overflow:hidden}
+  .hd{background:var(--navy);color:#fff;padding:16px 18px}
+  .hd h1{margin:0;font-size:16px;font-weight:700}
+  .hd p{margin:4px 0 0;font-size:12px;color:#cfe0f0}
+  .bd{padding:16px 18px 18px}
+  p{margin:0 0 12px;font-size:13.5px;color:var(--muted)}
+  code{background:#f4f8fc;border:1px solid var(--line);border-radius:5px;padding:1px 5px;
+       font-size:12px;color:var(--navy);word-break:break-all}
+  .row{display:flex;gap:9px;flex-wrap:wrap;margin-top:6px}
+  a.btn{flex:1 1 140px;border:1px solid var(--navy);background:var(--navy);color:#fff;
+        font:600 14px/1 inherit;padding:12px 14px;border-radius:10px;text-align:center;text-decoration:none}
+  a.btn.ghost{background:#fff;color:var(--navy)}
+  .tip{margin-top:14px;font-size:12px;color:#8a99a8}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="hd">
+    <h1>这个地址没找到</h1>
+    <p>AI GB-Team · 404</p>
+  </div>
+  <div class="bd">
+    <p>你点的页面不存在，或者它在你手机上被旧缓存记成了一个 404。</p>
+    <p>请求地址：<br><code id="u"></code></p>
+    <div class="row">
+      <a class="btn" id="home" href="/ai-gb-hub/reset/">清缓存并回首页</a>
+      <a class="btn ghost" id="plain" href="/ai-gb-hub/index.html">直接回首页</a>
+    </div>
+    <p class="tip">若反复出现同一个 404，说明是旧 Service Worker 缓存了这条地址 —— 走「清缓存并回首页」一次即可。</p>
+    <p class="tip" id="ver"></p>
+  </div>
+</div>
+<script>
+(function () {
+  var path = location.pathname + location.search;
+  document.getElementById('u').textContent = path;
+  var t = String(Date.now());
+  document.getElementById('home').href = '/ai-gb-hub/reset/?from=' + encodeURIComponent(path) + '&t=' + t;
+  document.getElementById('plain').href = '/ai-gb-hub/index.html?fresh=' + t;
+})();
+</script>
+</body>
+</html>

@@ -1,9 +1,10 @@
 {
-  "version": "2.2.5",
-  "build": "20261128k",
+  "version": "2.2.6",
+  "build": "20261128l",
   "released": "2026-11-28",
-  "title": "缓存破冰：修手机端锁死旧界面；新增一键修复页 /reset/",
+  "title": "底栏入口带版本指纹：断掉旧 SW 缓存的 404；新增友好 404 页",
   "changelog": [
+    "v2.2.6 修「点 PM 进 404」—— pm/ 目录曾经长时间没提交（线上真 404），旧版 Service Worker 把那条 404 响应按 URL 缓存住了，之后服务器修好、手机上点进去依然是 404。本版给底栏七个入口全部加上 ?v=<build> 版本指纹（含原来写死的 fin?v=20261128b 也统一了），缓存键每次发版都变，旧 404 再也命中不到。另新增站内 404.html：真走丢时给「清缓存并回首页 / 直接回首页」两条出路，不再是 GitHub 那张生硬的 404。",
     "v2.2.5 缓存破冰 —— 手机端（尤其 iOS 主屏 Web App）会被冻结的内存快照或旧 Service Worker 锁死在旧界面：即使服务器已是新版，页面也不会重新发一次导航请求。本版做了三件事：① 版本号升到 20261128k，任何还带自愈脚本的页面一开就强制换 query 重取；② 自愈脚本跳过 RD 的 e-<build>.html 不可变快照，避免快照页每次进来白刷一次；③ 新增 /reset/ 一键修复页，注销全部 Service Worker + 清空全部 Cache Storage 后跳回首页，用于救已经彻底锁死的设备。",
     "v2.2.4 补监督账本的底部导航 —— 该页原先只挂了 tabbar 自愈脚本、没挂 tabbar.js 本体，手机进得去出不来，只能按浏览器后退。现补 tabbar.js + 手机端为固定底栏让出 80px（env(safe-area-inset-bottom) 兜住 iOS 玻璃条）。同批把「监督账本 / 每日任务 / 创意合作」三页及其 5 个数据脚本纳入仓库（此前线上 404），并在输出端与生成端双重脱敏：gb-supervision.js 的 8 个真实收件地址、gb-delivery-failures.js 的 7 个，全部改为「首字母 + ***@域名」，自有域名 gunbase-optics.com 不脱敏；supervision_ledger.py / delivery_failure_list.py 新增 scrub()，今后每日重算也不会写回完整地址。七个 SW 缓存 +1（根 v47 / sales v54 / mkt v35 / rd v24 / pm v4 / as v4 / fin v5），RD 快照 e-20261128j.html。",
     "v2.2.3 版本自愈守卫 v3 —— 修「发布会新版、页面还是几小时前那版」。①真实成因有两层：一是 14:16 那次修底部导航时，把 shared/gb-bfcache-heal.js 的引用整行删掉了，标签页从早上一直开着、再没重新加载，于是永远停在那次加载的 HTML（截图里 build 20261128e 就是证据）；二是即使有自愈脚本，原版只用 location.reload()，会被 Pages 的 max-age=600 HTTP 缓存原地接住，看起来「刷了但还是旧的」。②新版守卫：从脚本自身 URL 推出上一级 version.json，用 cache:no-store 取线上 build，与本页 <meta name=\"gb-build\"> 比对，不一致就把 ?_gb=<build> 挂到 URL 上 location.replace —— 查询串一变，HTTP 缓存与 SW 缓存的键全变，旧副本不可能再被命中；同页面同 build 每会话只刷一次，不循环。③触发时机：首屏立刻 / load / bfcache 还原(pageshow.persisted) / 回到前台聚焦 / 网络恢复。④十一个页面统一挂载（团队中心、Sales、Marketing、RD 门与 app、PM、AS、Fin、监督账本、每日任务、创意合作），全部带 meta gb-build=20261128i，全站只认总部一个版本号。⑤七个 SW 缓存 +1（根 v45 / sales v53 / mkt v34 / rd v23 / pm v3 / as v3 / fin v4），RD 生成不可变快照 e-20261128i.html。",

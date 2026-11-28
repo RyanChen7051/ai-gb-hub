@@ -49,14 +49,24 @@
   var inSub = /\/(sales|marketing|rd|fin|pm|as)\//.test(path);
   var P = inSub ? '../' : './';
   var here = /\/sales\//.test(path) ? 'sales' : (/\/marketing\//.test(path) ? 'mkt' : (/\/rd\//.test(path) ? 'rd' : (/\/fin\//.test(path) ? 'fin' : (/\/pm\//.test(path) ? 'pm' : (/\/as\//.test(path) ? 'as' : 'team')))));
+  /* 版本指纹：给每个入口加 ?v=<build>。
+   * 为什么必须加：某条路径一旦在旧版里 404 过（例如 pm/ 曾经整目录没提交），
+   * 旧 Service Worker 会把那条 404 响应按 URL 缓存下来，之后即使服务器修好了，
+   * 点进去依然永远是 404 页。URL 带上 build 后缓存键每次发版都变，旧 404 再也命中不到。 */
+  var BUILD = '';
+  try {
+    var bm = document.querySelector('meta[name="gb-build"]');
+    BUILD = bm ? (bm.getAttribute('content') || '') : '';
+  } catch (e) { BUILD = ''; }
+  function u(p) { return BUILD ? p + '?v=' + BUILD : p; }
   var TABS = [
-    ['team', '团队中心', P + 'index.html'],
-    ['sales', 'AI GB-Sales', P + 'sales/index.html'],
-    ['mkt', 'AI GB-MKT', P + 'marketing/index.html'],
-    ['rd', 'AI GB-RD', P + 'rd/index.html'],
-    ['pm', 'AI GB-PM', P + 'pm/index.html'],
-    ['as', 'AI GB-AS', P + 'as/index.html'],
-    ['fin', 'Fin 🔒', P + 'fin/index.html?v=20261128b']
+    ['team', '团队中心', u(P + 'index.html')],
+    ['sales', 'AI GB-Sales', u(P + 'sales/index.html')],
+    ['mkt', 'AI GB-MKT', u(P + 'marketing/index.html')],
+    ['rd', 'AI GB-RD', u(P + 'rd/index.html')],
+    ['pm', 'AI GB-PM', u(P + 'pm/index.html')],
+    ['as', 'AI GB-AS', u(P + 'as/index.html')],
+    ['fin', 'Fin 🔒', u(P + 'fin/index.html')]
   ];
   /* 窄屏短标签：七个全名并排会在 360px 被截成半个字；这里给一套短名，
      fit() 之前先按可视宽度决定用全名还是短名（团队中心保持全名） */

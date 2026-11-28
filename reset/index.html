@@ -72,9 +72,19 @@
     dot.className = 'dot ' + (ok === false ? '' : 'ok');
   }
 
-  // 首页新地址：带时间戳，HTTP 缓存与 SW 缓存的键都变
-  var next = new URL('../index.html', location.href);
-  next.searchParams.set('fresh', String(Date.now()));
+  // 目标地址：默认回首页；若从 404 页带 ?from=/ai-gb-hub/xxx 过来，就回那一页。
+  // 一律带时间戳，HTTP 缓存与 SW 缓存的键都变，旧副本不可能再命中。
+  var ts = String(Date.now());
+  var from = '';
+  try { from = new URLSearchParams(location.search).get('from') || ''; } catch (e) { from = ''; }
+  var next;
+  if (from && from.indexOf('/ai-gb-hub/') === 0 && from.indexOf('/reset/') === -1) {
+    next = new URL(from, location.origin);
+    next.searchParams.set('_t', ts);          // 保留原 query，再叠一个破缓存参数
+  } else {
+    next = new URL('../index.html', location.href);
+    next.searchParams.set('fresh', ts);
+  }
   go.href = next.href;
 
   var jobs = [];
