@@ -1,21 +1,21 @@
 window.GB_DAILY_FACTS = {
  "date": "2026-11-28",
- "generatedAt": "2026-11-28T13:20:45.228025+08:00",
+ "generatedAt": "2026-11-28T15:23:01.282432+08:00",
  "source": "IMAP Sent / Supabase / 线上文件 / workbuddy.db / 账本 JSON（脚本直读）",
  "facts": [
   {
    "group": "业务结果",
    "item": "今日实发（Sales / Marketing）",
-   "value": "0 / 0",
-   "status": "bad",
+   "value": "0 / 1",
+   "status": "warn",
    "source": "IMAP Sent 直读",
    "note": "目标 6 + 2 = 8 封"
   },
   {
    "group": "业务结果",
    "item": "真实客户回信",
-   "value": "0",
-   "status": "bad",
+   "value": "1",
+   "status": "good",
    "source": "reply_intake_latest.json",
    "note": "自动回执 1 封不计入"
   },
@@ -33,20 +33,20 @@ window.GB_DAILY_FACTS = {
    "value": "0",
    "status": "good",
    "source": "bounce_loop_report_latest.json",
-   "note": "累计记录 5 条"
+   "note": "累计记录 7 条"
   },
   {
    "group": "执行链",
    "item": "Marketing 审批状态",
-   "value": "待你拍板",
-   "status": "info",
+   "value": "已批准",
+   "status": "good",
    "source": "Supabase 私有表",
    "note": "approved 只能你改，脚本绝不代批"
   },
   {
    "group": "执行链",
    "item": "云端待投 / 队列日期",
-   "value": "2 封 / 2026-11-28",
+   "value": "1 封 / 2026-11-28",
    "status": "warn",
    "source": "Supabase 私有表",
    "note": "投递器每 30 分钟检查净空窗"
@@ -78,7 +78,7 @@ window.GB_DAILY_FACTS = {
   {
    "group": "系统健康",
    "item": "GUNBASE 自动化累计成功",
-   "value": "184 / 239 (77.0%)",
+   "value": "191 / 246 (77.6%)",
    "status": "warn",
    "source": "workbuddy.db automation_runs",
    "note": "只算 GUNBASE 自身，不含无关自动化"
